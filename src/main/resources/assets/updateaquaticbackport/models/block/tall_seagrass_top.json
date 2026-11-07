@@ -1,0 +1,6 @@
+{
+  "parent": "updateaquaticbackport:block/template_seagrass",
+  "textures": {
+    "texture": "updateaquaticbackport:block/tall_seagrass_top"
+  }
+}

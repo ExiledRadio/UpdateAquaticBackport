@@ -199,11 +199,12 @@ def check_sounds():
             if read_asset(sns, "sounds/%s.ogg" % spath) is None:
                 errors.append("sound %s: missing %s" % (event, name))
             count += 1
-        if "subtitle" in spec and spec["subtitle"] + "=" not in LANG:
+        if "subtitle" in spec and spec["subtitle"] + "=" not in LANG and spec["subtitle"] not in OLD_LANG:
             errors.append("sound %s: no subtitle entry %s" % (event, spec["subtitle"]))
     return count
 
 
+OLD_LANG = set(l.split("=", 1)[0] for l in jar.read("assets/minecraft/lang/en_us.lang").decode("utf-8").splitlines() if "=" in l)
 LANG = open(os.path.join(ASSETS, MODID, "lang", "en_us.lang"), encoding="utf-8").read()
 
 

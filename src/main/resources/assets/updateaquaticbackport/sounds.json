@@ -40,5 +40,79 @@
       }
     ],
     "subtitle": "subtitles.updateaquaticbackport.item.axe.strip"
+  },
+  "block.wet_grass.break": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:dig/wet_grass1",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:dig/wet_grass2",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:dig/wet_grass3",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:dig/wet_grass4",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.wet_grass.step": {
+    "sounds": [
+      "updateaquaticbackport:step/wet_grass1",
+      "updateaquaticbackport:step/wet_grass2",
+      "updateaquaticbackport:step/wet_grass3",
+      "updateaquaticbackport:step/wet_grass4",
+      "updateaquaticbackport:step/wet_grass5",
+      "updateaquaticbackport:step/wet_grass6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.wet_grass.place": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:dig/wet_grass1",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:dig/wet_grass2",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:dig/wet_grass3",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:dig/wet_grass4",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.wet_grass.hit": {
+    "sounds": [
+      "updateaquaticbackport:step/wet_grass1",
+      "updateaquaticbackport:step/wet_grass2",
+      "updateaquaticbackport:step/wet_grass3",
+      "updateaquaticbackport:step/wet_grass4",
+      "updateaquaticbackport:step/wet_grass5",
+      "updateaquaticbackport:step/wet_grass6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.wet_grass.fall": {
+    "sounds": [
+      "updateaquaticbackport:step/wet_grass1",
+      "updateaquaticbackport:step/wet_grass2",
+      "updateaquaticbackport:step/wet_grass3",
+      "updateaquaticbackport:step/wet_grass4",
+      "updateaquaticbackport:step/wet_grass5",
+      "updateaquaticbackport:step/wet_grass6"
+    ]
   }
 }

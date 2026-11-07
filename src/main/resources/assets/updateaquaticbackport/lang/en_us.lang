@@ -50,3 +50,13 @@ tile.updateaquaticbackport.stripped_oak_log.name=Stripped Oak Log
 tile.updateaquaticbackport.stripped_oak_wood.name=Stripped Oak Wood
 tile.updateaquaticbackport.stripped_spruce_log.name=Stripped Spruce Log
 tile.updateaquaticbackport.stripped_spruce_wood.name=Stripped Spruce Wood
+
+# --- common ---
+
+# --- kelp ---
+item.updateaquaticbackport.dried_kelp.name=Dried Kelp
+tile.updateaquaticbackport.dried_kelp_block.name=Dried Kelp Block
+tile.updateaquaticbackport.kelp.name=Kelp
+tile.updateaquaticbackport.kelp_plant.name=Kelp Plant
+tile.updateaquaticbackport.seagrass.name=Seagrass
+tile.updateaquaticbackport.tall_seagrass.name=Tall Seagrass

@@ -6,7 +6,6 @@ import com.exiledradio.updateaquaticbackport.common.Content;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -33,7 +32,7 @@ import java.util.Map;
  *   <li>A model for every item model request in {@link Content#itemModels()} - by exact name, never by
  *       walking the model registry's keys, which some performance mods bake lazily.</li>
  *   <li>One model name per multipart block ({@link Content#multipart}).</li>
- *   <li>Biome water color on tint index 0 of every {@link BlockPseudoWater}: their water surface.</li>
+ *   <li>Biome water color on tint index 1 of every {@link BlockPseudoWater}: their water surface.</li>
  * </ul>
  */
 public final class ClientSetup {
@@ -78,7 +77,9 @@ public final class ClientSetup {
         event.getBlockColors().registerBlockColorHandler(new IBlockColor() {
             @Override
             public int colorMultiplier(IBlockState state, @Nullable IBlockAccess world, @Nullable BlockPos pos, int tintIndex) {
-                if (tintIndex != 0) {
+                // Tint 0 is the plant's own (1.13's tinted_cross and seagrass carry it, untinted); 1 is the
+                // water surface the blockstate adds.
+                if (tintIndex != 1) {
                     return -1;
                 }
                 return world != null && pos != null ? BiomeColorHelper.getWaterColorAtPos(world, pos) : -1;

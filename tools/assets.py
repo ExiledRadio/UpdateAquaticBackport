@@ -93,9 +93,91 @@ def copy_sound(event, our_event=None):
         entry["name"] = "%s:%s" % (MODID, path)
         out.append(entry if len(entry) > 1 else entry["name"])
     spec["sounds"] = out
-    if "subtitle" in spec:
+    if "subtitle" in spec and spec["subtitle"] not in OLD_LANG:
+        # A subtitle 1.12.2 lacks gets our own key; subtitle_lines() gives its English line.
         spec["subtitle"] = spec["subtitle"].replace("subtitles.", "subtitles.%s." % MODID, 1)
     return spec
+
+
+def subtitle_lines(specs):
+    """@return the en_us.lang lines for every subtitle of ours in these sounds.json entries."""
+    lines = []
+    for spec in specs.values():
+        key = spec.get("subtitle")
+        if key and key.startswith("subtitles.%s." % MODID):
+            lines.append("%s=%s" % (key, VANILLA_LANG[key.replace("%s." % MODID, "", 1)]))
+    return sorted(set(lines))
+
+
+OLD_JAR = zipfile.ZipFile(os.path.join(os.path.expanduser("~"), ".gradle", "caches", "minecraft", "net", "minecraft",
+                                       "minecraft", "1.12.2", "minecraft-1.12.2.jar"))
+OLD_NAMES = set(OLD_JAR.namelist())
+OLD_LANG = dict(l.split("=", 1) for l in OLD_JAR.read("assets/minecraft/lang/en_us.lang").decode("utf-8").splitlines()
+                if "=" in l and not l.startswith("#"))
+
+# 1.18 texture folders and their 1.12.2 names, for parents and textures that 1.12.2 already has.
+_OLD_TEXTURE_DIRS = {"block/": "blocks/", "item/": "items/"}
+
+
+def port_model(path, ours=None, textures_from_jar=True):
+    """Ports models/<path>.json from the 1.18.2 jar into our namespace, ready for 1.12.2.
+
+    * Textures named 'minecraft:block/x' are copied to ours and renamed 'updateaquaticbackport:block/x'.
+    * A parent 1.12.2 also has (block/cube_all, block/cross, item/generated, ...) is kept as vanilla's;
+      any other vanilla parent is ported too, recursively.
+    @return our model name, 'updateaquaticbackport:<ours or path>'
+    """
+    ours = ours or path
+    data = jar_json("assets/minecraft/models/%s.json" % path)
+    parent = data.get("parent")
+    if parent:
+        pns, _, ppath = parent.rpartition(":")
+        if (pns or "minecraft") == "minecraft":
+            if ppath.startswith("builtin/") or ("assets/minecraft/models/%s.json" % ppath) in OLD_NAMES:
+                data["parent"] = ppath
+            else:
+                data["parent"] = port_model(ppath)
+    for key, value in list(data.get("textures", {}).items()):
+        if value.startswith("#"):
+            continue
+        tns, _, tpath = value.rpartition(":")
+        if (tns or "minecraft") == "minecraft" and textures_from_jar:
+            data["textures"][key] = texture(tpath)
+    write_json("models/%s.json" % ours, data)
+    return "%s:%s" % (MODID, ours)
+
+
+def water_surface():
+    """Writes the shared water-surface model drawn on top of BlockPseudoWater blocks at the surface.
+
+    One up face at vanilla source water's height (8/9 of a block), 1.12.2's still water texture,
+    tint index 1 (the biome water color; tint 0 is the plants' own), culled by a block above.
+    """
+    write_json("models/block/water_surface.json", {
+        "ambientocclusion": False,
+        "textures": {"particle": "blocks/water_still", "water": "blocks/water_still"},
+        "elements": [{
+            "from": [0, 0, 0], "to": [16, 14.222, 16],
+            "shade": False,
+            "faces": {"up": {"uv": [0, 0, 16, 16], "texture": "#water", "tintindex": 1, "cullface": "up"}}
+        }]
+    })
+    return "%s:water_surface" % MODID
+
+
+def pseudo_water_blockstate(name, parts):
+    """Writes a multipart-only blockstate for a BlockPseudoWater block: its parts plus the water surface.
+
+    @param parts list of (when-dict or None, model name) for the block's own look
+    """
+    multipart = []
+    for when, model in parts:
+        part = {"apply": {"model": model}}
+        if when:
+            part["when"] = when
+        multipart.append(part)
+    multipart.append({"when": {"surface": "true"}, "apply": {"model": water_surface()}})
+    write_json("blockstates/%s.json" % name, {"multipart": multipart})
 
 
 def name(key):

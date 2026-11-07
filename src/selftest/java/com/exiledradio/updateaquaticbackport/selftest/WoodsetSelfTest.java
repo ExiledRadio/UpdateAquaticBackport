@@ -346,7 +346,7 @@ public final class WoodsetSelfTest implements SelfTest {
     static int countDrops(WorldServer world, BlockPos at, Item want) {
         int n = 0;
         for (EntityItem e : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(at).grow(2))) {
-            if (e.getItem().getItem() == want) {
+            if (!e.isDead && e.getItem().getItem() == want) {
                 n += e.getItem().getCount();
             }
             e.setDead();
