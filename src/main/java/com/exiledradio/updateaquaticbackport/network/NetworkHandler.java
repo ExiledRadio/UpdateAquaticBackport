@@ -41,5 +41,7 @@ public final class NetworkHandler {
         channel.registerMessage(com.exiledradio.updateaquaticbackport.mobs.PacketSquidInk.Handler.class,
                 com.exiledradio.updateaquaticbackport.mobs.PacketSquidInk.class,
                 65, net.minecraftforge.fml.relauncher.Side.CLIENT);
+        channel.registerMessage(com.exiledradio.updateaquaticbackport.swim.PacketSwimRules.Handler.class,
+                com.exiledradio.updateaquaticbackport.swim.PacketSwimRules.class, 75, net.minecraftforge.fml.relauncher.Side.CLIENT);
     }
 }

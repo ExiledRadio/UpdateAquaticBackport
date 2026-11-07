@@ -129,7 +129,13 @@
     "config.updateaquaticbackport.mobs.parrotsImitate",
     "config.updateaquaticbackport.mobs.parrotsImitate.tooltip",
     "config.updateaquaticbackport.mobs.skeletonHorsesUnderwater",
-    "config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip"
+    "config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip",
+    "config.updateaquaticbackport.swimming",
+    "config.updateaquaticbackport.swimming.tooltip",
+    "config.updateaquaticbackport.swimming.enabled",
+    "config.updateaquaticbackport.swimming.enabled.tooltip",
+    "config.updateaquaticbackport.swimming.crawling",
+    "config.updateaquaticbackport.swimming.crawling.tooltip"
   ],
   "vanilla": {
     "advancements.updateaquaticbackport.husbandry.fishy_business.description": "advancements.husbandry.fishy_business.description",

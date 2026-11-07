@@ -29,7 +29,7 @@ import org.apache.logging.log4j.Logger;
         name = UpdateAquaticBackport.MOD_NAME,
         version = UpdateAquaticBackport.VERSION,
         acceptedMinecraftVersions = "[1.12.2]",
-        dependencies = "required-after:backportcore@[1.1.0,);required-after:fluidlogged_api@[3.3.3,)"
+        dependencies = "required-after:backportcore@[1.2.0,);required-after:fluidlogged_api@[3.3.3,)"
 )
 public final class UpdateAquaticBackport {
 
@@ -46,6 +46,7 @@ public final class UpdateAquaticBackport {
     public void preInit(FMLPreInitializationEvent event) {
         NetworkHandler.init();
         com.exiledradio.updateaquaticbackport.structure.StructureContent.preInit();
+        com.exiledradio.updateaquaticbackport.swim.SwimContent.preInit(event.getSide().isClient());
 
         // Client-only setup lives in a class a dedicated server never loads. The call names no client
         // type, so this class verifies on a server - a guarded method here would not.
