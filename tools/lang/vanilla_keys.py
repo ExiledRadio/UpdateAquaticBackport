@@ -46,15 +46,34 @@ def candidates(key):
         return ["item.minecraft." + name, "block.minecraft." + name]
     if key.startswith("subtitles.%s." % M):
         return ["subtitles." + key[len("subtitles.%s." % M):]]
+    # The kinds build_langs.py also matches by structure (fish, trident and phantom streams merged here).
     # Entities (entity.<modid>.cod.name) and their sub-keys (entity.<modid>.tropical_fish.type.kob).
     if key.startswith("entity.%s." % M):
         rest = key[len("entity.%s." % M):]
         return ["entity.minecraft." + (rest[:-len(".name")] if rest.endswith(".name") else rest)]
+    if key.startswith("effect.%s." % M):
+        return ["effect.minecraft." + ".".join(parts[2:])]
+    if key.startswith("enchantment.%s." % M):
+        return ["enchantment.minecraft." + ".".join(parts[2:])]
     if key.startswith("advancements.%s." % M):
-        return ["advancements." + key[len("advancements.%s." % M):]]
+        rest = key[len("advancements.%s." % M):]
+        out = ["advancements." + rest]
+        if len(parts) == 4:
+            out += ["advancements.%s.%s.%s" % (tab, parts[2], parts[3])
+                    for tab in ("adventure", "story", "husbandry", "nether", "end")]
+        return out
     if key.startswith("color.%s." % M):
         return ["color.minecraft." + key[len("color.%s." % M):]]
-    return []
+    # Potions: potion.effect.<modid>.slow_falling and the splash, lingering and tipped arrow forms.
+    for form in ("potion", "splash_potion", "lingering_potion", "tipped_arrow"):
+        if key.startswith("%s.effect.%s." % (form, M)):
+            return ["item.minecraft.%s.effect.%s" % (form, ".".join(parts[3:]))]
+    # Statistics: stat.timeSinceRest -> stat.minecraft.time_since_rest
+    if key.startswith("stat.") and len(parts) == 2:
+        import re
+        return ["stat.minecraft." + re.sub(r"(?<!^)(?=[A-Z])", "_", parts[1]).lower()]
+    # A key 1.12.2 lacks but modern Minecraft has under the same name (death messages).
+    return [key]
 
 
 def main():
@@ -69,7 +88,8 @@ def main():
             if cand in assets.VANILLA_LANG:
                 found = cand
                 break
-        if found and assets.VANILLA_LANG[found] == text:
+        # A lang value is one line; a vanilla line break is a space here (as build_langs.py writes it).
+        if found and " ".join(assets.VANILLA_LANG[found].split("\n")) == text:
             vanilla[key] = found
         else:
             if found:

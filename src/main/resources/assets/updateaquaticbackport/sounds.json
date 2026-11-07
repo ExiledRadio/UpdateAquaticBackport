@@ -807,5 +807,267 @@
       }
     ],
     "subtitle": "subtitles.updateaquaticbackport.entity.phantom.swoop"
+  },
+  "item.trident.hit": {
+    "sounds": [
+      "updateaquaticbackport:item/trident/pierce1",
+      "updateaquaticbackport:item/trident/pierce2",
+      "updateaquaticbackport:item/trident/pierce3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.hit"
+  },
+  "item.trident.hit_ground": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:item/trident/ground_impact1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/ground_impact2",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/ground_impact3",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/ground_impact4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.hit_ground"
+  },
+  "item.trident.return": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:item/trident/return1",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return2",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return2",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return2",
+        "pitch": 1.2,
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return2",
+        "pitch": 1.2,
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return3",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return3",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return3",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:item/trident/return3",
+        "pitch": 1.2,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.return"
+  },
+  "item.trident.riptide_1": {
+    "sounds": [
+      "updateaquaticbackport:item/trident/riptide1"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.riptide"
+  },
+  "item.trident.riptide_2": {
+    "sounds": [
+      "updateaquaticbackport:item/trident/riptide2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.riptide"
+  },
+  "item.trident.riptide_3": {
+    "sounds": [
+      "updateaquaticbackport:item/trident/riptide3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.riptide"
+  },
+  "item.trident.throw": {
+    "sounds": [
+      "updateaquaticbackport:item/trident/throw1",
+      "updateaquaticbackport:item/trident/throw2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.throw"
+  },
+  "item.trident.thunder": {
+    "sounds": [
+      "updateaquaticbackport:item/trident/thunder1",
+      "updateaquaticbackport:item/trident/thunder2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.trident.thunder"
+  },
+  "entity.drowned.ambient": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/drowned/idle1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/idle2",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/idle3",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/idle4",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/idle5",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.ambient"
+  },
+  "entity.drowned.ambient_water": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/idle1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/idle2",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/idle3",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/idle4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.ambient_water"
+  },
+  "entity.drowned.death": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/drowned/death1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/death2",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.death"
+  },
+  "entity.drowned.death_water": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/death1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/death2",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.death"
+  },
+  "entity.drowned.hurt": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/drowned/hurt1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/hurt2",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/hurt3",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.hurt"
+  },
+  "entity.drowned.hurt_water": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/hurt1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/hurt2",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/drowned/water/hurt3",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.hurt"
+  },
+  "entity.drowned.shoot": {
+    "sounds": [
+      "updateaquaticbackport:item/trident/throw1",
+      "updateaquaticbackport:item/trident/throw2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.shoot"
+  },
+  "entity.drowned.step": {
+    "sounds": [
+      "updateaquaticbackport:mob/drowned/step1",
+      "updateaquaticbackport:mob/drowned/step2",
+      "updateaquaticbackport:mob/drowned/step3",
+      "updateaquaticbackport:mob/drowned/step4",
+      "updateaquaticbackport:mob/drowned/step5"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.step"
+  },
+  "entity.drowned.swim": {
+    "sounds": [
+      "updateaquaticbackport:liquid/swim1",
+      "updateaquaticbackport:liquid/swim2",
+      "updateaquaticbackport:liquid/swim3",
+      "updateaquaticbackport:liquid/swim4",
+      "updateaquaticbackport:liquid/swim5"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.drowned.swim"
+  },
+  "entity.zombie.converted_to_drowned": {
+    "sounds": [
+      "updateaquaticbackport:mob/drowned/convert1",
+      "updateaquaticbackport:mob/drowned/convert2",
+      "updateaquaticbackport:mob/drowned/convert3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.zombie.converted_to_drowned"
+  },
+  "entity.husk.converted_to_zombie": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/husk/convert1",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:mob/husk/convert2",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.husk.converted_to_zombie"
   }
 }

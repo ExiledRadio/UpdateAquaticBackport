@@ -178,6 +178,22 @@ public final class ModConfig {
         @Config.Comment("The trident, Loyalty, Riptide, Impaling, Channeling and the drowned. Off, nothing is registered.")
         @Config.LangKey("config.updateaquaticbackport.trident.enabled")
         public boolean enabled = true;
+
+        @Config.RequiresMcRestart
+        @Config.Comment("Drowned spawn in oceans and rivers. Off, they come only from zombies that drown and from spawn eggs.")
+        @Config.LangKey("config.updateaquaticbackport.trident.drownedSpawn")
+        public boolean drownedSpawn = true;
+
+        @Config.Comment("A zombie underwater for 30 seconds turns into a drowned, and a husk into a zombie.")
+        @Config.LangKey("config.updateaquaticbackport.trident.zombiesConvert")
+        public boolean zombiesConvert = true;
+
+        @Config.Comment({"Mobs Impaling counts as aquatic, by entity id, besides squid, guardians and every other water mob.",
+                "Ids of mods that are not installed are ignored."})
+        @Config.LangKey("config.updateaquaticbackport.trident.impalingMobs")
+        public String[] impalingMobs = {
+                "updateaquaticbackport:cod", "updateaquaticbackport:salmon", "updateaquaticbackport:pufferfish",
+                "updateaquaticbackport:tropical_fish", "updateaquaticbackport:dolphin", "updateaquaticbackport:turtle"};
     }
 
     public static final class Conduit {
