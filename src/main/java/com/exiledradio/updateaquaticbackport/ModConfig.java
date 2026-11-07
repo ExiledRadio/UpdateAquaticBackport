@@ -203,6 +203,40 @@ public final class ModConfig {
         @Config.Comment("Biome water colors, underwater fog, gradual air refill and the rest of 1.13's water changes.")
         @Config.LangKey("config.updateaquaticbackport.water.enabled")
         public boolean enabled = true;
+
+        @Config.RequiresMcRestart
+        @Config.Comment({"1.13's water texture and its colors by biome: blue in most places, darker in cold biomes,",
+                "purple in frozen ones, light green-gray in swamps, teal in warm oceans."})
+        @Config.LangKey("config.updateaquaticbackport.water.biomeColors")
+        public boolean biomeColors = true;
+
+        @Config.Comment({"1.13's view under water: fog in the biome's water color, darker deeper down, and clearer",
+                "the longer you stay under."})
+        @Config.LangKey("config.updateaquaticbackport.water.underwaterFog")
+        public boolean underwaterFog = true;
+
+        @Config.Comment("Underwater ambience: a soft loop with bubbles and the odd distant sound while your head is under water.")
+        @Config.LangKey("config.updateaquaticbackport.water.ambience")
+        public boolean ambience = true;
+
+        @Config.RequiresMcRestart
+        @Config.Comment({"Water dims light by 1 level per block instead of 3, so the sea floor is not pitch black.",
+                "Light already worked out in existing chunks changes only where blocks change."})
+        @Config.LangKey("config.updateaquaticbackport.water.lightThroughWater")
+        public boolean lightThroughWater = true;
+
+        @Config.Comment("Air comes back a little at a time after you surface, instead of all at once.")
+        @Config.LangKey("config.updateaquaticbackport.water.gradualAir")
+        public boolean gradualAir = true;
+
+        @Config.Comment({"Dropped items and experience orbs float up in water instead of sinking. Checks every loaded",
+                "item and orb once a tick."})
+        @Config.LangKey("config.updateaquaticbackport.water.floatingItems")
+        public boolean floatingItems = true;
+
+        @Config.Comment("Jumping in shallow flowing water is a normal jump instead of swimming up slowly.")
+        @Config.LangKey("config.updateaquaticbackport.water.shallowJump")
+        public boolean shallowJump = true;
     }
 
     // ------------------------------------------------------------------------------------------

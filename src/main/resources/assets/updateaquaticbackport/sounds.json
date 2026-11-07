@@ -164,5 +164,97 @@
       "updateaquaticbackport:step/coral5",
       "updateaquaticbackport:step/coral6"
     ]
+  },
+  "ambient.underwater.enter": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:ambient/underwater/enter1",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:ambient/underwater/enter2",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:ambient/underwater/enter3",
+        "volume": 0.8
+      }
+    ]
+  },
+  "ambient.underwater.exit": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:ambient/underwater/exit1",
+        "volume": 0.5
+      },
+      {
+        "name": "updateaquaticbackport:ambient/underwater/exit2",
+        "volume": 0.5
+      },
+      {
+        "name": "updateaquaticbackport:ambient/underwater/exit3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "ambient.underwater.loop": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:ambient/underwater/underwater_ambience",
+        "stream": true,
+        "volume": 0.65
+      }
+    ]
+  },
+  "ambient.underwater.loop.additions": {
+    "sounds": [
+      "updateaquaticbackport:ambient/underwater/additions/bubbles1",
+      "updateaquaticbackport:ambient/underwater/additions/bubbles2",
+      "updateaquaticbackport:ambient/underwater/additions/bubbles3",
+      "updateaquaticbackport:ambient/underwater/additions/bubbles4",
+      "updateaquaticbackport:ambient/underwater/additions/bubbles5",
+      "updateaquaticbackport:ambient/underwater/additions/bubbles6",
+      "updateaquaticbackport:ambient/underwater/additions/water1",
+      "updateaquaticbackport:ambient/underwater/additions/water2"
+    ]
+  },
+  "ambient.underwater.loop.additions.rare": {
+    "sounds": [
+      "updateaquaticbackport:ambient/underwater/additions/animal1",
+      {
+        "name": "updateaquaticbackport:ambient/underwater/additions/bass_whale1",
+        "volume": 0.45
+      },
+      {
+        "name": "updateaquaticbackport:ambient/underwater/additions/bass_whale2",
+        "volume": 0.5
+      },
+      {
+        "name": "updateaquaticbackport:ambient/underwater/additions/crackles1",
+        "volume": 0.7
+      },
+      "updateaquaticbackport:ambient/underwater/additions/crackles2",
+      {
+        "name": "updateaquaticbackport:ambient/underwater/additions/driplets1",
+        "volume": 0.5
+      },
+      {
+        "name": "updateaquaticbackport:ambient/underwater/additions/driplets2",
+        "volume": 0.5
+      },
+      "updateaquaticbackport:ambient/underwater/additions/earth_crack"
+    ]
+  },
+  "ambient.underwater.loop.additions.ultra_rare": {
+    "sounds": [
+      "updateaquaticbackport:ambient/underwater/additions/animal2",
+      "updateaquaticbackport:ambient/underwater/additions/dark1",
+      {
+        "name": "updateaquaticbackport:ambient/underwater/additions/dark2",
+        "volume": 0.7
+      },
+      "updateaquaticbackport:ambient/underwater/additions/dark3",
+      "updateaquaticbackport:ambient/underwater/additions/dark4"
+    ]
   }
 }
