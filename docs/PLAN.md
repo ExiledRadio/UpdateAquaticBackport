@@ -82,7 +82,7 @@ only when `villagerbackport` is absent. Also:
 - **Kelp** (`kelp`, top, age 0-25 in 1.13; `kelp_plant`, stem). Grows only with water above, 14% per
   random tick, a new top one block up. Placed only in water sources, on a block with a solid top or on
   kelp. Breaking any piece breaks everything above. **now:** bone meal grows it. Shears on the top stop
-  its growth (**now:**, 1.20.2? kept if the wiki confirms).
+  its growth for good (**now:**, 1.18).
 - **Dried kelp** (food 1, saturation 0.6, eaten in 16 ticks), smelted or campfire-cooked from kelp.
 - **Dried kelp block**: 9 dried kelp, burns 4000 ticks (20 items), compostable 50% with a 1.14 composter.
 - **Seagrass** (`seagrass`, `tall_seagrass`). Replaceable, drops only with shears. Bone meal on seagrass
@@ -105,10 +105,9 @@ only when `villagerbackport` is absent. Also:
 - **Cod, salmon, pufferfish, tropical fish** as mobs: swimming AI, schooling (**now:**), flopping and
   suffocating on land, avoiding players. Cod in normal/cold/lukewarm oceans (groups of 3-6), salmon in
   cold and frozen oceans and rivers, pufferfish in lukewarm and warm, tropical fish in warm and lukewarm
-  (and **now:** lush caves are out of scope). Sizes for salmon (**now:** no; salmon sizes are 1.21.2,
-  later update).
+  (lush caves belong to a later update).
 - **Pufferfish**: puffs up in three stages near non-sneaking players and axolotl-less mobs; stings with
-  Poison (7 s in 1.13; **now:** 2.5 s poison on touch, 1.13 values per wiki) and Nausea on eating.
+  Poison on touch and Poison and Nausea on eating, with the current Java wiki's durations.
 - **Tropical fish**: 2 shapes x 6 patterns x 15 x 15 colors; 22 named common variants; tooltip on the
   bucket.
 - **Buckets** of each: right-click a fish with a water bucket; empty to release with its variant and name.
@@ -130,7 +129,7 @@ only when `villagerbackport` is absent. Also:
 
 ### D. Dolphins
 
-- Dolphins in non-frozen oceans (groups of 1-2, **now:** 1-2 in normal oceans), breathe air (4800 ticks),
+- Dolphins in non-frozen oceans (small groups), breathe air (4800 ticks),
   play with dropped items, follow boats, jump, are neutral and attack in groups.
 - **Dolphin's Grace** effect for players swimming nearby.
 - Feeding raw cod or salmon makes it lead to the nearest shipwreck, ocean ruin or buried treasure, through
@@ -141,7 +140,7 @@ only when `villagerbackport` is absent. Also:
 
 - Phantoms spawn over players who have not slept for 3 days (72000 ticks of "time since rest", tracked
   per player since 1.12.2 lacks that statistic; reset by sleeping and dying), at night or in a
-  thunderstorm, above y=64? (**now:** any height, sky access), in groups by difficulty. Circle and swoop,
+  thunderstorm, with sky access, in groups by difficulty, by the current Java wiki's spawning rules. Circle and swoop,
   burn in daylight, size from spawn.
 - **Phantom membrane** (drop 0-1, Looting adds); repairs the elytra (instead of leather).
 - **Slow Falling** effect, potions (1:30, long 4:00), splash, lingering, tipped arrows.
@@ -155,7 +154,7 @@ only when `villagerbackport` is absent. Also:
   swimming stream.
 - **Drowned**: spawn in oceans and rivers (more at night), in ocean ruins; a zombie converts after 30 s
   underwater, plus 15 s; husks convert to zombies the same way. Trident throwers; nautilus shell in the
-  off hand; copper-less drops (1.13: gold ingot 11%; **now:** copper ingot is 1.17, later update).
+  off hand; current Java's drops except the copper ingot (a later update's).
 - Advancements *A Throwaway Joke* and *Very Very Frightening*.
 
 ### N. Conduit
@@ -199,8 +198,8 @@ only when `villagerbackport` is absent. Also:
   jack o'lanterns take the carved one.
 - **Wood** (bark) blocks: 4 logs make 3, as 1.12.2's hidden all-bark log.
 - Packed ice from 9 ice; **debug stick**; undyed (purple) shulker box and washing a dyed one in a cauldron.
-- Smaller rules: fence gates and pumpkins need no support, doors place on a side face, cacti break beside
-  signs and banners? (only what is visible and safe without patches).
+- Smaller rules where they are visible and need no patches: fence gates and pumpkins need no support,
+  doors place on a side face.
 
 ### M. Mob changes
 
@@ -278,7 +277,8 @@ All soft: `Loader.isModLoaded` and names, never a hard dependency.
 
 ## Order
 
-1. Scaffold, this plan, the mixin decision (done in the first session).
-2. Streams W, K, C first (blocks the others look up), then F, T, D, P, R, N, O, B, X, M, A in parallel.
+1. Scaffold, this plan, the mixin decision write-up: **done** (first session).
+2. Streams W, K, C: **done** (first session; see `docs/streams/`). Then F, T, D, P, R, N, O, B, X, M, A in
+   parallel.
 3. S once Backport Core has the template loader.
 4. Sw, Wl, and the mixin parts of A after the decision.
