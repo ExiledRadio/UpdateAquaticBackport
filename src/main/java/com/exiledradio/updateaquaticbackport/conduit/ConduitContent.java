@@ -3,6 +3,7 @@ package com.exiledradio.updateaquaticbackport.conduit;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.Content;
+import com.exiledradio.updateaquaticbackport.common.LegacyWater;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
@@ -113,6 +114,7 @@ public final class ConduitContent {
         }
         conduit = Content.block(event.getRegistry(), "conduit", new BlockConduit(), "pickaxe");
         Content.multipart(conduit);
+        LegacyWater.whenBit(conduit, 1);
         GameRegistry.registerTileEntity(TileEntityConduit.class, Content.id("conduit"));
     }
 

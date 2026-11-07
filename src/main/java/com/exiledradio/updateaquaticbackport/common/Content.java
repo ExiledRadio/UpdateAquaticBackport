@@ -111,9 +111,8 @@ public final class Content {
      * Declares that a block's blockstate file is multipart-only.
      *
      * <p>The client then maps every state to one model name instead of one per state - the parts are
-     * picked from the state when drawn, so nothing is lost, and a block whose states multiply (water's
-     * LEVEL alone is 16) never asks the model loader for thousands of identical models.
-     * {@link BlockPseudoWater} blocks must use this.
+     * picked from the state when drawn, so nothing is lost, and a block whose states multiply never asks the
+     * model loader for many identical models.
      */
     public static void multipart(Block block) {
         MULTIPART.add(block);

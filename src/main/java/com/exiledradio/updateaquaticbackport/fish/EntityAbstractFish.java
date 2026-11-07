@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.fish;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureType;
@@ -172,9 +173,9 @@ public abstract class EntityAbstractFish extends EntityCreature implements IAnim
         BlockPos pos = new BlockPos(this);
         int sea = this.world.getSeaLevel();
         return pos.getY() >= sea - 13 && pos.getY() <= sea
-                && this.world.getBlockState(pos).getMaterial() == Material.WATER
-                && this.world.getBlockState(pos.down()).getMaterial() == Material.WATER
-                && this.world.getBlockState(pos.up()).getMaterial() == Material.WATER;
+                && Waterlogging.hasWater(this.world, pos)
+                && Waterlogging.hasWater(this.world, pos.down())
+                && Waterlogging.hasWater(this.world, pos.up());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.selftest;
 
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.backportcore.waterlog.Waterloggable;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 import com.exiledradio.updateaquaticbackport.coral.BlockCoral;
 import com.exiledradio.updateaquaticbackport.coral.BlockCoralBlock;
@@ -29,13 +30,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.ActionResult;
 import net.minecraft.world.GameType;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
 
 import java.util.Random;
 
@@ -59,10 +57,11 @@ public final class CoralSelfTest implements SelfTest {
                 items++;
             }
             for (IBlockState s : b.getBlockState().getValidStates()) {
-                if (b instanceof BlockPseudoWater && (s.getValue(BlockPseudoWater.LEVEL) != 0 || s.getValue(BlockPseudoWater.SURFACE))) {
-                    continue;
-                }
                 c.ok(b.getStateFromMeta(b.getMetaFromState(s)) == s, "meta round trip " + s);
+            }
+            if (b instanceof BlockCoral) {
+                c.ok(((Waterloggable) b).waterNeed(b.getDefaultState()) == Waterloggable.Need.OPTIONAL,
+                        b.getRegistryName() + " may hold water or not");
             }
         }
         c.eq(30, items, "30 items (wall fans have none)");
@@ -112,39 +111,61 @@ public final class CoralSelfTest implements SelfTest {
         BlockPos a = floor.add(2, 0, 2);
         place(player, world, new ItemStack(coral), a, EnumFacing.UP);
         IBlockState s = world.getBlockState(a.up());
-        c.ok(s.getBlock() == coral && s.getValue(BlockPseudoWater.WATERLOGGED), "coral placed in water is waterlogged");
-        c.eq(Material.WATER, s.getMaterial(), "and is water");
+        c.ok(s.getBlock() == coral && Waterlogging.hasWaterSource(world, a.up()), "coral placed in water is waterlogged");
+        c.ok(s.getMaterial() != Material.WATER, "its water is waterlogging, not the block");
         Pools.settle(world);
         c.eq(coral, world.getBlockState(a.up()).getBlock(), "and lives");
         place(player, world, new ItemStack(fan), land.east(4).down(), EnumFacing.UP);
         BlockPos dryFan = land.east(4);
         s = world.getBlockState(dryFan);
-        c.ok(s.getBlock() == fan && !s.getValue(BlockPseudoWater.WATERLOGGED), "a fan placed on land is dry");
-        c.ok(s.getMaterial() != Material.WATER && s.getMaterial().blocksMovement(), "dry, it is not water and blocks flow");
+        c.ok(s.getBlock() == fan && !Waterlogging.hasWater(world, dryFan), "a fan placed on land is dry");
+        c.ok(Waterlogging.canHoldWater(s, world, dryFan), "dry, it can still hold water");
         c.ok(world.isUpdateScheduled(dryFan, fan), "a dry fan will be checked");
         Pools.settle(world);
         s = world.getBlockState(dryFan);
-        c.ok(s.getBlock() == CoralContent.DEAD_FANS.get(t) && !s.getValue(BlockPseudoWater.WATERLOGGED), "and dies, dry");
+        c.ok(s.getBlock() == CoralContent.DEAD_FANS.get(t) && !Waterlogging.hasWater(world, dryFan), "and dies, dry");
 
         // A dry coral touching water lives (1.14.4 checks all six sides).
         BlockPos side = floor.add(0, 1, 6).west();
         world.setBlockState(side.down(), Blocks.STONE.getDefaultState(), 2);
-        world.setBlockState(side, coral.getDefaultState().withProperty(BlockPseudoWater.WATERLOGGED, false), 3);
+        Waterlogging.placeDry(world, side, coral.getDefaultState(), 3);
         Pools.settle(world);
         c.eq(coral, world.getBlockState(side).getBlock(), "a dry coral touching water lives");
 
-        // 3. buckets ---------------------------------------------------------------------------------------
+        // 3. buckets, and a drained coral dies -------------------------------------------------------------
+        // A coral alone in a stone cup: its own water is the only water it has.
         BlockPos b = land.east(6);
         world.setBlockState(b.down(), Blocks.STONE.getDefaultState(), 2);
-        world.setBlockState(b, coral.getDefaultState().withProperty(BlockPseudoWater.WATERLOGGED, false), 2);
-        FillBucketEvent fill = new FillBucketEvent(player, new ItemStack(Items.WATER_BUCKET), world, new RayTraceResult(new Vec3d(b), EnumFacing.UP, b));
-        MinecraftForge.EVENT_BUS.post(fill);
-        c.ok(world.getBlockState(b).getValue(BlockPseudoWater.WATERLOGGED) && fill.getFilledBucket().getItem() == Items.BUCKET,
-                "a water bucket waterlogs a dry coral and comes back empty");
-        FillBucketEvent drain = new FillBucketEvent(player, new ItemStack(Items.BUCKET), world, new RayTraceResult(new Vec3d(b), EnumFacing.UP, b));
-        MinecraftForge.EVENT_BUS.post(drain);
-        c.ok(!world.getBlockState(b).getValue(BlockPseudoWater.WATERLOGGED) && drain.getFilledBucket().getItem() == Items.WATER_BUCKET,
-                "an empty bucket takes its water");
+        for (EnumFacing f : EnumFacing.HORIZONTALS) {
+            world.setBlockState(b.offset(f), Blocks.STONE.getDefaultState(), 2);
+        }
+        world.setBlockState(b, coral.getDefaultState(), 2);
+        EntityPlayerMP bucketeer = Players.real(world, "coralbucket");
+        bucketeer.interactionManager.setGameType(GameType.SURVIVAL);
+        bucketeer.setLocationAndAngles(b.getX() + 0.5D, b.getY() + 0.4D, b.getZ() + 0.5D, 0.0F, 90.0F);
+        bucketeer.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+        ActionResult<ItemStack> fill = Items.WATER_BUCKET.onItemRightClick(world, bucketeer, EnumHand.MAIN_HAND);
+        c.ok(world.getBlockState(b).getBlock() == coral && Waterlogging.hasWaterSource(world, b) && fill.getResult().getItem() == Items.BUCKET,
+                "a water bucket waterlogs a dry coral and comes back empty: " + fill.getType() + " " + world.getBlockState(b));
+        c.ok(world.getBlockState(b.up()).getMaterial() != Material.WATER, "and puts no water above it");
+        Pools.settle(world);
+        c.eq(coral, world.getBlockState(b).getBlock(), "a coral with only its own water lives");
+        bucketeer.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.BUCKET));
+        ActionResult<ItemStack> drain = Items.BUCKET.onItemRightClick(world, bucketeer, EnumHand.MAIN_HAND);
+        c.ok(world.getBlockState(b).getBlock() == coral && !Waterlogging.hasWater(world, b) && drain.getResult().getItem() == Items.WATER_BUCKET,
+                "an empty bucket takes its water: " + drain.getType() + " " + drain.getResult());
+        c.ok(world.isUpdateScheduled(b, coral), "drained, the coral will be checked");
+        Pools.settle(world);
+        c.eq(CoralContent.DEAD_CORALS.get(t), world.getBlockState(b).getBlock(), "a drained coral dies");
+        c.ok(!Waterlogging.hasWater(world, b), "dead and dry");
+        // Drained another way (a sponge, a command) it dies too.
+        world.setBlockState(b, fan.getDefaultState(), 2);
+        Waterlogging.setWater(world, b, true, 2);
+        Pools.settle(world);
+        c.eq(fan, world.getBlockState(b).getBlock(), "a waterlogged fan in a cup lives");
+        Waterlogging.setWater(world, b, false, 3);
+        Pools.settle(world);
+        c.eq(CoralContent.DEAD_FANS.get(t), world.getBlockState(b).getBlock(), "drained by a command, it dies");
 
         // 4. drops: Silk Touch only; water left behind -----------------------------------------------------
         breakWith(player, world, a.up(), new ItemStack(Items.IRON_PICKAXE));
@@ -168,7 +189,7 @@ public final class CoralSelfTest implements SelfTest {
         world.setBlockState(pillar.up(), Blocks.STONE.getDefaultState(), 3);
         place(player, world, new ItemStack(fan), pillar.up(), EnumFacing.EAST);
         s = world.getBlockState(pillar.up().east());
-        c.ok(s.getBlock() == wall && s.getValue(BlockCoralWallFan.FACING) == EnumFacing.EAST && s.getValue(BlockPseudoWater.WATERLOGGED),
+        c.ok(s.getBlock() == wall && s.getValue(BlockCoralWallFan.FACING) == EnumFacing.EAST && Waterlogging.hasWaterSource(world, pillar.up().east()),
                 "a fan placed on a side is a wall fan facing out, waterlogged: " + s);
         place(player, world, new ItemStack(fan), pillar.up(), EnumFacing.UP);
         c.eq(fan, world.getBlockState(pillar.up(2)).getBlock(), "a fan placed on top is a floor fan");
@@ -181,8 +202,7 @@ public final class CoralSelfTest implements SelfTest {
         // A dry wall fan dies facing the same way.
         BlockPos post = land.east(8);
         world.setBlockState(post, Blocks.STONE.getDefaultState(), 2);
-        world.setBlockState(post.west(), wall.getDefaultState().withProperty(BlockCoralWallFan.FACING, EnumFacing.WEST)
-                .withProperty(BlockPseudoWater.WATERLOGGED, false), 3);
+        world.setBlockState(post.west(), wall.getDefaultState().withProperty(BlockCoralWallFan.FACING, EnumFacing.WEST), 3);
         world.scheduleUpdate(post.west(), wall, 1);
         Pools.settle(world);
         s = world.getBlockState(post.west());
@@ -226,6 +246,15 @@ public final class CoralSelfTest implements SelfTest {
         CoralGenerator.mushroom(world, r, deep.add(2, 0, -4), CoralContent.BLOCKS.get(CoralType.TUBE).getDefaultState());
         int reefBlocks = countCoralBlocks(world, deep, 7, 12);
         c.ok(reefBlocks >= 10, "tree, claw and mushroom build a reef: " + reefBlocks + " coral blocks");
+        int plants = 0;
+        int dry = 0;
+        for (BlockPos q : BlockPos.getAllInBox(deep.add(-7, -4, -7), deep.add(7, 12, 7))) {
+            if (world.getBlockState(q).getBlock() instanceof BlockCoral) {
+                plants++;
+                dry += Waterlogging.hasWaterSource(world, q) ? 0 : 1;
+            }
+        }
+        c.ok(plants > 0 && dry == 0, "coral and fans on the reef keep the water they grew in: " + plants + " plants, " + dry + " dry");
 
         // 9. generation ------------------------------------------------------------------------------------------
         worldGen(c);
@@ -316,8 +345,12 @@ public final class CoralSelfTest implements SelfTest {
         com.exiledradio.updateaquaticbackport.UpdateAquaticBackport.LOGGER.info("SELFTEST coral worldgen (ocean biomes): warm {} -> {} coral, cold {} -> {}",
                 warm, reef, cold, none);
         c.ok(reef > 0, "a warm ocean biome has coral reefs: " + reef + " blocks at " + warm);
+        c.eq(0, DRY_GENERATED[0], "generated living coral and fans without water");
         c.eq(0, none, "a cold ocean biome has none");
     }
+
+    /** Generated living coral plants and fans found with no water. */
+    private static final int[] DRY_GENERATED = new int[1];
 
     private static int coralIn(WorldServer world, BlockPos at) {
         int cx = at.getX() >> 4;
@@ -335,9 +368,13 @@ public final class CoralSelfTest implements SelfTest {
                 for (int x = 0; x < 16; x++) {
                     for (int z = 0; z < 16; z++) {
                         for (int y = 20; y < 64; y++) {
-                            Block b = world.getBlockState(new BlockPos(x0 + x, y, z0 + z)).getBlock();
+                            BlockPos q = new BlockPos(x0 + x, y, z0 + z);
+                            Block b = world.getBlockState(q).getBlock();
                             if (b instanceof BlockCoralBlock || b instanceof BlockCoral) {
                                 n++;
+                            }
+                            if (b instanceof BlockCoral && ((BlockCoral) b).isLiving() && !Waterlogging.hasWater(world, q)) {
+                                DRY_GENERATED[0]++;
                             }
                         }
                     }

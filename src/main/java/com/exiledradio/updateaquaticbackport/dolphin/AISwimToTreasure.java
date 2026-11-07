@@ -113,7 +113,7 @@ final class AISwimToTreasure extends EntityAIBase {
             if (next == null) {
                 next = RandomPositionGenerator.findRandomTargetBlockTowards(this.dolphin, 8, 4, toward);
             }
-            if (next != null && !DolphinNodeProcessor.isSwimmable(world.getBlockState(new BlockPos(next)))) {
+            if (next != null && !DolphinNodeProcessor.isSwimmable(world, new BlockPos(next))) {
                 next = RandomPositionGenerator.findRandomTargetBlockTowards(this.dolphin, 8, 5, toward);
             }
             if (next == null) {

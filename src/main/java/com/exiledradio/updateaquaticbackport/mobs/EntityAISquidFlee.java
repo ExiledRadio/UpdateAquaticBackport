@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.mobs;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -48,7 +49,7 @@ public class EntityAISquidFlee extends EntityAIBase {
         BlockPos ahead = new BlockPos(this.squid.posX + away.x, this.squid.posY + away.y, this.squid.posZ + away.z);
         IBlockState state = this.squid.world.getBlockState(ahead);
         boolean air = state.getBlock().isAir(state, this.squid.world, ahead);
-        if (state.getMaterial() == Material.WATER || air) {
+        if (Waterlogging.hasWater(this.squid.world, ahead) || air) {
             double distance = away.length();
             if (distance > 0.0D) {
                 // 1.14.4 normalizes here and throws the result away, so the speed below scales the full

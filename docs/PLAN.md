@@ -187,8 +187,7 @@ only when `villagerbackport` is absent. Also:
 ### B. Bubble columns
 
 - Bubble column block over soul sand (up) and magma blocks (down), filling the water column; pushes and
-  pulls entities, sinks boats, refills air, particles and sounds. Uses the same water-block technique as
-  kelp (`common/BlockPseudoWater`).
+  pulls entities, sinks boats, refills air, particles and sounds. Always waterlogged, like kelp (stream Wl).
 
 ### X. Other blocks and items
 
@@ -226,8 +225,9 @@ of vanilla's `updateSize`), motion at the player tick, input at `InputUpdateEven
 
 Through Fluidlogged API, a required dependency of Backport Core. Core's `Waterloggable` adapter (extending
 its `IFluidloggable`) is implemented by every family block 1.13+ makes waterloggable; vanilla blocks get it
-from Fluidlogged API itself. Here, kelp, seagrass, coral, our sea pickle copy and bubble columns move onto it
-and `common/BlockPseudoWater` is removed. See `MIXIN_DECISION.md` and `BACKPORT_CORE_WATERLOGGING.md`.
+from Fluidlogged API itself. Here, kelp, seagrass, coral, the conduit and bubble columns move onto it and
+`common/BlockPseudoWater` is removed (**done**, `docs/streams/waterlog.md`; the sea pickle copy waits for its
+owner). See `MIXIN_DECISION.md` and `BACKPORT_CORE_WATERLOGGING.md`.
 
 ## Shared files and rules
 

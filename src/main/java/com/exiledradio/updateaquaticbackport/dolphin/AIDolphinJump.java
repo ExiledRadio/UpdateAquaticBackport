@@ -1,7 +1,7 @@
 package com.exiledradio.updateaquaticbackport.dolphin;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -45,8 +45,8 @@ final class AIDolphinJump extends EntityAIBase {
     }
 
     private boolean openWater(BlockPos at, int dx, int dz, int k) {
-        IBlockState state = this.dolphin.world.getBlockState(at.add(dx * k, 0, dz * k));
-        return state.getMaterial() == Material.WATER && !state.getMaterial().blocksMovement();
+        BlockPos pos = at.add(dx * k, 0, dz * k);
+        return Waterlogging.hasWater(this.dolphin.world, pos) && !this.dolphin.world.getBlockState(pos).getMaterial().blocksMovement();
     }
 
     private boolean airAbove(BlockPos at, int dx, int dz, int k) {
@@ -86,7 +86,7 @@ final class AIDolphinJump extends EntityAIBase {
     public void updateTask() {
         boolean was = this.inWater;
         if (!was) {
-            this.inWater = this.dolphin.world.getBlockState(new BlockPos(this.dolphin)).getMaterial() == Material.WATER;
+            this.inWater = Waterlogging.hasWater(this.dolphin.world, new BlockPos(this.dolphin));
         }
         if (this.inWater && !was) {
             this.dolphin.playSound(DolphinContent.JUMP, 1.0F, 1.0F);

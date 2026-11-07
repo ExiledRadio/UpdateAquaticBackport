@@ -18,9 +18,9 @@ def bs(model):
 
 
 # The conduit: drawn by its tile entity renderer. The block model is 1.18's (a particle texture and no
-# elements); the blockstate adds the water surface when it is waterlogged at the top of the water.
+# elements); the water of a waterlogged conduit is Fluidlogged API's to draw.
 block_model = assets.port_model("block/conduit")
-assets.pseudo_water_blockstate("conduit", [(None, bs(block_model))])
+assets.multipart_blockstate("conduit", [(None, bs(block_model))])
 # 1.18's item model: builtin/entity, drawn by the item renderer, with its display transforms.
 assets.port_model("item/conduit")
 

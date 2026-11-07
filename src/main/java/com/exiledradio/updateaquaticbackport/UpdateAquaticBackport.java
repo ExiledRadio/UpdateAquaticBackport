@@ -56,6 +56,7 @@ public final class UpdateAquaticBackport {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         com.exiledradio.updateaquaticbackport.common.Compat.init();
+        com.exiledradio.updateaquaticbackport.common.WaterSpawning.init();
         com.exiledradio.updateaquaticbackport.trident.TridentContent.init();
     }
 

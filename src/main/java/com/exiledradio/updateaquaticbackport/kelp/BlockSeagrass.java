@@ -1,15 +1,14 @@
 package com.exiledradio.updateaquaticbackport.kelp;
 
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.updateaquaticbackport.common.BlockUnderwater;
 import com.exiledradio.updateaquaticbackport.common.SharedSounds;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -33,17 +32,20 @@ import java.util.Random;
  * Seagrass and tall seagrass, from 1.14.4's SeaGrassBlock and TallSeaGrassBlock.
  *
  * <ul>
- *   <li>Placed only into a still water source on a block with a solid top, not magma.</li>
+ *   <li>Placed only into full water (a source, or falling water, which becomes a source) on a block with a
+ *       solid top, not magma. Always waterlogged ({@link Need#REQUIRED}): drained, it goes, with no drop; an
+ *       empty bucket takes nothing from it.</li>
  *   <li>Replaceable, like grass: placing a block into it takes its place.</li>
  *   <li>Drops nothing unless cut with shears: one seagrass, or two from tall seagrass.</li>
  *   <li>Bone meal turns seagrass into tall seagrass when the water above is a still source.</li>
  *   <li>Tall seagrass is two blocks, {@link #HALF} lower and upper; either half going takes the other.</li>
  * </ul>
  *
- * <p>Shears are handled in {@link #harvestBlock}, not through Forge's {@code IShearable}: vanilla's shears
- * replace an {@code IShearable} block with air, and seagrass has to leave water.
+ * <p>Shears are handled in {@link #harvestBlock}, not through Forge's {@code IShearable}: Forge's shears
+ * set an {@code IShearable} block to air directly, which takes its water with it, and seagrass has to leave
+ * its water.
  */
-public class BlockSeagrass extends BlockPseudoWater implements IGrowable {
+public class BlockSeagrass extends BlockUnderwater implements IGrowable {
 
     public enum Half implements IStringSerializable {
         LOWER, UPPER;
@@ -67,21 +69,21 @@ public class BlockSeagrass extends BlockPseudoWater implements IGrowable {
     BlockSeagrass tallForm;
 
     public BlockSeagrass(boolean tall) {
-        super(Material.WATER, MapColor.WATER);
+        super(SEA_GRASS, MapColor.WATER);
         this.tall = tall;
-        this.setDefaultState(this.baseState().withProperty(HALF, Half.LOWER));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, Half.LOWER));
         this.setHardness(0.0F);
         this.setSoundType(SharedSounds.WET_GRASS);
     }
 
     @Override
-    public boolean canBeDry() {
-        return false;
+    public Need waterNeed(IBlockState state) {
+        return Need.REQUIRED;
     }
 
     @Override
-    protected IProperty<?>[] ownProperties() {
-        return new IProperty<?>[] {HALF};
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, HALF);
     }
 
     @Override
@@ -130,11 +132,11 @@ public class BlockSeagrass extends BlockPseudoWater implements IGrowable {
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
         IBlockState here = world.getBlockState(pos);
-        boolean water = BlockKelp.isVanillaWaterSource(world, pos) || here.getBlock() == this.shortForm;
+        boolean water = (fullWater(world, pos) && !(here.getBlock() instanceof BlockSeagrass)) || here.getBlock() == this.shortForm;
         if (!water || !solidGround(world, pos.down())) {
             return false;
         }
-        return !this.tall || BlockKelp.isVanillaWaterSource(world, pos.up());
+        return !this.tall || fullWater(world, pos.up());
     }
 
     /** Tall seagrass placed by hand or by a command gets its upper half too. */
@@ -150,10 +152,10 @@ public class BlockSeagrass extends BlockPseudoWater implements IGrowable {
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighbor, BlockPos from) {
         if (!this.canStay(world, pos, state)) {
             if (this.tall) {
-                // The other half went: this one goes with it, quietly, as a double plant's does.
-                world.setBlockState(pos, this.leftBehind(state), 3);
+                // The other half went: this one goes with it, quietly, as a double plant's does, leaving its water.
+                world.setBlockToAir(pos);
             } else {
-                this.breakNaturally(world, pos, state);
+                breakLeavingWater(world, pos);
             }
         }
     }

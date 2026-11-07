@@ -4,14 +4,6 @@
       "apply": {
         "model": "updateaquaticbackport:dead_bubble_coral_fan"
       }
-    },
-    {
-      "when": {
-        "surface": "true"
-      },
-      "apply": {
-        "model": "updateaquaticbackport:water_surface"
-      }
     }
   ]
 }

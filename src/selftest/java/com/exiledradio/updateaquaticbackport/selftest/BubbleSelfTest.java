@@ -6,7 +6,8 @@ import com.exiledradio.updateaquaticbackport.bubble.BoatRocking;
 import com.exiledradio.updateaquaticbackport.bubble.BubbleColumns;
 import com.exiledradio.updateaquaticbackport.bubble.BubbleContent;
 import com.exiledradio.updateaquaticbackport.bubble.BubbleGenerator;
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.backportcore.waterlog.Waterloggable;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.common.Content;
 import com.exiledradio.updateaquaticbackport.common.Owners;
 
@@ -32,6 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameType;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -61,18 +63,15 @@ public final class BubbleSelfTest implements SelfTest {
         c.eq(column, reg, "bubble_column registered");
         c.eq(Items.AIR, Item.getItemFromBlock(column), "no bubble column item");
         c.ok(Content.multipartBlocks().contains(column), "bubble column is multipart");
-        c.eq(Material.WATER, column.getDefaultState().getMaterial(), "bubble column is water");
+        c.ok(column.getDefaultState().getMaterial() != Material.WATER, "the column itself is not water");
+        c.eq(Waterloggable.Need.REQUIRED, column.waterNeed(column.getDefaultState()), "it needs water (always waterlogged)");
         c.ok(column.getDefaultState().getValue(BlockBubbleColumn.DRAG), "default state is a whirlpool");
         int stored = 0;
         for (IBlockState s : column.getBlockState().getValidStates()) {
-            if (s.getValue(BlockLiquid.LEVEL) == 0 && !s.getValue(BlockPseudoWater.SURFACE)) {
-                c.eq(s, column.getStateFromMeta(column.getMetaFromState(s)), "meta round trip " + s);
-                stored++;
-            }
+            c.eq(s, column.getStateFromMeta(column.getMetaFromState(s)), "meta round trip " + s);
+            stored++;
         }
-        c.eq(2, stored, "two stored states");
-        c.eq(0, column.getStateFromMeta(0).getValue(BlockLiquid.LEVEL).intValue(), "stored states have water level 0");
-        c.eq(0, column.getStateFromMeta(1).getValue(BlockLiquid.LEVEL).intValue(), "for both drags");
+        c.eq(2, stored, "two states, both stored");
         for (String n : new String[] {"upwards_ambient", "upwards_inside", "whirlpool_ambient", "whirlpool_inside"}) {
             SoundEvent e = ForgeRegistries.SOUND_EVENTS.getValue(Content.id("block.bubble_column." + n));
             c.ok(e != null, "sound " + n);
@@ -100,10 +99,16 @@ public final class BubbleSelfTest implements SelfTest {
         c.ok(isColumn(world, column, up, DEPTH, false), "an upward column fills all " + DEPTH + " water blocks at once");
         c.ok(isColumn(world, column, down, DEPTH, true), "a whirlpool fills all " + DEPTH + " water blocks at once");
         c.ok(world.isAirBlock(up.up(DEPTH + 1)), "and stops at the surface");
+        boolean wet = true;
+        for (int i = 1; i <= DEPTH; i++) {
+            wet &= Waterlogging.hasWaterSource(world, up.up(i)) && Waterlogging.hasWaterSource(world, down.up(i));
+        }
+        c.ok(wet, "every column block keeps the water source it formed in");
         BlockPos topBlock = new BlockPos(up.getX(), top, up.getZ());
-        c.ok(world.getBlockState(topBlock).getActualState(world, topBlock).getValue(BlockPseudoWater.SURFACE), "top block shows the surface");
-        c.ok(!world.getBlockState(topBlock.down()).getActualState(world, topBlock.down()).getValue(BlockPseudoWater.SURFACE),
-                "below it no surface");
+        BlockPos besideTop = new BlockPos(up.getX() + 1, top, up.getZ() + 1);
+        BlockPos midBlock = topBlock.down(DEPTH / 2);
+        c.eq(world.getLightFor(EnumSkyBlock.SKY, besideTop.down(DEPTH / 2)), world.getLightFor(EnumSkyBlock.SKY, midBlock),
+                "light in a column is the water's beside it");
 
         // Water appearing over a base.
         BlockPos dry = c.area().down();

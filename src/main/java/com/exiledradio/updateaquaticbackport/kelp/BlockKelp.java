@@ -1,13 +1,12 @@
 package com.exiledradio.updateaquaticbackport.kelp;
 
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.updateaquaticbackport.common.BlockUnderwater;
 import com.exiledradio.updateaquaticbackport.common.SharedSounds;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -34,13 +33,16 @@ import java.util.Random;
  *
  * <h2>From 1.14.4's KelpTopBlock and KelpBlock, with today's additions</h2>
  * <ul>
- *   <li>Placed only into a still water source, on a block with a solid top (not magma) or on kelp.</li>
+ *   <li>Placed only into full water (a source, or falling water, which becomes a source), on a block with a
+ *       solid top (not magma) or on kelp.</li>
+ *   <li>Always waterlogged ({@link Need#REQUIRED}): drained, it goes, with no drop; an empty bucket takes nothing
+ *       from it ({@link KelpContent#onBucket}).</li>
  *   <li>The top grows 14% of random ticks, one block up, while the block above is a water source and it
  *       is not fully grown. The piece under a new top becomes {@code kelp_plant}; a plant left with no kelp
  *       above becomes a top again.</li>
  *   <li>A piece that loses its support breaks a tick later, with its drop, so a column breaks from the
  *       bottom up one piece per tick, as 1.13's.</li>
- *   <li>Every piece drops one kelp. Breaking leaves still water.</li>
+ *   <li>Every piece drops one kelp. Breaking leaves its water.</li>
  *   <li><b>Today's:</b> bone meal grows the top one block (1.16); shears on the top stop its growth for good
  *       (1.18).</li>
  * </ul>
@@ -51,7 +53,7 @@ import java.util.Random;
  * random age 0-14, the expected height a placed kelp grows to is then the same as 1.13's from its random
  * 0-24, and age 15 is "fully grown", which is also what shears set.
  */
-public class BlockKelp extends BlockPseudoWater implements IGrowable {
+public class BlockKelp extends BlockUnderwater implements IGrowable {
 
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
 
@@ -70,23 +72,23 @@ public class BlockKelp extends BlockPseudoWater implements IGrowable {
     BlockKelp other;
 
     public BlockKelp(boolean top) {
-        super(Material.WATER, MapColor.WATER);
+        super(OCEAN_PLANT, MapColor.WATER);
         this.top = top;
-        this.setDefaultState(this.baseState().withProperty(AGE, 0));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0));
         this.setHardness(0.0F);
         this.setSoundType(SharedSounds.WET_GRASS);
         this.setTickRandomly(top);
     }
 
     @Override
-    public boolean canBeDry() {
-        return false;
+    public Need waterNeed(IBlockState state) {
+        return Need.REQUIRED;
     }
 
     @Override
-    protected IProperty<?>[] ownProperties() {
+    protected BlockStateContainer createBlockState() {
         // The plant ignores its age; one property list keeps the two blocks' states alike.
-        return new IProperty<?>[] {AGE};
+        return new BlockStateContainer(this, AGE);
     }
 
     BlockKelp topBlock() {
@@ -135,7 +137,7 @@ public class BlockKelp extends BlockPseudoWater implements IGrowable {
 
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return isWaterSourceAt(world, pos) && world.getBlockState(pos).getBlock() != this.plantBlock()
+        return fullWater(world, pos) && world.getBlockState(pos).getBlock() != this.plantBlock()
                 && world.getBlockState(pos).getBlock() != this.topBlock() && this.hasSupport(world, pos);
     }
 
@@ -147,6 +149,7 @@ public class BlockKelp extends BlockPseudoWater implements IGrowable {
 
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(world, pos, state);
         this.settle(world, pos);
         // The piece below, if kelp, stops being a top.
         BlockPos below = pos.down();
@@ -183,7 +186,7 @@ public class BlockKelp extends BlockPseudoWater implements IGrowable {
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (!this.hasSupport(world, pos)) {
-            this.breakNaturally(world, pos, state);
+            breakLeavingWater(world, pos);
         }
     }
 
@@ -211,11 +214,12 @@ public class BlockKelp extends BlockPseudoWater implements IGrowable {
         world.setBlockState(pos.up(), this.topBlock().getDefaultState().withProperty(AGE, next), 3);
     }
 
-    /** @return true for plain still or flowing water at level 0 - the only thing kelp grows into */
+    /**
+     * @return true for a plain water source block: still or flowing water at level 0, with nothing in it - the
+     * only thing kelp grows into, as 1.14.4's {@code == Blocks.WATER}
+     */
     static boolean isVanillaWaterSource(IBlockAccess world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos);
-        return (state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER)
-                && state.getValue(net.minecraft.block.BlockLiquid.LEVEL) == 0;
+        return plainWaterSource(world, pos);
     }
 
     /** @return the top of the kelp column this piece belongs to */

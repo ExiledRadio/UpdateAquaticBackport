@@ -1,16 +1,15 @@
 package com.exiledradio.updateaquaticbackport.coral;
 
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+import com.exiledradio.updateaquaticbackport.common.BlockUnderwater;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -30,19 +29,21 @@ import java.util.Random;
  * {@code CoralFinBlock}.
  *
  * <ul>
- *   <li>Waterlogged when placed into a water source, dry otherwise; a bucket empties or fills it.</li>
+ *   <li>Waterloggable, living or dead ({@link Need#OPTIONAL}): placed into a water source it keeps the water,
+ *       otherwise it is dry; a bucket empties or fills it, and water flowing in fills it.</li>
  *   <li>Stands on a block with a solid top; goes (leaving its water) when that support goes.</li>
  *   <li>A living one that is neither waterlogged nor touching water on any face dies 60-99 ticks later
- *       unless water has come back. The dead form keeps its place, its facing, and is dry.</li>
+ *       unless water has come back: checked when it is placed, when a neighbor changes and when its own water
+ *       goes ({@link #onWaterChanged}). The dead form keeps its place and its facing, and is dry.</li>
  *   <li>Drops only with Silk Touch. Breaks instantly; no collision.</li>
  * </ul>
  *
- * <p>Dry, its material blocks liquids, so flowing water does not wash it away - as in 1.13, where flowing
- * water cannot enter a waterloggable block either.
+ * <p>Living coral is 1.13's ocean plant material; dead coral keeps its stone-like {@link #DRY} material. Water
+ * never washes either away: they can hold water, so flowing water fills them instead.
  */
-public class BlockCoral extends BlockPseudoWater {
+public class BlockCoral extends BlockUnderwater {
 
-    /** What a dry coral plant or fan is made of: no collision of its own, but water cannot flow into it. */
+    /** What a dead coral plant or fan is made of: no collision of its own, gray, stone-like. */
     static final Material DRY = new Material(MapColor.GRAY) {
         {
             this.setNoPushMobility();
@@ -77,37 +78,15 @@ public class BlockCoral extends BlockPseudoWater {
     Block itemBlock = this;
 
     public BlockCoral(CoralType type, boolean fan, boolean living, SoundType sound) {
-        super(DRY, living ? type.color : MapColor.GRAY);
+        super(living ? OCEAN_PLANT : DRY, living ? type.color : MapColor.GRAY);
         this.type = type;
         this.fan = fan;
-        this.setDefaultState(this.baseState());
         this.setHardness(0.0F);
         this.setSoundType(sound);
     }
 
-    @Override
-    public boolean canBeDry() {
-        return true;
-    }
-
-    @Override
-    protected IProperty<?>[] ownProperties() {
-        return new IProperty<?>[0];
-    }
-
     public boolean isLiving() {
         return this.dead != null;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(WATERLOGGED, (meta & 1) == 1);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return this.waterloggedBit(state, 1);
     }
 
     // ------------------------------------------------------------------------------------------
@@ -126,17 +105,9 @@ public class BlockCoral extends BlockPseudoWater {
                 && this.hasSupport(world, pos, this.getDefaultState());
     }
 
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
-                                            int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(WATERLOGGED, isVanillaWaterSource(world, pos));
-    }
-
-    /** @return true for still or flowing vanilla water at level 0 */
+    /** @return true for a plain water source block: still or flowing water at level 0, nothing in it */
     static boolean isVanillaWaterSource(IBlockAccess world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos);
-        return (state.getBlock() == net.minecraft.init.Blocks.WATER || state.getBlock() == net.minecraft.init.Blocks.FLOWING_WATER)
-                && state.getValue(net.minecraft.block.BlockLiquid.LEVEL) == 0;
+        return plainWaterSource(world, pos);
     }
 
     // ------------------------------------------------------------------------------------------
@@ -145,7 +116,7 @@ public class BlockCoral extends BlockPseudoWater {
 
     /** 1.14.4's isInWater: waterlogged, or water touching any face. */
     public boolean isInWater(IBlockAccess world, BlockPos pos, IBlockState state) {
-        return state.getValue(WATERLOGGED) || BlockCoralBlock.touchesWater(world, pos);
+        return Waterlogging.hasWater(world, pos) || BlockCoralBlock.touchesWater(world, pos);
     }
 
     private void checkLife(World world, BlockPos pos, IBlockState state) {
@@ -156,15 +127,25 @@ public class BlockCoral extends BlockPseudoWater {
 
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        // Water it was placed into becomes its own only after this; the scheduled tick checks again by then.
+        super.onBlockAdded(world, pos, state);
         this.checkLife(world, pos, state);
+    }
+
+    /** Its own water came or went: drained, a living coral starts its death timer. */
+    @Override
+    public void onWaterChanged(World world, BlockPos pos, IBlockState state, boolean hasWater) {
+        if (!world.isRemote && !hasWater) {
+            this.checkLife(world, pos, state);
+        }
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighbor, BlockPos from) {
         if (!this.hasSupport(world, pos, state)) {
-            // 1.13 removes it without drops.
-            world.setBlockState(pos, this.leftBehind(state), 3);
+            // 1.13 removes it without drops, leaving its water.
+            world.setBlockToAir(pos);
             return;
         }
         this.checkLife(world, pos, state);
@@ -173,13 +154,14 @@ public class BlockCoral extends BlockPseudoWater {
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
         if (this.isLiving() && !this.isInWater(world, pos, state)) {
-            world.setBlockState(pos, this.deadState(state), 2);
+            // 1.14.4 sets the dead form with waterlogged false; it has no water to lose here.
+            Waterlogging.placeDry(world, pos, this.deadState(state), 2);
         }
     }
 
-    /** @return the dead form of this state, dry, facing the same way */
+    /** @return the dead form of this state, facing the same way */
     protected IBlockState deadState(IBlockState state) {
-        return this.dead.getDefaultState().withProperty(WATERLOGGED, false);
+        return this.dead.getDefaultState();
     }
 
     // ------------------------------------------------------------------------------------------

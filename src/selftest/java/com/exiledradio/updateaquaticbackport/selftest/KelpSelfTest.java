@@ -1,7 +1,10 @@
 package com.exiledradio.updateaquaticbackport.selftest;
 
 import com.exiledradio.updateaquaticbackport.ModConfig;
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.backportcore.waterlog.Waterloggable;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+import com.exiledradio.updateaquaticbackport.common.LegacyWater;
+import com.exiledradio.updateaquaticbackport.common.RequiredWater;
 import com.exiledradio.updateaquaticbackport.common.Content;
 import com.exiledradio.updateaquaticbackport.kelp.BlockKelp;
 import com.exiledradio.updateaquaticbackport.kelp.BlockSeagrass;
@@ -30,6 +33,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.GameType;
 import net.minecraft.world.WorldServer;
@@ -71,15 +78,17 @@ public final class KelpSelfTest implements SelfTest {
         for (Block b : new Block[] {kelp, plant, seagrass, tall}) {
             c.ok(Content.multipartBlocks().contains(b), "multipart " + b.getRegistryName());
             for (IBlockState s : b.getBlockState().getValidStates()) {
-                if (s.getValue(BlockPseudoWater.LEVEL) == 0 && !s.getValue(BlockPseudoWater.SURFACE)) {
-                    IBlockState back = b.getStateFromMeta(b.getMetaFromState(s));
-                    boolean stored = b == kelp || (b == tall) || s == b.getDefaultState();
-                    if (stored) {
-                        c.ok(back == s, "meta round trip " + s);
-                    }
+                IBlockState back = b.getStateFromMeta(b.getMetaFromState(s));
+                boolean stored = b == kelp || (b == tall) || s == b.getDefaultState();
+                if (stored) {
+                    c.ok(back == s, "meta round trip " + s);
                 }
             }
-            c.eq(Material.WATER, b.getDefaultState().getMaterial(), b.getRegistryName() + " is water");
+            c.ok(b.getDefaultState().getMaterial() != Material.WATER, b.getRegistryName() + " is not itself water");
+            c.ok(b instanceof Waterloggable && ((Waterloggable) b).waterNeed(b.getDefaultState()) == Waterloggable.Need.REQUIRED,
+                    b.getRegistryName() + " is waterloggable and needs water");
+            c.ok(b.getBlockState().getProperties().size() <= 1, b.getRegistryName() + " has no water properties: "
+                    + b.getBlockState().getProperties());
         }
 
         // 2. placing by hand -----------------------------------------------------------------------
@@ -91,7 +100,7 @@ public final class KelpSelfTest implements SelfTest {
         IBlockState placed = world.getBlockState(at.up());
         c.eq(kelp, placed.getBlock(), "kelp placed on the floor under water");
         c.ok(placed.getValue(BlockKelp.AGE) < 15, "placed kelp starts below full growth");
-        c.eq(0, placed.getValue(BlockLiquid.LEVEL).intValue(), "kelp carries water level 0");
+        c.ok(Waterlogging.hasWaterSource(world, at.up()), "kelp placed in water keeps it, as a source");
 
         BlockPos dry = c.area().down();
         place(player, world, new ItemStack(kelpItem), dry, EnumFacing.UP);
@@ -134,6 +143,7 @@ public final class KelpSelfTest implements SelfTest {
                 new RayTraceResult(new Vec3d(at.up()), EnumFacing.UP, at.up()));
         c.ok(MinecraftForge.EVENT_BUS.post(bucket), "an empty bucket takes nothing from kelp");
         c.eq(plant, world.getBlockState(at.up()).getBlock(), "kelp still there after the bucket");
+        buckets(c, kelp, seagrass);
 
         // 5. growth ---------------------------------------------------------------------------------------
         BlockPos col = floor.add(5, 0, 5).up();
@@ -152,9 +162,11 @@ public final class KelpSelfTest implements SelfTest {
         c.eq(floor.getY() + 9, top.getY(), "kelp grows up to the highest water block");
         c.eq(kelp, world.getBlockState(top).getBlock(), "the top is kelp");
         c.eq(plant, world.getBlockState(top.down()).getBlock(), "under it is kelp plant");
-        c.ok(world.getBlockState(top).getValue(BlockPseudoWater.SURFACE) == false
-                && world.getBlockState(top).getActualState(world, top).getValue(BlockPseudoWater.SURFACE), "the top shows the water surface");
-        c.ok(!world.getBlockState(top.down()).getActualState(world, top.down()).getValue(BlockPseudoWater.SURFACE), "below the top no surface");
+        boolean grownWet = true;
+        for (BlockPos p = col; p.getY() <= top.getY(); p = p.up()) {
+            grownWet &= Waterlogging.hasWaterSource(world, p);
+        }
+        c.ok(grownWet, "every piece kelp grows into keeps the water it grew into");
         BlockPos col2 = floor.add(7, 0, 5).up();
         world.setBlockState(col2, kelp.getDefaultState().withProperty(BlockKelp.AGE, 15), 3);
         kelp.randomTick(world, col2, world.getBlockState(col2), always);
@@ -277,6 +289,14 @@ public final class KelpSelfTest implements SelfTest {
             belowSurface &= !(world.getBlockState(p).getBlock() instanceof BlockKelp);
         }
         c.ok(belowSurface, "generated kelp never reaches into the air");
+        boolean genWet = true;
+        for (BlockPos p : BlockPos.getAllInBox(forest.add(-4, -2, -4), forest.add(4, 9, 4))) {
+            if (world.getBlockState(p).getBlock() instanceof BlockKelp) {
+                genWet &= Waterlogging.hasWaterSource(world, p);
+            }
+        }
+        c.ok(genWet, "generated kelp keeps the sea's water");
+        waterlogging(c, kelp, plant, seagrass, tall);
         worldGen(c, kelp, plant, seagrass, tall);
     }
 
@@ -291,6 +311,7 @@ public final class KelpSelfTest implements SelfTest {
         c.ok(ModConfig.kelp.generate, "generation on");
         int kelpCount = 0;
         int grassCount = 0;
+        int dryCount = 0;
         int chunks = 0;
         int cx = ocean.getX() >> 4;
         int cz = ocean.getZ() >> 4;
@@ -307,11 +328,14 @@ public final class KelpSelfTest implements SelfTest {
                 for (int x = 0; x < 16; x++) {
                     for (int z = 0; z < 16; z++) {
                         for (int y = 20; y < 64; y++) {
-                            Block b = world.getBlockState(new BlockPos(x0 + x, y, z0 + z)).getBlock();
+                            BlockPos p = new BlockPos(x0 + x, y, z0 + z);
+                            Block b = world.getBlockState(p).getBlock();
                             if (b == kelp || b == plant) {
                                 kelpCount++;
+                                dryCount += Waterlogging.hasWaterSource(world, p) ? 0 : 1;
                             } else if (b == seagrass || b == tall) {
                                 grassCount++;
+                                dryCount += Waterlogging.hasWaterSource(world, p) ? 0 : 1;
                             }
                         }
                     }
@@ -320,8 +344,119 @@ public final class KelpSelfTest implements SelfTest {
         }
         c.ok(grassCount > 0, "generated ocean has seagrass: " + grassCount + " in " + chunks + " chunks");
         c.ok(kelpCount > 0, "generated ocean has kelp: " + kelpCount);
+        c.eq(0, dryCount, "generated kelp and seagrass without their water");
         com.exiledradio.updateaquaticbackport.UpdateAquaticBackport.LOGGER.info("SELFTEST kelp worldgen at {}: {} kelp, {} seagrass in {} chunks",
                 ocean, kelpCount, grassCount, chunks);
+    }
+
+    /** Real buckets, used by a player looking straight down at kelp and seagrass in a shallow pool. */
+    private static void buckets(Check c, BlockKelp kelp, BlockSeagrass seagrass) {
+        WorldServer world = c.world;
+        BlockPos floor = Pools.pool(c, 1);
+        BlockPos k = floor.add(2, 1, 2);
+        BlockPos g = floor.add(6, 1, 2);
+        world.setBlockState(k, kelp.getDefaultState(), 3);
+        world.setBlockState(g, seagrass.getDefaultState(), 3);
+        for (BlockPos target : new BlockPos[] {k, g}) {
+            Block block = world.getBlockState(target).getBlock();
+            EntityPlayerMP p = Players.real(world, "kelpbucket");
+            p.interactionManager.setGameType(GameType.SURVIVAL);
+            p.setLocationAndAngles(target.getX() + 0.5D, target.getY() + 0.2D, target.getZ() + 0.5D, 0.0F, 90.0F);
+            p.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.BUCKET));
+            ActionResult<ItemStack> empty = Items.BUCKET.onItemRightClick(world, p, EnumHand.MAIN_HAND);
+            c.ok(empty.getResult().getItem() == Items.BUCKET, "a bucket on " + block.getRegistryName() + " stays empty: "
+                    + empty.getType() + " " + empty.getResult());
+            c.ok(world.getBlockState(target).getBlock() == block && Waterlogging.hasWaterSource(world, target),
+                    "a bucket on " + block.getRegistryName() + " does nothing: " + world.getBlockState(target));
+            p.setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+            ActionResult<ItemStack> full = Items.WATER_BUCKET.onItemRightClick(world, p, EnumHand.MAIN_HAND);
+            c.ok(world.getBlockState(target).getBlock() == block && Waterlogging.hasWaterSource(world, target),
+                    "a water bucket leaves " + block.getRegistryName() + " as it is: " + full.getType() + " " + world.getBlockState(target));
+            com.exiledradio.updateaquaticbackport.UpdateAquaticBackport.LOGGER.info("SELFTEST kelp: water bucket on {}: {} {}",
+                    block.getRegistryName(), full.getType(), full.getResult());
+        }
+    }
+
+    /** Waterlogging: light, draining, a command placing kelp in the air, falling water, old worlds. */
+    private static void waterlogging(Check c, BlockKelp kelp, BlockKelp plant, BlockSeagrass seagrass, BlockSeagrass tall) {
+        WorldServer world = c.world;
+
+        // Light: a kelp column dims sky light exactly as the water beside it does, 1 a block.
+        BlockPos floor = Pools.pool(c, 9);
+        BlockPos col = floor.add(2, 1, 2);
+        BlockPos plain = floor.add(9, 1, 9);
+        for (int i = 0; i < 9; i++) {
+            world.setBlockState(col.up(i), (i == 8 ? kelp : plant).getDefaultState(), 3);
+        }
+        BlockPos grass = floor.add(9, 1, 2);
+        world.setBlockState(grass, seagrass.getDefaultState(), 3);
+        boolean same = true;
+        StringBuilder light = new StringBuilder();
+        for (int i = 0; i < 9; i++) {
+            int inKelp = world.getLightFor(EnumSkyBlock.SKY, col.up(i));
+            int inWater = world.getLightFor(EnumSkyBlock.SKY, plain.up(i));
+            same &= inKelp == inWater;
+            light.append(inKelp).append('/').append(inWater).append(' ');
+        }
+        c.ok(same, "sky light in kelp matches the water beside it, kelp/water by depth: " + light);
+        c.eq(world.getLightFor(EnumSkyBlock.SKY, plain.up(8)) - 8, world.getLightFor(EnumSkyBlock.SKY, plain),
+                "water dims sky light by 1 a block");
+        c.eq(world.getLightFor(EnumSkyBlock.SKY, plain), world.getLightFor(EnumSkyBlock.SKY, grass), "seagrass dims light as water");
+        c.eq(world.getBlockState(plain).getLightOpacity(world, plain), world.getBlockState(col).getLightOpacity(world, col) + 1,
+                "kelp itself has no opacity; its water has the water's");
+
+        // Drained (as by a sponge or a command), kelp goes with nothing left.
+        BlockPos d = floor.add(5, 1, 5);
+        world.setBlockState(d, kelp.getDefaultState(), 3);
+        c.ok(Waterlogging.setWater(world, d, false, 3) && world.isAirBlock(d) && !Waterlogging.hasWater(world, d),
+                "drained kelp is removed: " + world.getBlockState(d));
+        c.eq(0, WoodsetSelfTest.countDrops(world, d, Item.getItemFromBlock(kelp)), "drained kelp drops nothing");
+        world.setBlockState(d, Blocks.WATER.getDefaultState(), 2);
+
+        // A command setting kelp or seagrass in the air: its water comes with it, at the end of the tick.
+        BlockPos air = c.area();
+        world.setBlockState(air, kelp.getDefaultState(), 3);
+        world.setBlockState(air.east(3), seagrass.getDefaultState(), 3);
+        c.ok(!Waterlogging.hasWater(world, air), "kelp set in the air has no water yet");
+        c.ok(RequiredWater.flush(world) >= 2 && Waterlogging.hasWaterSource(world, air) && Waterlogging.hasWaterSource(world, air.east(3)),
+                "at the end of the tick, kelp and seagrass set in the air hold a water source");
+
+        // Falling water, 1.14's "level 8": kelp can be placed there and makes it a source.
+        BlockPos fall = Pools.pool(c, 1).add(4, 1, 4);
+        world.setBlockState(fall, Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 8), 2);
+        c.ok(kelp.canPlaceBlockAt(world, fall), "kelp can be placed in falling water");
+        world.setBlockState(fall.up(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 3), 2);
+        c.ok(!kelp.canPlaceBlockAt(world, fall.up()) && !seagrass.canPlaceBlockAt(world, fall.up()), "nor in thin flowing water");
+        world.setBlockState(fall.up(), Blocks.AIR.getDefaultState(), 2);
+        world.setBlockState(fall, kelp.getDefaultState(), 3);
+        RequiredWater.flush(world);
+        c.ok(Waterlogging.hasWaterSource(world, fall), "kelp in falling water turns it into a source");
+
+        // Old worlds: blocks that were the water in their space get it back once, found in the saved chunk.
+        NBTTagCompound level = new NBTTagCompound();
+        NBTTagList sections = new NBTTagList();
+        NBTTagCompound section = new NBTTagCompound();
+        byte[] blocks = new byte[4096];
+        byte[] data = new byte[2048];
+        byte[] add = new byte[2048];
+        int id = Block.getIdFromBlock(kelp);
+        int index = (5 << 8) | (3 << 4) | 2; // y 5, z 3, x 2 of the section
+        blocks[index] = (byte) (id & 255);
+        add[index >> 1] = (byte) (((id >> 8) & 15) << ((index & 1) << 2));
+        section.setByte("Y", (byte) 6);
+        section.setByteArray("Blocks", blocks);
+        section.setByteArray("Data", data);
+        section.setByteArray("Add", add);
+        sections.appendTag(section);
+        level.setTag("Sections", sections);
+        c.eq(java.util.Collections.singletonList(new BlockPos(162, 101, -61)), LegacyWater.find(level, 10, -4),
+                "an old chunk's kelp is found by its saved id");
+        BlockPos old = Pools.pool(c, 1).add(3, 1, 3);
+        world.setBlockState(old, kelp.getDefaultState(), 2 | Waterlogging.REMOVE_WATER);
+        c.ok(!Waterlogging.hasWater(world, old), "kelp as an old world loads it: no water of its own");
+        LegacyWater.queue(world, old);
+        c.ok(LegacyWater.run(world) == 1 && Waterlogging.hasWaterSource(world, old), "an old world's kelp gets its water back");
+        c.eq(0, LegacyWater.run(world), "and only once");
     }
 
     private static void place(EntityPlayerMP player, WorldServer world, ItemStack stack, BlockPos on, EnumFacing face) {

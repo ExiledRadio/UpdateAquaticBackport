@@ -30,11 +30,11 @@ for t in TYPES:
         assets.item_from_block(block)
 
         m = assets.port_model("block/" + plant)
-        assets.pseudo_water_blockstate(plant, [(None, bs(m))])
+        assets.multipart_blockstate(plant, [(None, bs(m))])
         assets.item_generated(plant, assets.texture("block/" + plant))
 
         m = assets.port_model("block/" + fan)
-        assets.pseudo_water_blockstate(fan, [(None, bs(m))])
+        assets.multipart_blockstate(fan, [(None, bs(m))])
         assets.item_generated(fan, assets.texture("block/" + fan))
 
         m = assets.port_model("block/" + wall)
@@ -42,7 +42,7 @@ for t in TYPES:
         parts = []
         for facing, y in rotations.items():
             parts.append(({"facing": facing}, bs(m)))
-        assets.pseudo_water_blockstate(wall, parts)
+        assets.multipart_blockstate(wall, parts)
         # y rotation per facing: patch the parts written above.
         import json
         path = os.path.join(assets.ASSETS, "blockstates", wall + ".json")

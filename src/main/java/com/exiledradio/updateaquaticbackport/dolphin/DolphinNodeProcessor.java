@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.dolphin;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -62,17 +64,25 @@ final class DolphinNodeProcessor extends NodeProcessor {
         if (isBreach(world, pos, state)) {
             return PathNodeType.OPEN;
         }
-        return isSwimmable(state) ? PathNodeType.WATER : PathNodeType.BLOCKED;
+        return isSwimmable(world, pos, state) ? PathNodeType.WATER : PathNodeType.BLOCKED;
     }
 
-    /** Water a mob can move through: water material that does not block movement (kelp, seagrass do not). */
-    static boolean isSwimmable(IBlockState state) {
-        return state.getMaterial() == Material.WATER && !state.getMaterial().blocksMovement();
+    /**
+     * Water a mob can move through, 1.14.4's water fluid that allows movement: a water block, or a waterlogged
+     * block whose material does not block movement (kelp, seagrass, living coral; not a conduit or a slab).
+     */
+    static boolean isSwimmable(IBlockAccess world, BlockPos pos, IBlockState state) {
+        return Waterlogging.hasWater(world, pos) && !state.getMaterial().blocksMovement();
+    }
+
+    /** {@link #isSwimmable(IBlockAccess, BlockPos, IBlockState)} for the block at a position. */
+    static boolean isSwimmable(IBlockAccess world, BlockPos pos) {
+        return isSwimmable(world, pos, world.getBlockState(pos));
     }
 
     /** Air directly above water. */
     private static boolean isBreach(IBlockAccess world, BlockPos pos, IBlockState state) {
-        return state.getMaterial() == Material.AIR && isSwimmable(world.getBlockState(pos.down()));
+        return state.getMaterial() == Material.AIR && isSwimmable(world, pos.down());
     }
 
     @Nullable
@@ -108,7 +118,7 @@ final class DolphinNodeProcessor extends NodeProcessor {
                     if (isBreach(this.blockaccess, pos, state)) {
                         return PathNodeType.OPEN;
                     }
-                    if (!isSwimmable(state)) {
+                    if (!isSwimmable(this.blockaccess, pos, state)) {
                         return PathNodeType.BLOCKED;
                     }
                 }

@@ -4,14 +4,6 @@
       "apply": {
         "model": "updateaquaticbackport:bubble_coral"
       }
-    },
-    {
-      "when": {
-        "surface": "true"
-      },
-      "apply": {
-        "model": "updateaquaticbackport:water_surface"
-      }
     }
   ]
 }

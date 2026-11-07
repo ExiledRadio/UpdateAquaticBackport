@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.fish;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +32,7 @@ final class EntityAIFishSwim extends EntityAIWander {
     @Nullable
     protected Vec3d getPosition() {
         Vec3d target = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
-        for (int i = 0; target != null && this.entity.world.getBlockState(new BlockPos(target)).getMaterial() != Material.WATER && i++ < 10; ) {
+        for (int i = 0; target != null && !Waterlogging.hasWater(this.entity.world, new BlockPos(target)) && i++ < 10; ) {
             target = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
         }
         return target;

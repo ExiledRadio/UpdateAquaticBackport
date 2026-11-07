@@ -1,9 +1,10 @@
 package com.exiledradio.updateaquaticbackport.trident;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import com.exiledradio.updateaquaticbackport.common.Content;
 import com.exiledradio.updateaquaticbackport.common.Owners;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -490,7 +491,7 @@ public class EntityDrowned extends EntityZombie implements IRangedAttackMob {
             BlockPos at = new BlockPos(this.creature.posX, this.creature.getEntityBoundingBox().minY, this.creature.posZ);
             for (int i = 0; i < 10; ++i) {
                 BlockPos p = at.add(random.nextInt(20) - 10, 2 - random.nextInt(8), random.nextInt(20) - 10);
-                if (this.creature.world.getBlockState(p).getMaterial() == Material.WATER) {
+                if (Waterlogging.hasWater(this.creature.world, p)) {
                     return new Vec3d(p.getX(), p.getY(), p.getZ());
                 }
             }

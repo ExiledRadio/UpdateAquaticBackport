@@ -58,6 +58,7 @@ public final class SelfTestRunner {
             new BlocksSelfTest(),
             new WaterSelfTest(),
             new MobsSelfTest(),
+            new WaterlogSelfTest(),
     };
 
     private final List<String> wanted;

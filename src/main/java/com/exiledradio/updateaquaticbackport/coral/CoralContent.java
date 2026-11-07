@@ -3,6 +3,7 @@ package com.exiledradio.updateaquaticbackport.coral;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.Content;
+import com.exiledradio.updateaquaticbackport.common.LegacyWater;
 import com.exiledradio.updateaquaticbackport.common.SharedSounds;
 
 import net.minecraft.block.Block;
@@ -115,6 +116,8 @@ public final class CoralContent {
         for (Block b : ALL) {
             if (b instanceof BlockCoral) {
                 Content.multipart(b);
+                // Saved before waterlogging, metadata bit 1 (wall fans: 4) meant waterlogged.
+                LegacyWater.whenBit(b, b instanceof BlockCoralWallFan ? 4 : 1);
             }
         }
         GameRegistry.registerWorldGenerator(new CoralGenerator(), 6);

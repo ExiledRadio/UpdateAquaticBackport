@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.dolphin;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 import com.exiledradio.updateaquaticbackport.common.Owners;
 
@@ -377,9 +379,7 @@ public class EntityDolphin extends EntityCreature implements IAnimals {
         if (pos.getY() < sea - 13 || pos.getY() > sea) {
             return false;
         }
-        if (world.getBlockState(pos).getMaterial() != Material.WATER
-                || world.getBlockState(pos.down()).getMaterial() != Material.WATER
-                || world.getBlockState(pos.up()).getMaterial() != Material.WATER) {
+        if (!Waterlogging.hasWater(world, pos) || !Waterlogging.hasWater(world, pos.down()) || !Waterlogging.hasWater(world, pos.up())) {
             return false;
         }
         switch (kind) {

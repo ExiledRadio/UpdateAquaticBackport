@@ -1,6 +1,6 @@
 package com.exiledradio.updateaquaticbackport.fish;
 
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
@@ -83,7 +83,8 @@ public class ItemFishBucket extends Item {
     /**
      * Places water at a position, as a water bucket would, and lets the fish out there.
      *
-     * <p>Kelp, seagrass and wet coral already are water: the fish just goes in. A dry coral is filled.
+     * <p>A block that can hold water (a waterloggable one: kelp, coral, a slab) is filled if it is dry, as a
+     * water bucket fills it; one that already holds water, such as kelp, just takes the fish.
      * In the Nether the water boils away and the fish is left to flop, as in 1.13.
      *
      * @return false if water cannot go there; then nothing happened
@@ -91,16 +92,9 @@ public class ItemFishBucket extends Item {
     public boolean empty(@Nullable EntityPlayer player, World world, BlockPos pos, ItemStack stack) {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        if (block instanceof BlockPseudoWater) {
-            BlockPseudoWater plant = (BlockPseudoWater) block;
-            if (!plant.isWater(state)) {
-                IBlockState filled = plant.filled(state);
-                if (filled == null) {
-                    return false;
-                }
-                if (!world.isRemote) {
-                    world.setBlockState(pos, filled, 11);
-                }
+        if (state.getMaterial() != Material.WATER && Waterlogging.canHoldWater(state, world, pos)) {
+            if (!Waterlogging.hasWaterSource(world, pos) && !world.isRemote && !Waterlogging.setWater(world, pos, true, 11)) {
+                return false;
             }
         } else {
             Material material = state.getMaterial();

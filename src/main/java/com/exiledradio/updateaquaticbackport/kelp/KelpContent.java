@@ -4,6 +4,7 @@ import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.Compat;
 import com.exiledradio.updateaquaticbackport.common.Content;
+import com.exiledradio.updateaquaticbackport.common.LegacyWater;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -17,8 +18,11 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.init.Items;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -32,7 +36,7 @@ import javax.annotation.Nullable;
  *
  * <p>Registers the blocks and items, kelp's smelting, the dried kelp block's recipes and fuel, compost
  * values for a composter if one is installed, and the generator ({@link KelpGenerator}). Underwater bone
- * meal is {@link UnderwaterBonemeal}. Off ({@code kelp.enabled}), nothing is registered and everything
+ * meal is {@link UnderwaterBonemeal}. An empty bucket takes nothing from kelp or seagrass ({@link #onBucket}). Off ({@code kelp.enabled}), nothing is registered and everything
  * here does nothing.
  */
 @Mod.EventBusSubscriber(modid = UpdateAquaticBackport.MOD_ID)
@@ -106,6 +110,7 @@ public final class KelpContent {
         tallSeagrass.setCreativeTab(null);
         for (Block block : new Block[] {kelp, kelpPlant, seagrass, tallSeagrass}) {
             Content.multipart(block);
+            LegacyWater.always(block);
         }
 
         // 1.14.4: organic, green on maps, hardness 0.5, blast resistance 2.5, plant sounds.
@@ -165,6 +170,24 @@ public final class KelpContent {
         registry.register(back);
 
         FurnaceRecipes.instance().addSmelting(Item.getItemFromBlock(kelp), new ItemStack(driedKelp), 0.1F);
+    }
+
+    /**
+     * An empty bucket aimed at kelp or seagrass does nothing, as today's: they hold water but are not a bucket's
+     * to take (1.14.4's kelp and seagrass are not {@code IBucketPickupHandler}s). Without this, Fluidlogged API
+     * would drain them, and a block that needs water would go with it.
+     */
+    @SubscribeEvent
+    public static void onBucket(FillBucketEvent event) {
+        RayTraceResult hit = event.getTarget();
+        if (!enabled() || hit == null || hit.typeOfHit != RayTraceResult.Type.BLOCK
+                || event.getEmptyBucket().getItem() != Items.BUCKET) {
+            return;
+        }
+        Block block = event.getWorld().getBlockState(hit.getBlockPos()).getBlock();
+        if (block instanceof BlockKelp || block instanceof BlockSeagrass) {
+            event.setCanceled(true);
+        }
     }
 
     @SubscribeEvent

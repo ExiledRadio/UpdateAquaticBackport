@@ -15,14 +15,6 @@
       "when": {
         "half": "upper"
       }
-    },
-    {
-      "when": {
-        "surface": "true"
-      },
-      "apply": {
-        "model": "updateaquaticbackport:water_surface"
-      }
     }
   ]
 }

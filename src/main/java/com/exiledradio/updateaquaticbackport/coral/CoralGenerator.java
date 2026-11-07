@@ -1,7 +1,7 @@
 package com.exiledradio.updateaquaticbackport.coral;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.ModConfig;
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 import com.exiledradio.updateaquaticbackport.common.Owners;
 
@@ -76,7 +76,7 @@ public final class CoralGenerator implements IWorldGenerator {
                 if (BlockCoral.isVanillaWaterSource(world, at)) {
                     IBlockState pickle = seaPickle(random.nextInt(4) + 1);
                     if (pickle != null && pickle.getBlock().canPlaceBlockAt(world, at)) {
-                        world.setBlockState(at, pickle, 2);
+                        Waterlogging.placeKeepingWater(world, at, pickle, 2);
                     }
                 }
             }
@@ -139,19 +139,19 @@ public final class CoralGenerator implements IWorldGenerator {
         if (random.nextFloat() < 0.25F) {
             List<Block> tops = new ArrayList<Block>(CoralContent.CORALS.values());
             tops.addAll(CoralContent.FANS.values());
-            world.setBlockState(up, randomOf(tops, random).getDefaultState().withProperty(BlockPseudoWater.WATERLOGGED, true), 2);
+            Waterlogging.placeKeepingWater(world, up, randomOf(tops, random).getDefaultState(), 2);
         } else if (random.nextFloat() < 0.05F) {
             IBlockState pickle = seaPickle(random.nextInt(4) + 1);
             if (pickle != null) {
-                world.setBlockState(up, pickle, 2);
+                Waterlogging.placeKeepingWater(world, up, pickle, 2);
             }
         }
         for (EnumFacing side : EnumFacing.Plane.HORIZONTAL) {
             if (random.nextFloat() < 0.2F) {
                 BlockPos beside = pos.offset(side);
                 if (BlockCoral.isVanillaWaterSource(world, beside)) {
-                    world.setBlockState(beside, randomOf(new ArrayList<Block>(CoralContent.WALL_FANS.values()), random).getDefaultState()
-                            .withProperty(BlockCoralWallFan.FACING, side).withProperty(BlockPseudoWater.WATERLOGGED, true), 2);
+                    Waterlogging.placeKeepingWater(world, beside, randomOf(new ArrayList<Block>(CoralContent.WALL_FANS.values()), random)
+                            .getDefaultState().withProperty(BlockCoralWallFan.FACING, side), 2);
                 }
             }
         }
