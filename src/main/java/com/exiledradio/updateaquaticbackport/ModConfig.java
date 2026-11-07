@@ -182,6 +182,10 @@ public final class ModConfig {
         @Config.Comment("Bubble columns over soul sand (upward) and magma blocks (downward). Off, nothing is registered.")
         @Config.LangKey("config.updateaquaticbackport.bubbles.enabled")
         public boolean enabled = true;
+
+        @Config.Comment("Bubble columns start over soul sand and magma blocks that world generation leaves under water, in newly generated chunks.")
+        @Config.LangKey("config.updateaquaticbackport.bubbles.generate")
+        public boolean generate = true;
     }
 
     public static final class Blocks {

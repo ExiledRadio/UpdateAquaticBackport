@@ -1,0 +1,17 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "updateaquaticbackport:bubble_column"
+      }
+    },
+    {
+      "when": {
+        "surface": "true"
+      },
+      "apply": {
+        "model": "updateaquaticbackport:water_surface"
+      }
+    }
+  ]
+}

@@ -155,3 +155,12 @@ config.updateaquaticbackport.bubbles.tooltip=Bubble columns over soul sand and m
 config.updateaquaticbackport.blocks.tooltip=Smaller 1.13 block and item changes: prismarine stairs and slabs, carved pumpkins, wood blocks and more.
 config.updateaquaticbackport.mobs.tooltip=1.13's changes to existing mobs.
 config.updateaquaticbackport.water.tooltip=How water looks and feels: biome water colors, underwater fog, air refilling, floating items.
+
+# --- bubble ---
+tile.updateaquaticbackport.bubble_column.name=Bubble Column
+subtitles.updateaquaticbackport.block.bubble_column.upwards_ambient=Bubbles flow
+subtitles.updateaquaticbackport.block.bubble_column.upwards_inside=Bubbles woosh
+subtitles.updateaquaticbackport.block.bubble_column.whirlpool_ambient=Bubbles whirl
+subtitles.updateaquaticbackport.block.bubble_column.whirlpool_inside=Bubbles zoom
+config.updateaquaticbackport.bubbles.generate=Form in New Chunks
+config.updateaquaticbackport.bubbles.generate.tooltip=Bubble columns start over soul sand and magma blocks that world generation leaves under water, in newly generated chunks.

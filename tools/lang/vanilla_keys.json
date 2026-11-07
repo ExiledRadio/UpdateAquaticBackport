@@ -66,10 +66,16 @@
     "config.updateaquaticbackport.bubbles.tooltip",
     "config.updateaquaticbackport.blocks.tooltip",
     "config.updateaquaticbackport.mobs.tooltip",
-    "config.updateaquaticbackport.water.tooltip"
+    "config.updateaquaticbackport.water.tooltip",
+    "config.updateaquaticbackport.bubbles.generate",
+    "config.updateaquaticbackport.bubbles.generate.tooltip"
   ],
   "vanilla": {
     "item.updateaquaticbackport.dried_kelp.name": "item.minecraft.dried_kelp",
+    "subtitles.updateaquaticbackport.block.bubble_column.upwards_ambient": "subtitles.block.bubble_column.upwards_ambient",
+    "subtitles.updateaquaticbackport.block.bubble_column.upwards_inside": "subtitles.block.bubble_column.upwards_inside",
+    "subtitles.updateaquaticbackport.block.bubble_column.whirlpool_ambient": "subtitles.block.bubble_column.whirlpool_ambient",
+    "subtitles.updateaquaticbackport.block.bubble_column.whirlpool_inside": "subtitles.block.bubble_column.whirlpool_inside",
     "subtitles.updateaquaticbackport.item.axe.strip": "subtitles.item.axe.strip",
     "tile.pressurePlateWood.name": "block.minecraft.oak_pressure_plate",
     "tile.trapdoor.name": "block.minecraft.oak_trapdoor",
@@ -84,6 +90,7 @@
     "tile.updateaquaticbackport.brain_coral_block.name": "block.minecraft.brain_coral_block",
     "tile.updateaquaticbackport.brain_coral_fan.name": "block.minecraft.brain_coral_fan",
     "tile.updateaquaticbackport.brain_coral_wall_fan.name": "block.minecraft.brain_coral_wall_fan",
+    "tile.updateaquaticbackport.bubble_column.name": "block.minecraft.bubble_column",
     "tile.updateaquaticbackport.bubble_coral.name": "block.minecraft.bubble_coral",
     "tile.updateaquaticbackport.bubble_coral_block.name": "block.minecraft.bubble_coral_block",
     "tile.updateaquaticbackport.bubble_coral_fan.name": "block.minecraft.bubble_coral_fan",
