@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.coral;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -44,10 +46,10 @@ public class BlockCoralBlock extends Block {
         return this.dead != null;
     }
 
-    /** @return true if water (vanilla's, or a block that is water) touches any face */
+    /** @return true if water (a water block, or a waterlogged block) touches any face */
     public static boolean touchesWater(IBlockAccess world, BlockPos pos) {
         for (EnumFacing face : EnumFacing.values()) {
-            if (world.getBlockState(pos.offset(face)).getMaterial() == Material.WATER) {
+            if (Waterlogging.hasWater(world, pos.offset(face))) {
                 return true;
             }
         }

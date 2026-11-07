@@ -147,26 +147,10 @@ def port_model(path, ours=None, textures_from_jar=True):
     return "%s:%s" % (MODID, ours)
 
 
-def water_surface():
-    """Writes the shared water-surface model drawn on top of BlockPseudoWater blocks at the surface.
+def multipart_blockstate(name, parts):
+    """Writes a multipart-only blockstate (the block is registered with Content.multipart).
 
-    One up face at vanilla source water's height (8/9 of a block), 1.12.2's still water texture,
-    tint index 1 (the biome water color; tint 0 is the plants' own), culled by a block above.
-    """
-    write_json("models/block/water_surface.json", {
-        "ambientocclusion": False,
-        "textures": {"particle": "blocks/water_still", "water": "blocks/water_still"},
-        "elements": [{
-            "from": [0, 0, 0], "to": [16, 14.222, 16],
-            "shade": False,
-            "faces": {"up": {"uv": [0, 0, 16, 16], "texture": "#water", "tintindex": 1, "cullface": "up"}}
-        }]
-    })
-    return "%s:water_surface" % MODID
-
-
-def pseudo_water_blockstate(name, parts):
-    """Writes a multipart-only blockstate for a BlockPseudoWater block: its parts plus the water surface.
+    The water in a waterlogged block is Fluidlogged API's to draw, so no water part is added.
 
     @param parts list of (when-dict or None, model name) for the block's own look
     """
@@ -176,7 +160,6 @@ def pseudo_water_blockstate(name, parts):
         if when:
             part["when"] = when
         multipart.append(part)
-    multipart.append({"when": {"surface": "true"}, "apply": {"model": water_surface()}})
     write_json("blockstates/%s.json" % name, {"multipart": multipart})
 
 

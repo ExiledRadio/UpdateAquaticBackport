@@ -61,6 +61,7 @@ public final class SelfTestRunner {
             new StructureSelfTest(),
             new OceanLegacySelfTest(),
             new SwimSelfTest(),
+            new WaterlogSelfTest(),
     };
 
     private final List<String> wanted;

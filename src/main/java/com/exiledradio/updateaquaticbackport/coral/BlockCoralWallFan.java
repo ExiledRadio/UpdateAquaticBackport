@@ -1,9 +1,9 @@
 package com.exiledradio.updateaquaticbackport.coral;
 
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
@@ -35,20 +35,20 @@ public class BlockCoralWallFan extends BlockCoral {
     }
 
     @Override
-    protected IProperty<?>[] ownProperties() {
-        return new IProperty<?>[] {FACING};
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
     }
 
+    /** Meta 0-3: the facing. Bit 4 was the old waterlogged flag; it is ignored (see {@code common.LegacyWater}). */
     @Override
     @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3))
-                .withProperty(WATERLOGGED, (meta & 4) != 0);
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex() | this.waterloggedBit(state, 4);
+        return state.getValue(FACING).getHorizontalIndex();
     }
 
     /** @return true if the block behind (opposite FACING) has a solid face toward this */

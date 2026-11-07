@@ -3,6 +3,8 @@ package com.exiledradio.updateaquaticbackport.kelp;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -134,16 +136,16 @@ public final class KelpGenerator implements IWorldGenerator {
             if (BlockKelp.isVanillaWaterSource(world, pos) && BlockKelp.isVanillaWaterSource(world, pos.up()) && plant.hasSupport(world, pos)) {
                 if (l == height) {
                     // 1.14.4 gives a generated top age 0-22; here 0-13 of 16.
-                    world.setBlockState(pos, top.getDefaultState().withProperty(BlockKelp.AGE, random.nextInt(14)), 2);
+                    Waterlogging.placeKeepingWater(world, pos, top.getDefaultState().withProperty(BlockKelp.AGE, random.nextInt(14)), 2);
                 } else {
-                    world.setBlockState(pos, plant.getDefaultState(), 2);
+                    Waterlogging.placeKeepingWater(world, pos, plant.getDefaultState(), 2);
                 }
                 placed = true;
             } else {
                 if (l > 0) {
                     BlockPos below = pos.down();
                     if (top.hasSupport(world, below) && world.getBlockState(below.down()).getBlock() != top) {
-                        world.setBlockState(below, top.getDefaultState().withProperty(BlockKelp.AGE, random.nextInt(14)), 2);
+                        Waterlogging.placeKeepingWater(world, below, top.getDefaultState().withProperty(BlockKelp.AGE, random.nextInt(14)), 2);
                     }
                 }
                 break;
@@ -163,13 +165,13 @@ public final class KelpGenerator implements IWorldGenerator {
         if (random.nextDouble() < tallChance) {
             if (BlockKelp.isVanillaWaterSource(world, floor.up())) {
                 IBlockState lower = tallForm.getDefaultState().withProperty(BlockSeagrass.HALF, BlockSeagrass.Half.LOWER);
-                world.setBlockState(floor, lower, 2);
-                world.setBlockState(floor.up(), lower.withProperty(BlockSeagrass.HALF, BlockSeagrass.Half.UPPER), 2);
+                Waterlogging.placeKeepingWater(world, floor, lower, 2);
+                Waterlogging.placeKeepingWater(world, floor.up(), lower.withProperty(BlockSeagrass.HALF, BlockSeagrass.Half.UPPER), 2);
                 return true;
             }
             return false;
         }
-        world.setBlockState(floor, shortForm.getDefaultState(), 2);
+        Waterlogging.placeKeepingWater(world, floor, shortForm.getDefaultState(), 2);
         return true;
     }
 }

@@ -22,10 +22,10 @@ def bs(model):
     return model.replace(":block/", ":")
 
 
-assets.pseudo_water_blockstate("kelp", [(None, bs(kelp))])
-assets.pseudo_water_blockstate("kelp_plant", [(None, bs(kelp_plant))])
-assets.pseudo_water_blockstate("seagrass", [(None, bs(seagrass))])
-assets.pseudo_water_blockstate("tall_seagrass", [({"half": "lower"}, bs(tall_bottom)), ({"half": "upper"}, bs(tall_top))])
+assets.multipart_blockstate("kelp", [(None, bs(kelp))])
+assets.multipart_blockstate("kelp_plant", [(None, bs(kelp_plant))])
+assets.multipart_blockstate("seagrass", [(None, bs(seagrass))])
+assets.multipart_blockstate("tall_seagrass", [({"half": "lower"}, bs(tall_bottom)), ({"half": "upper"}, bs(tall_top))])
 assets.write_json("blockstates/dried_kelp_block.json", {"variants": {"normal": {"model": bs(dried_block)}}})
 
 assets.item_generated("kelp", assets.texture("item/kelp"))

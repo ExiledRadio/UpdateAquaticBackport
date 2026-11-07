@@ -1,17 +1,15 @@
 package com.exiledradio.updateaquaticbackport.bubble;
 
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.updateaquaticbackport.common.BlockUnderwater;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -29,12 +27,12 @@ import java.util.Random;
 /**
  * The bubble column: water over soul sand (upward) or a magma block (downward, a whirlpool).
  *
- * <h2>The block is the water</h2>
- * A {@link BlockPseudoWater}, always water, like kelp: swimming, drowning, fog, boats and flowing water all
- * see a still water source. What differs from kelp: nothing here can be hit or seen except the water's
- * surface, so a player's ordinary ray trace passes through it as through water ({@link #canCollideCheck})
- * and only a bucket's stops on it; another block placed here replaces it; an empty bucket takes its water
- * and leaves air, as 1.13's ({@link #drained}).
+ * <h2>Always waterlogged</h2>
+ * A {@link BlockUnderwater} that needs water ({@link Need#REQUIRED}), like kelp: its water is Fluidlogged API's,
+ * so swimming, drowning, fog, boats and flowing water all see a still water source. What differs from kelp:
+ * its model is empty, so only its water is drawn, and a player's ordinary ray trace passes through it as
+ * through water ({@link #canCollideCheck}), only a bucket's stopping on it; another block placed here replaces it; an empty
+ * bucket takes its water and leaves air, as 1.13's (draining a block that needs water removes it).
  *
  * <h2>From 1.14.4's BubbleColumnBlock and today's BubbleColumnBlock</h2>
  * <ul>
@@ -50,7 +48,7 @@ import java.util.Random;
  *   <li>Particles and ambient sounds as 1.14.4's {@code animateTick} ({@code client.BubbleEffects}).</li>
  * </ul>
  */
-public class BlockBubbleColumn extends BlockPseudoWater {
+public class BlockBubbleColumn extends BlockUnderwater {
 
     /** 1.13's {@code drag}: true pulls down (magma), false pushes up (soul sand). */
     public static final PropertyBool DRAG = PropertyBool.create("drag");
@@ -59,21 +57,21 @@ public class BlockBubbleColumn extends BlockPseudoWater {
     static final int TICK_RATE = 5;
 
     public BlockBubbleColumn() {
-        super(Material.WATER, MapColor.WATER);
-        this.setDefaultState(this.baseState().withProperty(DRAG, true));
+        super(BUBBLE_COLUMN, MapColor.WATER);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(DRAG, true));
         // Water's: never broken by hand, blast resistance 100 (1.12.2 divides by 5 and multiplies by 3).
         this.setHardness(100.0F);
         this.setResistance(100.0F * 5.0F / 3.0F);
     }
 
     @Override
-    public boolean canBeDry() {
-        return false;
+    public Need waterNeed(IBlockState state) {
+        return Need.REQUIRED;
     }
 
     @Override
-    protected IProperty<?>[] ownProperties() {
-        return new IProperty<?>[] {DRAG};
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, DRAG);
     }
 
     /** @return this column's state for a drag direction */
@@ -169,7 +167,7 @@ public class BlockBubbleColumn extends BlockPseudoWater {
     // Water that nothing can hit
     // ------------------------------------------------------------------------------------------
 
-    /** Only a ray trace that stops on liquids (a bucket's) stops here, as on water. */
+    /** Only a ray trace that stops on liquids (a bucket's) stops here, as on its water. */
     @Override
     public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid) {
         return hitIfLiquid;
@@ -179,12 +177,6 @@ public class BlockBubbleColumn extends BlockPseudoWater {
     @Override
     public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
         return true;
-    }
-
-    /** 1.13's bucket takes the water and leaves air. */
-    @Override
-    public IBlockState drained(IBlockState state) {
-        return Blocks.AIR.getDefaultState();
     }
 
     @Override

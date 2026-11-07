@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.dolphin;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.MoverType;
@@ -64,11 +66,12 @@ final class AIBreatheAir extends EntityAIBase {
         this.dolphin.getNavigator().tryMoveToXYZ(found.getX(), found.getY() + 1, found.getZ(), 1.0D);
     }
 
-    /** No liquid there (or a bubble column of this mod), and nothing solid. */
+    /** No liquid there, waterlogged blocks included (except a bubble column of this mod), and nothing solid. */
     private boolean canBreatheAt(BlockPos pos) {
         Block block = this.dolphin.world.getBlockState(pos).getBlock();
         Material material = this.dolphin.world.getBlockState(pos).getMaterial();
         Block column = com.exiledradio.updateaquaticbackport.common.Owners.ourBlock("bubble_column");
-        return (!material.isLiquid() || (column != null && block == column)) && !material.blocksMovement();
+        boolean fluid = material.isLiquid() || Waterlogging.hasWater(this.dolphin.world, pos);
+        return (!fluid || (column != null && block == column)) && !material.blocksMovement();
     }
 }

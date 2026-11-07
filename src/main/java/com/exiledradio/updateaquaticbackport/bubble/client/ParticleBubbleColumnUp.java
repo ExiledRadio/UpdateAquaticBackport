@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.bubble.client;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -43,7 +44,7 @@ public class ParticleBubbleColumnUp extends Particle {
         this.motionX *= 0.85F;
         this.motionY *= 0.85F;
         this.motionZ *= 0.85F;
-        if (this.world.getBlockState(new BlockPos(this.posX, this.posY, this.posZ)).getMaterial() != Material.WATER) {
+        if (!Waterlogging.hasWater(this.world, new BlockPos(this.posX, this.posY, this.posZ))) {
             this.setExpired();
         }
     }

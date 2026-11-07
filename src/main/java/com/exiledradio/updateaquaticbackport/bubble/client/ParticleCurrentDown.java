@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.bubble.client;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -47,7 +48,7 @@ public class ParticleCurrentDown extends Particle {
         this.motionX *= 0.07;
         this.motionZ *= 0.07;
         this.move(this.motionX, this.motionY, this.motionZ);
-        if (this.world.getBlockState(new BlockPos(this.posX, this.posY, this.posZ)).getMaterial() != Material.WATER || this.onGround) {
+        if (!Waterlogging.hasWater(this.world, new BlockPos(this.posX, this.posY, this.posZ)) || this.onGround) {
             this.setExpired();
         }
         this.spin += 0.08F;

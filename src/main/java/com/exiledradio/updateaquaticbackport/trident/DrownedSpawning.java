@@ -1,9 +1,10 @@
 package com.exiledradio.updateaquaticbackport.trident;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
@@ -81,7 +82,7 @@ public final class DrownedSpawning {
      * a river, or 1 in 40 and more than 5 below sea level anywhere else.
      */
     public static boolean waterRule(World world, BlockPos pos, Biome biome, Random random) {
-        if (world.getBlockState(pos).getMaterial() != Material.WATER) {
+        if (!Waterlogging.hasWater(world, pos)) {
             return false;
         }
         if (isRiver(biome)) {

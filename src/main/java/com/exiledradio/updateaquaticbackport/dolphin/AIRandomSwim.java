@@ -19,7 +19,7 @@ final class AIRandomSwim extends EntityAIWander {
     @Nullable
     protected Vec3d getPosition() {
         Vec3d target = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
-        for (int i = 0; target != null && !DolphinNodeProcessor.isSwimmable(this.entity.world.getBlockState(new BlockPos(target))) && i++ < 10;
+        for (int i = 0; target != null && !DolphinNodeProcessor.isSwimmable(this.entity.world, new BlockPos(target)) && i++ < 10;
              target = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7)) {
             // try again
         }

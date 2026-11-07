@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.turtle;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import com.google.common.base.Predicate;
 
 import net.minecraft.advancements.CriteriaTriggers;
@@ -236,7 +238,7 @@ public class EntityTurtle extends EntityAnimal {
 
     @Override
     public float getBlockPathWeight(BlockPos pos) {
-        if (!isGoingHome() && this.world.getBlockState(pos).getMaterial() == Material.WATER) {
+        if (!isGoingHome() && Waterlogging.hasWater(this.world, pos)) {
             return 10.0F;
         }
         return this.world.getBlockState(pos.down()).getBlock() == Blocks.SAND ? 10.0F : this.world.getLightBrightness(pos) - 0.5F;
@@ -430,7 +432,7 @@ public class EntityTurtle extends EntityAnimal {
                 for (int y = at.getY() - vertical; y <= at.getY() + vertical; ++y) {
                     for (int z = at.getZ() - horizontal; z <= at.getZ() + horizontal; ++z) {
                         pos.setPos(x, y, z);
-                        if (turtle.world.getBlockState(pos).getMaterial() == Material.WATER) {
+                        if (Waterlogging.hasWater(turtle.world, pos)) {
                             float d = (x - at.getX()) * (x - at.getX()) + (y - at.getY()) * (y - at.getY()) + (z - at.getZ()) * (z - at.getZ());
                             if (d < best) {
                                 best = d;

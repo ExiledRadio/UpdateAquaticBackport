@@ -2,8 +2,8 @@
 
     python tools/bubble/generate.py
 
-The column draws nothing of its own (1.13's is invisible; its water is drawn by the fluid renderer). Here
-the block is the water, so its blockstate is the shared water surface on top of an empty model.
+The column draws nothing of its own (1.13's is invisible; its water is drawn by the fluid renderer, here
+Fluidlogged API's): its blockstate is one empty model.
 """
 import os
 import sys
@@ -13,9 +13,9 @@ import assets  # noqa: E402
 
 M = assets.MODID
 
-# No elements: nothing drawn but the surface part. The particle is 1.12.2's water.
+# No elements: nothing drawn. The particle is 1.12.2's water.
 assets.write_json("models/block/bubble_column.json", {"textures": {"particle": "blocks/water_still"}})
-assets.pseudo_water_blockstate("bubble_column", [(None, "%s:bubble_column" % M)])
+assets.multipart_blockstate("bubble_column", [(None, "%s:bubble_column" % M)])
 
 events = {}
 for e in ["block.bubble_column.upwards_ambient", "block.bubble_column.upwards_inside",

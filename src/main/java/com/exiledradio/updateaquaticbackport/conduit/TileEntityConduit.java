@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.conduit;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
@@ -156,7 +157,7 @@ public class TileEntityConduit extends TileEntity implements ITickable {
         for (int x = -1; x <= 1; ++x) {
             for (int y = -1; y <= 1; ++y) {
                 for (int z = -1; z <= 1; ++z) {
-                    if (this.world.getBlockState(this.pos.add(x, y, z)).getMaterial() != Material.WATER) {
+                    if (!Waterlogging.hasWater(this.world, this.pos.add(x, y, z))) {
                         return false;
                     }
                 }

@@ -3,6 +3,7 @@ package com.exiledradio.updateaquaticbackport.bubble;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.Content;
+import com.exiledradio.updateaquaticbackport.common.LegacyWater;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.SoundEvent;
@@ -60,6 +61,7 @@ public final class BubbleContent {
         column = Content.block(event.getRegistry(), "bubble_column", new BlockBubbleColumn(), null);
         column.setCreativeTab(null);
         Content.multipart(column);
+        LegacyWater.always(column);
         GameRegistry.registerWorldGenerator(new BubbleGenerator(), GENERATOR_WEIGHT);
     }
 

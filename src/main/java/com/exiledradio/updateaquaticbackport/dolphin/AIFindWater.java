@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.dolphin;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -16,7 +17,7 @@ final class AIFindWater extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
-        return this.dolphin.onGround && this.dolphin.world.getBlockState(new BlockPos(this.dolphin)).getMaterial() != Material.WATER;
+        return this.dolphin.onGround && !Waterlogging.hasWater(this.dolphin.world, new BlockPos(this.dolphin));
     }
 
     @Override
@@ -25,7 +26,7 @@ final class AIFindWater extends EntityAIBase {
         for (BlockPos pos : BlockPos.getAllInBoxMutable(
                 new BlockPos(MathHelper.floor(this.dolphin.posX - 2.0D), MathHelper.floor(this.dolphin.posY - 2.0D), MathHelper.floor(this.dolphin.posZ - 2.0D)),
                 new BlockPos(MathHelper.floor(this.dolphin.posX + 2.0D), MathHelper.floor(this.dolphin.posY), MathHelper.floor(this.dolphin.posZ + 2.0D)))) {
-            if (this.dolphin.world.getBlockState(pos).getMaterial() == Material.WATER) {
+            if (Waterlogging.hasWater(this.dolphin.world, pos)) {
                 found = pos.toImmutable();
                 break;
             }

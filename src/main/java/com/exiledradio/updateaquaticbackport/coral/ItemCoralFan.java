@@ -33,8 +33,7 @@ public class ItemCoralFan extends ItemBlock {
             BlockPos target = pos.offset(facing);
             ItemStack stack = player.getHeldItem(hand);
             IBlockState there = world.getBlockState(target);
-            IBlockState fan = this.wall.getDefaultState().withProperty(BlockCoralWallFan.FACING, facing)
-                    .withProperty(BlockCoral.WATERLOGGED, BlockCoral.isVanillaWaterSource(world, target));
+            IBlockState fan = this.wall.getDefaultState().withProperty(BlockCoralWallFan.FACING, facing);
             if (!stack.isEmpty() && player.canPlayerEdit(target, facing, stack)
                     && (there.getMaterial().isReplaceable() || there.getBlock().isReplaceable(world, target))
                     && this.wall.hasSupport(world, target, fan)) {

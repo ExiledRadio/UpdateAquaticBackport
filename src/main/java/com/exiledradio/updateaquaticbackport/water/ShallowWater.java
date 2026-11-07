@@ -1,5 +1,8 @@
 package com.exiledradio.updateaquaticbackport.water;
 
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
+
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -54,8 +57,8 @@ public final class ShallowWater {
                 for (int y = y0; y < y1; y++) {
                     for (int z = z0; z < z1; z++) {
                         pos.setPos(x, y, z);
-                        IBlockState state = world.getBlockState(pos);
-                        if (state.getMaterial() != Material.WATER) {
+                        IBlockState state = water(world, pos);
+                        if (state == null) {
                             continue;
                         }
                         double surface = y + surfaceHeight(world, pos, state);
@@ -71,9 +74,28 @@ public final class ShallowWater {
         return depth;
     }
 
-    /** @return the height of a water block's surface inside its own space, 1.14.4's {@code getActualHeight} */
+    /**
+     * @return the water at a position as a water block's state: the block itself if it is water, the water kept
+     * in it if it is waterlogged, or null if there is none
+     */
+    @javax.annotation.Nullable
+    static IBlockState water(World world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos);
+        if (state.getMaterial() == Material.WATER) {
+            return state;
+        }
+        if (!Waterlogging.hasWater(world, pos)) {
+            return null;
+        }
+        return FluidloggedUtils.getFluidState(world, pos, state).getState();
+    }
+
+    /**
+     * @param state the water there, as {@link #water} gives it
+     * @return the height of a water block's surface inside its own space, 1.14.4's {@code getActualHeight}
+     */
     static double surfaceHeight(World world, BlockPos pos, IBlockState state) {
-        if (world.getBlockState(pos.up()).getMaterial() == Material.WATER) {
+        if (Waterlogging.hasWater(world, pos.up())) {
             return 1.0D;
         }
         // Vanilla water first: Fluidlogged API makes BlockLiquid an IFluidBlock too, and Forge's filled

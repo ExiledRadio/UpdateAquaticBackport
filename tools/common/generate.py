@@ -1,4 +1,4 @@
-"""Assets shared by several streams: the water surface model and 1.13's wet grass sounds.
+"""Assets shared by several streams: 1.13's wet grass sounds.
 
     python tools/common/generate.py
 """
@@ -8,7 +8,6 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import assets  # noqa: E402
 
-assets.water_surface()
 events = {}
 for e in ["block.wet_grass.break", "block.wet_grass.step", "block.wet_grass.place", "block.wet_grass.hit",
           "block.wet_grass.fall"]:

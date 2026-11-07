@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.selftest;
 
-import com.exiledradio.updateaquaticbackport.common.BlockPseudoWater;
+import com.exiledradio.backportcore.waterlog.Waterloggable;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.common.Content;
 import com.exiledradio.updateaquaticbackport.conduit.BlockConduit;
 import com.exiledradio.updateaquaticbackport.conduit.ConduitContent;
@@ -76,16 +77,12 @@ public final class ConduitSelfTest implements SelfTest {
             c.eq(64, item.getItemStackLimit(new ItemStack(item)), item.getRegistryName() + " stacks to 64");
         }
         c.ok(Content.multipartBlocks().contains(conduit), "conduit blockstate is multipart");
-        for (IBlockState s : conduit.getBlockState().getValidStates()) {
-            if (s.getValue(BlockPseudoWater.LEVEL) == 0 && !s.getValue(BlockPseudoWater.SURFACE)) {
-                c.ok(conduit.getStateFromMeta(conduit.getMetaFromState(s)) == s, "meta round trip " + s);
-            }
-        }
+        c.eq(1, conduit.getBlockState().getValidStates().size(), "one state: its water is waterlogging, not a property");
         IBlockState dryState = conduit.getDefaultState();
-        IBlockState wetState = dryState.withProperty(BlockPseudoWater.WATERLOGGED, true);
-        c.ok(!dryState.getValue(BlockPseudoWater.WATERLOGGED), "default state is dry, as today's");
-        c.eq(Material.WATER, wetState.getMaterial(), "waterlogged conduit is water");
-        c.eq(Material.GLASS, dryState.getMaterial(), "dry conduit is glass");
+        // Placed into a water source, the one state keeps the water there.
+        IBlockState wetState = dryState;
+        c.ok(conduit instanceof Waterloggable && conduit.waterNeed(dryState) == Waterloggable.Need.OPTIONAL, "waterloggable, wet or dry");
+        c.eq(Material.GLASS, dryState.getMaterial(), "a conduit is glass, wet or dry");
         c.eq(3.0F, dryState.getBlockHardness(world, BlockPos.ORIGIN), "hardness 3");
         c.eq(3.0F, conduit.getExplosionResistance(null), "blast resistance 3");
         c.eq(15, dryState.getLightValue(), "light 15");
@@ -125,19 +122,20 @@ public final class ConduitSelfTest implements SelfTest {
         held.getItem().onItemUse(player, world, floor.add(1, 0, 1), EnumHand.MAIN_HAND, EnumFacing.UP, 0.5F, 1.0F, 0.5F);
         IBlockState placed = world.getBlockState(floor.add(1, 1, 1));
         c.eq(conduit, placed.getBlock(), "placed under water");
-        c.ok(placed.getBlock() == conduit && placed.getValue(BlockPseudoWater.WATERLOGGED), "placed into water: waterlogged");
+        c.ok(placed.getBlock() == conduit && Waterlogging.hasWaterSource(world, floor.add(1, 1, 1)), "placed into water: waterlogged");
         c.ok(world.getTileEntity(floor.add(1, 1, 1)) instanceof TileEntityConduit, "placing makes its tile entity");
         BlockPos dryFloor = c.area().down();
         held = new ItemStack(conduitItem);
         player.setHeldItem(EnumHand.MAIN_HAND, held);
         held.getItem().onItemUse(player, world, dryFloor, EnumHand.MAIN_HAND, EnumFacing.UP, 0.5F, 1.0F, 0.5F);
         IBlockState dryPlaced = world.getBlockState(dryFloor.up());
-        c.ok(dryPlaced.getBlock() == conduit && !dryPlaced.getValue(BlockPseudoWater.WATERLOGGED), "placed on land: dry");
+        c.ok(dryPlaced.getBlock() == conduit && !Waterlogging.hasWater(world, dryFloor.up()), "placed on land: dry");
 
         // 4. breaking: leaves its water, drops itself; explosions never lose it ----------------------------
         BlockPos wetAt = floor.add(1, 1, 1);
         player.interactionManager.tryHarvestBlock(wetAt);
-        c.eq(Blocks.WATER, world.getBlockState(wetAt).getBlock(), "broken under water: water left");
+        c.ok(KelpSelfTest.water(world, wetAt) && Waterlogging.hasWaterSource(world, wetAt), "broken under water: a water source left: "
+                + world.getBlockState(wetAt));
         c.eq(1, Drops.count(world, wetAt, conduitItem), "broken: drops itself");
         player.interactionManager.tryHarvestBlock(dryFloor.up());
         c.ok(world.isAirBlock(dryFloor.up()), "broken on land: air left");
@@ -201,11 +199,11 @@ public final class ConduitSelfTest implements SelfTest {
         }
         te.checkNow();
         c.ok(te.isActive() && te.isEyeOpen(), "a mixed full frame is full");
-        world.setBlockState(at, dryState, 3);
+        Waterlogging.setWater(world, at, false, 3);
         c.ok(world.getTileEntity(at) == te, "emptying it keeps the tile entity");
         te.checkNow();
         c.ok(!te.isActive(), "a dry conduit is not active");
-        world.setBlockState(at, wetState, 3);
+        Waterlogging.setWater(world, at, true, 3);
         world.setBlockState(at.add(1, 1, 1), Blocks.STONE.getDefaultState(), 2 | 16);
         te.checkNow();
         c.ok(!te.isActive(), "a solid block in the 3x3x3 stops it");
@@ -215,9 +213,9 @@ public final class ConduitSelfTest implements SelfTest {
         world.setBlockState(at.add(1, 1, 1), Blocks.WATER.getDefaultState(), 2 | 16);
 
         // Its own tick: one check per 40 ticks of world time.
-        world.setBlockState(at, dryState, 3);
+        Waterlogging.setWater(world, at, false, 3);
         te.checkNow();
-        world.setBlockState(at, wetState, 3);
+        Waterlogging.setWater(world, at, true, 3);
         long time = world.getTotalWorldTime();
         long start = (time / 40L + 1L) * 40L + 1L;
         int inactive = 0;

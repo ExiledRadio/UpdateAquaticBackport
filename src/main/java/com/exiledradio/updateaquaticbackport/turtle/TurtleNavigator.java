@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.turtle;
 
-import net.minecraft.block.material.Material;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.PathNavigate;
@@ -98,7 +99,7 @@ public class TurtleNavigator extends PathNavigate {
     @Override
     public boolean canEntityStandOnPos(BlockPos pos) {
         if (this.entity instanceof EntityTurtle && ((EntityTurtle) this.entity).isTravelling()) {
-            return this.world.getBlockState(pos).getMaterial() == Material.WATER;
+            return Waterlogging.hasWater(this.world, pos);
         }
         return !this.world.isAirBlock(pos.down());
     }
