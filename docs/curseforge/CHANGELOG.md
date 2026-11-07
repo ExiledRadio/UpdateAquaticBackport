@@ -54,7 +54,7 @@ First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their 
 *   **Dolphins** swim in oceans in pods of one or two, except in cold and frozen oceans, with fewer in lukewarm and warm ones. They breathe air: four minutes under water and they drown, so they come up to breathe. Stranded on land they flop about and dry out after two minutes, unless it rains.
 *   Dolphins chase items floating in water, pick them up and toss them about. Whatever one is carrying when it dies, it drops.
 *   They follow boats being rowed, leap out of the water, and swim alongside players who sprint in water, giving them **Dolphin's Grace**: water slows you far less while it lasts.
-*   Feed a dolphin raw cod, raw salmon, tropical fish or pufferfish and it leads you to the nearest shipwreck or ocean ruin. <!-- needs S -->
+*   Feed a dolphin raw cod, raw salmon, tropical fish or pufferfish and it leads you to the nearest shipwreck or ocean ruin.
 *   Dolphins are neutral: hit one and the whole pod fights back. They keep away from guardians.
 *   They drop up to one raw cod (cooked if they die burning; Looting adds more) and 1 to 3 experience. Leads work on them, and a dolphin on a lead never despawns.
 *   A dolphin spawn egg, dolphin sounds and subtitles, and the trail a swimming dolphin leaves behind it.
@@ -85,7 +85,7 @@ First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their 
 *   Players in water or rain within its range get **Conduit Power**: they don't run out of air under water (and get it back there, as in current Java), see under water as with Night Vision, and mine as with Haste.
 *   With a full frame its eye opens and it attacks one hostile mob in water or rain within 8 blocks, 4 damage every 2 seconds.
 *   It gives off light level 15, can be waterlogged (a bucket fills or empties it), drops itself (in explosions too) and can't be pushed by pistons.
-*   **Nautilus shells** can be fished up as treasure. The **heart of the sea** comes from buried treasure. <!-- needs S -->
+*   **Nautilus shells** can be fished up as treasure. The **heart of the sea** comes from buried treasure.
 
 ## New: bubble columns
 
@@ -126,10 +126,12 @@ First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their 
 *   **Parrots imitate phantoms and drowned.**
 *   **Skeleton horses can be ridden under water**: the rider stays on, the horse is fast under water, and it has its own underwater sounds.
 
-<!-- PENDING: S -->
 ## New: ocean structures
 
-*   Placeholder: shipwrecks, ocean ruins, buried treasure and treasure maps.
+*   **Shipwrecks** in every ocean, sunk to the sea floor, and **beached shipwrecks** half buried on beaches: Minecraft's own 20 ship designs, upright, sideways or upside down, whole or broken, in any of the six woods. Each has supply, map and treasure chests with current Java's loot.
+*   **Ocean ruins**: small and large stone brick ruins, cracked and mossy, in ordinary, cold and frozen oceans, and sandstone ruins in warm and lukewarm ones. Large ruins often stand among 4 to 8 small ones. Their chests hold current Java's ruin loot, and **drowned** wait in them.
+*   **Buried treasure** under beaches: one chest, buried in sand on the stone below, with a **heart of the sea**, iron, gold, emeralds, diamonds, prismarine crystals, TNT, cooked fish and potions of Water Breathing.
+*   **Buried treasure maps** in shipwreck map chests and ocean ruin chests: they show the land around the nearest buried treasure, marked with a **red X**.
 
 <!-- PENDING: Wl -->
 ## New: waterlogging

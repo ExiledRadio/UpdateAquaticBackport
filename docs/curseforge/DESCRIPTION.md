@@ -67,7 +67,7 @@ Kelp forests grow in every ocean except warm and frozen ones; seagrass grows eve
 *   **Dolphins** swim in pods in every ocean except cold and frozen ones. They breathe air: four minutes under water and they drown, so they come up to breathe. Stranded on land, they dry out after two minutes unless it's raining.
 *   They chase items floating in the water, pick them up and toss them about, follow boats being rowed, and leap out of the water.
 *   **Dolphin's Grace**: swim alongside a dolphin while sprinting in the water and it lends you its speed, so the water slows you far less while it lasts.
-*   **Feed one** raw cod, raw salmon, tropical fish or pufferfish and it leads you to the nearest shipwreck or ocean ruin. <!-- needs S -->
+*   **Feed one** raw cod, raw salmon, tropical fish or pufferfish and it leads you to the nearest shipwreck or ocean ruin.
 *   Dolphins are neutral: hit one and the whole pod fights back. They keep away from guardians.
 *   Leads work on them, and a dolphin on a lead never despawns.
 
@@ -98,7 +98,7 @@ Kelp forests grow in every ocean except warm and frozen ones; seagrass grows eve
 *   **The conduit**, crafted from eight nautilus shells around a heart of the sea. Place it in water inside a frame of prismarine, prismarine bricks, dark prismarine or sea lanterns, and it wakes. The bigger the frame, the further it reaches, up to 96 blocks with the full 42 blocks.
 *   **Conduit Power** for players in the water or the rain within range: you don't run out of air, you see under water as with Night Vision, and you mine faster.
 *   With the full frame, its eye opens and it attacks hostile mobs in the water nearby.
-*   **Nautilus shells** can be fished up as treasure, and the **heart of the sea** is found in buried treasure. <!-- needs S -->
+*   **Nautilus shells** can be fished up as treasure, and the **heart of the sea** is found in buried treasure.
 
 ***
 
@@ -144,10 +144,12 @@ Kelp forests grow in every ocean except warm and frozen ones; seagrass grows eve
 *   **The debug stick**, for operators in creative.
 *   **Looser placement**: pumpkins, jack o'lanterns and fence gates stand on nothing, and doors place on the side of a block.
 
-<!-- PENDING: S -->
 ## Ocean structures
 
-*Placeholder: shipwrecks, ocean ruins, buried treasure and treasure maps.*
+*   **Shipwrecks** in every ocean, sunk to the sea floor, and **beached shipwrecks** half buried on beaches: Minecraft's own 20 ship designs, upright, sideways or upside down, whole or broken, in any of the six woods. Each has supply, map and treasure chests with current Java's loot.
+*   **Ocean ruins**: small and large stone brick ruins, cracked and mossy, in ordinary, cold and frozen oceans, and sandstone ruins in warm and lukewarm ones. Large ruins often stand among 4 to 8 small ones. Their chests hold current Java's ruin loot, and **drowned** wait in them.
+*   **Buried treasure** under beaches: one chest, buried in sand on the stone below, with a **heart of the sea**, iron, gold, emeralds, diamonds, prismarine crystals, TNT, cooked fish and potions of Water Breathing.
+*   **Buried treasure maps** in shipwreck map chests and ocean ruin chests: they show the land around the nearest buried treasure, marked with a **red X**.
 
 <!-- PENDING: Wl -->
 ## Waterlogging
