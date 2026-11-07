@@ -189,6 +189,11 @@ public final class ModConfig {
         @Config.Comment("Prismarine stairs and slabs, carved pumpkins, wood blocks from logs and the other small changes.")
         @Config.LangKey("config.updateaquaticbackport.blocks.enabled")
         public boolean enabled = true;
+
+        @Config.Comment({"1.13's looser placement: pumpkins, jack o'lanterns and fence gates need no block under them,",
+                "and doors can be placed against the side of a block."})
+        @Config.LangKey("config.updateaquaticbackport.blocks.placementRules")
+        public boolean placementRules = true;
     }
 
     public static final class Mobs {

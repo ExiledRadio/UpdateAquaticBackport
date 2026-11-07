@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=bottom,variant=default": {
+      "model": "updateaquaticbackport:prismarine_slab"
+    },
+    "half=top,variant=default": {
+      "model": "updateaquaticbackport:prismarine_slab_top"
+    }
+  }
+}
