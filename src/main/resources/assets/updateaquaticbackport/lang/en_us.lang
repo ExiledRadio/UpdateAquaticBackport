@@ -155,3 +155,13 @@ config.updateaquaticbackport.bubbles.tooltip=Bubble columns over soul sand and m
 config.updateaquaticbackport.blocks.tooltip=Smaller 1.13 block and item changes: prismarine stairs and slabs, carved pumpkins, wood blocks and more.
 config.updateaquaticbackport.mobs.tooltip=1.13's changes to existing mobs.
 config.updateaquaticbackport.water.tooltip=How water looks and feels: biome water colors, underwater fog, air refilling, floating items.
+
+# --- conduit ---
+effect.updateaquaticbackport.conduit_power=Conduit Power
+item.updateaquaticbackport.heart_of_the_sea.name=Heart of the Sea
+item.updateaquaticbackport.nautilus_shell.name=Nautilus Shell
+tile.updateaquaticbackport.conduit.name=Conduit
+subtitles.updateaquaticbackport.block.conduit.activate=Conduit activates
+subtitles.updateaquaticbackport.block.conduit.ambient=Conduit pulses
+subtitles.updateaquaticbackport.block.conduit.attack.target=Conduit attacks
+subtitles.updateaquaticbackport.block.conduit.deactivate=Conduit deactivates
