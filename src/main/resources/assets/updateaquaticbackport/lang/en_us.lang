@@ -155,3 +155,21 @@ config.updateaquaticbackport.bubbles.tooltip=Bubble columns over soul sand and m
 config.updateaquaticbackport.blocks.tooltip=Smaller 1.13 block and item changes: prismarine stairs and slabs, carved pumpkins, wood blocks and more.
 config.updateaquaticbackport.mobs.tooltip=1.13's changes to existing mobs.
 config.updateaquaticbackport.water.tooltip=How water looks and feels: biome water colors, underwater fog, air refilling, floating items.
+
+# --- phantom ---
+config.updateaquaticbackport.phantoms.insomnia.tooltip=Phantoms spawn at night over players who have not slept for three days. Off, they never spawn on their own in any world; the doInsomnia game rule turns them off in one world.
+config.updateaquaticbackport.phantoms.insomnia=Insomnia
+effect.updateaquaticbackport.slow_falling=Slow Falling
+entity.updateaquaticbackport.phantom.name=Phantom
+item.updateaquaticbackport.phantom_membrane.name=Phantom Membrane
+lingering_potion.effect.updateaquaticbackport.slow_falling=Lingering Potion of Slow Falling
+potion.effect.updateaquaticbackport.slow_falling=Potion of Slow Falling
+splash_potion.effect.updateaquaticbackport.slow_falling=Splash Potion of Slow Falling
+stat.timeSinceRest=Time Since Last Rest
+tipped_arrow.effect.updateaquaticbackport.slow_falling=Arrow of Slow Falling
+subtitles.updateaquaticbackport.entity.phantom.ambient=Phantom screeches
+subtitles.updateaquaticbackport.entity.phantom.bite=Phantom bites
+subtitles.updateaquaticbackport.entity.phantom.death=Phantom dies
+subtitles.updateaquaticbackport.entity.phantom.flap=Phantom flaps
+subtitles.updateaquaticbackport.entity.phantom.hurt=Phantom hurts
+subtitles.updateaquaticbackport.entity.phantom.swoop=Phantom swoops

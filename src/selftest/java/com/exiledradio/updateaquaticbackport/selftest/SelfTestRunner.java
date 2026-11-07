@@ -47,6 +47,7 @@ public final class SelfTestRunner {
             new WoodsetSelfTest(),
             new KelpSelfTest(),
             new CoralSelfTest(),
+            new PhantomSelfTest(),
     };
 
     private final List<String> wanted;

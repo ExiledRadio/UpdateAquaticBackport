@@ -164,5 +164,112 @@
       "updateaquaticbackport:step/coral5",
       "updateaquaticbackport:step/coral6"
     ]
+  },
+  "entity.phantom.ambient": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/phantom/idle1",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/idle2",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/idle3",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/idle4",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/idle5",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.phantom.ambient"
+  },
+  "entity.phantom.bite": {
+    "sounds": [
+      "updateaquaticbackport:mob/phantom/bite1",
+      "updateaquaticbackport:mob/phantom/bite2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.phantom.bite"
+  },
+  "entity.phantom.death": {
+    "sounds": [
+      "updateaquaticbackport:mob/phantom/death1",
+      "updateaquaticbackport:mob/phantom/death2",
+      "updateaquaticbackport:mob/phantom/death3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.phantom.death"
+  },
+  "entity.phantom.flap": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/phantom/flap1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/flap2",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/flap3",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/flap4",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/flap5",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/flap6",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.phantom.flap"
+  },
+  "entity.phantom.hurt": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/phantom/hurt1",
+        "volume": 0.75
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/hurt2",
+        "volume": 0.75
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/hurt3",
+        "volume": 0.75
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.phantom.hurt"
+  },
+  "entity.phantom.swoop": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/phantom/swoop1",
+        "volume": 0.7
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/swoop2",
+        "volume": 0.7
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/swoop3",
+        "volume": 0.7
+      },
+      {
+        "name": "updateaquaticbackport:mob/phantom/swoop4",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.phantom.swoop"
   }
 }
