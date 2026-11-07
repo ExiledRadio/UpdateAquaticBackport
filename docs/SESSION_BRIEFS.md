@@ -29,6 +29,12 @@ content list and the shared-file rules, `docs/streams/kelp.md` and `coral.md` sh
   not tested), a commit on your branch. No mixins, no coremod.
 - **Rules**: never mention other backport mods in user-facing text; American spelling; never send
   keystrokes or clicks to the user's screen.
+- **Languages (family Rule 4)**: every user-facing string is an `en_us.lang` key from your generator, none
+  hardcoded in code; new config fields get `@Config.LangKey` plus name and `.tooltip` lines; vanilla names come
+  through `assets.name(...)`. Run `python tools/lang/vanilla_keys.py` and check every vanilla name is listed as
+  vanilla. Then, if the family's language tool exists (`tools/lang/build_langs.py`; ask the integrator where),
+  generate the 18 language files with it; if not yet, say so in your stream doc and leave them to the integrator.
+  Never translate by hand.
 
 ## F. Fish (row 4, port 25734)
 

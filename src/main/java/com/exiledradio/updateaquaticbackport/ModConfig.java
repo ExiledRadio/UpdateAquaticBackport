@@ -91,99 +91,117 @@ public final class ModConfig {
         @Config.RequiresMcRestart
         @Config.Comment({"Add these blocks when no other installed mod provides them. Off, nothing is registered,",
                 "and a world that has them loses them."})
+        @Config.LangKey("config.updateaquaticbackport.woodset.enabled")
         public boolean enabled = true;
 
         @Config.Comment("Right-clicking a log with any axe strips it.")
+        @Config.LangKey("config.updateaquaticbackport.woodset.axeStripping")
         public boolean axeStripping = true;
     }
 
     public static final class Kelp {
         @Config.RequiresMcRestart
         @Config.Comment("Kelp, dried kelp, the dried kelp block and seagrass. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.kelp.enabled")
         public boolean enabled = true;
 
         @Config.Comment("Kelp and seagrass generate in oceans and rivers in newly generated chunks.")
+        @Config.LangKey("config.updateaquaticbackport.kelp.generate")
         public boolean generate = true;
     }
 
     public static final class Coral {
         @Config.RequiresMcRestart
         @Config.Comment("Coral blocks, coral, coral fans and their dead forms. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.coral.enabled")
         public boolean enabled = true;
 
         @Config.Comment("Coral reefs generate in warm oceans in newly generated chunks.")
+        @Config.LangKey("config.updateaquaticbackport.coral.generate")
         public boolean generate = true;
     }
 
     public static final class Fish {
         @Config.RequiresMcRestart
         @Config.Comment("Cod, salmon, pufferfish and tropical fish as mobs, and their buckets. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.fish.enabled")
         public boolean enabled = true;
     }
 
     public static final class Turtles {
         @Config.RequiresMcRestart
         @Config.Comment("Turtles, turtle eggs, scutes, the turtle shell and Turtle Master. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.turtles.enabled")
         public boolean enabled = true;
     }
 
     public static final class Dolphins {
         @Config.RequiresMcRestart
         @Config.Comment("Dolphins and Dolphin's Grace. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.dolphins.enabled")
         public boolean enabled = true;
     }
 
     public static final class Phantoms {
         @Config.RequiresMcRestart
         @Config.Comment("Phantoms, phantom membrane and Slow Falling. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.phantoms.enabled")
         public boolean enabled = true;
     }
 
     public static final class Trident {
         @Config.RequiresMcRestart
         @Config.Comment("The trident, Loyalty, Riptide, Impaling, Channeling and the drowned. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.trident.enabled")
         public boolean enabled = true;
     }
 
     public static final class Conduit {
         @Config.RequiresMcRestart
         @Config.Comment("The conduit, Conduit Power, the nautilus shell and the heart of the sea. Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.conduit.enabled")
         public boolean enabled = true;
     }
 
     public static final class Structures {
         @Config.RequiresMcRestart
         @Config.Comment("Shipwrecks, ocean ruins, buried treasure and buried treasure maps. Off, none generate.")
+        @Config.LangKey("config.updateaquaticbackport.structures.enabled")
         public boolean enabled = true;
     }
 
     public static final class Oceans {
         @Config.RequiresMcRestart
         @Config.Comment("1.13's warm, lukewarm, cold and frozen oceans, icebergs, and underwater caves and ravines.")
+        @Config.LangKey("config.updateaquaticbackport.oceans.enabled")
         public boolean enabled = true;
     }
 
     public static final class Bubbles {
         @Config.RequiresMcRestart
         @Config.Comment("Bubble columns over soul sand (upward) and magma blocks (downward). Off, nothing is registered.")
+        @Config.LangKey("config.updateaquaticbackport.bubbles.enabled")
         public boolean enabled = true;
     }
 
     public static final class Blocks {
         @Config.RequiresMcRestart
         @Config.Comment("Prismarine stairs and slabs, carved pumpkins, wood blocks from logs and the other small changes.")
+        @Config.LangKey("config.updateaquaticbackport.blocks.enabled")
         public boolean enabled = true;
     }
 
     public static final class Mobs {
         @Config.RequiresMcRestart
         @Config.Comment("1.13's changes to existing mobs: undead sinking, squid ink, polar bears on ice and the rest.")
+        @Config.LangKey("config.updateaquaticbackport.mobs.enabled")
         public boolean enabled = true;
     }
 
     public static final class Water {
         @Config.RequiresMcRestart
         @Config.Comment("Biome water colors, underwater fog, gradual air refill and the rest of 1.13's water changes.")
+        @Config.LangKey("config.updateaquaticbackport.water.enabled")
         public boolean enabled = true;
     }
 
