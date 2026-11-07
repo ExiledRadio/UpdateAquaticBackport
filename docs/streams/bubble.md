@@ -75,6 +75,8 @@ or packets used (45-49 and 55-59 stay free).
 *   Changing the base: soul sand swapped for magma changes nothing at once, the whole column 5 ticks later;
     the base replaced by stone turns the whole column back to water; the base dug out lets the water flow down
     into it and leaves no column; a new water source over the top joins the column.
+*   Freezing, in a biome forced cold for the two blocks tested: a column's own block never freezes, plain
+    water beside it does (vanilla's freezing pass and the frozen oceans' both freeze plain water only).
 *   An ordinary ray trace from above goes through the column to its base; an empty bucket used by a real
     player fills from the column and leaves air, the column below stays.
 *   Generation: magma and soul sand set under water without updates get their columns from the generator's

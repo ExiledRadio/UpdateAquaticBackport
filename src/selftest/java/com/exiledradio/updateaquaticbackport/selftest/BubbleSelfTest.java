@@ -19,6 +19,7 @@ import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -32,6 +33,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 /** Bubble columns: forming, changing, pushing, air, boats, buckets and generation. */
@@ -168,6 +170,20 @@ public final class BubbleSelfTest implements SelfTest {
         world.setBlockState(over, Blocks.WATER.getDefaultState(), 3);
         Pools.settle(world);
         c.eq(column.withDrag(false), world.getBlockState(over), "a new water source over the top joins the column");
+
+        // Freezing, in whatever biome the test lands: forced cold here, a column's own blocks never freeze,
+        // plain water beside it does (vanilla's freezing pass and the frozen oceans' both read plain water only).
+        BlockPos plainTop = new BlockPos(grow.getX() + 1, top, grow.getZ());
+        byte[] biomes = world.getChunk(over).getBiomeArray();
+        int[] cells = {(over.getZ() & 15) << 4 | (over.getX() & 15), (plainTop.getZ() & 15) << 4 | (plainTop.getX() & 15)};
+        byte[] saved = {biomes[cells[0]], biomes[cells[1]]};
+        byte cold = (byte) Biome.getIdForBiome(Biomes.ICE_PLAINS);
+        biomes[cells[0]] = cold;
+        biomes[cells[1]] = cold;
+        c.ok(!world.canBlockFreezeWater(over), "a column never freezes, even in a frozen biome");
+        c.ok(water(world, plainTop) && world.canBlockFreezeWater(plainTop), "plain water beside it can");
+        biomes[cells[0]] = saved[0];
+        biomes[cells[1]] = saved[1];
 
         // 7. buckets and ray traces -----------------------------------------------------------------------
         BlockPos colTop = new BlockPos(grow.getX(), top, grow.getZ());

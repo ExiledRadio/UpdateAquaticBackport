@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
@@ -72,11 +73,63 @@ public final class Check {
     /**
      * @return the corner of a new empty 32x32 area at y=100, cleared from y=60 to y=160 with a stone floor
      * at y=99 and its chunks loaded
+     *
+     * <p>Population never writes into a test area. A chunk populates the 16x16 square offset by 8 once it
+     * and its +x, +z and +xz neighbors are loaded, so the area's own chunks and the ring west and north of
+     * them can all reach it. Each is marked populated as it loads, west to east, so none of them ever
+     * populates. Without this, a test that touches the chunk next to its area mid-test (a mob's
+     * wandering, a ray trace) populates it then: in a cold biome its freezing pass turns the test's pool
+     * surface to ice, and trees, lakes or reefs land in the test.
+     *
+     * <p>The ring is loaded after the area is cleared: with it loaded, every block cleared would also
+     * relight across the chunk borders, which makes clearing many times slower. If loading the ring did
+     * populate something (a ring chunk whose other neighbors an earlier test had loaded), the area is
+     * cleared again.
      */
     public BlockPos area() {
         int x = 20000 + 48 * this.nextArea++;
         int z = 20000;
         BlockPos corner = new BlockPos(x, 100, z);
+        int cx0 = x >> 4;
+        int cz0 = z >> 4;
+        int cx1 = (x + 31) >> 4;
+        int cz1 = (z + 31) >> 4;
+        boolean populated = this.loadUnpopulated(cx0, cx1, cz0, cz1, cx0, cz0);
+        this.clear(x, z);
+        if (this.loadUnpopulated(cx0 - 1, cx1, cz0 - 1, cz1, cx0, cz0) || populated) {
+            this.clear(x, z);
+        }
+        return corner;
+    }
+
+    /**
+     * Loads the chunks in a range, west to east, marking each populated as it loads. A range that starts
+     * west or north of the area's first chunk {@code (areaX, areaZ)} is the ring, and skips the area's own
+     * chunks.
+     *
+     * @return true if loading made any of them populate after all
+     */
+    private boolean loadUnpopulated(int fromX, int toX, int fromZ, int toZ, int areaX, int areaZ) {
+        boolean populated = false;
+        for (int cx = fromX; cx <= toX; cx++) {
+            for (int cz = fromZ; cz <= toZ; cz++) {
+                boolean ring = fromX < areaX || fromZ < areaZ;
+                if (ring && cx >= areaX && cz >= areaZ) {
+                    continue;
+                }
+                boolean wasLoaded = this.world.getChunkProvider().getLoadedChunk(cx, cz) != null;
+                Chunk chunk = this.world.getChunk(cx, cz);
+                if (chunk.isTerrainPopulated()) {
+                    populated |= !wasLoaded;
+                } else {
+                    chunk.setTerrainPopulated(true);
+                }
+            }
+        }
+        return populated;
+    }
+
+    private void clear(int x, int z) {
         for (int dx = 0; dx < 32; dx++) {
             for (int dz = 0; dz < 32; dz++) {
                 for (int y = 60; y < 160; y++) {
@@ -88,7 +141,6 @@ public final class Check {
                 }
             }
         }
-        return corner;
     }
 
     /** Fills a box (inclusive) with a state, without neighbor updates. */
