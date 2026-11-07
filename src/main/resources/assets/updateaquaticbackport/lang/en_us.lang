@@ -1,0 +1,17 @@
+itemGroup.updateaquaticbackport=Update Aquatic Backport
+
+config.updateaquaticbackport.woodset=Shared 1.13 Blocks
+config.updateaquaticbackport.kelp=Kelp and Seagrass
+config.updateaquaticbackport.coral=Coral
+config.updateaquaticbackport.fish=Fish
+config.updateaquaticbackport.turtles=Turtles
+config.updateaquaticbackport.dolphins=Dolphins
+config.updateaquaticbackport.phantoms=Phantoms
+config.updateaquaticbackport.trident=Trident and Drowned
+config.updateaquaticbackport.conduit=Conduit
+config.updateaquaticbackport.structures=Ocean Structures
+config.updateaquaticbackport.oceans=Ocean Biomes
+config.updateaquaticbackport.bubbles=Bubble Columns
+config.updateaquaticbackport.blocks=Other Blocks and Items
+config.updateaquaticbackport.mobs=Mob Changes
+config.updateaquaticbackport.water=Water
