@@ -88,9 +88,13 @@ models, 60 sound files, 0 errors**.
     deep frozen ocean no sea ice; **15200 packed ice and 362 blue ice** in the two frozen areas; **1401
     obsidian at y 10** from underwater caves in the 44800 ocean columns checked.
 *   Monuments from eight starting points: all eight on a deep ocean, two on 1.13's new deep oceans.
-*   With every stream's test (`-Pselftest=all`, fresh world) there is no cascading-worldgen warning (an
-    earlier version set carved water flowing with flag 2 and had one). Four failures there belong to other
-    tests, see below.
+*   **Every stream's test** (`-Pselftest=all`, fresh world): **`SELFTEST DONE pass=12408 fail=0`**, and no
+    cascading-worldgen warning (an earlier version set carved water flowing with flag 2 and had one). Kelp:
+    1501 kelp and 1236 seagrass in a vanilla ocean near spawn; coral: 2865 coral blocks in a `warm_ocean`,
+    none in a `cold_ocean`.
+*   With `oceans.enabled=false` (`-Pselftest=scaffold,coral,kelp`, fresh world): **`pass=274 fail=0`**; the
+    server boots without the biomes and the coral test takes its old path (4513 coral in a warm stretch of a
+    vanilla ocean by the noise, none in a cold one).
 *   The server booting proves no client type is reached from server code.
 
 ## Not tested
@@ -118,11 +122,10 @@ lines are ours). The 17 other language files are left for the family's language 
     on, vanilla oceans in chunks generated before the mod was added (or by a world type this layer does
     not reach) lose the noise fallback. If that matters, `OceanKind` could take a per-world flag ("this
     world's biome map has 1.13's temperatures", set from `OceanLayers`) and use the noise otherwise.
-*   **Other streams' tests** need updating after merge, since they exercise the noise through vanilla's
-    ocean: `ScaffoldSelfTest` (3 failures, "noise gives some WARM/LUKEWARM/COLD ocean") should call
-    `OceanKind.fromNoise` instead of `OceanKind.of(Biomes.OCEAN, ...)`; `CoralSelfTest.worldGen` (1 failure,
-    "a warm ocean has coral reefs") should, with this stream on, look for `warm_ocean` rather than a warm
-    stretch of a vanilla ocean. `KelpSelfTest.worldGen` still passes (vanilla oceans remain near spawn).
+*   **Older tests updated on this branch** (test code only), since they exercised the noise through
+    vanilla's ocean, which this stream registers as `NORMAL`: `ScaffoldSelfTest` now samples
+    `OceanKind.fromNoise`; `CoralSelfTest.worldGen` looks up `warm_ocean` and `cold_ocean` by name and uses
+    them when present, else keeps its old vanilla-ocean check. `KelpSelfTest` needed no change.
 *   **Stream A** (water colors): our biomes keep the default multiplier. 1.13's water / fog colors: warm
     4445678 / 270131, lukewarm and deep lukewarm 4566514 / 267827, cold and deep cold 4020182 / 329011,
     frozen and deep frozen 3750089 / 329011 (vanilla ocean 4159204 / 329011).

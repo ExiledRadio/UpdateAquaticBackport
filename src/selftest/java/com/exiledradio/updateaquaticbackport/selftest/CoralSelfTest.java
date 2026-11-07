@@ -244,9 +244,21 @@ public final class CoralSelfTest implements SelfTest {
     private static final net.minecraft.world.gen.NoiseGeneratorPerlin REEF_NOISE =
             new net.minecraft.world.gen.NoiseGeneratorPerlin(new Random(2345L), 1);
 
-    /** A warm stretch of a vanilla ocean near spawn grows reefs; a cold one none. */
+    /**
+     * A warm ocean near spawn grows reefs; a cold one none. With the ocean stream on these are its
+     * {@code warm_ocean} and {@code cold_ocean} (looked up by name); with it off, warm and cold stretches of
+     * vanilla's ocean by the temperature noise.
+     */
     private static void worldGen(Check c) {
         WorldServer world = c.world;
+        Biome warmOcean = net.minecraftforge.fml.common.registry.ForgeRegistries.BIOMES.getValue(
+                com.exiledradio.updateaquaticbackport.common.Content.id("warm_ocean"));
+        Biome coldOcean = net.minecraftforge.fml.common.registry.ForgeRegistries.BIOMES.getValue(
+                com.exiledradio.updateaquaticbackport.common.Content.id("cold_ocean"));
+        if (warmOcean != null && coldOcean != null) {
+            worldGenOceanBiomes(c, world, warmOcean, coldOcean);
+            return;
+        }
         BlockPos warm = null;
         BlockPos cold = null;
         for (int x = -6000; x <= 6000 && (warm == null || cold == null); x += 96) {
@@ -276,6 +288,35 @@ public final class CoralSelfTest implements SelfTest {
                 warm, reef, cold, none);
         c.ok(reef > 0, "a warm ocean has coral reefs: " + reef + " blocks at " + warm);
         c.eq(0, none, "a cold ocean has none");
+    }
+
+    /** As {@link #worldGen}, in the ocean stream's warm and cold ocean biomes. */
+    private static void worldGenOceanBiomes(Check c, WorldServer world, Biome warmOcean, Biome coldOcean) {
+        BlockPos warm = null;
+        BlockPos cold = null;
+        for (int x = -6000; x <= 6000 && (warm == null || cold == null); x += 96) {
+            for (int z = -6000; z <= 6000 && (warm == null || cold == null); z += 96) {
+                BlockPos pos = new BlockPos(x, 0, z);
+                Biome biome = world.getBiomeProvider().getBiome(pos);
+                // Reefs come in patches by 1.13's density noise: look where it says yes.
+                if (warm == null && biome == warmOcean && REEF_NOISE.getValue(x / 400.0, z / 400.0) > 0.3
+                        && world.getBiomeProvider().areBiomesViable(x, z, 40, java.util.Collections.singletonList(warmOcean))) {
+                    warm = pos;
+                } else if (cold == null && biome == coldOcean) {
+                    cold = pos;
+                }
+            }
+        }
+        if (warm == null || cold == null) {
+            c.fail("no warm or cold ocean biome found near spawn: " + warm + " " + cold);
+            return;
+        }
+        int reef = coralIn(world, warm);
+        int none = coralIn(world, cold);
+        com.exiledradio.updateaquaticbackport.UpdateAquaticBackport.LOGGER.info("SELFTEST coral worldgen (ocean biomes): warm {} -> {} coral, cold {} -> {}",
+                warm, reef, cold, none);
+        c.ok(reef > 0, "a warm ocean biome has coral reefs: " + reef + " blocks at " + warm);
+        c.eq(0, none, "a cold ocean biome has none");
     }
 
     private static int coralIn(WorldServer world, BlockPos at) {
