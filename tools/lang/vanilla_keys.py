@@ -39,7 +39,18 @@ def candidates(key):
         return ["item.minecraft." + name, "block.minecraft." + name]
     if key.startswith("subtitles.%s." % M):
         return ["subtitles." + key[len("subtitles.%s." % M):]]
-    return []
+    # The kinds build_langs.py also matches by structure: entities, effects, enchantments, advancements.
+    if key.startswith("entity.%s." % M) and key.endswith(".name"):
+        return ["entity.minecraft." + ".".join(parts[2:-1])]
+    if key.startswith("effect.%s." % M):
+        return ["effect.minecraft." + ".".join(parts[2:])]
+    if key.startswith("enchantment.%s." % M):
+        return ["enchantment.minecraft." + ".".join(parts[2:])]
+    if key.startswith("advancements.%s." % M) and len(parts) == 4:
+        return ["advancements.%s.%s.%s" % (tab, parts[2], parts[3])
+                for tab in ("adventure", "story", "husbandry", "nether", "end")]
+    # A key 1.12.2 lacks but modern Minecraft has under the same name (death messages).
+    return [key]
 
 
 def main():
@@ -54,7 +65,8 @@ def main():
             if cand in assets.VANILLA_LANG:
                 found = cand
                 break
-        if found and assets.VANILLA_LANG[found] == text:
+        # A lang value is one line; a vanilla line break is a space here (as build_langs.py writes it).
+        if found and " ".join(assets.VANILLA_LANG[found].split("\n")) == text:
             vanilla[key] = found
         else:
             if found:

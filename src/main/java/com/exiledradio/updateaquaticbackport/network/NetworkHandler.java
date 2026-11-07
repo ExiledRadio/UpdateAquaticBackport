@@ -34,5 +34,9 @@ public final class NetworkHandler {
     public static void init() {
         channel = NetworkRegistry.INSTANCE.newSimpleChannel(CHANNEL);
         // Streams register their packets below, in id order.
+        channel.registerMessage(com.exiledradio.updateaquaticbackport.trident.PacketDrowning.Handler.class,
+                com.exiledradio.updateaquaticbackport.trident.PacketDrowning.class, 35, net.minecraftforge.fml.relauncher.Side.CLIENT);
+        channel.registerMessage(com.exiledradio.updateaquaticbackport.trident.PacketSpin.Handler.class,
+                com.exiledradio.updateaquaticbackport.trident.PacketSpin.class, 36, net.minecraftforge.fml.relauncher.Side.CLIENT);
     }
 }
