@@ -48,6 +48,7 @@ public final class SelfTestRunner {
             new KelpSelfTest(),
             new CoralSelfTest(),
             new FishSelfTest(),
+            new TurtleSelfTest(),
     };
 
     private final List<String> wanted;
