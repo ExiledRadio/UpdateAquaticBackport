@@ -397,3 +397,19 @@ tile.updateaquaticbackport.prismarine_slab.name=Prismarine Slab
 tile.updateaquaticbackport.prismarine_stairs.name=Prismarine Stairs
 tile.updateaquaticbackport.shulker_box.name=Shulker Box
 subtitles.updateaquaticbackport.block.pumpkin.carve=Shears carve
+
+# --- water ---
+config.updateaquaticbackport.water.biomeColors=Biome Water Colors
+config.updateaquaticbackport.water.biomeColors.tooltip=1.13's water texture and its colors by biome: blue in most places, darker in cold biomes, purple in frozen ones, light green-gray in swamps, teal in warm oceans.
+config.updateaquaticbackport.water.underwaterFog=Underwater Fog
+config.updateaquaticbackport.water.underwaterFog.tooltip=1.13's view under water: fog in the biome's water color, darker deeper down, and clearer the longer you stay under.
+config.updateaquaticbackport.water.ambience=Underwater Ambience
+config.updateaquaticbackport.water.ambience.tooltip=Underwater ambience: a soft loop with bubbles and the odd distant sound while your head is under water.
+config.updateaquaticbackport.water.lightThroughWater=Light Through Water
+config.updateaquaticbackport.water.lightThroughWater.tooltip=Water dims light by 1 level per block instead of 3, so the sea floor is not pitch black. Light already worked out in existing chunks changes only where blocks change.
+config.updateaquaticbackport.water.gradualAir=Gradual Air Refill
+config.updateaquaticbackport.water.gradualAir.tooltip=Air comes back a little at a time after you surface, instead of all at once.
+config.updateaquaticbackport.water.floatingItems=Floating Items and Orbs
+config.updateaquaticbackport.water.floatingItems.tooltip=Dropped items and experience orbs float up in water instead of sinking. Checks every loaded item and orb once a tick.
+config.updateaquaticbackport.water.shallowJump=Jump in Shallow Water
+config.updateaquaticbackport.water.shallowJump.tooltip=Jumping in shallow flowing water is a normal jump instead of swimming up slowly.

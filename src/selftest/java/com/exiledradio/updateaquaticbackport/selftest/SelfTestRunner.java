@@ -56,6 +56,7 @@ public final class SelfTestRunner {
             new BubbleSelfTest(),
             new OceanSelfTest(),
             new BlocksSelfTest(),
+            new WaterSelfTest(),
     };
 
     private final List<String> wanted;
