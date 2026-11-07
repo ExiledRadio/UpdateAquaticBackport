@@ -166,6 +166,11 @@ public final class ModConfig {
         @Config.Comment("Phantoms, phantom membrane and Slow Falling. Off, nothing is registered.")
         @Config.LangKey("config.updateaquaticbackport.phantoms.enabled")
         public boolean enabled = true;
+
+        @Config.Comment({"Phantoms spawn at night over players who have not slept for three days. Off, they never spawn",
+                "on their own in any world; the doInsomnia game rule turns them off in one world."})
+        @Config.LangKey("config.updateaquaticbackport.phantoms.insomnia")
+        public boolean insomnia = true;
     }
 
     public static final class Trident {

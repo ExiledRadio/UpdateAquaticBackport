@@ -50,6 +50,7 @@ public final class SelfTestRunner {
             new FishSelfTest(),
             new TurtleSelfTest(),
             new DolphinSelfTest(),
+            new PhantomSelfTest(),
     };
 
     private final List<String> wanted;
