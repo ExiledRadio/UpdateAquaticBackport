@@ -114,5 +114,55 @@
       "updateaquaticbackport:step/wet_grass5",
       "updateaquaticbackport:step/wet_grass6"
     ]
+  },
+  "block.coral_block.break": {
+    "sounds": [
+      "updateaquaticbackport:dig/coral1",
+      "updateaquaticbackport:dig/coral2",
+      "updateaquaticbackport:dig/coral3",
+      "updateaquaticbackport:dig/coral4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.coral_block.step": {
+    "sounds": [
+      "updateaquaticbackport:step/coral1",
+      "updateaquaticbackport:step/coral2",
+      "updateaquaticbackport:step/coral3",
+      "updateaquaticbackport:step/coral4",
+      "updateaquaticbackport:step/coral5",
+      "updateaquaticbackport:step/coral6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.coral_block.place": {
+    "sounds": [
+      "updateaquaticbackport:dig/coral1",
+      "updateaquaticbackport:dig/coral2",
+      "updateaquaticbackport:dig/coral3",
+      "updateaquaticbackport:dig/coral4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.coral_block.hit": {
+    "sounds": [
+      "updateaquaticbackport:step/coral1",
+      "updateaquaticbackport:step/coral2",
+      "updateaquaticbackport:step/coral3",
+      "updateaquaticbackport:step/coral4",
+      "updateaquaticbackport:step/coral5",
+      "updateaquaticbackport:step/coral6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.coral_block.fall": {
+    "sounds": [
+      "updateaquaticbackport:step/coral1",
+      "updateaquaticbackport:step/coral2",
+      "updateaquaticbackport:step/coral3",
+      "updateaquaticbackport:step/coral4",
+      "updateaquaticbackport:step/coral5",
+      "updateaquaticbackport:step/coral6"
+    ]
   }
 }

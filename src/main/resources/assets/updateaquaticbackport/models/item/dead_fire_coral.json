@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "updateaquaticbackport:block/dead_fire_coral"
+  }
+}

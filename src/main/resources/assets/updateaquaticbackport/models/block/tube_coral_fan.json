@@ -1,0 +1,6 @@
+{
+  "parent": "updateaquaticbackport:block/coral_fan",
+  "textures": {
+    "fan": "updateaquaticbackport:block/tube_coral_fan"
+  }
+}

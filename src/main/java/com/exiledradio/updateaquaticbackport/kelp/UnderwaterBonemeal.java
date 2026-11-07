@@ -52,7 +52,12 @@ public final class UnderwaterBonemeal {
         }
         BlockPos water = pos;
         if (!BlockKelp.isVanillaWaterSource(world, water)) {
-            water = pos.offset(face(event.getEntityPlayer(), pos));
+            // 1.13: only through a solid face of the block aimed at - not a sea pickle, a slab's side...
+            EnumFacing face = face(event.getEntityPlayer(), pos);
+            if (event.getBlock().getBlockFaceShape(world, pos, face) != net.minecraft.block.state.BlockFaceShape.SOLID) {
+                return;
+            }
+            water = pos.offset(face);
         }
         if (!BlockKelp.isVanillaWaterSource(world, water)) {
             return;

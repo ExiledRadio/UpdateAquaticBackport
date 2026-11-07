@@ -1,0 +1,5 @@
+block.coral_block.break
+block.coral_block.fall
+block.coral_block.hit
+block.coral_block.place
+block.coral_block.step

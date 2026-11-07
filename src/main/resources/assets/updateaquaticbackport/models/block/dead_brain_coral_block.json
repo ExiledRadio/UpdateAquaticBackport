@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "updateaquaticbackport:block/dead_brain_coral_block"
+  }
+}

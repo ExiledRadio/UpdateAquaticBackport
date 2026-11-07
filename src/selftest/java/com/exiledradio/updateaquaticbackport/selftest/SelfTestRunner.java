@@ -46,6 +46,7 @@ public final class SelfTestRunner {
             new ScaffoldSelfTest(),
             new WoodsetSelfTest(),
             new KelpSelfTest(),
+            new CoralSelfTest(),
     };
 
     private final List<String> wanted;

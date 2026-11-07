@@ -1,0 +1,6 @@
+{
+  "parent": "updateaquaticbackport:block/coral_wall_fan",
+  "textures": {
+    "fan": "updateaquaticbackport:block/dead_brain_coral_fan"
+  }
+}
