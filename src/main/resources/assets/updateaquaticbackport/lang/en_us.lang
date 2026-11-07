@@ -270,3 +270,21 @@ subtitles.updateaquaticbackport.entity.turtle.shamble_baby=Turtle baby shambles
 subtitles.updateaquaticbackport.entity.turtle.swim=Turtle swims
 subtitles.updateaquaticbackport.entity.zombie.destroy_egg=Turtle Egg stomped
 subtitles.updateaquaticbackport.item.armor.equip_turtle=Turtle Shell thunks
+
+# --- dolphin ---
+config.updateaquaticbackport.dolphins.spawnWeight.tooltip=How often dolphins spawn in oceans, against the squid's 10. 0 stops natural spawning. Lukewarm and warm oceans get a fifth of this; cold and frozen oceans none.
+config.updateaquaticbackport.dolphins.spawnWeight=Spawn Weight
+death.attack.dryout.player=%1$s died from dehydration whilst trying to escape %2$s
+death.attack.dryout=%1$s died from dehydration
+effect.updateaquaticbackport.dolphins_grace=Dolphin's Grace
+entity.updateaquaticbackport.dolphin.name=Dolphin
+subtitles.updateaquaticbackport.entity.dolphin.ambient=Dolphin chirps
+subtitles.updateaquaticbackport.entity.dolphin.ambient_water=Dolphin whistles
+subtitles.updateaquaticbackport.entity.dolphin.attack=Dolphin attacks
+subtitles.updateaquaticbackport.entity.dolphin.death=Dolphin dies
+subtitles.updateaquaticbackport.entity.dolphin.eat=Dolphin eats
+subtitles.updateaquaticbackport.entity.dolphin.hurt=Dolphin hurts
+subtitles.updateaquaticbackport.entity.dolphin.jump=Dolphin jumps
+subtitles.updateaquaticbackport.entity.dolphin.play=Dolphin plays
+subtitles.updateaquaticbackport.entity.dolphin.splash=Dolphin splashes
+subtitles.updateaquaticbackport.entity.dolphin.swim=Dolphin swims

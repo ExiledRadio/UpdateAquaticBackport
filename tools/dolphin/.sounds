@@ -1,0 +1,10 @@
+entity.dolphin.ambient
+entity.dolphin.ambient_water
+entity.dolphin.attack
+entity.dolphin.death
+entity.dolphin.eat
+entity.dolphin.hurt
+entity.dolphin.jump
+entity.dolphin.play
+entity.dolphin.splash
+entity.dolphin.swim

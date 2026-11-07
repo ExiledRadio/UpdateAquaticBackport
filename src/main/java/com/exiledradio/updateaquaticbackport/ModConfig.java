@@ -152,6 +152,13 @@ public final class ModConfig {
         @Config.Comment("Dolphins and Dolphin's Grace. Off, nothing is registered.")
         @Config.LangKey("config.updateaquaticbackport.dolphins.enabled")
         public boolean enabled = true;
+
+        @Config.RequiresMcRestart
+        @Config.RangeInt(min = 0, max = 100)
+        @Config.Comment({"How often dolphins spawn in oceans, against the squid's 10. 0 stops natural spawning.",
+                "Lukewarm and warm oceans get a fifth of this; cold and frozen oceans none."})
+        @Config.LangKey("config.updateaquaticbackport.dolphins.spawnWeight")
+        public int spawnWeight = 10;
     }
 
     public static final class Phantoms {

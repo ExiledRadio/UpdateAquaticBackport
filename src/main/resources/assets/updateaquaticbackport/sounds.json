@@ -576,5 +576,129 @@
       }
     ],
     "subtitle": "subtitles.updateaquaticbackport.item.armor.equip_turtle"
+  },
+  "entity.dolphin.ambient": {
+    "sounds": [
+      "updateaquaticbackport:mob/dolphin/blowhole1",
+      "updateaquaticbackport:mob/dolphin/blowhole2",
+      "updateaquaticbackport:mob/dolphin/idle1",
+      "updateaquaticbackport:mob/dolphin/idle2",
+      "updateaquaticbackport:mob/dolphin/idle3",
+      "updateaquaticbackport:mob/dolphin/idle4",
+      "updateaquaticbackport:mob/dolphin/idle5",
+      "updateaquaticbackport:mob/dolphin/idle6"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.ambient"
+  },
+  "entity.dolphin.ambient_water": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/dolphin/idle_water1",
+        "volume": 0.8
+      },
+      "updateaquaticbackport:mob/dolphin/idle_water2",
+      "updateaquaticbackport:mob/dolphin/idle_water3",
+      "updateaquaticbackport:mob/dolphin/idle_water4",
+      "updateaquaticbackport:mob/dolphin/idle_water5",
+      "updateaquaticbackport:mob/dolphin/idle_water6",
+      {
+        "name": "updateaquaticbackport:mob/dolphin/idle_water7",
+        "volume": 0.75
+      },
+      {
+        "name": "updateaquaticbackport:mob/dolphin/idle_water8",
+        "volume": 0.75
+      },
+      "updateaquaticbackport:mob/dolphin/idle_water9",
+      {
+        "name": "updateaquaticbackport:mob/dolphin/idle_water10",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.ambient_water"
+  },
+  "entity.dolphin.attack": {
+    "sounds": [
+      "updateaquaticbackport:mob/dolphin/attack1",
+      "updateaquaticbackport:mob/dolphin/attack2",
+      "updateaquaticbackport:mob/dolphin/attack3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.attack"
+  },
+  "entity.dolphin.death": {
+    "sounds": [
+      "updateaquaticbackport:mob/dolphin/death1",
+      "updateaquaticbackport:mob/dolphin/death2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.death"
+  },
+  "entity.dolphin.eat": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/dolphin/eat1",
+        "volume": 0.75
+      },
+      {
+        "name": "updateaquaticbackport:mob/dolphin/eat2",
+        "volume": 0.75
+      },
+      {
+        "name": "updateaquaticbackport:mob/dolphin/eat3",
+        "volume": 0.75
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.eat"
+  },
+  "entity.dolphin.hurt": {
+    "sounds": [
+      "updateaquaticbackport:mob/dolphin/hurt1",
+      "updateaquaticbackport:mob/dolphin/hurt2",
+      "updateaquaticbackport:mob/dolphin/hurt3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.hurt"
+  },
+  "entity.dolphin.jump": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/dolphin/jump1",
+        "volume": 0.75
+      },
+      {
+        "name": "updateaquaticbackport:mob/dolphin/jump2",
+        "volume": 0.75
+      },
+      {
+        "name": "updateaquaticbackport:mob/dolphin/jump3",
+        "volume": 0.75
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.jump"
+  },
+  "entity.dolphin.play": {
+    "sounds": [
+      "updateaquaticbackport:mob/dolphin/play1",
+      "updateaquaticbackport:mob/dolphin/play2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.play"
+  },
+  "entity.dolphin.splash": {
+    "sounds": [
+      "updateaquaticbackport:mob/dolphin/splash1",
+      "updateaquaticbackport:mob/dolphin/splash2",
+      "updateaquaticbackport:mob/dolphin/splash3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.splash"
+  },
+  "entity.dolphin.swim": {
+    "sounds": [
+      "updateaquaticbackport:entity/fish/swim5",
+      "updateaquaticbackport:entity/fish/swim6",
+      "updateaquaticbackport:entity/fish/swim7",
+      "updateaquaticbackport:mob/dolphin/swim1",
+      "updateaquaticbackport:mob/dolphin/swim2",
+      "updateaquaticbackport:mob/dolphin/swim3",
+      "updateaquaticbackport:mob/dolphin/swim4"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.dolphin.swim"
   }
 }
