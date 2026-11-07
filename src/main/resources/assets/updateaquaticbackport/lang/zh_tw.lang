@@ -435,3 +435,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=骷髏馬在�
 
 # --- structure ---
 filled_map.buried_treasure=藏寶圖
+
+# --- swim ---
+config.updateaquaticbackport.swimming=游泳與爬行
+config.updateaquaticbackport.swimming.tooltip=游泳與爬行：在水下跑步即可游泳，在沒有站立空間的地方會爬行。
+config.updateaquaticbackport.swimming.enabled=游泳
+config.updateaquaticbackport.swimming.enabled.tooltip=頭部在水下時跑步即可游泳：你會以 0.6 格高的姿態平躺，移動更快，朝視線方向前進，並能穿過一格高的空隙。在伺服器上以伺服器的設定為準。
+config.updateaquaticbackport.swimming.crawling=爬行
+config.updateaquaticbackport.swimming.crawling.tooltip=既沒有站立空間也無法潛行時，你會改為爬行：以潛行速度平趴在地上，直到再次有足夠空間。游進一格高的空隙或位於關閉的地板門下方時就會如此。

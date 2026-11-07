@@ -435,3 +435,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Skelettpferde
 
 # --- structure ---
 filled_map.buried_treasure=Schatzkarte
+
+# --- swim ---
+config.updateaquaticbackport.swimming=Schwimmen & Kriechen
+config.updateaquaticbackport.swimming.tooltip=Schwimmen und Kriechen: Sprinte unter Wasser, um zu schwimmen, und krieche, wo kein Platz zum Stehen ist.
+config.updateaquaticbackport.swimming.enabled=Schwimmen
+config.updateaquaticbackport.swimming.enabled.tooltip=Sprinte mit dem Kopf unter Wasser, um zu schwimmen: Du liegst flach in einer 0.6 Blöcke hohen Form, bist schneller, folgst deinem Blick und passt durch Lücken von einem Block. Auf einem Server zählt die Einstellung des Servers.
+config.updateaquaticbackport.swimming.crawling=Kriechen
+config.updateaquaticbackport.swimming.crawling.tooltip=Ist weder zum Stehen noch zum Schleichen Platz, kriechst du: flach am Boden mit Schleichgeschwindigkeit, bis wieder Platz ist. Das passiert, wenn du in eine Lücke von einem Block schwimmst oder unter einer geschlossenen Falltür.

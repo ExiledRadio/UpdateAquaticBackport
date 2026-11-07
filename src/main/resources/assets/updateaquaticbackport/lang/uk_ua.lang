@@ -435,3 +435,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Коні-ск
 
 # --- structure ---
 filled_map.buried_treasure=Мапа скарбів
+
+# --- swim ---
+config.updateaquaticbackport.swimming=Плавання й повзання
+config.updateaquaticbackport.swimming.tooltip=Плавання й повзання: біжіть під водою, щоб плисти, і повзіть там, де не можна встати.
+config.updateaquaticbackport.swimming.enabled=Плавання
+config.updateaquaticbackport.swimming.enabled.tooltip=Біжіть, опустивши голову під воду, щоб плисти: ви лягаєте горизонтально у фігуру заввишки 0.6 блока, рухаєтеся швидше, пливете туди, куди дивитеся, і пролазите в отвори заввишки один блок. На сервері діє налаштування сервера.
+config.updateaquaticbackport.swimming.crawling=Повзання
+config.updateaquaticbackport.swimming.crawling.tooltip=Якщо немає місця ні встати, ні крастися, ви повзете: лежачи на землі зі швидкістю скрадання, доки знову не з'явиться місце. Так буває, якщо запливти в отвір заввишки один блок або опинитися під зачиненим люком.

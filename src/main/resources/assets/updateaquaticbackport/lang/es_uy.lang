@@ -435,3 +435,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Los caballos 
 
 # --- structure ---
 filled_map.buried_treasure=Mapa del tesoro
+
+# --- swim ---
+config.updateaquaticbackport.swimming=Nadar y gatear
+config.updateaquaticbackport.swimming.tooltip=Nadar y gatear: corre bajo el agua para nadar, y gatea donde no hay espacio para estar de pie.
+config.updateaquaticbackport.swimming.enabled=Nadar
+config.updateaquaticbackport.swimming.enabled.tooltip=Corre con la cabeza bajo el agua para nadar: te acuestas en una forma de 0.6 bloques de alto, vas más rápido, avanzas hacia donde miras y cabes por huecos de un bloque. En un servidor cuenta la opción del servidor.
+config.updateaquaticbackport.swimming.crawling=Gatear
+config.updateaquaticbackport.swimming.crawling.tooltip=Sin espacio para estar de pie ni agacharte, gateas: acostado en el suelo a la velocidad de agacharse, hasta que vuelva a haber espacio. Pasa al entrar nadando en un hueco de un bloque o debajo de una trampilla cerrada.

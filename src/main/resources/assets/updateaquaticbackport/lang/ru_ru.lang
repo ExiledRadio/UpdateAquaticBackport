@@ -435,3 +435,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Лошади-
 
 # --- structure ---
 filled_map.buried_treasure=Карта клада
+
+# --- swim ---
+config.updateaquaticbackport.swimming=Плавание и ползание
+config.updateaquaticbackport.swimming.tooltip=Плавание и ползание: бегите под водой, чтобы плыть, и ползите там, где нельзя встать.
+config.updateaquaticbackport.swimming.enabled=Плавание
+config.updateaquaticbackport.swimming.enabled.tooltip=Бегите, опустив голову под воду, чтобы плыть: вы ложитесь горизонтально в фигуру высотой 0.6 блока, двигаетесь быстрее, плывёте туда, куда смотрите, и пролезаете в проёмы высотой в один блок. На сервере действует настройка сервера.
+config.updateaquaticbackport.swimming.crawling=Ползание
+config.updateaquaticbackport.swimming.crawling.tooltip=Если нет места ни встать, ни красться, вы ползёте: лёжа на земле со скоростью крадущегося, пока снова не появится место. Это бывает, если заплыть в проём высотой в один блок или оказаться под закрытым люком.

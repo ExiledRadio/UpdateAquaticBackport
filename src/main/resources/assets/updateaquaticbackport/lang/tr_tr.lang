@@ -435,3 +435,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=İskelet atla
 
 # --- structure ---
 filled_map.buried_treasure=Gömülü Hazine Haritası
+
+# --- swim ---
+config.updateaquaticbackport.swimming=Yüzme ve Sürünme
+config.updateaquaticbackport.swimming.tooltip=Yüzme ve sürünme: yüzmek için su altında koşun, ayakta duracak yer olmayan yerlerde sürünün.
+config.updateaquaticbackport.swimming.enabled=Yüzme
+config.updateaquaticbackport.swimming.enabled.tooltip=Yüzmek için başınız su altındayken koşun: 0.6 blok yüksekliğinde bir şekilde yatarsınız, daha hızlı gidersiniz, baktığınız yöne ilerlersiniz ve bir blokluk boşluklardan geçebilirsiniz. Sunucuda sunucunun ayarı geçerlidir.
+config.updateaquaticbackport.swimming.crawling=Sürünme
+config.updateaquaticbackport.swimming.crawling.tooltip=Ayakta durmaya ya da eğilmeye yer yoksa sürünürsünüz: yeniden yer açılana kadar eğilme hızında yere yatarak. Bu, bir blokluk bir boşluğa yüzerek girdiğinizde ya da kapalı bir tuzak kapısının altında olur.

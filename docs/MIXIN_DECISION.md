@@ -1,5 +1,10 @@
 # Swimming, crawling and waterlogging: the chosen design
 
+> **Superseded on patching (2026-11-07):** the user's standing rule is now "closest to vanilla, always", with our own small
+> ASM patches allowed wherever parity needs them (no MixinBooter). Swimming and crawling use five patches in Backport
+> Core's coremod, and Update Aquatic has three of its own; see `docs/PATCHES.md`. Waterlogging still comes from
+> Fluidlogged API as below.
+
 **Decided by the user (2026-11-06):**
 
 - **Swimming and crawling** are our own code, written from scratch. No MixinBooter, no mixins, and no code

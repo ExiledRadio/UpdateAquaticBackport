@@ -435,3 +435,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Skeletpaarden
 
 # --- structure ---
 filled_map.buried_treasure=Schatkaart
+
+# --- swim ---
+config.updateaquaticbackport.swimming=Zwemmen en kruipen
+config.updateaquaticbackport.swimming.tooltip=Zwemmen en kruipen: ren onder water om te zwemmen, en kruip waar geen ruimte is om te staan.
+config.updateaquaticbackport.swimming.enabled=Zwemmen
+config.updateaquaticbackport.swimming.enabled.tooltip=Ren met je hoofd onder water om te zwemmen: je ligt plat in een vorm van 0.6 blok hoog, gaat sneller, zwemt waar je naartoe kijkt en past door openingen van één blok. Op een server telt de instelling van de server.
+config.updateaquaticbackport.swimming.crawling=Kruipen
+config.updateaquaticbackport.swimming.crawling.tooltip=Is er geen ruimte om te staan of te sluipen, dan kruip je: plat op de grond op sluipsnelheid, tot er weer ruimte is. Dat gebeurt als je een opening van één blok in zwemt, of onder een gesloten valluik.

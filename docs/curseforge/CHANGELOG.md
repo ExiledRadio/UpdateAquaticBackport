@@ -141,10 +141,16 @@ First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their 
 
 *   Placeholder: the blocks that hold water, and how buckets and flowing water work with them.
 
-<!-- PENDING: Sw -->
 ## New: swimming and crawling
 
-*   Placeholder: sprint-swimming, crawling through one-block gaps, and their animations.
+*   **Swimming**: sprint with your head under water to swim. You lie flat, only 0.6 blocks tall, with your eyes low, and you move much faster, following where you look: up, down or level. Swimming carries on while you keep sprinting anywhere in the water, even in water one block deep, and through bumping into walls; it stops when you stop sprinting, leave the water, or get too hungry to sprint away from the ground. You can start the sprint under water with a double tap of forward or the sprint key, as on land.
+*   **Through one-block gaps**: a swimmer fits through holes one block tall, and comes out of them crawling.
+*   **Crawling**: with no room to stand, you crawl flat on the ground at sneaking speed and stay down until there is room, such as after swimming into a low tunnel, or with a trapdoor closed over you. With room to sneak but not to stand, you get up to a crouch first.
+*   **Water feels like 1.13**: water slows a sprinting player less, you sink more slowly when you stop swimming, sneaking in water takes you down, and looking up at the surface does not lift you out unless you jump. Slow Falling slows sinking in water too.
+*   **What everyone sees**: other players see you swim and crawl. Swimmers and crawlers are drawn lying along the swim with 1.13's stroke, armor and all, and the camera eases down to your new eye height and back up instead of jumping.
+*   **Riptide**: a spinning player is the same small size as a swimmer while the spin lasts.
+*   Players raise a trident over their head to throw it.
+*   On a server, the server's own swimming and crawling settings count for everyone on it.
 
 ## Works with Village & Pillage Backport
 
