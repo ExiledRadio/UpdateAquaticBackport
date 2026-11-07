@@ -13,7 +13,7 @@ differently from 1.13, current Java wins (marked **now:**). 1.14.4's decompiled 
 | In | Out (and why) |
 | --- | --- |
 | Every new block, item, mob, effect, enchantment, potion, structure and ocean biome; 1.13's changes to existing mobs, blocks and water | The Flattening, the command rewrite, data packs, functions, tags and the other purely technical changes: 1.12.2 cannot take them and players never see them |
-| Swimming, crawling, waterlogging: our own code, no patches (design in `MIXIN_DECISION.md`) | The four End biomes: the End's terrain did not change; they only split one biome id into four |
+| Swimming and crawling (our own code, no patches) and waterlogging (through Fluidlogged API); design in `MIXIN_DECISION.md` | The four End biomes: the End's terrain did not change; they only split one biome id into four |
 | | Debug-screen, options-menu and launcher changes |
 
 ## Content owned by another mod of the family
@@ -60,7 +60,7 @@ No stream calls another's classes; when one needs another's item it looks it up 
 | M | Mob changes | `mobs` | `mobs` | 40-44 | 65-69 | nothing |
 | A | Water look and feel | `water` | `water` | none | 70-74 | nothing (floating items: see the design's open point 2) |
 | Sw | Swimming and crawling | `swim` (pose engine in Backport Core) | (new) `swimming` | none | 75-79 | the user's approval of the design |
-| Wl | Waterlogging | framework in Backport Core; `common/BlockPseudoWater` moves onto it | (new) `waterlogging` in Backport Core | none | 80-84 | the user's approval of the design; Backport Core |
+| Wl | Waterlogging | adapter in Backport Core over Fluidlogged API; kelp, seagrass, coral move onto it | none of ours (Fluidlogged API's) | none | 80-84 | Backport Core's adapter |
 
 Entity ids are this mod's own `EntityRegistry.registerModEntity` numbers. Potions, enchantments and
 sounds have no numbers to collide on: each stream names them under its own words.
@@ -224,11 +224,10 @@ of vanilla's `updateSize`), motion at the player tick, input at `InputUpdateEven
 
 ### Wl. Waterlogging
 
-Our own waterlogging for this mod's blocks and the family's (lanterns, campfires, sea pickles, chains,
-scaffolding), framework in Backport Core: the block's state carries `waterlogged` and is water while it is,
-water spreads from it, and a model wrapper draws the water inside it. `common/BlockPseudoWater` moves onto
-it. Coexists with Fluidlogged API (our blocks opt out of its fluidlogging; vanilla blocks stay its). Vanilla
-blocks themselves cannot be waterlogged without patches; see `MIXIN_DECISION.md`.
+Through Fluidlogged API, a required dependency of Backport Core. Core's `Waterloggable` adapter (extending
+its `IFluidloggable`) is implemented by every family block 1.13+ makes waterloggable; vanilla blocks get it
+from Fluidlogged API itself. Here, kelp, seagrass, coral, our sea pickle copy and bubble columns move onto it
+and `common/BlockPseudoWater` is removed. See `MIXIN_DECISION.md` and `BACKPORT_CORE_WATERLOGGING.md`.
 
 ## Shared files and rules
 
@@ -286,4 +285,4 @@ All soft: `Loader.isModLoaded` and names, never a hard dependency.
 2. Streams W, K, C: **done** (first session; see `docs/streams/`). Then F, T, D, P, R, N, O, B, X, M, A in
    parallel.
 3. S once Backport Core has the template loader.
-4. Sw and Wl once the user has approved the design in `MIXIN_DECISION.md`.
+4. Sw once the user has approved the design in `MIXIN_DECISION.md`; Wl once Backport Core has the adapter.

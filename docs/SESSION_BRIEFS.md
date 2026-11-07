@@ -130,17 +130,16 @@ goes; the server's movement check accepts a crawl through the gap (no "moved wro
 round-trips. Visual parts are listed as not tested. If any part proves impossible without patching, stop and
 report exactly which part and why; do not write ASM.
 
-## Wl. Waterlogging (start only after the user approves `docs/MIXIN_DECISION.md`; port 25747)
+## Wl. Waterlogging (start once Backport Core ships the `Waterloggable` adapter; port 25747)
 
-Our own system, framework in Backport Core (its own worktree and branch, coordinated with its owner), no
-patches and no dependency on Fluidlogged API. Build `IWaterloggable` and the `Waterlogging` helper (the
-`waterlogged` property plus a fixed water `level`, material and light by state, buckets, placing into water,
-breaking leaving water, spreading flowing water from a newly waterlogged block, one model-name mapping), and the
-client baked-model wrapper that draws water inside the block on faces bordering non-water and the surface at 8/9
-height. Then move Update Aquatic's `common/BlockPseudoWater` blocks (kelp, seagrass, coral) onto it with their
-states and metadata unchanged, so no world changes. Fluidlogged API: a listener class loaded only when
-`fluidlogged_api` is present answers its `FluidloggableEvent` so our blocks are never fluidlogged by it, compiled
-against a stand-in kept out of the jar. Its coremod cannot load in the FG2 dev environment, so that part is tested
-in E2Eu-Cleanroom (it has v3.3.3): our blocks beside its fluidlogged ones, flow, buckets, rendering. Vanilla blocks
-are not waterlogged by us (see open point 1 of the design). Headless tests as for kelp and coral, plus spreading and
-the meta layout of an existing block gaining the property.
+Waterlogging comes from Fluidlogged API, which Backport Core requires; this stream moves Update Aquatic onto
+Core's adapter (`docs/BACKPORT_CORE_WATERLOGGING.md`). Do not touch Backport Core's repo; if the adapter lacks
+something, write it up for its owner. In Update Aquatic: remove `common/BlockPseudoWater`, `PseudoWaterEvents`,
+the `level`/`surface`/`waterlogged` properties, the water-surface model and the water tint; make kelp, kelp
+plant, seagrass and tall seagrass `Waterloggable` blocks that need water (drained, they break), coral and fans
+blocks that may have it (dry ones still die by the six-face rule), and our sea pickle copy and the bubble column
+users of it too; place them with their water in generation through Core's helper. Add the dependency lines from
+that doc to `build.gradle` and `required-after:backportcore` (which brings Fluidlogged API). Rerun every stream's
+self-test with Fluidlogged API in the dev environment, including: kelp placed in water keeps its water, breaking
+kelp leaves water, a drained coral dies, a bucket on kelp does nothing, generation still makes forests and reefs.
+No mixins or ASM in our code.

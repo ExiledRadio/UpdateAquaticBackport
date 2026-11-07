@@ -1,13 +1,15 @@
 # Swimming, crawling and waterlogging: the chosen design
 
-**Decided by the user (2026-11-06):** all three are our own code, written from scratch. No MixinBooter, no
-mixins, and no code taken from, adapted from or credited to any other mod. Waterlogging is our own system,
-with its framework in Backport Core, and it must keep working when Fluidlogged API is installed, without
-depending on it.
+**Decided by the user (2026-11-06):**
 
-Nothing below is built yet. The user reviews this design first. If any part turns out to need bytecode
-patching, that part stops and goes back to the user before any ASM is written. The parts that already look
-that way are listed at the end.
+- **Swimming and crawling** are our own code, written from scratch. No MixinBooter, no mixins, and no code
+  taken from, adapted from or credited to any other mod.
+- **Waterlogging** uses Fluidlogged API for everything, as a required dependency of Backport Core. This
+  replaced the earlier choice of our own system ("why reinvent the wheel").
+
+Nothing below is built yet. If any part of our own code turns out to need bytecode patching, that part
+stops and goes back to the user before any ASM is written. Fluidlogged API's own patches are its business,
+not our code.
 
 ## Swimming and crawling
 
@@ -47,60 +49,71 @@ So the pose system needs no patch.
   The self-test must still prove it: a player crawling in a one-block gap for 200 ticks, never taking
   suffocation damage.
 
-## Waterlogging
+## Waterlogging: Fluidlogged API
 
-### What "our own waterlogging" can mean on 1.12.2 without patches
+### What it is (checked 2026-11-06)
 
-A 1.12.2 chunk holds one state per position. Without patching, a block and water can share a space only
-if **the block's own state says it is waterlogged**, and the block then *is* water to the rest of the game.
-This is the technique Update Aquatic already uses for kelp, seagrass and coral (`common/BlockPseudoWater`).
-It works well:
-
-- the block's material is water while waterlogged;
-- it carries vanilla water's `level` property, fixed at 0;
-- so swimming, drowning, fog, boats, fish, flow, source forming and buckets all treat it as still water.
-
-It only works for **blocks we write**. It cannot reach vanilla's blocks.
-
-### Design (framework in Backport Core; Update Aquatic supplies the water mechanics)
-
-| Part | How |
+| | |
 | --- | --- |
-| **`IWaterloggable` + `Waterlogging` helper** in Backport Core | A block adds 1.13's `waterlogged` property and the fixed `level` property. It keeps one metadata bit for `waterlogged`, chosen so existing metadata keeps its meaning (required for blocks already in worlds, such as the family's lanterns and sea pickles). The helper supplies: material and light opacity by state; the bucket rules (fill, drain, refuse); placing into a water source waterlogs; breaking or exploding leaves water; and one shared model-name mapping. |
-| **Spreading** | When a block becomes waterlogged it schedules a tick. That tick starts vanilla flowing water in the open spaces beside and below it, as a 1.13 source would. From then on vanilla's own water keeps flowing, because it reads our block as a source (`level` 0). |
-| **Drawing the water** | A client-only baked-model wrapper, registered through Forge's model bake event for our blocks only, by exact name. It adds water faces (still-water texture, biome tint) on every side that borders something not water, and the surface at 8/9 height when nothing water-like is above. This removes the one gap the current kelp and coral blocks have: water not drawn when seen from the side through glass or air. |
-| **Who uses it** | Update Aquatic's kelp, seagrass, coral, bubble columns and sea pickles. Later backports' own lanterns, campfires, chains, scaffolding and other blocks that 1.13+ made waterloggable. Each of those mods calls the framework; Backport Core adds no blocks. |
-| **Config** | A new `waterlogging` category in Backport Core: `enabled`. Off, blocks still register the property, so worlds stay loadable, but they never take water. |
+| **Current version** | **3.3.3** for 1.12.2, released 2026-07-16 (CurseForge project 485654, file 8445863). It is also on Modrinth and GitHub (`jbredwards/Fluidlogged-API`, branch `1.12.2-Latest`). There are no git tags. |
+| **License** | The author's *Mod Permissions License* v1. It allows running it and depending on it, and copying parts of it into other software only "for the purpose of improving compatibility". It does **not** allow redistributing it: it must stay a separate download (a CurseForge *required dependency*), never bundled or shaded into our jars. Depending on it the way we plan is allowed. |
+| **What it needs** | Nothing. Its `@Mod` declares no dependencies, and it contains no mixins and no mixin configs. It is an ASM coremod of its own (`FMLCorePlugin: ...asm.ASMHandler`, about 370 transformer classes, with an access transformer). It is needed on both client and server. |
+| **Cleanroom** | Runs. v3.3.2 loads its plugin in all four DregoraCleanroom instances on Cleanroom 0.6.13 (the Celeritas instance booted today), and v3.3.3 in E2Eu-Cleanroom. Every one of those instances also has Fugue; it is not proven whether Fluidlogged API needs Fugue on Cleanroom. |
+| **Dev environment** | Its README supports ForgeGradle 2.3 with `stable_39` mappings (ours) through `deobfCompile`. So unlike Future MC it should load in our `runServer`, and the adapter can be tested headlessly. Not yet tried; it is Backport Core's first check. |
+| **API for our blocks** | `api.block.IFluidloggable`: a block that implements it decides its own fluidlogging. It answers `isFluidValid` / `isFluidloggable`, `canFluidFlow` / `canFluidConnect` per side, `shouldFluidRender`, and gets the callbacks `onFluidFill` / `onFluidDrain` / `onFluidChange`. `overrideApplyDefaultsSetting()` returning true makes its own rules win over the player's config. `api.block.BlockWaterloggedPlant` is its base for plants that only live in water. `api.util.FluidloggedUtils` holds `getFluidState`, `setFluidState`, `setFluidToAir`, `getFluidOrReal` and `canFluidFlow`. `api.util.FluidState` is a (fluid, block state) pair, `FluidState.of(...)`, with `EMPTY`. `api.event.FluidloggableEvent` (has a result) lets outside code allow or deny a block. `FluidloggedEvent` and a config event round it out. |
+| **Defaults** | Out of the box it fluidlogs a long list of vanilla blocks and their "properly coded" modded subclasses: slabs, walls, fences, panes, trapdoors, signs, chests, rails, buttons, leaves and more. Stairs are **not** on that default list. It can download community configs, which may add more. |
 
-### Fluidlogged API installed
+### Design
 
-- **No double-patching** is possible, because we patch nothing.
-- **Our blocks opt out of its fluidlogging.** It publishes an `IFluidloggable` interface and a
-  `FluidloggableEvent`. A listener class loaded only when `fluidlogged_api` is present tells it our blocks
-  are not fluidloggable: they already manage their own water, and its water on top of ours would be drawn
-  and simulated twice. We compile against a small stand-in of its event, kept out of our jar, so there is
-  no dependency. (Village & Pillage does the same for its JEI and Mouse Tweaks hooks.)
-- **Vanilla blocks stay its business.** When it is installed, players get its waterlogged stairs, slabs and
-  fences, and ours never touches them.
-- **Must be tested in a real instance.** Its coremod cannot load in the FG2 dev environment. E2Eu-Cleanroom
-  already has v3.3.3. Things to check there: our pseudo-water blocks beside its fluidlogged blocks (flow,
-  rendering, buckets), and what its fluid-collision and renderer changes do with a block whose material is
-  water.
+- **Backport Core requires Fluidlogged API** (`required-after:fluidlogged_api@[3.3.3,)`), so every family mod
+  does too, through Core. Our own waterlogging system is dropped: no `waterlogged` property of ours, no
+  water-material trick, no water-drawing model.
+- **One adapter in Backport Core**, `Waterloggable` (see `docs/BACKPORT_CORE_WATERLOGGING.md` for the exact
+  API). It extends Fluidlogged API's `IFluidloggable`, so Fluidlogged API sees our blocks as its own. It
+  bridges to three simple choices per block: whether it can hold water; whether it needs water (kelp,
+  seagrass) or merely may have it (lanterns, slabs); and what happens when its water comes or goes (coral
+  dying, sea pickles lighting). A small `Waterlogging` helper reads and sets a position's water for
+  generation and tests.
+- **Every family block that 1.13+ makes waterloggable** implements `Waterloggable`:
+  - Update Aquatic: kelp, kelp plant, seagrass, tall seagrass, coral and coral fans (all four forms), sea
+    pickles (our copy), bubble columns;
+  - Village & Pillage: sea pickles, lanterns, campfires, scaffolding, the stone slab, stair and wall sets;
+  - later backports: chains and the rest.
+- **Vanilla blocks** get waterlogging from Fluidlogged API itself, by its defaults and configs. Stairs are not
+  among its defaults. To match 1.13 for vanilla stairs, Backport Core would add them through Fluidlogged API's
+  config (its whitelist, or its config event). That needs no patch; it is a choice for the user.
+- **No mixin and no ASM in our code.** Everything above is plain Java against Fluidlogged API's published
+  API.
 
-## Looks infeasible without patching (for the user to decide)
+### What changes in Update Aquatic
 
-1. **Waterlogging vanilla blocks** (stairs, slabs, fences, glass panes, chests, ladders, signs, rails, ...).
-   Their state containers are vanilla's, and 1.12.2 keeps one state per position. The only patch-free
-   route is replacing the vanilla blocks in the registry with our own subclasses that have the extra
-   property. Stairs have a free metadata bit; stone slabs have none. Replacing vanilla blocks breaks other
-   mods that compare against `Blocks.OAK_STAIRS` and the like, and changes every world's block mapping.
-   **Not recommended.** The real fix is a second state layer per chunk (what Fluidlogged API does), which
-   needs bytecode patches to `World`, `Chunk`, rendering and physics. **Proposal:** our waterlogging covers
-   our blocks and the family's. Vanilla blocks are waterlogged only when the player installs Fluidlogged
-   API.
-2. **Items and experience orbs floating in water** (stream A). `EntityItem` and `EntityXPOrb` have no
-   update event. The only patch-free route is moving every loaded item from a world tick event, which costs
-   performance and is a little out of step. **Proposal:** do it that way behind a config switch, default
-   on, limited to entities in water, or skip it.
+The mod is unreleased, so its blocks can change state freely; no world needs converting.
+
+- `common/BlockPseudoWater`, `PseudoWaterEvents`, the `level` and `surface` properties, the water-surface
+  model and the water tint all go.
+- Kelp, seagrass and coral become ordinary plant and coral blocks implementing `Waterloggable`, with their
+  water held by Fluidlogged API:
+  - kelp and seagrass *need* water: drained, they break;
+  - coral and fans *may* have it, and dry ones die as now (the six-face rule stays);
+  - their own `waterlogged` property goes, since the water's presence is the state.
+- Generation places blocks with their water through the helper. The tests run with Fluidlogged API in the dev
+  environment.
+- This is one follow-up stream ("Wl-UA"), after Core ships the adapter.
+
+### For Village & Pillage (owner of released blocks)
+
+Its sea pickle has a stored `waterlogged` property in worlds that already exist. When it moves onto the
+adapter, it keeps the property for metadata compatibility and moves the water across once. A pickle that says
+waterlogged but has no Fluidlogged API water gets that water as its chunk loads, and from then on its light
+follows the real water. Backport Core can offer that conversion as part of its migration code.
+
+## Still open (for the user to decide)
+
+1. **Items and experience orbs floating in water** (stream A). `EntityItem` and `EntityXPOrb` have no update
+   event. The only patch-free route is moving every loaded item from a world tick event, which costs a little
+   performance and runs slightly out of step. **Proposal:** do it that way behind a config switch, limited to
+   entities in water, or skip it.
+2. **Vanilla stairs** waterlogged as in 1.13: add them to Fluidlogged API's config from Backport Core, or leave
+   it to the player's own config.
 
 Nothing in swimming or crawling looks like it needs patching.
