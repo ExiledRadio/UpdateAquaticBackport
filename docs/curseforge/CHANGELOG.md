@@ -100,6 +100,9 @@ First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their 
 
 *   **Prismarine, prismarine brick and dark prismarine stairs and slabs.** Six blocks make four stairs, three make six slabs.
 *   **Carved pumpkins**: use shears on a pumpkin to carve a face into it (the face goes on the side you clicked) and get 4 pumpkin seeds. The plain pumpkin no longer has a face. Snow golems and iron golems are built with a carved pumpkin or a jack o'lantern, not a plain pumpkin; jack o'lanterns are crafted from a carved pumpkin and a torch. Wear a carved pumpkin on your head; dispensers put one on a mob's head or on a golem's body. Snow golems wear a carved pumpkin, and so do zombies and skeletons at Halloween.
+*   **Endermen** are calmed only by a **carved pumpkin** on your head. As in 1.14, an enderman riding something doesn't teleport at you, one that is already angry stays angry if you put a carved pumpkin on afterwards, and endermen can pick up carved pumpkins.
+*   **The plain pumpkin can no longer be worn**, and it never builds a golem, however it is placed.
+*   **Middle-clicking wood** (the bark block) picks the wood item.
 *   **Wood**: four logs make three wood, a block with bark on every side. It makes four planks, smelts into charcoal and burns like a log. Logs are now named "Oak Log" and so on; "Oak Wood" is the bark block.
 *   **Stripped logs and stripped wood** in all six woods, **spruce, birch, jungle, acacia and dark oak trapdoors, buttons and pressure plates**, **blue ice** and **sea pickles**, with axe stripping. Vanilla's trapdoor, wooden button and wooden pressure plate take oak planks only, as in 1.13, and are named Oak Trapdoor and Oak Pressure Plate.
 *   **Packed ice** from nine ice.

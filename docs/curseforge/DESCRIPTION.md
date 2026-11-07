@@ -213,11 +213,9 @@ In 18 languages: English, Spanish (Spain and Latin America, including Argentina,
 
 ## Things to know
 
-Existing worlds work. The new oceans, coral reefs, kelp, seagrass, icebergs and underwater caves only appear in chunks you haven't explored yet, so where old ocean meets new you'll see the change at a chunk border. The mobs spawn in old chunks too, each in its own biomes, so tropical fish and pufferfish need the new warm and lukewarm oceans.
+Existing worlds work. Old ocean chunks keep their warm and cold water from before. The new oceans, coral reefs, kelp, seagrass, icebergs and underwater caves only appear in chunks you haven't explored yet, so where old ocean meets new you'll see the change at a chunk border. The mobs spawn in old chunks too, each in its own biomes, so tropical fish and pufferfish need the new warm and lukewarm oceans.
 
 Light already worked out under water in existing chunks stays as it was until something there changes, as in 1.13.
-
-Endermen are still calmed by a plain pumpkin worn on your head, as well as a carved one.
 
 If floating items cost you performance in a world with a lot of dropped items in water, turn off `water.floatingItems`.
 
