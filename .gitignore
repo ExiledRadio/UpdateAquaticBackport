@@ -16,3 +16,6 @@
 Thumbs.db
 
 __pycache__/
+
+# Backport Core dev jar (copied from its build, not committed)
+/deps/

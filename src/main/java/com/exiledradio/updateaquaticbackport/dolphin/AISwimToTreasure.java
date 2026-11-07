@@ -1,5 +1,6 @@
 package com.exiledradio.updateaquaticbackport.dolphin;
 
+import com.exiledradio.backportcore.structure.Structures;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +21,7 @@ final class AISwimToTreasure extends EntityAIBase {
     static final int RADIUS_CHUNKS = 50;
 
     /** Current Java's {@code dolphin_located} structure tag. */
-    static final String[] TARGETS = {StructureLocator.OCEAN_RUIN, StructureLocator.SHIPWRECK};
+    static final String[] TARGETS = {Structures.OCEAN_RUIN, Structures.SHIPWRECK};
 
     private final EntityDolphin dolphin;
     private boolean stuck;
@@ -58,7 +59,7 @@ final class AISwimToTreasure extends EntityAIBase {
         this.dolphin.getNavigator().clearPath();
         World world = this.dolphin.world;
         BlockPos found = world instanceof WorldServer
-                ? StructureLocator.nearestOf((WorldServer) world, new BlockPos(this.dolphin), RADIUS_CHUNKS, TARGETS)
+                ? Structures.nearestOf((WorldServer) world, new BlockPos(this.dolphin), RADIUS_CHUNKS, TARGETS)
                 : null;
         if (found == null) {
             this.stuck = true;

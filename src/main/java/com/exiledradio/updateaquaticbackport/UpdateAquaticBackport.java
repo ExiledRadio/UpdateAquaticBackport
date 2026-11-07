@@ -28,7 +28,8 @@ import org.apache.logging.log4j.Logger;
         modid = UpdateAquaticBackport.MOD_ID,
         name = UpdateAquaticBackport.MOD_NAME,
         version = UpdateAquaticBackport.VERSION,
-        acceptedMinecraftVersions = "[1.12.2]"
+        acceptedMinecraftVersions = "[1.12.2]",
+        dependencies = "required-after:backportcore@[1.1.0,);required-after:fluidlogged_api@[3.3.3,)"
 )
 public final class UpdateAquaticBackport {
 

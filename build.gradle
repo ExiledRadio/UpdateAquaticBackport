@@ -36,6 +36,26 @@ minecraft {
     replaceIn 'UpdateAquaticBackport.java'
 }
 
+repositories {
+    // Backport Core's dev jar, put here by its copyToDependents task (or copied by hand). Not committed.
+    flatDir {
+        dirs 'deps'
+    }
+    // CurseMaven serves CurseForge files by project and file id, so the version is pinned exactly.
+    maven { url 'https://cursemaven.com' }
+}
+
+dependencies {
+    // Backport Core, required. Plain compile, not deobfCompile: flatDir matches by file name, so
+    // deobfCompile would hand ForgeGradle the SRG-named jar. The dev jar is also what puts Core on the
+    // runServer/runClient classpath, where FML finds it as a mod.
+    compile name: "BackportCore-${core_version}-dev"
+    // Fluidlogged API 3.3.3 (CurseForge 485654, file 8445863), which Backport Core requires for
+    // waterlogging. Core's dev jar does not carry it, so every family mod names it too. deobfCompile maps
+    // it to dev names, and FG2's GradleStart finds its coremod on the classpath. Never shade it.
+    deobfCompile 'curse.maven:fluidlogged-api-485654:8445863'
+}
+
 // Headless self-tests live in src/selftest/java and are compiled in only for a test run:
 //
 //     ./gradlew runServer -Pselftest=kelp

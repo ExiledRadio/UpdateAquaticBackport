@@ -6,7 +6,7 @@ import com.exiledradio.updateaquaticbackport.common.OceanKind;
 import com.exiledradio.updateaquaticbackport.dolphin.DolphinContent;
 import com.exiledradio.updateaquaticbackport.dolphin.DolphinsGrace;
 import com.exiledradio.updateaquaticbackport.dolphin.EntityDolphin;
-import com.exiledradio.updateaquaticbackport.dolphin.StructureLocator;
+import com.exiledradio.backportcore.structure.Structures;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -369,8 +369,8 @@ public final class DolphinSelfTest implements SelfTest {
 
     private void treasure() {
         // Nothing locates structures: a fed dolphin forgets the fish and just swims.
-        StructureLocator.unregister(StructureLocator.SHIPWRECK);
-        StructureLocator.unregister(StructureLocator.OCEAN_RUIN);
+        Structures.unregister(Structures.SHIPWRECK);
+        Structures.unregister(Structures.OCEAN_RUIN);
         BlockPos floor = bigPool(6);
         EntityDolphin d = spawn(floor.add(2, 2, 2));
         d.setGotFish(true);
@@ -379,9 +379,9 @@ public final class DolphinSelfTest implements SelfTest {
 
         // A shipwreck at the far corner of the pool: it swims there.
         final BlockPos wreck = floor.add(27, 2, 27);
-        StructureLocator.register(StructureLocator.SHIPWRECK, (w, from, radius) -> wreck);
+        Structures.register(Structures.SHIPWRECK, (w, from, radius) -> wreck);
         final BlockPos ruin = floor.add(-2000, 2, 0);
-        StructureLocator.register(StructureLocator.OCEAN_RUIN, (w, from, radius) -> ruin);
+        Structures.register(Structures.OCEAN_RUIN, (w, from, radius) -> ruin);
         EntityDolphin guide = spawn(floor.add(2, 2, 2));
         guide.setGotFish(true);
         double start = horizontal(guide, wreck);
@@ -404,8 +404,8 @@ public final class DolphinSelfTest implements SelfTest {
         low.setAir(90);
         tick(low, 4);
         c.eq(BlockPos.ORIGIN, low.getTreasurePos(), "under 100 air it does not look for treasure");
-        StructureLocator.unregister(StructureLocator.SHIPWRECK);
-        StructureLocator.unregister(StructureLocator.OCEAN_RUIN);
+        Structures.unregister(Structures.SHIPWRECK);
+        Structures.unregister(Structures.OCEAN_RUIN);
         d.setDead();
         guide.setDead();
         low.setDead();

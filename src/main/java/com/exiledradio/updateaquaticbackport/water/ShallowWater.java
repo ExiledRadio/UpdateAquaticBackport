@@ -76,12 +76,18 @@ public final class ShallowWater {
         if (world.getBlockState(pos.up()).getMaterial() == Material.WATER) {
             return 1.0D;
         }
+        // Vanilla water first: Fluidlogged API makes BlockLiquid an IFluidBlock too, and Forge's filled
+        // percentage counts in eighths, where 1.14.4's water height counts in ninths.
+        if (state.getBlock() instanceof BlockLiquid && state.getPropertyKeys().contains(BlockLiquid.LEVEL)) {
+            int level = state.getValue(BlockLiquid.LEVEL);
+            // 1.12.2's level 0 is a source and 1-7 thinner and thinner; 8 and up are falling, as tall as a source.
+            return (8 - (level >= 8 ? 0 : level)) / 9.0D;
+        }
         if (state.getBlock() instanceof IFluidBlock) {
             return Math.abs(((IFluidBlock) state.getBlock()).getFilledPercentage(world, pos));
         }
         if (state.getPropertyKeys().contains(BlockLiquid.LEVEL)) {
             int level = state.getValue(BlockLiquid.LEVEL);
-            // 1.12.2's level 0 is a source and 1-7 thinner and thinner; 8 and up are falling, as tall as a source.
             return (8 - (level >= 8 ? 0 : level)) / 9.0D;
         }
         return 1.0D;

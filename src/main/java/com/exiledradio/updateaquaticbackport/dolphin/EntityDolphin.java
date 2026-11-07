@@ -55,7 +55,7 @@ import java.util.Random;
  *       players who sprint in water and gives them Dolphin's Grace.</li>
  *   <li>Neutral: hit by anything but a guardian, it and the dolphins near it fight back. Avoids
  *       guardians.</li>
- *   <li>Fed a raw fish, leads to the nearest shipwreck or ocean ruin, through {@link StructureLocator}.</li>
+ *   <li>Fed a raw fish, leads to the nearest shipwreck or ocean ruin, through {@link com.exiledradio.backportcore.structure.Structures}.</li>
  * </ul>
  *
  * <p>It extends {@link EntityCreature} (1.12.2's water mob class is not one, and the AI tasks need one)

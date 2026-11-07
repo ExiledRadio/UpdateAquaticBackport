@@ -157,3 +157,6 @@ registers nothing.
 *   The real structure stream's locators (it does not exist yet); the locator here was a test double.
 *   Not included, on purpose: baby dolphins and golden dandelions (26.1 additions with models and items
     1.18's assets do not have).
+
+
+**Integrated (2026-11-07):** the locator now lives in Backport Core 1.1.0 as `com.exiledradio.backportcore.structure.Structures` (same API); `dolphin/StructureLocator` is gone and the dolphin code and its self-test call Core directly.
