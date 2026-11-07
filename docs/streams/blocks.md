@@ -32,12 +32,11 @@ entities, no packets (ids 60-64 unused).
 *   **Carved pumpkin** extends vanilla's `BlockPumpkin`, which looks its golem patterns up through protected
     methods: overriding those with a carved-pumpkin-or-jack-o'lantern head is all it takes, the spawning is
     vanilla's. It needs no support and does not tick. Its item is worn on the head (`getEquipmentSlot`)
-    and draws vanilla's pumpkin blur (`renderHelmetOverlay`, client class).
+    and draws vanilla's pumpkin blur (`renderHelmetOverlay`, client class). Endermen can carry it.
 *   **The plain pumpkin**: drawn faceless by mapping vanilla's pumpkin states and item to this mod's
-    `pumpkin` models (client, `BlocksClient`), made from 1.12.2's pumpkin textures. Its golems: vanilla's
-    pumpkin builds them in `onBlockAdded`, which does nothing else, so a player's pumpkin is placed by
-    `Placement` without calling it (same snapshot capture, place event and undo as Forge's own item
-    placement). Its dispenser behavior becomes plain dropping; the carved pumpkin gets the old behavior.
+    `pumpkin` models (client, `BlocksClient`), made from 1.12.2's pumpkin textures. It builds no golems and
+    is not worn (patches P1 and P2, `docs/PATCHES.md`). Its dispenser behavior becomes plain dropping; the
+    carved pumpkin gets the old behavior.
 *   **Carving** is 1.14.4's `PumpkinBlock.onBlockActivated`: clicked face, or the player's facing when
     clicked on top or bottom; 4 seeds thrown out of the face; `block.pumpkin.carve` (new sound, copied from
     1.18); shears wear by 1. Any `ItemShears`.
@@ -126,17 +125,11 @@ vanilla except the false flags under *For the integrator*.
 *   The carve sound playing.
 *   A Halloween-spawned zombie or skeleton (the head swap is tested on a zombie given a pumpkin and spawned).
 
-## Not done (would need a patch)
+## Done later (follow-ups)
 
-*   **Endermen** are still calmed by vanilla's plain pumpkin on a player's head, not the carved one:
-    `EntityEnderman.shouldAttackPlayer` is private and names `Blocks.PUMPKIN`; the only patch-free route is
-    replacing the enderman's private `AIFindPlayer` task, which also needs its protected teleport methods.
-    Left for the user (or the mob stream) to decide.
-*   **The plain pumpkin can still be worn** from the inventory's helmet slot (vanilla's
-    `EntityLiving.getSlotForItemStack` names it); worn, it shows faceless with the blur.
-*   **Middle-click on a bark log** picks the log item, not the wood item (vanilla `BlockLog.getItem`).
-*   **Dispensers and other mods placing a plain pumpkin** on a golem's body still build the golem; only a
-    player's placement goes through `Placement`.
+The four gaps this stream left are closed in `docs/streams/followups.md`: endermen are calmed only by a
+carved pumpkin (their target task replaced), and three patches (`docs/PATCHES.md`) stop the plain pumpkin
+being worn or building golems however it is placed, and make middle-clicking wood pick the wood item.
 
 ## For the integrator
 

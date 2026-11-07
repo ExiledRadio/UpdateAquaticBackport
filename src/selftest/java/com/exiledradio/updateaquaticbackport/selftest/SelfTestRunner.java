@@ -59,6 +59,7 @@ public final class SelfTestRunner {
             new WaterSelfTest(),
             new MobsSelfTest(),
             new StructureSelfTest(),
+            new OceanLegacySelfTest(),
     };
 
     private final List<String> wanted;
@@ -88,7 +89,7 @@ public final class SelfTestRunner {
             check.fail("dump: " + e);
         }
         for (SelfTest test : TESTS) {
-            if (this.wanted.contains("all") || this.wanted.contains(test.name())) {
+            if (this.wanted.contains("all") && test.inAll() || this.wanted.contains(test.name())) {
                 check.section(test.name());
                 try {
                     test.run(check);

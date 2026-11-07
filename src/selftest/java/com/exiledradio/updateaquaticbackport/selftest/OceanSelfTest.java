@@ -7,6 +7,7 @@ import com.exiledradio.updateaquaticbackport.common.Owners;
 import com.exiledradio.updateaquaticbackport.ocean.BiomeAquaticOcean;
 import com.exiledradio.updateaquaticbackport.ocean.BiomeFrozenOcean;
 import com.exiledradio.updateaquaticbackport.ocean.Icebergs;
+import com.exiledradio.updateaquaticbackport.ocean.OceanChunks;
 import com.exiledradio.updateaquaticbackport.ocean.OceanContent;
 import com.exiledradio.updateaquaticbackport.ocean.OceanTerrain;
 import com.exiledradio.updateaquaticbackport.ocean.UnderwaterCarvers;
@@ -16,15 +17,24 @@ import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameType;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.WorldSettings;
+import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeProvider;
+import net.minecraft.world.biome.BiomeProviderSingle;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraft.world.storage.WorldInfo;
 import net.minecraft.world.gen.ChunkGeneratorOverworld;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.structure.StructureOceanMonument;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.util.HashMap;
@@ -52,6 +62,7 @@ public final class OceanSelfTest implements SelfTest {
             return;
         }
         registration(c);
+        oldChunks(c, world);
         Map<Biome, BlockPos> found = biomeMap(c, world);
         hooks(c, world);
         features(c);
@@ -109,8 +120,12 @@ public final class OceanSelfTest implements SelfTest {
         c.ok(BiomeDictionary.hasType(OceanContent.frozen(), BiomeDictionary.Type.SNOWY), "frozen ocean is SNOWY");
         c.ok(OceanContent.frozen().getEnableSnow(), "frozen ocean snows");
         c.ok(!OceanContent.deepFrozen().getEnableSnow(), "deep frozen ocean rains");
-        c.eq(OceanKind.NORMAL, OceanKind.of(Biomes.OCEAN, 1L, 5000, 5000), "vanilla ocean is the normal temperature");
-        c.eq(OceanKind.NORMAL, OceanKind.of(Biomes.DEEP_OCEAN, 1L, -9000, 300), "vanilla deep ocean too");
+        // Without a world, a vanilla ocean is what a map without 1.13's temperatures has: the noise.
+        for (int i = 0; i < 200; i++) {
+            int x = i * 977 - 90000, z = i * 613 - 60000;
+            c.eq(OceanKind.fromNoise(1L, x, z), OceanKind.of(Biomes.OCEAN, 1L, x, z), "vanilla ocean by seed alone is the noise at " + x + "," + z);
+            c.eq(OceanKind.fromNoise(1L, x, z), OceanKind.of(Biomes.DEEP_OCEAN, 1L, x, z), "vanilla deep ocean too at " + x + "," + z);
+        }
         c.ok(ModConfig.oceans.underwaterCaves, "underwater caves on by default");
 
         // 1.13's patchy temperature: a frozen ocean is 0.0 with 0.2 patches, a deep frozen one 0.5 with 0.2.
@@ -134,6 +149,108 @@ public final class OceanSelfTest implements SelfTest {
     // ------------------------------------------------------------------------------------------
 
     /** Samples the 4-block biome map over 8192 x 8192 blocks: every biome present, the coast rule held. */
+    /**
+     * Vanilla oceans are the normal temperature only where the map had 1.13's temperatures: chunks made by
+     * this world's layered map, and columns not loaded (what the map would make). A chunk loaded from disk
+     * without the flag (made before the stream was on) keeps the noise; flat worlds and single-biome
+     * providers have no layers. The real two-world run is {@link OceanLegacySelfTest}.
+     */
+    private static void oldChunks(Check c, WorldServer world) {
+        c.ok(OceanChunks.layered(world.getBiomeProvider()), "the overworld's biome map has the temperature layers");
+        WorldInfo flatInfo = new WorldInfo(new WorldSettings(world.getSeed(), GameType.SURVIVAL, true, false, WorldType.FLAT), "flat");
+        c.ok(!OceanChunks.layered(new BiomeProvider(flatInfo)), "a flat world's map has no temperature layers");
+        c.ok(!OceanChunks.layered(new BiomeProviderSingle(Biomes.OCEAN)), "nor a single-biome provider");
+        WorldInfo defaultInfo = new WorldInfo(new WorldSettings(world.getSeed(), GameType.SURVIVAL, true, false, WorldType.DEFAULT), "default");
+        c.ok(OceanChunks.layered(new BiomeProvider(defaultInfo)), "a new default map has them");
+
+        // A vanilla ocean chunk near spawn, generated now.
+        Chunk chunk = null;
+        search:
+        for (int r = 0; r < 40; r++) {
+            for (int dx = -r; dx <= r; dx++) {
+                for (int dz = -r; dz <= r; dz++) {
+                    if (Math.max(Math.abs(dx), Math.abs(dz)) != r) {
+                        continue;
+                    }
+                    BlockPos p = new BlockPos(dx * 64 + 8, 0, dz * 64 + 8);
+                    if (world.getBiomeProvider().getBiome(p) == Biomes.OCEAN) {
+                        Chunk here = world.getChunk(p);
+                        if (vanillaOceanColumns(here) > 128) {
+                            chunk = here;
+                            break search;
+                        }
+                    }
+                }
+            }
+        }
+        if (!c.ok(chunk != null, "a chunk of vanilla ocean near spawn")) {
+            return;
+        }
+        int x0 = chunk.x * 16, z0 = chunk.z * 16;
+        c.ok(OceanChunks.loadedFlag(chunk) == null && OceanChunks.realTemperatures(chunk), "a chunk generated now has real temperatures");
+        c.eq(OceanKind.NORMAL, kindOfVanillaOcean(world, chunk), "its vanilla ocean is the normal temperature");
+        NBTTagCompound saved = new NBTTagCompound();
+        OceanChunks.save(new ChunkDataEvent.Save(chunk, saved));
+        c.ok(saved.getBoolean(OceanChunks.TAG_NAME), "saving it writes the flag");
+
+        // The same chunk as if it had been loaded from a save made before the stream: no flag.
+        OceanChunks.load(new ChunkDataEvent.Load(chunk, new NBTTagCompound()));
+        c.ok(!OceanChunks.realTemperatures(chunk), "loaded without the flag, it has no real temperatures");
+        int noise = 0, columns = 0;
+        for (int dx = 0; dx < 16; dx++) {
+            for (int dz = 0; dz < 16; dz++) {
+                BlockPos p = new BlockPos(x0 + dx, 62, z0 + dz);
+                Biome b = world.getBiome(p);
+                if (b == Biomes.OCEAN || b == Biomes.DEEP_OCEAN) {
+                    columns++;
+                    noise += OceanKind.at(world, p) == OceanKind.fromNoise(world.getSeed(), p.getX(), p.getZ()) ? 1 : 0;
+                }
+            }
+        }
+        c.eq(columns, noise, "its vanilla ocean columns take the noise");
+        saved = new NBTTagCompound();
+        OceanChunks.save(new ChunkDataEvent.Save(chunk, saved));
+        c.ok(!saved.hasKey(OceanChunks.TAG_NAME), "and saving it again does not make it new");
+
+        NBTTagCompound flagged = new NBTTagCompound();
+        flagged.setBoolean(OceanChunks.TAG_NAME, true);
+        OceanChunks.load(new ChunkDataEvent.Load(chunk, flagged));
+        c.ok(OceanChunks.realTemperatures(chunk), "loaded with the flag, it has them again");
+        c.eq(OceanKind.NORMAL, kindOfVanillaOcean(world, chunk), "and its vanilla ocean is normal again");
+
+        // A column far away, not loaded: what the layered map would make there.
+        c.ok(world.getChunkProvider().getLoadedChunk(400000 >> 4, 400000 >> 4) == null, "a far column is not loaded");
+        c.eq(OceanKind.NORMAL, OceanKind.of(world, Biomes.OCEAN, 400000, 400000), "a vanilla ocean not loaded is normal in a layered world");
+    }
+
+    static int vanillaOceanColumns(Chunk chunk) {
+        int n = 0;
+        for (byte id : chunk.getBiomeArray()) {
+            Biome b = Biome.getBiome(id & 255);
+            n += b == Biomes.OCEAN || b == Biomes.DEEP_OCEAN ? 1 : 0;
+        }
+        return n;
+    }
+
+    /** @return the one kind every vanilla ocean column of the chunk has, or null if they differ */
+    static OceanKind kindOfVanillaOcean(WorldServer world, Chunk chunk) {
+        OceanKind kind = null;
+        for (int dx = 0; dx < 16; dx++) {
+            for (int dz = 0; dz < 16; dz++) {
+                BlockPos p = new BlockPos(chunk.x * 16 + dx, 62, chunk.z * 16 + dz);
+                Biome b = world.getBiome(p);
+                if (b == Biomes.OCEAN || b == Biomes.DEEP_OCEAN) {
+                    OceanKind k = OceanKind.at(world, p);
+                    if (kind != null && k != kind) {
+                        return null;
+                    }
+                    kind = k;
+                }
+            }
+        }
+        return kind;
+    }
+
     private static Map<Biome, BlockPos> biomeMap(Check c, WorldServer world) {
         Map<Integer, Integer> counts = new HashMap<Integer, Integer>();
         Map<Biome, BlockPos> found = new HashMap<Biome, BlockPos>();

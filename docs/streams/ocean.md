@@ -32,7 +32,7 @@ Package `ocean`. Config `oceans` (`enabled`, `underwaterCaves`). No blocks, item
     vanilla's (which 1.12.2 never generates): vanilla's terrain and temperature methods are final or
     shared. 1.14.4's depth, scale, temperature, downfall, squid and polar bear numbers, Forge 1.14's
     dictionary types, Forge's `BiomeManager.oceanBiomes`. Each is registered with `OceanKind.register`;
-    vanilla's ocean and deep ocean are registered as `NORMAL` (see "For the integrator").
+    vanilla's ocean and deep ocean are `NORMAL` where this map made the chunk (see "For the integrator").
 *   **Floors**: vanilla's `generateBiomeTerrain` with the deep-floor block as a parameter, as 1.13's surface
     builder configurations (warm: sand, sand, sand; lukewarm: grass, dirt, sand; cold and frozen: vanilla).
     Written at vanilla's transposed `(z & 15, y, x & 15)` so the columns line up with vanilla's neighbors.
@@ -116,12 +116,10 @@ lines are ours). The 17 other language files are left for the family's language 
 
 ## For the integrator
 
-*   **`common/OceanKind`**: this stream registers `Biomes.OCEAN` and `Biomes.DEEP_OCEAN` as `NORMAL`. In a
-    world with the new biomes that is exactly where vanilla's oceans still generate, and without it the
-    noise would put coral reefs into plain oceans beside real warm ones. It also means, while the stream is
-    on, vanilla oceans in chunks generated before the mod was added (or by a world type this layer does
-    not reach) lose the noise fallback. If that matters, `OceanKind` could take a per-world flag ("this
-    world's biome map has 1.13's temperatures", set from `OceanLayers`) and use the noise otherwise.
+*   **`common/OceanKind`**: vanilla's `Biomes.OCEAN` and `Biomes.DEEP_OCEAN` are `NORMAL` only in chunks
+    this stream's biome map made; chunks generated before the stream was on, and worlds or world types
+    its layers do not reach, keep the noise (`ocean/OceanChunks`, a flag in each chunk's saved data; see
+    `docs/streams/followups.md`). Before the follow-ups this stream registered them as `NORMAL` everywhere.
 *   **Older tests updated on this branch** (test code only), since they exercised the noise through
     vanilla's ocean, which this stream registers as `NORMAL`: `ScaffoldSelfTest` now samples
     `OceanKind.fromNoise`; `CoralSelfTest.worldGen` looks up `warm_ocean` and `cold_ocean` by name and uses

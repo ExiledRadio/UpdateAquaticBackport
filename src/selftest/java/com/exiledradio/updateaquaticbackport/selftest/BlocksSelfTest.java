@@ -83,6 +83,7 @@ public final class BlocksSelfTest implements SelfTest {
         debugStick(c, player);
         shulkerBox(c, player);
         mobsAndDispensers(c);
+        PumpkinFollowupsTest.run(c);
     }
 
     // ------------------------------------------------------------------------------------------------

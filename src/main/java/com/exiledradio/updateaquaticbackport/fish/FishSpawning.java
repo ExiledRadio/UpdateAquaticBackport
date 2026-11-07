@@ -81,7 +81,7 @@ public final class FishSpawning {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
         Biome biome = world.getBiome(pos);
-        add(event.getList(), biome, OceanKind.of(biome, world.getSeed(), pos.getX(), pos.getZ()));
+        add(event.getList(), biome, OceanKind.of(world, biome, pos.getX(), pos.getZ()));
     }
 
     /** Fills a spawn list for a biome of this ocean kind. */

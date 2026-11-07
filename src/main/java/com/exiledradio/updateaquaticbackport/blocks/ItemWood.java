@@ -31,8 +31,9 @@ import net.minecraft.world.World;
  * <h2>Not an ItemBlock</h2>
  * An {@code ItemBlock} for vanilla's log would replace the log's own item in the block-to-item map, so this
  * is a plain item that places the state the way {@code ItemBlock.onItemUse} does (same checks, sound,
- * advancement trigger). Breaking the block gives this item back ({@link BlocksContent#harvestDrops}); a log
- * picked with the middle button is still the log's item, which is vanilla's block code.
+ * advancement trigger). Breaking the block gives this item back ({@link BlocksEvents#harvestDrops}), and
+ * picking it with the middle button gives this item too ({@link BlocksHooks#pickBlock}, patched into
+ * {@code BlockLog}).
  */
 public final class ItemWood extends Item {
 

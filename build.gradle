@@ -56,6 +56,15 @@ dependencies {
     deobfCompile 'curse.maven:fluidlogged-api-485654:8445863'
 }
 
+// The mod carries a small coremod of its own (package asm, one transformer per patch, docs/PATCHES.md).
+// FMLCorePluginContainsFMLMod keeps the jar a normal mod as well.
+def coremodPlugin = 'com.exiledradio.updateaquaticbackport.asm.UpdateAquaticPlugin'
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': coremodPlugin, 'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+
 // Headless self-tests live in src/selftest/java and are compiled in only for a test run:
 //
 //     ./gradlew runServer -Pselftest=kelp
@@ -78,6 +87,9 @@ if (selftest) {
 // configs and all.
 [runServer, runClient].each { task ->
     task.outputs.upToDateWhen { false }
+    // The mod's own patches (package asm, docs/PATCHES.md). GradleStart also finds them in the jar's
+    // manifest; it merges the two lists, so naming the plugin here too loads it once.
+    task.systemProperty 'fml.coreMods.load', coremodPlugin
     if (selftest) {
         task.systemProperty 'updateaquaticbackport.selftest', selftest
     }
@@ -117,6 +129,10 @@ processResources {
 
 task devJar(type: Jar) {
     classifier = 'dev'
+    // So a dependent's dev run loads this mod's patches too.
+    manifest {
+        attributes 'FMLCorePlugin': coremodPlugin, 'FMLCorePluginContainsFMLMod': 'true'
+    }
     from sourceSets.main.output
     exclude 'com/exiledradio/updateaquaticbackport/selftest/**'
 }

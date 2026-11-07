@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
- * 1.13's smaller placement rules, and the plain pumpkin no longer building golems.
+ * 1.13's smaller placement rules.
  *
  * <ul>
  *   <li><b>Pumpkins, jack o'lanterns and fence gates need no support</b> (1.13 dropped the rule): placed
@@ -30,13 +30,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  *   <li><b>Doors place on a side face</b>: 1.12.2's door item works only on a block's top; 1.13's door is
  *       placed like any block, against any face, and still stands only on a solid top. A click on a side is
  *       handed to the door item as the click on the top of the block under the door's place.</li>
- *   <li><b>A plain pumpkin builds no golem</b>: 1.13 moved that to the carved pumpkin. Vanilla's pumpkin
- *       builds one in {@code onBlockAdded}, so a player's pumpkin is placed here without it (it is the only
- *       thing that method does for a pumpkin).</li>
  * </ul>
- * The first two follow {@code blocks.placementRules}; the third follows the stream switch. Everything is
- * done at {@link EventPriority#LOW}, so another mod's handler that took the click first wins, and only
- * where vanilla would refuse (or, for the plain pumpkin, build a golem); every other click is vanilla's.
+ * Both follow {@code blocks.placementRules}. (That a plain pumpkin builds no golem is a patch,
+ * {@code asm.PumpkinGolemPatch}, since it holds for every way of placing one.) Everything is done at
+ * {@link EventPriority#LOW}, so another mod's handler that took the click first wins, and only where
+ * vanilla would refuse; every other click is vanilla's.
  * Both sides run the same checks: the client cancels the same clicks, so it draws no block the server
  * did not place.
  */
@@ -67,7 +65,6 @@ public final class PlacementRules {
     }
 
     private static void block(PlayerInteractEvent.RightClickBlock event, Block block) {
-        boolean plainPumpkin = block == Blocks.PUMPKIN;
         boolean supportless = block == Blocks.PUMPKIN || block == Blocks.LIT_PUMPKIN || block instanceof BlockFenceGate;
         if (!supportless) {
             return;
@@ -79,8 +76,7 @@ public final class PlacementRules {
         if (!Placement.roomFor(world, pos, block, face, player, event.getItemStack())) {
             return;
         }
-        boolean supported = block.canPlaceBlockOnSide(world, pos, face);
-        if (supported ? !plainPumpkin : !ModConfig.blocks.placementRules) {
+        if (!ModConfig.blocks.placementRules || block.canPlaceBlockOnSide(world, pos, face)) {
             return;
         }
         float[] hit = Placement.hit(event);
@@ -92,7 +88,7 @@ public final class PlacementRules {
             return;
         }
         event.setCancellationResult(world.isRemote ? EnumActionResult.SUCCESS
-                : Placement.place(player, world, pos, face, event.getHand(), hit, !plainPumpkin));
+                : Placement.place(player, world, pos, face, event.getHand(), hit));
     }
 
     private static void door(PlayerInteractEvent.RightClickBlock event, ItemStack stack) {

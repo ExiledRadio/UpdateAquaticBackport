@@ -22,10 +22,16 @@ import java.util.Random;
  *   <li>A biome registered with {@link #register} - the oceans stream registers its warm, lukewarm,
  *       cold and frozen oceans and their deep forms - is that kind.</li>
  *   <li>1.12.2's frozen ocean is {@link #FROZEN}.</li>
- *   <li>Any other ocean (vanilla's or another mod's, by the biome dictionary) gets its temperature from
- *       a large-scale noise seeded by the world seed, so a world without the new biomes still has warm
- *       seas with reefs and cold seas with kelp, in patches a few hundred blocks across, the same for
- *       every stream and every chunk. Noise never says frozen: frozen water needs the frozen biome.</li>
+ *   <li>Vanilla's ocean and deep ocean are {@link #NORMAL} where the world's biome map has 1.13's
+ *       temperatures in it: there they are exactly the cells the map left at the normal temperature. The
+ *       oceans stream says where that is ({@link #useRealTemperatures}): chunks its biome map made, but
+ *       not chunks generated before it was switched on, nor worlds and world types its layers do not
+ *       reach.</li>
+ *   <li>Any other ocean (vanilla's elsewhere, or another mod's, by the biome dictionary) gets its
+ *       temperature from a large-scale noise seeded by the world seed, so a world without the new
+ *       biomes still has warm seas with reefs and cold seas with kelp, in patches a few hundred blocks
+ *       across, the same for every stream and every chunk. Noise never says frozen: frozen water needs
+ *       the frozen biome.</li>
  * </ul>
  */
 public enum OceanKind {
@@ -44,17 +50,45 @@ public enum OceanKind {
     private static long noiseSeed;
     private static NoiseGeneratorSimplex noise;
 
+    /** Where vanilla's oceans carry 1.13's temperatures; null without the oceans stream. */
+    private static volatile RealTemperatures realTemperatures;
+
+    /** Answers whether the biome at a column of a world came from a map with 1.13's ocean temperatures. */
+    public interface RealTemperatures {
+        boolean at(World world, int x, int z);
+    }
+
     /** Declares a biome to be an ocean of this kind. Called by whatever registers the biome. */
     public static void register(Biome biome, OceanKind kind) {
         REGISTERED.put(biome, kind);
     }
 
-    /** @return the ocean kind at a position; {@link #NONE} if it is not in an ocean biome */
-    public static OceanKind at(World world, BlockPos pos) {
-        return of(world.getBiome(pos), world.getSeed(), pos.getX(), pos.getZ());
+    /** Called by the oceans stream, which knows where its biome map has been. */
+    public static void useRealTemperatures(RealTemperatures rule) {
+        realTemperatures = rule;
     }
 
-    /** @return the ocean kind of a biome at a column, for a world with this seed */
+    /** @return the ocean kind at a position; {@link #NONE} if it is not in an ocean biome */
+    public static OceanKind at(World world, BlockPos pos) {
+        return of(world, world.getBiome(pos), pos.getX(), pos.getZ());
+    }
+
+    /**
+     * @return the ocean kind of a biome at a column of a world: as {@link #of(Biome, long, int, int)}, except
+     * that vanilla's ocean and deep ocean are {@link #NORMAL} where the world's map has 1.13's temperatures
+     */
+    public static OceanKind of(World world, Biome biome, int x, int z) {
+        RealTemperatures rule = realTemperatures;
+        if ((biome == Biomes.OCEAN || biome == Biomes.DEEP_OCEAN) && rule != null && rule.at(world, x, z)) {
+            return NORMAL;
+        }
+        return of(biome, world.getSeed(), x, z);
+    }
+
+    /**
+     * @return the ocean kind of a biome at a column, for a world with this seed, as in a map without 1.13's
+     * temperatures: vanilla's ocean and deep ocean take theirs from the noise
+     */
     public static OceanKind of(Biome biome, long seed, int x, int z) {
         OceanKind kind = REGISTERED.get(biome);
         if (kind != null) {
