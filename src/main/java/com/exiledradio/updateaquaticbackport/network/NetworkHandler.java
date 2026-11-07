@@ -34,5 +34,8 @@ public final class NetworkHandler {
     public static void init() {
         channel = NetworkRegistry.INSTANCE.newSimpleChannel(CHANNEL);
         // Streams register their packets below, in id order.
+        channel.registerMessage(com.exiledradio.updateaquaticbackport.mobs.PacketSquidInk.Handler.class,
+                com.exiledradio.updateaquaticbackport.mobs.PacketSquidInk.class,
+                65, net.minecraftforge.fml.relauncher.Side.CLIENT);
     }
 }

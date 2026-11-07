@@ -196,6 +196,33 @@ public final class ModConfig {
         @Config.Comment("1.13's changes to existing mobs: undead sinking, squid ink, polar bears on ice and the rest.")
         @Config.LangKey("config.updateaquaticbackport.mobs.enabled")
         public boolean enabled = true;
+
+        @Config.Comment({"Zombies, skeletons and their kinds, and skeleton and zombie horses, sink in water instead of",
+                "swimming to the surface, and no undead mob drowns."})
+        @Config.LangKey("config.updateaquaticbackport.mobs.undeadSink")
+        public boolean undeadSink = true;
+
+        @Config.Comment("Baby zombies burn in daylight like adult ones.")
+        @Config.LangKey("config.updateaquaticbackport.mobs.babyZombiesBurn")
+        public boolean babyZombiesBurn = true;
+
+        @Config.Comment("A squid that is hurt squirts a cloud of ink and swims away from whatever hurt it.")
+        @Config.LangKey("config.updateaquaticbackport.mobs.squidInk")
+        public boolean squidInk = true;
+
+        @Config.Comment("Polar bears spawn on the ice of frozen oceans.")
+        @Config.LangKey("config.updateaquaticbackport.mobs.polarBearsOnIce")
+        public boolean polarBearsOnIce = true;
+
+        @Config.RequiresMcRestart
+        @Config.Comment("Parrots imitate phantoms and drowned when those mobs are in the game.")
+        @Config.LangKey("config.updateaquaticbackport.mobs.parrotsImitate")
+        public boolean parrotsImitate = true;
+
+        @Config.Comment({"Skeleton horses keep their rider under water, move faster there than other horses, and make",
+                "their own sounds under water."})
+        @Config.LangKey("config.updateaquaticbackport.mobs.skeletonHorsesUnderwater")
+        public boolean skeletonHorsesUnderwater = true;
     }
 
     public static final class Water {

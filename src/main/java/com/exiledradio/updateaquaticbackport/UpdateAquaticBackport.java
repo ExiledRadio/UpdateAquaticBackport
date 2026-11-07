@@ -59,6 +59,7 @@ public final class UpdateAquaticBackport {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        com.exiledradio.updateaquaticbackport.mobs.MobsContent.postInit();
     }
 
     @Mod.EventHandler
