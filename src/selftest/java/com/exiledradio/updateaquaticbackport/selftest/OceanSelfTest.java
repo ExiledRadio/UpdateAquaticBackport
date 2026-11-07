@@ -354,7 +354,7 @@ public final class OceanSelfTest implements SelfTest {
         }
         Object ravine = ReflectionHelper.getPrivateValue(ChunkGeneratorOverworld.class, (ChunkGeneratorOverworld) gen, "ravineGenerator", "field_185979_A");
         c.ok(ravine instanceof UnderwaterCarvers, "ravine generator wrapped by the underwater carvers: " + ravine);
-        Object monument = ReflectionHelper.getPrivateValue(ChunkGeneratorOverworld.class, (ChunkGeneratorOverworld) gen, "oceanMonumentGenerator");
+        Object monument = ReflectionHelper.getPrivateValue(ChunkGeneratorOverworld.class, (ChunkGeneratorOverworld) gen, "oceanMonumentGenerator", "field_185980_B");
         c.ok(monument instanceof StructureOceanMonument && monument.getClass() != StructureOceanMonument.class,
                 "monument placed by 1.13's biome rule: " + monument);
     }
