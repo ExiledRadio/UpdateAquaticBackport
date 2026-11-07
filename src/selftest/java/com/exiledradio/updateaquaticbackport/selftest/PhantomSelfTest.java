@@ -2,6 +2,7 @@ package com.exiledradio.updateaquaticbackport.selftest;
 
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.Content;
+import com.exiledradio.updateaquaticbackport.common.Owners;
 import com.exiledradio.updateaquaticbackport.phantom.EntityPhantom;
 import com.exiledradio.updateaquaticbackport.phantom.Insomnia;
 import com.exiledradio.updateaquaticbackport.phantom.PhantomContent;
@@ -10,6 +11,7 @@ import net.minecraft.block.BlockBed;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -22,6 +24,7 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ContainerRepair;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -353,39 +356,30 @@ public final class PhantomSelfTest implements SelfTest {
         remove(world, p, q, player);
     }
 
-    /** A tamed ocelot (1.12.2's cat) within 16 blocks ends a swoop. */
+    /**
+     * 1.14.4: a cat within 16 blocks ends a swoop - checked every 20 ticks of the phantom's age while it swoops,
+     * each cat hissing once. 1.12.2's tamed ocelot is its cat; with Village &amp; Pillage installed its cat counts
+     * too, and its own generic phantom fear must not add break-offs or hisses of its own.
+     */
     private static void cats(Check c, WorldServer world) {
-        night(world);
-        BlockPos o = c.area();
-        EntityPlayerMP player = player(world, "phantomcat", o.add(16, 1, 16));
-        player.capabilities.disableDamage = false;
-        EntityPhantom p = phantom(world, o.getX() + 16, 140, o.getZ() + 16);
-        EntityOcelot cat = new EntityOcelot(world);
-        cat.setTamed(true);
-        cat.setTameSkin(1);
-        cat.setLocationAndAngles(o.getX() + 18, 100, o.getZ() + 18, 0, 0);
-        boolean swooped = false;
-        boolean gaveUp = false;
-        int ticks = 0;
-        for (; ticks < 1200 && !gaveUp; ticks++) {
-            if (ticks == 0) {
-                // Let it take its target and start a swoop with no cat about.
-                for (int i = 0; i < 200 && !p.swooping(); i++) {
-                    tick(p);
-                }
-                swooped = p.swooping();
-                world.spawnEntity(cat);
-            }
-            tick(p);
-            if (swooped && p.getAttackTarget() == null) {
-                gaveUp = true;
+        EntityOcelot ocelot = new EntityOcelot(world);
+        ocelot.setTamed(true);
+        ocelot.setTameSkin(1);
+        swoopEndsAtCat(c, world, "a tamed ocelot", ocelot);
+        if (Owners.present(Owners.VILLAGE_AND_PILLAGE)) {
+            Entity cat = EntityList.createEntityByIDFromName(new ResourceLocation(Owners.VILLAGE_AND_PILLAGE, "cat"), world);
+            c.ok(cat instanceof EntityLiving, "Village & Pillage's cat is there to test with");
+            if (cat instanceof EntityLiving) {
+                swoopEndsAtCat(c, world, "Village & Pillage's cat", (EntityLiving) cat);
             }
         }
-        c.ok(swooped, "swooping before the cat came");
-        c.ok(gaveUp, "a tamed ocelot within 16 blocks ends the swoop");
-        c.ok(player.getHealth() == player.getMaxHealth() || ticks < 30, "the cat came before the bite");
 
-        cat.setTamed(false);
+        night(world);
+        BlockPos o = c.area();
+        EntityPlayerMP player = player(world, "phantomwild", o.add(16, 1, 16));
+        EntityOcelot wild = new EntityOcelot(world);
+        wild.setLocationAndAngles(o.getX() + 18, 100, o.getZ() + 18, 0, 0);
+        world.spawnEntity(wild);
         EntityPhantom q = phantom(world, o.getX() + 16, 140, o.getZ() + 16);
         int wildSwoops = 0;
         for (int i = 0; i < 400; i++) {
@@ -395,7 +389,53 @@ public final class PhantomSelfTest implements SelfTest {
             }
         }
         c.ok(wildSwoops > 0, "a wild ocelot does not stop it swooping");
-        remove(world, p, q, cat, player);
+        remove(world, q, wild, player);
+        player.setHealth(player.getMaxHealth());
+    }
+
+    private static void swoopEndsAtCat(Check c, WorldServer world, String what, EntityLiving cat) {
+        night(world);
+        BlockPos o = c.area();
+        EntityPlayerMP player = player(world, "phantomcat", o.add(16, 1, 16));
+        player.capabilities.disableDamage = false;
+        EntityPhantom p = phantom(world, o.getX() + 16, 140, o.getZ() + 16);
+        cat.setLocationAndAngles(o.getX() + 18, 100, o.getZ() + 18, 0, 0);
+        MobsSelfTest.Sounds sounds = new MobsSelfTest.Sounds();
+        boolean swooped = false;
+        boolean gaveUp = false;
+        boolean swoopingWhenItGaveUp = false;
+        int gaveUpAtAge = -1;
+        int ticks = 0;
+        MinecraftForge.EVENT_BUS.register(sounds);
+        try {
+            for (; ticks < 1200 && !gaveUp; ticks++) {
+                if (ticks == 0) {
+                    // Let it take its target and start a swoop with no cat about.
+                    for (int i = 0; i < 200 && !p.swooping(); i++) {
+                        tick(p);
+                    }
+                    swooped = p.swooping();
+                    world.spawnEntity(cat);
+                }
+                boolean wasSwooping = p.swooping();
+                tick(p);
+                if (swooped && p.getAttackTarget() == null) {
+                    gaveUp = true;
+                    swoopingWhenItGaveUp = wasSwooping;
+                    gaveUpAtAge = p.ticksExisted;
+                }
+            }
+        } finally {
+            MinecraftForge.EVENT_BUS.unregister(sounds);
+        }
+        c.ok(swooped, what + ": swooping before the cat came");
+        c.ok(gaveUp, what + ": within 16 blocks, it ends the swoop");
+        c.ok(player.getHealth() == player.getMaxHealth() || ticks < 30, what + ": the cat came before the bite");
+        c.ok(swoopingWhenItGaveUp && gaveUpAtAge % 20 == 0,
+                what + ": the swoop ends on a 20th tick of its age, as 1.14.4's check runs (age " + gaveUpAtAge + ")");
+        c.eq(1, sounds.count(SoundEvents.ENTITY_CAT_HISS), what + ": the cat hisses once");
+        c.ok(!p.swooping(), what + ": the phantom goes back to circling");
+        remove(world, p, cat, player);
         player.setHealth(player.getMaxHealth());
     }
 

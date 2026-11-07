@@ -3,6 +3,7 @@ package com.exiledradio.updateaquaticbackport.selftest;
 import com.exiledradio.backportcore.waterlog.Waterloggable;
 import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
+import com.exiledradio.updateaquaticbackport.common.Owners;
 import com.exiledradio.updateaquaticbackport.coral.BlockCoral;
 import com.exiledradio.updateaquaticbackport.coral.BlockCoralBlock;
 import com.exiledradio.updateaquaticbackport.coral.BlockCoralWallFan;
@@ -10,11 +11,11 @@ import com.exiledradio.updateaquaticbackport.coral.CoralContent;
 import com.exiledradio.updateaquaticbackport.coral.CoralGenerator;
 import com.exiledradio.updateaquaticbackport.coral.CoralPickles;
 import com.exiledradio.updateaquaticbackport.coral.CoralType;
-import com.exiledradio.updateaquaticbackport.woodset.BlockSeaPickle;
 import com.exiledradio.updateaquaticbackport.woodset.WoodsetContent;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -215,28 +216,15 @@ public final class CoralSelfTest implements SelfTest {
             world.setBlockState(q, coralBlock.getDefaultState(), 2);
         }
         BlockPos pickleAt = reef.add(5, 1, 5);
-        c.ok(WoodsetContent.seaPickle() != null, "our sea pickle exists here (owner absent)");
-        IBlockState pickle = WoodsetContent.seaPickle().getDefaultState().withProperty(BlockSeaPickle.WATERLOGGED, true);
-        world.setBlockState(pickleAt, pickle, 2);
-        Random always = new Random() {
-            @Override
-            public int nextInt(int bound) {
-                return 0;
-            }
-        };
-        CoralPickles.spread(world, pickleAt, pickle, always);
-        int pickles = 0;
-        for (BlockPos q : BlockPos.getAllInBox(reef.add(2, 1, 2), reef.add(8, 1, 8))) {
-            if (world.getBlockState(q).getBlock() == WoodsetContent.seaPickle()) {
-                pickles++;
-            }
+        // This mod's own sea pickle (1.13's block). Until it becomes an owned block, the woodset stream still
+        // gives way to Village & Pillage 2.4.0, which registers one too: then there is none of ours to test.
+        Block seaPickle = Owners.ourBlock("sea_pickle");
+        if (seaPickle != null) {
+            c.ok(seaPickle == WoodsetContent.seaPickle(), "our sea pickle is the woodset stream's");
+            picklesOnCoral(c, world, player, reef, pickleAt, seaPickle);
+        } else {
+            c.ok(Owners.present(Owners.VILLAGE_AND_PILLAGE), "our sea pickle is missing only while Village & Pillage ships one");
         }
-        c.eq(4, world.getBlockState(pickleAt).getValue(BlockSeaPickle.PICKLES).intValue(), "bone meal makes the pickle four");
-        c.eq(13, pickles, "pickles spread over the coral around, in a diamond (12 + itself)");
-        ItemStack meal = new ItemStack(Items.DYE, 2, EnumDyeColor.WHITE.getDyeDamage());
-        BlockPos second = reef.add(3, 1, 5);
-        world.setBlockState(second, WoodsetContent.seaPickle().getDefaultState().withProperty(BlockSeaPickle.WATERLOGGED, true), 2);
-        c.ok(ItemDye.applyBonemeal(meal, world, second, player, EnumHand.MAIN_HAND) && meal.getCount() == 1, "bone meal is used on a pickle on coral");
 
         // 8. reef shapes in a deep pool ----------------------------------------------------------------------
         BlockPos deep = Pools.pool(c, 12).add(6, 1, 6);
@@ -258,6 +246,52 @@ public final class CoralSelfTest implements SelfTest {
 
         // 9. generation ------------------------------------------------------------------------------------------
         worldGen(c);
+    }
+
+    /** Bone meal on a lit pickle on living coral: four pickles, and more spread over the coral around. */
+    private static void picklesOnCoral(Check c, WorldServer world, EntityPlayerMP player, BlockPos reef, BlockPos pickleAt, Block seaPickle) {
+        IBlockState pickle = withValue(seaPickle.getDefaultState(), "waterlogged", Boolean.TRUE);
+        world.setBlockState(pickleAt, pickle, 2);
+        Random always = new Random() {
+            @Override
+            public int nextInt(int bound) {
+                return 0;
+            }
+        };
+        CoralPickles.spread(world, pickleAt, pickle, always);
+        int pickles = 0;
+        for (BlockPos q : BlockPos.getAllInBox(reef.add(2, 1, 2), reef.add(8, 1, 8))) {
+            if (world.getBlockState(q).getBlock() == seaPickle) {
+                pickles++;
+                c.ok(Boolean.TRUE.equals(valueOf(world.getBlockState(q), "waterlogged")), "a spread pickle is lit, in water: " + q);
+            }
+        }
+        c.eq(4, valueOf(world.getBlockState(pickleAt), "pickles"), "bone meal makes the pickle four");
+        c.eq(13, pickles, "pickles spread over the coral around, in a diamond (12 + itself)");
+        ItemStack meal = new ItemStack(Items.DYE, 2, EnumDyeColor.WHITE.getDyeDamage());
+        BlockPos second = reef.add(3, 1, 5);
+        world.setBlockState(second, withValue(seaPickle.getDefaultState(), "waterlogged", Boolean.TRUE), 2);
+        c.ok(ItemDye.applyBonemeal(meal, world, second, player, EnumHand.MAIN_HAND) && meal.getCount() == 1, "bone meal is used on a pickle on coral");
+    }
+
+    /** A property of whichever sea pickle the game has, by name (the owner's class is never linked). */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    static IBlockState withValue(IBlockState state, String name, Comparable value) {
+        for (IProperty p : state.getPropertyKeys()) {
+            if (name.equals(p.getName())) {
+                return state.withProperty(p, value);
+            }
+        }
+        throw new IllegalArgumentException(state + " has no property " + name);
+    }
+
+    static Object valueOf(IBlockState state, String name) {
+        for (IProperty<?> p : state.getPropertyKeys()) {
+            if (name.equals(p.getName())) {
+                return state.getValue(p);
+            }
+        }
+        return null;
     }
 
     private static int countCoralBlocks(WorldServer world, BlockPos center, int radius, int height) {
