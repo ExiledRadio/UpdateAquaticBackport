@@ -6,7 +6,7 @@ ids, blocks, items, textures or sounds. One line in `UpdateAquaticBackport.preIn
 `NetworkHandler` (see *For the integrator*).
 
 The pose engine - the pose itself, the hitbox, the eyes, sending poses to other players and drawing them -
-is shared family code in **Backport Core 1.2.0** (branch `pose`, package `pose`, documented in its
+is shared family code in **Backport Core 1.1.0** (branch `pose`, package `pose`, documented in its
 `docs/API.md`). It needs five small bytecode patches, in Backport Core's own coremod, each documented in its
 `docs/PATCHES.md`. This stream is the rules: when a player swims, how a swimmer moves, and the client's
 sprint and input rules.
@@ -81,7 +81,7 @@ sprint and input rules.
 ## Tested headlessly
 
 `./gradlew runServer -Pselftest=swim` (port 25746): **`SELFTEST DONE pass=50 fail=0`**; `-Pselftest=all` in
-a fresh world, rebased on main 1378df4, with Backport Core 1.2.0, Fluidlogged API and this mod's own coremod
+a fresh world, rebased on main 1378df4, with Backport Core 1.1.0, Fluidlogged API and this mod's own coremod
 all loaded: **`SELFTEST DONE pass=16030 fail=0`** (main's 15980 plus these 50); `python
 tools/check_assets.py`: **88 blocks, 5489 states, 90 item models, 380 sound files, 0 errors**. Real server players, each with a connection that keeps what it is sent.
 
@@ -136,8 +136,8 @@ tools/check_assets.py`: **88 blocks, 5489 states, 90 item models, 380 sound file
 ## For the integrator
 
 *   `UpdateAquaticBackport.preInit`: one line, `SwimContent.preInit(event.getSide().isClient())`; the
-    dependency is now `required-after:backportcore@[1.2.0,)`; `gradle.properties` `core_version=1.2.0` (copy
-    Backport Core 1.2.0's dev jar from branch `pose` into `deps/`).
+    dependency is now `required-after:backportcore@[1.1.0,)`; `gradle.properties` `core_version=1.1.0` (copy
+    Backport Core 1.1.0's dev jar from branch `pose` into `deps/`).
 *   `NetworkHandler.init`: packet 75 registered.
 *   `ModConfig`: the new `swimming` category (`enabled`, `crawling`).
 *   `selftest/SelfTestRunner.TESTS`: one line, `new SwimSelfTest()`.

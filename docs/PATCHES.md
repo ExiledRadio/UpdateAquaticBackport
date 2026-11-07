@@ -83,7 +83,7 @@ under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin` or `BlockLog`
 ## Not in this coremod: swimming and crawling
 
 Swimming and crawling (stream Sw, `docs/streams/swim.md`) add no transformer here. The pose engine they run
-on is shared family code in Backport Core 1.2.0, which has its own coremod in its own jar
+on is shared family code in Backport Core 1.1.0, which has its own coremod in its own jar
 (`com.exiledradio.backportcore.asm.BackportCorePlugin`) with the five patches swimming needs: water travel
 (`EntityLivingBase.travel`), the client sprint rules (`EntityPlayerSP.onLivingUpdate`), the biped swim
 stroke (`ModelBiped.setRotationAngles`), the body turn (`RenderPlayer.applyRotations`) and the camera's eye
