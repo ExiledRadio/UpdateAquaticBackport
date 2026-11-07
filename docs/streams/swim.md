@@ -80,10 +80,10 @@ sprint and input rules.
 
 ## Tested headlessly
 
-`./gradlew runServer -Pselftest=swim` (port 25746): **`SELFTEST DONE pass=50 fail=0`**; `-Pselftest=all`:
-every stream's test with Backport Core 1.2.0 and its patches in (see *Not tested* for the other streams'
-results); `python tools/check_assets.py`: **88 blocks, 5489 states, 90 item models, 380 sound files, 0
-errors**. Real server players, each with a connection that keeps what it is sent.
+`./gradlew runServer -Pselftest=swim` (port 25746): **`SELFTEST DONE pass=50 fail=0`**; `-Pselftest=all` in
+a fresh world, rebased on main 1378df4, with Backport Core 1.2.0, Fluidlogged API and this mod's own coremod
+all loaded: **`SELFTEST DONE pass=16030 fail=0`** (main's 15980 plus these 50); `python
+tools/check_assets.py`: **88 blocks, 5489 states, 90 item models, 380 sound files, 0 errors**. Real server players, each with a connection that keeps what it is sent.
 
 *   Wiring: both switches on by default, the engine active, Backport Core's patch P1 applied in this dev
     environment (beside Fluidlogged API), its coremod found through the dev jar's manifest.
