@@ -1,73 +1,106 @@
-# Decision needed: swimming, crawling and waterlogging
+# Swimming, crawling and waterlogging: the chosen design
 
-These three 1.13 features change the player and the world at a level no Forge event reaches, so they need
-mixins (through MixinBooter) or a library that already has them. Nothing below is built yet. Everything
-else in `PLAN.md` is built without either.
+**Decided by the user (2026-11-06):** all three are our own code, written from scratch. No MixinBooter, no
+mixins, and no code taken from, adapted from or credited to any other mod. Waterlogging is our own system,
+with its framework in Backport Core, and it must keep working when Fluidlogged API is installed, without
+depending on it.
 
-## What each one needs
+Nothing below is built yet. The user reviews this design first. If any part turns out to need bytecode
+patching, that part stops and goes back to the user before any ASM is written. The parts that already look
+that way are listed at the end.
 
-| Feature | What has to change | Size |
-| --- | --- | --- |
-| **Swimming** (sprint underwater, 0.6-block hitbox, swim animation) | the player's pose, size and eye height every tick, its movement in water, the third-person model and first-person camera | medium: about 15 mixin targets, half of them client |
-| **Crawling** (under one-block gaps) | the same pose system, plus the collision check that forces it | small once swimming exists |
-| **Waterlogging** (a block and water in one space) | where a chunk stores a second state per position, every `getBlockState` / `setBlockState` caller that must see the water, fluid flow and ticking, fluid rendering inside non-liquid blocks, entity physics, buckets, saving and loading | large: tens of targets across world, chunk, rendering and physics |
+## Swimming and crawling
 
-## What exists on 1.12.2
+### What 1.12.2 already gives us
 
-- **Aqua Acrobatics** (Fuzs, maintained by embeddedt): 1.13 swimming, crawling and 1.14's sneak height.
-  Mixins, needs a Mixin provider (MixinBooter or MixinBootstrap). **Public domain** (the Unlicense), so its
-  code can be copied, changed and shipped by anyone. Already in your DregoraCleanroom-Celeritas (1.15.4)
-  and E2Eu-Cleanroom (1.15.2) instances. Known conflicts: Better Sprinting and Idō; a few open reports with
-  specific mods (Spartan Weaponry).
-- **Fluidlogged API** (jbredwards): full fluidlogging for any block and any Forge fluid, with rendering,
-  physics and flowing fluids, plus many fluid fixes. ASM coremod. **Mod Permissions License**: other mods
-  may depend on it and add compatibility, but may not copy or redistribute its code. Already in five of
-  your instances (v3.3.2 / v3.3.3), including E2Eu.
+Forge calls the player post-tick event (`PlayerTickEvent`, phase END) as the **last line of
+`EntityPlayer.updateSize()`**, which runs once per tick on both the client and the server. Whatever size we
+set there is the player's size until the next tick's movement is done. Two more vanilla rules help:
 
-## Options
+- `updateSize()` only grows a player back when the bigger box fits. A player who is 0.6 tall in a
+  one-block gap stays 0.6 tall on their own, until there is room to stand.
+- `getEyeHeight()` already returns 0.4 for a non-sneaking player whose height is 0.6 (vanilla's elytra
+  rule). The public Forge field `eyeHeight` covers the sneaking case.
 
-### 1. Write all three ourselves
+So the pose system needs no patch.
 
-- **Cost**: the largest. Swimming and crawling are about a week of careful work. Waterlogging is a library
-  in its own right; Fluidlogged API is the proof of how much it takes to get right.
-- **Risk**: every big pack that already has Aqua Acrobatics or Fluidlogged API would have two mods
-  patching the same methods. We would have to detect both and stand down, so the code we wrote would sit
-  unused exactly where packs are largest.
-- **Gain**: no outside dependency, full control.
+### Design (package `swim`, pose engine shared through Backport Core)
 
-### 2. Build on a library for one part (waterlogging through Fluidlogged API)
+| Part | How |
+| --- | --- |
+| **Pose state** | One per player: `STANDING`, `SWIMMING` or `CRAWLING`. It is worked out the same way on both sides every tick: swimming is sprinting with eyes in water (1.13's rule); crawling is being unable to fit the standing box when the swimming box fits (1.14's rule). The server sends each player's pose to the clients tracking them, using one packet in our id block, so other players are drawn right. |
+| **Size and eyes** | At `PlayerTickEvent` END: `setSize(0.6F, 0.6F)` (protected, called through reflection, resolved once) for SWIMMING and CRAWLING. `eyeHeight` is set so the eyes sit at 0.4 even while sneaking, and is restored on STANDING. Both sides apply it, so the server's own movement check (`NetHandlerPlayServer.processPlayer`) uses the same box as the client and never rubber-bands a crawling player. |
+| **Swim motion** | Client side, where 1.12.2 moves players: at `PlayerTickEvent` END (after vanilla's water movement) we apply 1.13's swimming changes to the motion: less water drag while sprinting, vertical motion following the look direction, sinking faster while sneaking, and Dolphin's Grace when that stream exists. The server needs nothing: it trusts the client's movement within its normal limits, and swimming stays inside them. |
+| **Crawl motion** | `InputUpdateEvent` (client) scales forward and strafe input to the sneaking speed while crawling. |
+| **Starting and stopping** | Swimming stops when the player stops sprinting, leaves the water or runs out of hunger to sprint. Crawling stops when there is room to stand. Both are re-checked every tick, the way 1.14 decides the pose. |
+| **Third-person look** | `RenderPlayerEvent.Pre/Post` rotates the whole body to lie along the look direction (pitch-following when swimming, flat when crawling) around the player's position. The swimming and crawling arm and leg animation come from our own `ModelPlayer` subclass. It is put into both player renderers' `mainModel` field (default and slim skins) once, at client setup. It draws exactly as vanilla's unless the player is swimming or crawling. |
+| **First person** | Nothing extra: the camera follows the eye height. |
+| **Config** | A new `swimming` category: `enabled`, `crawling`. |
 
-- **How**: Backport Core gets a small `Waterlogging` interface with two backends. With Fluidlogged API
-  installed, the family's blocks (kelp, coral, sea pickles, lanterns, campfires, chains, scaffolding)
-  register as fluidloggable and get real waterlogging, drawn and simulated by the library. Without it,
-  the backend is what this mod already does (`common/BlockPseudoWater`: the plant *is* the water), which
-  needs no patches and only misses the water being drawn inside a block seen through glass.
-- **Cost**: small: an adapter and tests with the library installed (it cannot load in the FG2 dev
-  environment, so those tests run in a real instance).
-- **Risk**: low. The license allows exactly this. A soft dependency, so nothing breaks without it.
-- **Limit**: waterlogging vanilla's own blocks (stairs, slabs, fences, chests) is something the library
-  already does for itself; we would not duplicate it.
+### Risks
 
-### 3. Something else: swimming and crawling from Aqua Acrobatics' code, inside this mod
+- **Mods that also resize the player or replace the player model** (morph mods, animation mods, and any
+  other mod that adds swimming). We detect the known ones by mod id and stand down quietly, never naming
+  them in game. When our model is not in the renderer at draw time, we fall back to rotating the body only.
+- **Hitbox changes in the middle of a tick.** Vanilla's `updateSize()` may grow the box back for a moment
+  just before our END handler shrinks it. No movement or collision runs between the two, so this is safe.
+  The self-test must still prove it: a player crawling in a one-block gap for 200 ticks, never taking
+  suffocation damage.
 
-- **How**: Aqua Acrobatics is public domain, so its swimming and crawling mixins can be taken into the
-  `swim` stream with credit, trimmed to 1.13's behavior and updated to today's (swimming up waterfalls,
-  current Java hitboxes), and loaded through MixinBooter's late loader. When Aqua Acrobatics itself is
-  installed, ours do not load at all and its version runs.
-- **Cost**: medium: adapting and testing rather than writing from nothing.
-- **Risk**: medium. Same conflict list as Aqua Acrobatics (Better Sprinting, Idō). A hard dependency on
-  MixinBooter (already in every Cleanroom instance, and required by RLMixins in your Dregora packs).
+## Waterlogging
 
-### 4. Defer
+### What "our own waterlogging" can mean on 1.12.2 without patches
 
-Keep the pseudo-water blocks, ship everything else, and add none of the three. Players who want them
-install Aqua Acrobatics and Fluidlogged API themselves; we just make sure we work with both.
+A 1.12.2 chunk holds one state per position. Without patching, a block and water can share a space only
+if **the block's own state says it is waterlogged**, and the block then *is* water to the rest of the game.
+This is the technique Update Aquatic already uses for kelp, seagrass and coral (`common/BlockPseudoWater`).
+It works well:
 
-## Recommendation
+- the block's material is water while waterlogged;
+- it carries vanilla water's `level` property, fixed at 0;
+- so swimming, drowning, fog, boats, fish, flow, source forming and buckets all treat it as still water.
 
-**Options 2 and 3 together**: waterlogging through a Backport Core interface backed by Fluidlogged API when
-it is installed and by our pseudo-water otherwise; swimming and crawling adapted from Aqua Acrobatics' public-domain code,
-standing down when Aqua Acrobatics is present. No chunk-storage patching of our own, ever.
+It only works for **blocks we write**. It cannot reach vanilla's blocks.
 
-The cost is one required library (MixinBooter) for the swim stream only; every other stream stays
-mixin-free.
+### Design (framework in Backport Core; Update Aquatic supplies the water mechanics)
+
+| Part | How |
+| --- | --- |
+| **`IWaterloggable` + `Waterlogging` helper** in Backport Core | A block adds 1.13's `waterlogged` property and the fixed `level` property. It keeps one metadata bit for `waterlogged`, chosen so existing metadata keeps its meaning (required for blocks already in worlds, such as the family's lanterns and sea pickles). The helper supplies: material and light opacity by state; the bucket rules (fill, drain, refuse); placing into a water source waterlogs; breaking or exploding leaves water; and one shared model-name mapping. |
+| **Spreading** | When a block becomes waterlogged it schedules a tick. That tick starts vanilla flowing water in the open spaces beside and below it, as a 1.13 source would. From then on vanilla's own water keeps flowing, because it reads our block as a source (`level` 0). |
+| **Drawing the water** | A client-only baked-model wrapper, registered through Forge's model bake event for our blocks only, by exact name. It adds water faces (still-water texture, biome tint) on every side that borders something not water, and the surface at 8/9 height when nothing water-like is above. This removes the one gap the current kelp and coral blocks have: water not drawn when seen from the side through glass or air. |
+| **Who uses it** | Update Aquatic's kelp, seagrass, coral, bubble columns and sea pickles. Later backports' own lanterns, campfires, chains, scaffolding and other blocks that 1.13+ made waterloggable. Each of those mods calls the framework; Backport Core adds no blocks. |
+| **Config** | A new `waterlogging` category in Backport Core: `enabled`. Off, blocks still register the property, so worlds stay loadable, but they never take water. |
+
+### Fluidlogged API installed
+
+- **No double-patching** is possible, because we patch nothing.
+- **Our blocks opt out of its fluidlogging.** It publishes an `IFluidloggable` interface and a
+  `FluidloggableEvent`. A listener class loaded only when `fluidlogged_api` is present tells it our blocks
+  are not fluidloggable: they already manage their own water, and its water on top of ours would be drawn
+  and simulated twice. We compile against a small stand-in of its event, kept out of our jar, so there is
+  no dependency. (Village & Pillage does the same for its JEI and Mouse Tweaks hooks.)
+- **Vanilla blocks stay its business.** When it is installed, players get its waterlogged stairs, slabs and
+  fences, and ours never touches them.
+- **Must be tested in a real instance.** Its coremod cannot load in the FG2 dev environment. E2Eu-Cleanroom
+  already has v3.3.3. Things to check there: our pseudo-water blocks beside its fluidlogged blocks (flow,
+  rendering, buckets), and what its fluid-collision and renderer changes do with a block whose material is
+  water.
+
+## Looks infeasible without patching (for the user to decide)
+
+1. **Waterlogging vanilla blocks** (stairs, slabs, fences, glass panes, chests, ladders, signs, rails, ...).
+   Their state containers are vanilla's, and 1.12.2 keeps one state per position. The only patch-free
+   route is replacing the vanilla blocks in the registry with our own subclasses that have the extra
+   property. Stairs have a free metadata bit; stone slabs have none. Replacing vanilla blocks breaks other
+   mods that compare against `Blocks.OAK_STAIRS` and the like, and changes every world's block mapping.
+   **Not recommended.** The real fix is a second state layer per chunk (what Fluidlogged API does), which
+   needs bytecode patches to `World`, `Chunk`, rendering and physics. **Proposal:** our waterlogging covers
+   our blocks and the family's. Vanilla blocks are waterlogged only when the player installs Fluidlogged
+   API.
+2. **Items and experience orbs floating in water** (stream A). `EntityItem` and `EntityXPOrb` have no
+   update event. The only patch-free route is moving every loaded item from a world tick event, which costs
+   performance and is a little out of step. **Proposal:** do it that way behind a config switch, default
+   on, limited to entities in water, or skip it.
+
+Nothing in swimming or crawling looks like it needs patching.

@@ -13,7 +13,7 @@ differently from 1.13, current Java wins (marked **now:**). 1.14.4's decompiled 
 | In | Out (and why) |
 | --- | --- |
 | Every new block, item, mob, effect, enchantment, potion, structure and ocean biome; 1.13's changes to existing mobs, blocks and water | The Flattening, the command rewrite, data packs, functions, tags and the other purely technical changes: 1.12.2 cannot take them and players never see them |
-| Swimming, crawling, waterlogging (decision pending, see `MIXIN_DECISION.md`) | The four End biomes: the End's terrain did not change; they only split one biome id into four |
+| Swimming, crawling, waterlogging: our own code, no patches (design in `MIXIN_DECISION.md`) | The four End biomes: the End's terrain did not change; they only split one biome id into four |
 | | Debug-screen, options-menu and launcher changes |
 
 ## Content owned by another mod of the family
@@ -58,9 +58,9 @@ No stream calls another's classes; when one needs another's item it looks it up 
 | B | Bubble columns | `bubble` | `bubbles` | 45-49 | 55-59 | nothing |
 | X | Other blocks and items | `blocks` | `blocks` | none | 60-64 | nothing |
 | M | Mob changes | `mobs` | `mobs` | 40-44 | 65-69 | nothing |
-| A | Water look and feel | `water` | `water` | none | 70-74 | nothing (parts need the mixin decision) |
-| Sw | Swimming and crawling | `swim` | (new) `swimming` | none | 75-79 | the mixin decision |
-| Wl | Waterlogging | `waterlog` + Backport Core | (new) `waterlogging` | none | 80-84 | the mixin decision; Backport Core |
+| A | Water look and feel | `water` | `water` | none | 70-74 | nothing (floating items: see the design's open point 2) |
+| Sw | Swimming and crawling | `swim` (pose engine in Backport Core) | (new) `swimming` | none | 75-79 | the user's approval of the design |
+| Wl | Waterlogging | framework in Backport Core; `common/BlockPseudoWater` moves onto it | (new) `waterlogging` in Backport Core | none | 80-84 | the user's approval of the design; Backport Core |
 
 Entity ids are this mod's own `EntityRegistry.registerModEntity` numbers. Potions, enchantments and
 sounds have no numbers to collide on: each stream names them under its own words.
@@ -212,19 +212,23 @@ only when `villagerbackport` is absent. Also:
 - Biome water colors (1.13's per-biome colors via Forge's water color event), underwater fog by depth and
   biome, underwater ambience sounds, water reducing light by 1 instead of 3 (new water only), air
   refilling gradually, items and experience orbs floating.
-- Some of these (floating items, the jump out of flowing water) are easiest as mixins; they wait for the
-  decision.
+- Floating items and orbs have no patch-free hook; the design's open point 2 proposes a world-tick
+  version behind a switch. The jump out of flowing water is motion handling at the player tick.
 
-### Sw. Swimming and crawling (decision pending)
+### Sw. Swimming and crawling
 
 Sprinting underwater swims (0.6 x 0.6 hitbox), crawling under one-block gaps, 1.13's swim animations.
-Needs player mixins. See `MIXIN_DECISION.md`.
+Our own code, no MixinBooter and no patches: size and eye height at the player post-tick (the last line
+of vanilla's `updateSize`), motion at the player tick, input at `InputUpdateEvent`, the pose drawn through
+`RenderPlayerEvent` and our own player model. Full design in `MIXIN_DECISION.md`.
 
-### Wl. Waterlogging (decision pending)
+### Wl. Waterlogging
 
-Real waterlogging for this mod's blocks (and the family's: lanterns, campfires, sea pickles, chains,
-scaffolding) through Backport Core. When it exists, `common/BlockPseudoWater` switches its blocks over and
-the known limit (water inside the block is not drawn from the side) goes away.
+Our own waterlogging for this mod's blocks and the family's (lanterns, campfires, sea pickles, chains,
+scaffolding), framework in Backport Core: the block's state carries `waterlogged` and is water while it is,
+water spreads from it, and a model wrapper draws the water inside it. `common/BlockPseudoWater` moves onto
+it. Coexists with Fluidlogged API (our blocks opt out of its fluidlogging; vanilla blocks stay its). Vanilla
+blocks themselves cannot be waterlogged without patches; see `MIXIN_DECISION.md`.
 
 ## Shared files and rules
 
@@ -258,7 +262,8 @@ Every stream touches a few shared files. To keep merges mechanical:
 - Build last: any run task rewrites `build/libs` with an unobfuscated jar. Before a jar leaves the
   workspace, check its classes carry `func_` names.
 - Client-only types never appear in a class a server loads; put them in a `client/` class.
-- No mixins and no coremod until the decision is made, and then only in the streams that need them.
+- No mixins, no coremod, no MixinBooter, anywhere. A part that cannot be done without patching stops and
+  goes to the user first.
 
 ## Integrations with other mods of the family (Rule 2)
 
@@ -277,8 +282,8 @@ All soft: `Loader.isModLoaded` and names, never a hard dependency.
 
 ## Order
 
-1. Scaffold, this plan, the mixin decision write-up: **done** (first session).
+1. Scaffold, this plan, the swimming and waterlogging design: **done** (first session).
 2. Streams W, K, C: **done** (first session; see `docs/streams/`). Then F, T, D, P, R, N, O, B, X, M, A in
    parallel.
 3. S once Backport Core has the template loader.
-4. Sw, Wl, and the mixin parts of A after the decision.
+4. Sw and Wl once the user has approved the design in `MIXIN_DECISION.md`.

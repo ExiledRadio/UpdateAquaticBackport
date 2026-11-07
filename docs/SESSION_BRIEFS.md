@@ -106,9 +106,41 @@ polar bears on ice, parrots imitating phantoms and drowned, skeleton horses unde
 
 Package `water`, config `water`, packets 70-74: biome water colors (Forge's water color event), underwater fog
 by depth, underwater ambience, water's light reduction, gradual air refill. Floating items and the jump out of
-flowing water only if they can be done without patches; otherwise list them for the mixin stream.
+flowing water without patches; floating items and orbs follow the user's answer to open point 2 of
+`docs/MIXIN_DECISION.md`.
 
 ## Waiting
 
 - **S. Ocean structures**: needs Backport Core's modern structure template loader and terrain adapters.
-- **Sw. Swimming and crawling**, **Wl. Waterlogging**: need the decision in `docs/MIXIN_DECISION.md`.
+
+## Sw. Swimming and crawling (start only after the user approves `docs/MIXIN_DECISION.md`; port 25746)
+
+Our own code, written from scratch: no MixinBooter, no mixins, no ASM, and nothing taken from, adapted from
+or credited to another mod. The pose engine (pose state, size, eye height, sync, drawing) is shared code for
+the family, so build it in Backport Core (`E:\MincraftModding\Workspaces\BackportCore`, in its own worktree
+and branch, coordinated with whoever owns that repo) and the swimming and crawling rules in Update Aquatic's
+`swim` package (packets 75-79, a new `swimming` config category with `enabled` and `crawling`). Follow the
+design table in `docs/MIXIN_DECISION.md`: size and eye height at `PlayerTickEvent` END on both sides, swim
+motion on the client after vanilla's water movement, crawl speed through `InputUpdateEvent`, the pose sent to
+tracking clients, the body rotated in `RenderPlayerEvent`, and limbs from our own `ModelPlayer` subclass set into
+both player renderers. Stand down when a known player-resizing or player-model mod is installed (by mod id,
+never named in game). Headless tests: a server player in water sprinting becomes 0.6 x 0.6 with eyes at 0.4;
+one in a one-block gap stays crawling for 200 ticks with no suffocation damage and stands up when the ceiling
+goes; the server's movement check accepts a crawl through the gap (no "moved wrongly"); the pose packet
+round-trips. Visual parts are listed as not tested. If any part proves impossible without patching, stop and
+report exactly which part and why; do not write ASM.
+
+## Wl. Waterlogging (start only after the user approves `docs/MIXIN_DECISION.md`; port 25747)
+
+Our own system, framework in Backport Core (its own worktree and branch, coordinated with its owner), no
+patches and no dependency on Fluidlogged API. Build `IWaterloggable` and the `Waterlogging` helper (the
+`waterlogged` property plus a fixed water `level`, material and light by state, buckets, placing into water,
+breaking leaving water, spreading flowing water from a newly waterlogged block, one model-name mapping), and the
+client baked-model wrapper that draws water inside the block on faces bordering non-water and the surface at 8/9
+height. Then move Update Aquatic's `common/BlockPseudoWater` blocks (kelp, seagrass, coral) onto it with their
+states and metadata unchanged, so no world changes. Fluidlogged API: a listener class loaded only when
+`fluidlogged_api` is present answers its `FluidloggableEvent` so our blocks are never fluidlogged by it, compiled
+against a stand-in kept out of the jar. Its coremod cannot load in the FG2 dev environment, so that part is tested
+in E2Eu-Cleanroom (it has v3.3.3): our blocks beside its fluidlogged ones, flow, buckets, rendering. Vanilla blocks
+are not waterlogged by us (see open point 1 of the design). Headless tests as for kelp and coral, plus spreading and
+the meta layout of an existing block gaining the property.
