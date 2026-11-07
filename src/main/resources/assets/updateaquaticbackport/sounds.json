@@ -164,5 +164,269 @@
       "updateaquaticbackport:step/coral5",
       "updateaquaticbackport:step/coral6"
     ]
+  },
+  "entity.cod.ambient": {
+    "sounds": []
+  },
+  "entity.cod.death": {
+    "sounds": [
+      "updateaquaticbackport:entity/fish/hurt1",
+      "updateaquaticbackport:entity/fish/hurt2",
+      "updateaquaticbackport:entity/fish/hurt3",
+      "updateaquaticbackport:entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.cod.death"
+  },
+  "entity.cod.flop": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/fish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop4",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.cod.flop"
+  },
+  "entity.cod.hurt": {
+    "sounds": [
+      "updateaquaticbackport:entity/fish/hurt1",
+      "updateaquaticbackport:entity/fish/hurt2",
+      "updateaquaticbackport:entity/fish/hurt3",
+      "updateaquaticbackport:entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.cod.hurt"
+  },
+  "entity.salmon.ambient": {
+    "sounds": []
+  },
+  "entity.salmon.death": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.salmon.death"
+  },
+  "entity.salmon.flop": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.salmon.flop"
+  },
+  "entity.salmon.hurt": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.salmon.hurt"
+  },
+  "entity.puffer_fish.ambient": {
+    "sounds": []
+  },
+  "entity.puffer_fish.blow_out": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/blow_out1",
+        "volume": 0.7
+      },
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/blow_out2",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.puffer_fish.blow_out"
+  },
+  "entity.puffer_fish.blow_up": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/blow_up1",
+        "volume": 0.45
+      },
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/blow_up2",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.puffer_fish.blow_up"
+  },
+  "entity.puffer_fish.death": {
+    "sounds": [
+      "updateaquaticbackport:entity/pufferfish/death1",
+      "updateaquaticbackport:entity/pufferfish/death2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.puffer_fish.death"
+  },
+  "entity.puffer_fish.flop": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/pufferfish/flop4",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.puffer_fish.flop"
+  },
+  "entity.puffer_fish.hurt": {
+    "sounds": [
+      "updateaquaticbackport:entity/pufferfish/hurt1",
+      "updateaquaticbackport:entity/pufferfish/hurt2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.puffer_fish.hurt"
+  },
+  "entity.puffer_fish.sting": {
+    "sounds": [
+      "updateaquaticbackport:entity/pufferfish/sting1",
+      "updateaquaticbackport:entity/pufferfish/sting2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.puffer_fish.sting"
+  },
+  "entity.tropical_fish.ambient": {
+    "sounds": []
+  },
+  "entity.tropical_fish.death": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.tropical_fish.death"
+  },
+  "entity.tropical_fish.flop": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity/fish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:entity/fish/flop4",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.tropical_fish.flop"
+  },
+  "entity.tropical_fish.hurt": {
+    "sounds": [
+      "updateaquaticbackport:entity/fish/hurt1",
+      "updateaquaticbackport:entity/fish/hurt2",
+      "updateaquaticbackport:entity/fish/hurt3",
+      "updateaquaticbackport:entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.tropical_fish.hurt"
+  },
+  "entity.fish.swim": {
+    "sounds": [
+      "updateaquaticbackport:entity/fish/swim1",
+      "updateaquaticbackport:entity/fish/swim2",
+      "updateaquaticbackport:entity/fish/swim3",
+      "updateaquaticbackport:entity/fish/swim4",
+      "updateaquaticbackport:entity/fish/swim5",
+      "updateaquaticbackport:entity/fish/swim6",
+      "updateaquaticbackport:entity/fish/swim7"
+    ]
+  },
+  "item.bucket.fill_fish": {
+    "sounds": [
+      "updateaquaticbackport:item/bucket/fill_fish1",
+      "updateaquaticbackport:item/bucket/fill_fish2",
+      "updateaquaticbackport:item/bucket/fill_fish3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.bucket.fill_fish"
+  },
+  "item.bucket.empty_fish": {
+    "sounds": [
+      "updateaquaticbackport:item/bucket/empty_fish1",
+      "updateaquaticbackport:item/bucket/empty_fish2",
+      "updateaquaticbackport:item/bucket/empty_fish3"
+    ],
+    "subtitle": "subtitles.item.bucket.empty"
   }
 }

@@ -126,6 +126,11 @@ public final class ModConfig {
         @Config.Comment("Cod, salmon, pufferfish and tropical fish as mobs, and their buckets. Off, nothing is registered.")
         @Config.LangKey("config.updateaquaticbackport.fish.enabled")
         public boolean enabled = true;
+
+        @Config.Comment({"Fish spawn on their own in oceans and rivers, under their own mob cap of 20. Off, they come",
+                "only from spawn eggs, spawners, commands and buckets."})
+        @Config.LangKey("config.updateaquaticbackport.fish.spawn")
+        public boolean spawn = true;
     }
 
     public static final class Turtles {
