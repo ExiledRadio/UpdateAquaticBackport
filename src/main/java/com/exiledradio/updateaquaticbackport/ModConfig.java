@@ -215,6 +215,10 @@ public final class ModConfig {
         @Config.Comment("1.13's warm, lukewarm, cold and frozen oceans, icebergs, and underwater caves and ravines.")
         @Config.LangKey("config.updateaquaticbackport.oceans.enabled")
         public boolean enabled = true;
+
+        @Config.Comment("Underwater caves and ravines cut through ocean floors in newly generated chunks.")
+        @Config.LangKey("config.updateaquaticbackport.oceans.underwaterCaves")
+        public boolean underwaterCaves = true;
     }
 
     public static final class Bubbles {

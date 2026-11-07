@@ -361,3 +361,7 @@ subtitles.updateaquaticbackport.block.bubble_column.whirlpool_ambient=Bubbles wh
 subtitles.updateaquaticbackport.block.bubble_column.whirlpool_inside=Bubbles zoom
 config.updateaquaticbackport.bubbles.generate=Form in New Chunks
 config.updateaquaticbackport.bubbles.generate.tooltip=Bubble columns start over soul sand and magma blocks that world generation leaves under water, in newly generated chunks.
+
+# --- ocean ---
+config.updateaquaticbackport.oceans.underwaterCaves=Underwater Caves and Ravines
+config.updateaquaticbackport.oceans.underwaterCaves.tooltip=Underwater caves and ravines cut through ocean floors in newly generated chunks.

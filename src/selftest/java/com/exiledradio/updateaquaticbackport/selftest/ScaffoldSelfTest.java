@@ -23,7 +23,8 @@ public final class ScaffoldSelfTest implements SelfTest {
         int[] counts = new int[OceanKind.values().length];
         for (int x = -20000; x < 20000; x += 97) {
             for (int z = -20000; z < 20000; z += 97) {
-                counts[OceanKind.of(Biomes.OCEAN, seed, x, z).ordinal()]++;
+                // The noise itself: with the ocean stream on, vanilla's ocean is registered as NORMAL.
+                counts[OceanKind.fromNoise(seed, x, z).ordinal()]++;
             }
         }
         int total = 0;
@@ -34,7 +35,7 @@ public final class ScaffoldSelfTest implements SelfTest {
             check.ok(counts[kind.ordinal()] > total / 50, "noise gives some " + kind + " ocean: " + counts[kind.ordinal()] + "/" + total);
         }
         check.eq(0, counts[OceanKind.FROZEN.ordinal()], "noise never gives frozen");
-        check.eq(OceanKind.of(Biomes.OCEAN, seed, 100, 100), OceanKind.of(Biomes.OCEAN, seed, 100, 100), "same column, same kind");
+        check.eq(OceanKind.fromNoise(seed, 100, 100), OceanKind.fromNoise(seed, 100, 100), "same column, same kind");
         check.eq(OceanKind.FROZEN, OceanKind.of(Biomes.FROZEN_OCEAN, seed, 0, 0), "frozen ocean biome");
         check.eq(OceanKind.NONE, OceanKind.of(Biomes.PLAINS, seed, 0, 0), "plains is not an ocean");
         check.eq(OceanKind.NONE, OceanKind.of(Biomes.RIVER, seed, 0, 0), "a river is not an ocean");
