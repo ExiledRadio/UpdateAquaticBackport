@@ -352,3 +352,12 @@ subtitles.updateaquaticbackport.block.conduit.activate=Conduit activates
 subtitles.updateaquaticbackport.block.conduit.ambient=Conduit pulses
 subtitles.updateaquaticbackport.block.conduit.attack.target=Conduit attacks
 subtitles.updateaquaticbackport.block.conduit.deactivate=Conduit deactivates
+
+# --- bubble ---
+tile.updateaquaticbackport.bubble_column.name=Bubble Column
+subtitles.updateaquaticbackport.block.bubble_column.upwards_ambient=Bubbles flow
+subtitles.updateaquaticbackport.block.bubble_column.upwards_inside=Bubbles woosh
+subtitles.updateaquaticbackport.block.bubble_column.whirlpool_ambient=Bubbles whirl
+subtitles.updateaquaticbackport.block.bubble_column.whirlpool_inside=Bubbles zoom
+config.updateaquaticbackport.bubbles.generate=Form in New Chunks
+config.updateaquaticbackport.bubbles.generate.tooltip=Bubble columns start over soul sand and magma blocks that world generation leaves under water, in newly generated chunks.

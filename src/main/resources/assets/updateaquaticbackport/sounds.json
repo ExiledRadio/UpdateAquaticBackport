@@ -1144,5 +1144,73 @@
       }
     ],
     "subtitle": "subtitles.updateaquaticbackport.block.conduit.deactivate"
+  },
+  "block.bubble_column.upwards_ambient": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:block/bubble_column/upwards_ambient1",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/upwards_ambient2",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/upwards_ambient3",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/upwards_ambient4",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/upwards_ambient5",
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.bubble_column.upwards_ambient"
+  },
+  "block.bubble_column.upwards_inside": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:block/bubble_column/upwards_inside",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.bubble_column.upwards_inside"
+  },
+  "block.bubble_column.whirlpool_ambient": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:block/bubble_column/whirlpool_ambient1",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/whirlpool_ambient2",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/whirlpool_ambient3",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/whirlpool_ambient4",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:block/bubble_column/whirlpool_ambient5",
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.bubble_column.whirlpool_ambient"
+  },
+  "block.bubble_column.whirlpool_inside": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:block/bubble_column/whirlpool_inside",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.bubble_column.whirlpool_inside"
   }
 }

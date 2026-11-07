@@ -53,6 +53,7 @@ public final class SelfTestRunner {
             new PhantomSelfTest(),
             new TridentSelfTest(),
             new ConduitSelfTest(),
+            new BubbleSelfTest(),
     };
 
     private final List<String> wanted;
