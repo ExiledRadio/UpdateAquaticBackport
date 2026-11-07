@@ -1212,5 +1212,12 @@
       }
     ],
     "subtitle": "subtitles.updateaquaticbackport.block.bubble_column.whirlpool_inside"
+  },
+  "block.pumpkin.carve": {
+    "sounds": [
+      "updateaquaticbackport:block/pumpkin/carve1",
+      "updateaquaticbackport:block/pumpkin/carve2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.pumpkin.carve"
   }
 }

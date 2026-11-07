@@ -55,6 +55,7 @@ public final class SelfTestRunner {
             new ConduitSelfTest(),
             new BubbleSelfTest(),
             new OceanSelfTest(),
+            new BlocksSelfTest(),
     };
 
     private final List<String> wanted;

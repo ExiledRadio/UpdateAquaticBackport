@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "updateaquaticbackport:carved_pumpkin"
+    },
+    "facing=south": {
+      "model": "updateaquaticbackport:carved_pumpkin",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "updateaquaticbackport:carved_pumpkin",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "updateaquaticbackport:carved_pumpkin",
+      "y": 90
+    }
+  }
+}

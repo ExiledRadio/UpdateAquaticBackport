@@ -365,3 +365,35 @@ config.updateaquaticbackport.bubbles.generate.tooltip=Bubble columns start over 
 # --- ocean ---
 config.updateaquaticbackport.oceans.underwaterCaves=Underwater Caves and Ravines
 config.updateaquaticbackport.oceans.underwaterCaves.tooltip=Underwater caves and ravines cut through ocean floors in newly generated chunks.
+
+# --- blocks ---
+config.updateaquaticbackport.blocks.placementRules.tooltip=1.13's looser placement: pumpkins, jack o'lanterns and fence gates need no block under them, and doors can be placed against the side of a block.
+config.updateaquaticbackport.blocks.placementRules=Looser Placement
+item.updateaquaticbackport.acacia_wood.name=Acacia Wood
+item.updateaquaticbackport.birch_wood.name=Birch Wood
+item.updateaquaticbackport.dark_oak_wood.name=Dark Oak Wood
+item.updateaquaticbackport.debug_stick.empty=%s has no properties
+item.updateaquaticbackport.debug_stick.name=Debug Stick
+item.updateaquaticbackport.debug_stick.select=selected "%s" (%s)
+item.updateaquaticbackport.debug_stick.update="%s" to %s
+item.updateaquaticbackport.jungle_wood.name=Jungle Wood
+item.updateaquaticbackport.oak_wood.name=Oak Wood
+item.updateaquaticbackport.spruce_wood.name=Spruce Wood
+tile.log.acacia.name=Acacia Log
+tile.log.big_oak.name=Dark Oak Log
+tile.log.birch.name=Birch Log
+tile.log.jungle.name=Jungle Log
+tile.log.oak.name=Oak Log
+tile.log.spruce.name=Spruce Log
+tile.updateaquaticbackport.carved_pumpkin.name=Carved Pumpkin
+tile.updateaquaticbackport.dark_prismarine_double_slab.name=Dark Prismarine Slab
+tile.updateaquaticbackport.dark_prismarine_slab.name=Dark Prismarine Slab
+tile.updateaquaticbackport.dark_prismarine_stairs.name=Dark Prismarine Stairs
+tile.updateaquaticbackport.prismarine_brick_double_slab.name=Prismarine Brick Slab
+tile.updateaquaticbackport.prismarine_brick_slab.name=Prismarine Brick Slab
+tile.updateaquaticbackport.prismarine_brick_stairs.name=Prismarine Brick Stairs
+tile.updateaquaticbackport.prismarine_double_slab.name=Prismarine Slab
+tile.updateaquaticbackport.prismarine_slab.name=Prismarine Slab
+tile.updateaquaticbackport.prismarine_stairs.name=Prismarine Stairs
+tile.updateaquaticbackport.shulker_box.name=Shulker Box
+subtitles.updateaquaticbackport.block.pumpkin.carve=Shears carve

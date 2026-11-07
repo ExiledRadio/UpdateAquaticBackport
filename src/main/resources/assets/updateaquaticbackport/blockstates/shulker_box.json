@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "updateaquaticbackport:shulker_box"
+    },
+    "facing=up": {
+      "model": "updateaquaticbackport:shulker_box"
+    },
+    "facing=north": {
+      "model": "updateaquaticbackport:shulker_box"
+    },
+    "facing=south": {
+      "model": "updateaquaticbackport:shulker_box"
+    },
+    "facing=west": {
+      "model": "updateaquaticbackport:shulker_box"
+    },
+    "facing=east": {
+      "model": "updateaquaticbackport:shulker_box"
+    }
+  }
+}
