@@ -1,0 +1,208 @@
+{
+  "variants": {
+    "eggs=1,hatch=0": [
+      {
+        "model": "updateaquaticbackport:turtle_egg"
+      },
+      {
+        "model": "updateaquaticbackport:turtle_egg",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:turtle_egg",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:turtle_egg",
+        "y": 270
+      }
+    ],
+    "eggs=1,hatch=1": [
+      {
+        "model": "updateaquaticbackport:slightly_cracked_turtle_egg"
+      },
+      {
+        "model": "updateaquaticbackport:slightly_cracked_turtle_egg",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:slightly_cracked_turtle_egg",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:slightly_cracked_turtle_egg",
+        "y": 270
+      }
+    ],
+    "eggs=1,hatch=2": [
+      {
+        "model": "updateaquaticbackport:very_cracked_turtle_egg"
+      },
+      {
+        "model": "updateaquaticbackport:very_cracked_turtle_egg",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:very_cracked_turtle_egg",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:very_cracked_turtle_egg",
+        "y": 270
+      }
+    ],
+    "eggs=2,hatch=0": [
+      {
+        "model": "updateaquaticbackport:two_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:two_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:two_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:two_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=2,hatch=1": [
+      {
+        "model": "updateaquaticbackport:two_slightly_cracked_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:two_slightly_cracked_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:two_slightly_cracked_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:two_slightly_cracked_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=2,hatch=2": [
+      {
+        "model": "updateaquaticbackport:two_very_cracked_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:two_very_cracked_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:two_very_cracked_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:two_very_cracked_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=3,hatch=0": [
+      {
+        "model": "updateaquaticbackport:three_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:three_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:three_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:three_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=3,hatch=1": [
+      {
+        "model": "updateaquaticbackport:three_slightly_cracked_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:three_slightly_cracked_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:three_slightly_cracked_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:three_slightly_cracked_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=3,hatch=2": [
+      {
+        "model": "updateaquaticbackport:three_very_cracked_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:three_very_cracked_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:three_very_cracked_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:three_very_cracked_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=4,hatch=0": [
+      {
+        "model": "updateaquaticbackport:four_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:four_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:four_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:four_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=4,hatch=1": [
+      {
+        "model": "updateaquaticbackport:four_slightly_cracked_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:four_slightly_cracked_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:four_slightly_cracked_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:four_slightly_cracked_turtle_eggs",
+        "y": 270
+      }
+    ],
+    "eggs=4,hatch=2": [
+      {
+        "model": "updateaquaticbackport:four_very_cracked_turtle_eggs"
+      },
+      {
+        "model": "updateaquaticbackport:four_very_cracked_turtle_eggs",
+        "y": 90
+      },
+      {
+        "model": "updateaquaticbackport:four_very_cracked_turtle_eggs",
+        "y": 180
+      },
+      {
+        "model": "updateaquaticbackport:four_very_cracked_turtle_eggs",
+        "y": 270
+      }
+    ]
+  }
+}

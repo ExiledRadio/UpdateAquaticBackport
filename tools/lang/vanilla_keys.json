@@ -66,10 +66,33 @@
     "config.updateaquaticbackport.bubbles.tooltip",
     "config.updateaquaticbackport.blocks.tooltip",
     "config.updateaquaticbackport.mobs.tooltip",
-    "config.updateaquaticbackport.water.tooltip"
+    "config.updateaquaticbackport.water.tooltip",
+    "entity.updateaquaticbackport.turtle.name",
+    "lingering_potion.effect.turtle_master",
+    "potion.effect.turtle_master",
+    "splash_potion.effect.turtle_master",
+    "tipped_arrow.effect.turtle_master",
+    "config.updateaquaticbackport.turtles.spawnWeight.tooltip",
+    "config.updateaquaticbackport.turtles.spawnWeight"
   ],
   "vanilla": {
     "item.updateaquaticbackport.dried_kelp.name": "item.minecraft.dried_kelp",
+    "item.updateaquaticbackport.scute.name": "item.minecraft.scute",
+    "item.updateaquaticbackport.turtle_helmet.name": "item.minecraft.turtle_helmet",
+    "subtitles.updateaquaticbackport.entity.turtle.ambient_land": "subtitles.entity.turtle.ambient_land",
+    "subtitles.updateaquaticbackport.entity.turtle.death": "subtitles.entity.turtle.death",
+    "subtitles.updateaquaticbackport.entity.turtle.death_baby": "subtitles.entity.turtle.death_baby",
+    "subtitles.updateaquaticbackport.entity.turtle.egg_break": "subtitles.entity.turtle.egg_break",
+    "subtitles.updateaquaticbackport.entity.turtle.egg_crack": "subtitles.entity.turtle.egg_crack",
+    "subtitles.updateaquaticbackport.entity.turtle.egg_hatch": "subtitles.entity.turtle.egg_hatch",
+    "subtitles.updateaquaticbackport.entity.turtle.hurt": "subtitles.entity.turtle.hurt",
+    "subtitles.updateaquaticbackport.entity.turtle.hurt_baby": "subtitles.entity.turtle.hurt_baby",
+    "subtitles.updateaquaticbackport.entity.turtle.lay_egg": "subtitles.entity.turtle.lay_egg",
+    "subtitles.updateaquaticbackport.entity.turtle.shamble": "subtitles.entity.turtle.shamble",
+    "subtitles.updateaquaticbackport.entity.turtle.shamble_baby": "subtitles.entity.turtle.shamble_baby",
+    "subtitles.updateaquaticbackport.entity.turtle.swim": "subtitles.entity.turtle.swim",
+    "subtitles.updateaquaticbackport.entity.zombie.destroy_egg": "subtitles.entity.zombie.destroy_egg",
+    "subtitles.updateaquaticbackport.item.armor.equip_turtle": "subtitles.item.armor.equip_turtle",
     "subtitles.updateaquaticbackport.item.axe.strip": "subtitles.item.axe.strip",
     "tile.pressurePlateWood.name": "block.minecraft.oak_pressure_plate",
     "tile.trapdoor.name": "block.minecraft.oak_trapdoor",
@@ -146,6 +169,7 @@
     "tile.updateaquaticbackport.tube_coral.name": "block.minecraft.tube_coral",
     "tile.updateaquaticbackport.tube_coral_block.name": "block.minecraft.tube_coral_block",
     "tile.updateaquaticbackport.tube_coral_fan.name": "block.minecraft.tube_coral_fan",
-    "tile.updateaquaticbackport.tube_coral_wall_fan.name": "block.minecraft.tube_coral_wall_fan"
+    "tile.updateaquaticbackport.tube_coral_wall_fan.name": "block.minecraft.tube_coral_wall_fan",
+    "tile.updateaquaticbackport.turtle_egg.name": "block.minecraft.turtle_egg"
   }
 }

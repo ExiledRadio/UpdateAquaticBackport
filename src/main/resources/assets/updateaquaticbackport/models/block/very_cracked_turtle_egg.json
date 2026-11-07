@@ -1,0 +1,6 @@
+{
+  "parent": "updateaquaticbackport:block/template_turtle_egg",
+  "textures": {
+    "all": "updateaquaticbackport:block/turtle_egg_very_cracked"
+  }
+}

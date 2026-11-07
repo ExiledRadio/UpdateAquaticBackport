@@ -1,0 +1,14 @@
+entity.turtle.ambient_land
+entity.turtle.death
+entity.turtle.death_baby
+entity.turtle.egg_break
+entity.turtle.egg_crack
+entity.turtle.egg_hatch
+entity.turtle.hurt
+entity.turtle.hurt_baby
+entity.turtle.lay_egg
+entity.turtle.shamble
+entity.turtle.shamble_baby
+entity.turtle.swim
+entity.zombie.destroy_egg
+item.armor.equip_turtle

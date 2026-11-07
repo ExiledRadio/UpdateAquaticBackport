@@ -133,6 +133,13 @@ public final class ModConfig {
         @Config.Comment("Turtles, turtle eggs, scutes, the turtle shell and Turtle Master. Off, nothing is registered.")
         @Config.LangKey("config.updateaquaticbackport.turtles.enabled")
         public boolean enabled = true;
+
+        @Config.RequiresMcRestart
+        @Config.RangeInt(min = 0, max = 100)
+        @Config.Comment({"How often turtles spawn on sandy beaches, against the other animals there (1.13: 5). 0 stops them",
+                "spawning naturally."})
+        @Config.LangKey("config.updateaquaticbackport.turtles.spawnWeight")
+        public int spawnWeight = 5;
     }
 
     public static final class Dolphins {

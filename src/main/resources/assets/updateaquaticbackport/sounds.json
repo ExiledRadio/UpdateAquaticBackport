@@ -164,5 +164,153 @@
       "updateaquaticbackport:step/coral5",
       "updateaquaticbackport:step/coral6"
     ]
+  },
+  "entity.turtle.ambient_land": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/turtle/idle1",
+        "volume": 0.8
+      },
+      {
+        "name": "updateaquaticbackport:mob/turtle/idle2",
+        "volume": 0.7
+      },
+      {
+        "name": "updateaquaticbackport:mob/turtle/idle3",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.ambient_land"
+  },
+  "entity.turtle.death": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/death1",
+      "updateaquaticbackport:mob/turtle/death2",
+      "updateaquaticbackport:mob/turtle/death3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.death"
+  },
+  "entity.turtle.death_baby": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/baby/death1",
+      "updateaquaticbackport:mob/turtle/baby/death2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.death_baby"
+  },
+  "entity.turtle.egg_break": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/egg/egg_break1",
+      "updateaquaticbackport:mob/turtle/egg/egg_break2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.egg_break"
+  },
+  "entity.turtle.egg_crack": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/egg/egg_crack1",
+      "updateaquaticbackport:mob/turtle/egg/egg_crack2",
+      "updateaquaticbackport:mob/turtle/egg/egg_crack3",
+      "updateaquaticbackport:mob/turtle/egg/egg_crack4",
+      "updateaquaticbackport:mob/turtle/egg/egg_crack5"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.egg_crack"
+  },
+  "entity.turtle.egg_hatch": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/baby/egg_hatched1",
+      "updateaquaticbackport:mob/turtle/baby/egg_hatched2",
+      "updateaquaticbackport:mob/turtle/baby/egg_hatched3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.egg_hatch"
+  },
+  "entity.turtle.hurt": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/hurt1",
+      "updateaquaticbackport:mob/turtle/hurt2",
+      "updateaquaticbackport:mob/turtle/hurt3",
+      "updateaquaticbackport:mob/turtle/hurt4",
+      "updateaquaticbackport:mob/turtle/hurt5"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.hurt"
+  },
+  "entity.turtle.hurt_baby": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/baby/hurt1",
+      "updateaquaticbackport:mob/turtle/baby/hurt2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.hurt_baby"
+  },
+  "entity.turtle.lay_egg": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/egg/drop_egg1",
+      "updateaquaticbackport:mob/turtle/egg/drop_egg2"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.lay_egg"
+  },
+  "entity.turtle.shamble": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/walk1",
+      "updateaquaticbackport:mob/turtle/walk2",
+      "updateaquaticbackport:mob/turtle/walk3",
+      "updateaquaticbackport:mob/turtle/walk4",
+      "updateaquaticbackport:mob/turtle/walk5"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.shamble"
+  },
+  "entity.turtle.shamble_baby": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/baby/shamble1",
+      "updateaquaticbackport:mob/turtle/baby/shamble2",
+      "updateaquaticbackport:mob/turtle/baby/shamble3",
+      "updateaquaticbackport:mob/turtle/baby/shamble4"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.shamble_baby"
+  },
+  "entity.turtle.swim": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/turtle/swim/swim1",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:mob/turtle/swim/swim2",
+        "volume": 0.3
+      },
+      {
+        "name": "updateaquaticbackport:mob/turtle/swim/swim3",
+        "volume": 0.2
+      },
+      {
+        "name": "updateaquaticbackport:mob/turtle/swim/swim4",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:mob/turtle/swim/swim5",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.turtle.swim"
+  },
+  "entity.zombie.destroy_egg": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/egg/jump_egg1",
+      "updateaquaticbackport:mob/turtle/egg/jump_egg2",
+      "updateaquaticbackport:mob/turtle/egg/jump_egg3",
+      "updateaquaticbackport:mob/turtle/egg/jump_egg4"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.zombie.destroy_egg"
+  },
+  "item.armor.equip_turtle": {
+    "sounds": [
+      "updateaquaticbackport:mob/turtle/armor",
+      {
+        "name": "updateaquaticbackport:mob/turtle/armor",
+        "pitch": 0.85
+      },
+      {
+        "name": "updateaquaticbackport:mob/turtle/armor",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.armor.equip_turtle"
   }
 }
