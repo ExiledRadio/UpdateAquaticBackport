@@ -155,3 +155,21 @@ config.updateaquaticbackport.bubbles.tooltip=Bubble columns over soul sand and m
 config.updateaquaticbackport.blocks.tooltip=Smaller 1.13 block and item changes: prismarine stairs and slabs, carved pumpkins, wood blocks and more.
 config.updateaquaticbackport.mobs.tooltip=1.13's changes to existing mobs.
 config.updateaquaticbackport.water.tooltip=How water looks and feels: biome water colors, underwater fog, air refilling, floating items.
+
+# --- dolphin ---
+config.updateaquaticbackport.dolphins.spawnWeight.tooltip=How often dolphins spawn in oceans, against the squid's 10. 0 stops natural spawning. Lukewarm and warm oceans get a fifth of this; cold and frozen oceans none.
+config.updateaquaticbackport.dolphins.spawnWeight=Spawn Weight
+death.attack.dryout.player=%1$s died from dehydration whilst trying to escape %2$s
+death.attack.dryout=%1$s died from dehydration
+effect.updateaquaticbackport.dolphins_grace=Dolphin's Grace
+entity.updateaquaticbackport.dolphin.name=Dolphin
+subtitles.updateaquaticbackport.entity.dolphin.ambient=Dolphin chirps
+subtitles.updateaquaticbackport.entity.dolphin.ambient_water=Dolphin whistles
+subtitles.updateaquaticbackport.entity.dolphin.attack=Dolphin attacks
+subtitles.updateaquaticbackport.entity.dolphin.death=Dolphin dies
+subtitles.updateaquaticbackport.entity.dolphin.eat=Dolphin eats
+subtitles.updateaquaticbackport.entity.dolphin.hurt=Dolphin hurts
+subtitles.updateaquaticbackport.entity.dolphin.jump=Dolphin jumps
+subtitles.updateaquaticbackport.entity.dolphin.play=Dolphin plays
+subtitles.updateaquaticbackport.entity.dolphin.splash=Dolphin splashes
+subtitles.updateaquaticbackport.entity.dolphin.swim=Dolphin swims
