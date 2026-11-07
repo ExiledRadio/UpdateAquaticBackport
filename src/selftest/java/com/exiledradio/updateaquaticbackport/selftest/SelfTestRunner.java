@@ -52,6 +52,7 @@ public final class SelfTestRunner {
             new DolphinSelfTest(),
             new PhantomSelfTest(),
             new TridentSelfTest(),
+            new ConduitSelfTest(),
     };
 
     private final List<String> wanted;

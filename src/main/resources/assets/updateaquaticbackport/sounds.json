@@ -1069,5 +1069,80 @@
       }
     ],
     "subtitle": "subtitles.updateaquaticbackport.entity.husk.converted_to_zombie"
+  },
+  "block.conduit.activate": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:block/conduit/activate",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.conduit.activate"
+  },
+  "block.conduit.ambient": {
+    "sounds": [
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/ambient"
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.conduit.ambient"
+  },
+  "block.conduit.ambient.short": {
+    "sounds": [
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short1"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short2"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short3"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short4"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short5"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short6"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short7"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short8"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "updateaquaticbackport:block/conduit/short9"
+      }
+    ]
+  },
+  "block.conduit.attack.target": {
+    "sounds": [
+      "updateaquaticbackport:block/conduit/attack1",
+      "updateaquaticbackport:block/conduit/attack2",
+      "updateaquaticbackport:block/conduit/attack3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.conduit.attack.target"
+  },
+  "block.conduit.deactivate": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:block/conduit/deactivate",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.block.conduit.deactivate"
   }
 }

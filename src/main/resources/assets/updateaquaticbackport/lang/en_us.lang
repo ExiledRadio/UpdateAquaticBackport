@@ -342,3 +342,13 @@ subtitles.updateaquaticbackport.item.trident.return=Trident returns
 subtitles.updateaquaticbackport.item.trident.riptide=Trident zooms
 subtitles.updateaquaticbackport.item.trident.throw=Trident clangs
 subtitles.updateaquaticbackport.item.trident.thunder=Trident thunder cracks
+
+# --- conduit ---
+effect.updateaquaticbackport.conduit_power=Conduit Power
+item.updateaquaticbackport.heart_of_the_sea.name=Heart of the Sea
+item.updateaquaticbackport.nautilus_shell.name=Nautilus Shell
+tile.updateaquaticbackport.conduit.name=Conduit
+subtitles.updateaquaticbackport.block.conduit.activate=Conduit activates
+subtitles.updateaquaticbackport.block.conduit.ambient=Conduit pulses
+subtitles.updateaquaticbackport.block.conduit.attack.target=Conduit attacks
+subtitles.updateaquaticbackport.block.conduit.deactivate=Conduit deactivates
