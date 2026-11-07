@@ -6,7 +6,6 @@ import com.exiledradio.updateaquaticbackport.common.Content;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -27,7 +26,8 @@ import java.util.List;
  *
  * <p>Registers the seven biomes, declares each to {@link OceanKind} so every stream's generation follows
  * it, and turns on the generation hooks in {@link OceanTerrain}. Vanilla's ocean and deep ocean become
- * 1.13's "normal" temperature: in a world with these biomes, that is exactly where they still generate.
+ * 1.13's "normal" temperature in chunks these biomes' map made: that is exactly where they still generate
+ * ({@link OceanChunks}).
  * Off ({@code oceans.enabled}), nothing is registered and no hook runs.
  *
  * <p>Biome names: 1.12.2 has no translation for biome names (vanilla's are English strings too, shown only
@@ -130,9 +130,9 @@ public final class OceanContent {
         register(event, "frozen_ocean", frozen, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SNOWY);
         register(event, "deep_frozen_ocean", deepFrozen, BiomeDictionary.Type.COLD);
 
-        // With these biomes in the map, vanilla's oceans are exactly 1.13's "normal" ones.
-        OceanKind.register(Biomes.OCEAN, OceanKind.NORMAL);
-        OceanKind.register(Biomes.DEEP_OCEAN, OceanKind.NORMAL);
+        // Where these biomes are in the map, vanilla's oceans are exactly 1.13's "normal" ones; chunks made
+        // before (or by a map these layers do not reach) keep the noise.
+        OceanChunks.install();
 
         // Worldgen hooks that are not registry events: this event comes before any world exists.
         MinecraftForge.TERRAIN_GEN_BUS.register(OceanTerrain.Generation.class);

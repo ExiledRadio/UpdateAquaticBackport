@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Bootstrap;
 import net.minecraft.init.Items;
@@ -53,8 +54,9 @@ import java.util.Map;
  *       reads crafting recipes cuts them on its own.</li>
  *   <li>The carved pumpkin ({@link BlockCarvedPumpkin}), carved with shears ({@link PumpkinCarving});
  *       jack o'lanterns are made from it, golems built with it, dispensers place it on a golem's body
- *       or put it on a head; the plain pumpkin loses its face (client) and its golems
- *       ({@link PlacementRules}).</li>
+ *       or put it on a head, and it is what calms endermen ({@link EndermanStare}); the plain pumpkin
+ *       loses its face (client), its golems and its place on the head ({@link BlocksHooks}, patched
+ *       in by package {@code asm}).</li>
  *   <li>Wood ({@link ItemWood}): 4 logs make 3, as vanilla's hidden all-bark log; 4 planks, charcoal,
  *       fuel and {@code logWood} like a log.</li>
  *   <li>Packed ice from 9 ice; the debug stick ({@link ItemDebugStick}); the undyed shulker box
@@ -163,6 +165,8 @@ public final class BlocksContent {
             DOUBLES.put(p.getKey(), full);
         }
         carvedPumpkin = Content.block(registry, "carved_pumpkin", new BlockCarvedPumpkin(), "axe");
+        // 1.13's enderman_holdable tag has the carved pumpkin beside the pumpkin.
+        EntityEnderman.setCarriable(carvedPumpkin, true);
         shulkerBox = Content.block(registry, "shulker_box", new BlockUndyedShulkerBox(), "pickaxe");
         GameRegistry.registerTileEntity(TileEntityUndyedShulkerBox.class, Content.id("shulker_box"));
     }

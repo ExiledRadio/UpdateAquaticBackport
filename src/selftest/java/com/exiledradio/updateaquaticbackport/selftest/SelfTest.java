@@ -7,4 +7,9 @@ public interface SelfTest {
     String name();
 
     void run(Check check) throws Exception;
+
+    /** @return false for a test that runs only when asked for by name, never as part of {@code all} */
+    default boolean inAll() {
+        return true;
+    }
 }

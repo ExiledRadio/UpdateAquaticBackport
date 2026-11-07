@@ -36,8 +36,7 @@ import java.util.List;
  * pumpkin), and the placement then follows {@code ItemBlock.onItemUse} inside the same block-snapshot
  * capture as {@code ForgeHooks.onPlaceItemIntoWorld}: the same {@link BlockEvent.PlaceEvent} for
  * protection mods, the same undo when it is cancelled, the same sound, statistic and advancement trigger.
- * Two things differ, each the reason for using this class: the block's own support rule is not asked, and
- * {@code onBlockAdded} can be skipped.
+ * One thing differs, the reason for using this class: the block's own support rule is not asked.
  */
 final class Placement {
 
@@ -97,12 +96,9 @@ final class Placement {
     /**
      * Places the held item block at {@code pos} (server side only).
      *
-     * @param runOnAdded false to set the block without its {@code onBlockAdded} (a plain pumpkin there
-     *                   would otherwise build a golem)
      * @return SUCCESS whether or not a protection mod refused it, as vanilla's item reports
      */
-    static EnumActionResult place(EntityPlayer player, World world, BlockPos pos, EnumFacing face, EnumHand hand, float[] hit,
-                                  boolean runOnAdded) {
+    static EnumActionResult place(EntityPlayer player, World world, BlockPos pos, EnumFacing face, EnumHand hand, float[] hit) {
         ItemStack stack = player.getHeldItem(hand);
         ItemBlock item = (ItemBlock) stack.getItem();
         Block block = item.getBlock();
@@ -135,7 +131,7 @@ final class Placement {
         }
         for (BlockSnapshot snapshot : snapshots) {
             IBlockState now = world.getBlockState(snapshot.getPos());
-            if (runOnAdded && !now.getBlock().hasTileEntity(now)) {
+            if (!now.getBlock().hasTileEntity(now)) {
                 now.getBlock().onBlockAdded(world, snapshot.getPos(), now);
             }
             world.markAndNotifyBlock(snapshot.getPos(), null, snapshot.getReplacedBlock(), now, snapshot.getFlag());
