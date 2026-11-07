@@ -431,3 +431,6 @@ config.updateaquaticbackport.mobs.parrotsImitate=Parrots Imitate
 config.updateaquaticbackport.mobs.parrotsImitate.tooltip=Parrots imitate phantoms and drowned when those mobs are in the game.
 config.updateaquaticbackport.mobs.skeletonHorsesUnderwater=Skeleton Horses Underwater
 config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Skeleton horses keep their rider under water, move faster there than other horses, and make their own sounds under water.
+
+# --- structure ---
+filled_map.buried_treasure=Buried Treasure Map
