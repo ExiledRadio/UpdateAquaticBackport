@@ -36,6 +36,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -56,6 +57,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -508,6 +510,47 @@ public final class MobsSelfTest implements SelfTest {
 
     // ---------------------------------------------------------------------------------------------- parrots
 
+    private static final String BUZZY_BEES = "buzzybeesbackport";
+
+    /** 1.12.2's {@code EntityParrot} static block. */
+    private static final Map<Class<? extends Entity>, SoundEvent> VANILLA_IMITATIONS = new java.util.LinkedHashMap<Class<? extends Entity>, SoundEvent>();
+    private static final java.util.Set<Class<? extends Entity>> DROPPED_IN_1_15 = new java.util.HashSet<Class<? extends Entity>>();
+
+    static {
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityBlaze.class, SoundEvents.E_PARROT_IM_BLAZE);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityCaveSpider.class, SoundEvents.E_PARROT_IM_SPIDER);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityCreeper.class, SoundEvents.E_PARROT_IM_CREEPER);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityElderGuardian.class, SoundEvents.E_PARROT_IM_ELDER_GUARDIAN);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.boss.EntityDragon.class, SoundEvents.E_PARROT_IM_ENDERDRAGON);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityEnderman.class, SoundEvents.E_PARROT_IM_ENDERMAN);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityEndermite.class, SoundEvents.E_PARROT_IM_ENDERMITE);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityEvoker.class, SoundEvents.E_PARROT_IM_EVOCATION_ILLAGER);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityGhast.class, SoundEvents.E_PARROT_IM_GHAST);
+        VANILLA_IMITATIONS.put(EntityHusk.class, SoundEvents.E_PARROT_IM_HUSK);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityIllusionIllager.class, SoundEvents.E_PARROT_IM_ILLUSION_ILLAGER);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityMagmaCube.class, SoundEvents.E_PARROT_IM_MAGMACUBE);
+        VANILLA_IMITATIONS.put(EntityPigZombie.class, SoundEvents.E_PARROT_IM_ZOMBIE_PIGMAN);
+        VANILLA_IMITATIONS.put(EntityPolarBear.class, SoundEvents.E_PARROT_IM_POLAR_BEAR);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityShulker.class, SoundEvents.E_PARROT_IM_SHULKER);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntitySilverfish.class, SoundEvents.E_PARROT_IM_SILVERFISH);
+        VANILLA_IMITATIONS.put(EntitySkeleton.class, SoundEvents.E_PARROT_IM_SKELETON);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntitySlime.class, SoundEvents.E_PARROT_IM_SLIME);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntitySpider.class, SoundEvents.E_PARROT_IM_SPIDER);
+        VANILLA_IMITATIONS.put(EntityStray.class, SoundEvents.E_PARROT_IM_STRAY);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityVex.class, SoundEvents.E_PARROT_IM_VEX);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityVindicator.class, SoundEvents.E_PARROT_IM_VINDICATION_ILLAGER);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.monster.EntityWitch.class, SoundEvents.E_PARROT_IM_WITCH);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.boss.EntityWither.class, SoundEvents.E_PARROT_IM_WITHER);
+        VANILLA_IMITATIONS.put(EntityWitherSkeleton.class, SoundEvents.E_PARROT_IM_WITHER_SKELETON);
+        VANILLA_IMITATIONS.put(net.minecraft.entity.passive.EntityWolf.class, SoundEvents.E_PARROT_IM_WOLF);
+        VANILLA_IMITATIONS.put(EntityZombie.class, SoundEvents.E_PARROT_IM_ZOMBIE);
+        VANILLA_IMITATIONS.put(EntityZombieVillager.class, SoundEvents.E_PARROT_IM_ZOMBIE_VILLAGER);
+        DROPPED_IN_1_15.add(net.minecraft.entity.monster.EntityEnderman.class);
+        DROPPED_IN_1_15.add(EntityPolarBear.class);
+        DROPPED_IN_1_15.add(net.minecraft.entity.passive.EntityWolf.class);
+        DROPPED_IN_1_15.add(EntityPigZombie.class);
+    }
+
     @SuppressWarnings("unchecked")
     private static void parrots(Check c) {
         c.ok(ModConfig.mobs.parrotsImitate, "parrot imitation on");
@@ -523,7 +566,18 @@ public final class MobsSelfTest implements SelfTest {
                 c.ok(mimic.get(mob) == sounds[i], "parrots imitate the " + names[i] + " with " + sounds[i].getRegistryName());
             }
         }
-        c.ok(mimic.get(EntityZombie.class) != null && mimic.size() >= 27, "vanilla's imitations are untouched (" + mimic.size() + ")");
+        // Vanilla 1.12.2's 28, each with its own sound. Buzzy Bees Backport takes out the four neutral mobs as 1.15
+        // did (endermen, polar bears, wolves, zombie pigmen); every other entry stays whatever else is installed.
+        int vanilla = 0;
+        for (Map.Entry<Class<? extends Entity>, SoundEvent> e : VANILLA_IMITATIONS.entrySet()) {
+            SoundEvent now = mimic.get(e.getKey());
+            if (now == null && DROPPED_IN_1_15.contains(e.getKey()) && Loader.isModLoaded(BUZZY_BEES)) {
+                continue;
+            }
+            vanilla++;
+            c.ok(now == e.getValue(), "parrots still imitate the " + e.getKey().getSimpleName() + " with vanilla's sound");
+        }
+        c.ok(vanilla >= 24, "vanilla's imitations are untouched (" + vanilla + " of 28 here, " + mimic.size() + " in all)");
         c.ok(ParrotImitation.ourMob("no_such_mob") == null, "an unknown name finds nothing");
         ResourceLocation pig = new ResourceLocation("minecraft", "pig");
         c.ok(ForgeRegistries.ENTITIES.getValue(pig) != null && ParrotImitation.ourMob("pig") == null,

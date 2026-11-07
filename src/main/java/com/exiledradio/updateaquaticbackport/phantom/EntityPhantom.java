@@ -1,12 +1,9 @@
 package com.exiledradio.updateaquaticbackport.phantom;
 
-import com.exiledradio.updateaquaticbackport.common.Owners;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityBodyHelper;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -17,9 +14,7 @@ import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -29,7 +24,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -40,7 +34,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -78,8 +71,6 @@ public class EntityPhantom extends EntityFlying implements IMob {
 
     /** 1.14's cat check distance. */
     public static final double CAT_RANGE = 16.0D;
-
-    private static final ResourceLocation FAMILY_CAT = new ResourceLocation(Owners.VILLAGE_AND_PILLAGE, "cat");
 
     enum AttackPhase {
         CIRCLE,
@@ -185,6 +176,8 @@ public class EntityPhantom extends EntityFlying implements IMob {
 
     @Override
     public void onLivingUpdate() {
+        // The update event is over; a handler that threw must not leave the target hidden.
+        this.targetHidden = false;
         if (this.isEntityAlive() && this.isInDaylight()) {
             this.setFire(8);
         }
@@ -316,26 +309,32 @@ public class EntityPhantom extends EntityFlying implements IMob {
 
     /**
      * The cats within 16 blocks: 1.12.2's tamed ocelots (its cats), and Village &amp; Pillage's cats when that
-     * mod is installed (it makes its own cats hiss; tamed ocelots hiss here).
+     * mod is installed ({@link FamilyCats}).
      */
     List<EntityLiving> nearbyCats() {
-        AxisAlignedBB box = this.getEntityBoundingBox().grow(CAT_RANGE);
-        List<EntityLiving> cats = new ArrayList<EntityLiving>();
-        Class<? extends Entity> familyCat = Owners.present(Owners.VILLAGE_AND_PILLAGE) ? EntityList.getClass(FAMILY_CAT) : null;
-        if (familyCat != null && EntityLiving.class.isAssignableFrom(familyCat)) {
-            for (Entity cat : this.world.getEntitiesWithinAABB(familyCat, box)) {
-                if (cat.isEntityAlive()) {
-                    cats.add((EntityLiving) cat);
-                }
-            }
-        } else {
-            for (EntityOcelot cat : this.world.getEntitiesWithinAABB(EntityOcelot.class, box)) {
-                if (cat.isEntityAlive() && cat.isTamed()) {
-                    cats.add(cat);
-                }
-            }
-        }
-        return cats;
+        return FamilyCats.catsIn(this, this.getEntityBoundingBox().grow(CAT_RANGE));
+    }
+
+    /**
+     * While true, {@link #getAttackTarget} reads null: set only around other mods' update-event handlers, on
+     * the ticks Village &amp; Pillage's generic phantom fear would act ({@link FamilyCats}).
+     */
+    private boolean targetHidden;
+
+    void hideTargetFromOthers(boolean hide) {
+        this.targetHidden = hide;
+    }
+
+    /** The target, whatever other mods are being shown. */
+    @Nullable
+    EntityLivingBase realAttackTarget() {
+        return super.getAttackTarget();
+    }
+
+    @Override
+    @Nullable
+    public EntityLivingBase getAttackTarget() {
+        return this.targetHidden ? null : super.getAttackTarget();
     }
 
     // ------------------------------------------------------------------------------------------
@@ -590,9 +589,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
                 List<EntityLiving> cats = this.phantom.nearbyCats();
                 if (!cats.isEmpty()) {
                     for (EntityLiving cat : cats) {
-                        if (cat instanceof EntityOcelot) {
-                            cat.playSound(SoundEvents.ENTITY_CAT_HISS, 1.0F, 1.0F);
-                        }
+                        FamilyCats.hiss(cat);
                     }
                     return false;
                 }
