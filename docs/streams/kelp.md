@@ -67,3 +67,5 @@ errors**.
     drawn from the side).
 *   Sounds playing.
 *   Composting (needs the composter's mod; the calls are made in `init` when it is present).
+
+> **Since waterlogging (stream Wl, 2026-11-07):** these blocks no longer use `common/BlockPseudoWater`; they hold real water through Backport Core's `Waterloggable` adapter over Fluidlogged API. See `docs/streams/waterlog.md`.

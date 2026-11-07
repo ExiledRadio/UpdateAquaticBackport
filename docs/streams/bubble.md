@@ -120,3 +120,5 @@ or packets used (45-49 and 55-59 stay free).
 *   Languages: `en_us.lang` lines come from `tools/bubble/generate.py` (block name, four subtitles, the
     `generate` config name and tooltip). The other 17 languages were not written here; run the family's
     language tool (`tools/lang/build_langs.py`, on `ua-languages`) after merge.
+
+> **Since waterlogging (stream Wl, 2026-11-07):** these blocks no longer use `common/BlockPseudoWater`; they hold real water through Backport Core's `Waterloggable` adapter over Fluidlogged API. See `docs/streams/waterlog.md`.

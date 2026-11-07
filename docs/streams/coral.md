@@ -60,3 +60,5 @@ across all four tests, the one failure a test-site choice since fixed (coral alo
 *   A sea pickle of the owner's in reefs (the owner cannot be loaded beside these tests' world without the
     owner remap described in `woodset.md`); the code path is the same lookup the owner-present woodset test
     covers.
+
+> **Since waterlogging (stream Wl, 2026-11-07):** these blocks no longer use `common/BlockPseudoWater`; they hold real water through Backport Core's `Waterloggable` adapter over Fluidlogged API. See `docs/streams/waterlog.md`.

@@ -151,10 +151,12 @@ Kelp forests grow in every ocean except warm and frozen ones; seagrass grows eve
 *   **Buried treasure** under beaches: one chest, buried in sand on the stone below, with a **heart of the sea**, iron, gold, emeralds, diamonds, prismarine crystals, TNT, cooked fish and potions of Water Breathing.
 *   **Buried treasure maps** in shipwreck map chests and ocean ruin chests: they show the land around the nearest buried treasure, marked with a **red X**.
 
-<!-- PENDING: Wl -->
 ## Waterlogging
 
-*Placeholder: which blocks hold water, and how buckets and flowing water work with them.*
+*   **Waterlogging, as in 1.13**: kelp, seagrass, coral, coral fans, conduits, bubble columns and prismarine stairs and slabs hold the water they are in. The water is drawn around them, flows out of them into open space, and buckets fill and empty the ones that may be dry.
+*   **Kelp, seagrass and bubble columns always hold water**: drain them and they go with it. An empty bucket aimed at kelp or seagrass does nothing, as in 1.13; one aimed at a bubble column takes its water and leaves air. Kelp and seagrass can be placed in falling water, which becomes a source.
+*   **Coral, coral fans and conduits** may be dry or in water: a coral drained of its water dies a few seconds later.
+*   Light passes through all of them exactly as through the water around them, and squid, fish, dolphins and drowned spawn in the water of a kelp forest or a reef.
 
 ## Swimming and crawling
 

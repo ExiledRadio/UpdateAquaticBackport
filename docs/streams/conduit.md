@@ -115,3 +115,5 @@ models, 75 sound files, 0 errors**.
 *   Sounds playing (the events are registered and their files checked by `check_assets.py`).
 *   The client predicting breath and mining speed for its own player (the same event code runs there).
 *   Fishing with a real rod (the loot table itself is tested).
+
+> **Since waterlogging (stream Wl, 2026-11-07):** these blocks no longer use `common/BlockPseudoWater`; they hold real water through Backport Core's `Waterloggable` adapter over Fluidlogged API. See `docs/streams/waterlog.md`.
