@@ -274,7 +274,7 @@ subtitles.updateaquaticbackport.item.armor.equip_turtle=Turtle Shell thunks
 # --- dolphin ---
 config.updateaquaticbackport.dolphins.spawnWeight.tooltip=How often dolphins spawn in oceans, against the squid's 10. 0 stops natural spawning. Lukewarm and warm oceans get a fifth of this; cold and frozen oceans none.
 config.updateaquaticbackport.dolphins.spawnWeight=Spawn Weight
-death.attack.dryout.player=%1$s died from dehydration whilst trying to escape %2$s
+death.attack.dryout.player=%1$s died from dehydration while trying to escape %2$s
 death.attack.dryout=%1$s died from dehydration
 effect.updateaquaticbackport.dolphins_grace=Dolphin's Grace
 entity.updateaquaticbackport.dolphin.name=Dolphin

@@ -43,7 +43,8 @@ lang = [
     "entity.%s.dolphin.name=%s" % (M, assets.name("entity.minecraft.dolphin")),
     "effect.%s.dolphins_grace=%s" % (M, assets.name("effect.minecraft.dolphins_grace")),
     "death.attack.dryout=%s" % assets.name("death.attack.dryout"),
-    "death.attack.dryout.player=%s" % assets.name("death.attack.dryout.player"),
+    # Current Java's wording (1.18's said "whilst"; the family writes American English and the newest names).
+    "death.attack.dryout.player=%1$s died from dehydration while trying to escape %2$s",
     # Our own: the config option this stream adds (its comment, as the config screen's tooltip).
     "config.%s.dolphins.spawnWeight=Spawn Weight" % M,
     "config.%s.dolphins.spawnWeight.tooltip=How often dolphins spawn in oceans, against the squid's 10. 0 stops "
