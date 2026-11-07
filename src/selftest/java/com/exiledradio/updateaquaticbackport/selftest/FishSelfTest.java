@@ -86,7 +86,7 @@ public final class FishSelfTest implements SelfTest {
     public void run(Check c) throws Exception {
         WorldServer world = c.world;
         MinecraftServer server = world.getMinecraftServer();
-        this.idleTime = net.minecraft.entity.EntityLivingBase.class.getDeclaredField("idleTime");
+        this.idleTime = net.minecraftforge.fml.relauncher.ReflectionHelper.findField(net.minecraft.entity.EntityLivingBase.class, "idleTime", "field_70708_bq");
         this.idleTime.setAccessible(true);
 
         // 1. registration ---------------------------------------------------------------------------
@@ -506,7 +506,7 @@ public final class FishSelfTest implements SelfTest {
         c.ok(poison != null && poison.getDuration() >= 118, "and poisoned for 6 seconds: " + poison);
 
         // Sting: a player touching it.
-        Field invulnerable = EntityPlayerMP.class.getDeclaredField("respawnInvulnerabilityTicks");
+        Field invulnerable = net.minecraftforge.fml.relauncher.ReflectionHelper.findField(EntityPlayerMP.class, "respawnInvulnerabilityTicks", "field_147101_bU");
         invulnerable.setAccessible(true);
         invulnerable.setInt(player, 0);
         player.setHealth(20.0F);

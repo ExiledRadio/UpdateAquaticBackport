@@ -352,7 +352,7 @@ public final class OceanSelfTest implements SelfTest {
         if (!c.ok(gen instanceof ChunkGeneratorOverworld, "overworld generator: " + gen)) {
             return;
         }
-        Object ravine = ReflectionHelper.getPrivateValue(ChunkGeneratorOverworld.class, (ChunkGeneratorOverworld) gen, "ravineGenerator");
+        Object ravine = ReflectionHelper.getPrivateValue(ChunkGeneratorOverworld.class, (ChunkGeneratorOverworld) gen, "ravineGenerator", "field_185979_A");
         c.ok(ravine instanceof UnderwaterCarvers, "ravine generator wrapped by the underwater carvers: " + ravine);
         Object monument = ReflectionHelper.getPrivateValue(ChunkGeneratorOverworld.class, (ChunkGeneratorOverworld) gen, "oceanMonumentGenerator");
         c.ok(monument instanceof StructureOceanMonument && monument.getClass() != StructureOceanMonument.class,
