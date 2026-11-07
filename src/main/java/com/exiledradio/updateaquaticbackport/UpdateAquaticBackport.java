@@ -45,6 +45,7 @@ public final class UpdateAquaticBackport {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         NetworkHandler.init();
+        com.exiledradio.updateaquaticbackport.structure.StructureContent.preInit();
 
         // Client-only setup lives in a class a dedicated server never loads. The call names no client
         // type, so this class verifies on a server - a guarded method here would not.
@@ -57,6 +58,7 @@ public final class UpdateAquaticBackport {
     public void init(FMLInitializationEvent event) {
         com.exiledradio.updateaquaticbackport.common.Compat.init();
         com.exiledradio.updateaquaticbackport.trident.TridentContent.init();
+        com.exiledradio.updateaquaticbackport.structure.StructureContent.init();
     }
 
     @Mod.EventHandler

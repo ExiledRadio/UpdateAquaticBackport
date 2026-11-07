@@ -404,11 +404,21 @@ public final class DolphinSelfTest implements SelfTest {
         low.setAir(90);
         tick(low, 4);
         c.eq(BlockPos.ORIGIN, low.getTreasurePos(), "under 100 air it does not look for treasure");
-        Structures.unregister(Structures.SHIPWRECK);
-        Structures.unregister(Structures.OCEAN_RUIN);
+        // Puts back the real locators (Backport Core's, for the structure stream's shipwrecks and ruins).
+        restoreLocator(Structures.SHIPWRECK);
+        restoreLocator(Structures.OCEAN_RUIN);
         d.setDead();
         guide.setDead();
         low.setDead();
+    }
+
+    /** The locator ScatteredStructure.register gives a kind, so later tests find real structures again. */
+    private static void restoreLocator(String kind) {
+        Structures.register(kind, (w, from, radius) -> {
+            com.exiledradio.backportcore.structure.ScatteredStructure s =
+                    com.exiledradio.backportcore.structure.ScatteredStructure.of(w, kind);
+            return s == null ? null : s.nearest(w, from, radius);
+        });
     }
 
     private void grace() {
