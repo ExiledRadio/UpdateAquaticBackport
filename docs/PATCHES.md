@@ -80,6 +80,16 @@ under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin` or `BlockLog`
     item; an upright log of each type still picks its log with the right metadata; stone picks stone. The
     client's middle click itself (`ForgeHooks.onPickBlock`) is not run headlessly.
 
+## Not in this coremod: swimming and crawling
+
+Swimming and crawling (stream Sw, `docs/streams/swim.md`) add no transformer here. The pose engine they run
+on is shared family code in Backport Core 1.2.0, which has its own coremod in its own jar
+(`com.exiledradio.backportcore.asm.BackportCorePlugin`) with the five patches swimming needs: water travel
+(`EntityLivingBase.travel`), the client sprint rules (`EntityPlayerSP.onLivingUpdate`), the biped swim
+stroke (`ModelBiped.setRotationAngles`), the body turn (`RenderPlayer.applyRotations`) and the camera's eye
+height (`EntityRenderer.orientCamera`). They are documented, with their tests, in Backport Core's
+`docs/PATCHES.md`. This mod only registers its rules with that engine.
+
 ## Not a patch: endermen
 
 Endermen calmed by a carved pumpkin rather than a plain one (`blocks/EndermanStare`) replace the

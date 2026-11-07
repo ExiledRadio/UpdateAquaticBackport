@@ -434,3 +434,11 @@ config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Skeleton hors
 
 # --- structure ---
 filled_map.buried_treasure=Buried Treasure Map
+
+# --- swim ---
+config.updateaquaticbackport.swimming=Swimming and Crawling
+config.updateaquaticbackport.swimming.tooltip=Swimming and crawling: sprint under water to swim, and crawl where there is no room to stand.
+config.updateaquaticbackport.swimming.enabled=Swimming
+config.updateaquaticbackport.swimming.enabled.tooltip=Sprint with your head under water to swim: you lie flat in a 0.6-block-tall shape, move faster and follow where you look, and fit through one-block gaps. On a server, the server's setting counts.
+config.updateaquaticbackport.swimming.crawling=Crawling
+config.updateaquaticbackport.swimming.crawling.tooltip=With no room to stand or sneak, you crawl instead, flat on the ground at sneaking speed, until there is room again: after swimming into a one-block gap, or under a closed trapdoor.

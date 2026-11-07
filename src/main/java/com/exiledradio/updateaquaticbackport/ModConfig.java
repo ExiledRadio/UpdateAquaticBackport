@@ -83,6 +83,10 @@ public final class ModConfig {
     @Config.Comment("How water looks and feels: biome water colors, underwater fog, air refilling, floating items.")
     public static final Water water = new Water();
 
+    @Config.LangKey("config.updateaquaticbackport.swimming")
+    @Config.Comment("Swimming and crawling: sprint under water to swim, and crawl where there is no room to stand.")
+    public static final Swimming swimming = new Swimming();
+
     // ------------------------------------------------------------------------------------------
     // Categories. Each stream owns exactly one.
     // ------------------------------------------------------------------------------------------
@@ -317,6 +321,18 @@ public final class ModConfig {
         @Config.Comment("Jumping in shallow flowing water is a normal jump instead of swimming up slowly.")
         @Config.LangKey("config.updateaquaticbackport.water.shallowJump")
         public boolean shallowJump = true;
+    }
+
+    public static final class Swimming {
+        @Config.Comment({"Sprint with your head under water to swim: you lie flat in a 0.6-block-tall shape, move faster",
+                "and follow where you look, and fit through one-block gaps. On a server, the server's setting counts."})
+        @Config.LangKey("config.updateaquaticbackport.swimming.enabled")
+        public boolean enabled = true;
+
+        @Config.Comment({"With no room to stand or sneak, you crawl instead, flat on the ground at sneaking speed, until",
+                "there is room again: after swimming into a one-block gap, or under a closed trapdoor."})
+        @Config.LangKey("config.updateaquaticbackport.swimming.crawling")
+        public boolean crawling = true;
     }
 
     // ------------------------------------------------------------------------------------------

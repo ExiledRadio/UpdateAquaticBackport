@@ -60,6 +60,7 @@ public final class SelfTestRunner {
             new MobsSelfTest(),
             new StructureSelfTest(),
             new OceanLegacySelfTest(),
+            new SwimSelfTest(),
     };
 
     private final List<String> wanted;
