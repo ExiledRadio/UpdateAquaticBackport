@@ -1,0 +1,60 @@
+{
+  "parent": "updateaquaticbackport:husbandry/fishy_business",
+  "display": {
+    "icon": {
+      "item": "updateaquaticbackport:pufferfish_bucket"
+    },
+    "title": {
+      "translate": "advancements.updateaquaticbackport.husbandry.tactical_fishing.title"
+    },
+    "description": {
+      "translate": "advancements.updateaquaticbackport.husbandry.tactical_fishing.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cod_bucket": {
+      "trigger": "updateaquaticbackport:filled_bucket",
+      "conditions": {
+        "item": {
+          "item": "updateaquaticbackport:cod_bucket"
+        }
+      }
+    },
+    "salmon_bucket": {
+      "trigger": "updateaquaticbackport:filled_bucket",
+      "conditions": {
+        "item": {
+          "item": "updateaquaticbackport:salmon_bucket"
+        }
+      }
+    },
+    "pufferfish_bucket": {
+      "trigger": "updateaquaticbackport:filled_bucket",
+      "conditions": {
+        "item": {
+          "item": "updateaquaticbackport:pufferfish_bucket"
+        }
+      }
+    },
+    "tropical_fish_bucket": {
+      "trigger": "updateaquaticbackport:filled_bucket",
+      "conditions": {
+        "item": {
+          "item": "updateaquaticbackport:tropical_fish_bucket"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cod_bucket",
+      "salmon_bucket",
+      "pufferfish_bucket",
+      "tropical_fish_bucket"
+    ]
+  ]
+}

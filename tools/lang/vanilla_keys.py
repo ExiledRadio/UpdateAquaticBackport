@@ -24,6 +24,13 @@ SPECIAL = {
     # 1.13 renamed vanilla's own wooden trapdoor and pressure plate once the other woods had theirs.
     "tile.trapdoor.name": "block.minecraft.oak_trapdoor",
     "tile.pressurePlateWood.name": "block.minecraft.oak_pressure_plate",
+    # 1.13 renamed 1.12.2's raw fish (fish stream).
+    "item.fish.cod.raw.name": "item.minecraft.cod",
+    "item.fish.cod.cooked.name": "item.minecraft.cooked_cod",
+    "item.fish.salmon.raw.name": "item.minecraft.salmon",
+    "item.fish.salmon.cooked.name": "item.minecraft.cooked_salmon",
+    "item.fish.clownfish.raw.name": "item.minecraft.tropical_fish",
+    "item.fish.pufferfish.raw.name": "item.minecraft.pufferfish",
 }
 
 
@@ -39,6 +46,14 @@ def candidates(key):
         return ["item.minecraft." + name, "block.minecraft." + name]
     if key.startswith("subtitles.%s." % M):
         return ["subtitles." + key[len("subtitles.%s." % M):]]
+    # Entities (entity.<modid>.cod.name) and their sub-keys (entity.<modid>.tropical_fish.type.kob).
+    if key.startswith("entity.%s." % M):
+        rest = key[len("entity.%s." % M):]
+        return ["entity.minecraft." + (rest[:-len(".name")] if rest.endswith(".name") else rest)]
+    if key.startswith("advancements.%s." % M):
+        return ["advancements." + key[len("advancements.%s." % M):]]
+    if key.startswith("color.%s." % M):
+        return ["color.minecraft." + key[len("color.%s." % M):]]
     return []
 
 
