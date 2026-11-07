@@ -413,3 +413,21 @@ config.updateaquaticbackport.water.floatingItems=Floating Items and Orbs
 config.updateaquaticbackport.water.floatingItems.tooltip=Dropped items and experience orbs float up in water instead of sinking. Checks every loaded item and orb once a tick.
 config.updateaquaticbackport.water.shallowJump=Jump in Shallow Water
 config.updateaquaticbackport.water.shallowJump.tooltip=Jumping in shallow flowing water is a normal jump instead of swimming up slowly.
+
+# --- mobs ---
+subtitles.updateaquaticbackport.entity.parrot.imitate.drowned=Parrot gurgles
+subtitles.updateaquaticbackport.entity.parrot.imitate.phantom=Parrot screeches
+subtitles.updateaquaticbackport.entity.skeleton_horse.swim=Skeleton Horse swims
+subtitles.updateaquaticbackport.entity.squid.squirt=Squid shoots ink
+config.updateaquaticbackport.mobs.undeadSink=Undead Sink
+config.updateaquaticbackport.mobs.undeadSink.tooltip=Zombies, skeletons and their kinds, and skeleton and zombie horses, sink in water instead of swimming to the surface, and no undead mob drowns.
+config.updateaquaticbackport.mobs.babyZombiesBurn=Baby Zombies Burn
+config.updateaquaticbackport.mobs.babyZombiesBurn.tooltip=Baby zombies burn in daylight like adult ones.
+config.updateaquaticbackport.mobs.squidInk=Squid Ink
+config.updateaquaticbackport.mobs.squidInk.tooltip=A squid that is hurt squirts a cloud of ink and swims away from whatever hurt it.
+config.updateaquaticbackport.mobs.polarBearsOnIce=Polar Bears on Ice
+config.updateaquaticbackport.mobs.polarBearsOnIce.tooltip=Polar bears spawn on the ice of frozen oceans.
+config.updateaquaticbackport.mobs.parrotsImitate=Parrots Imitate
+config.updateaquaticbackport.mobs.parrotsImitate.tooltip=Parrots imitate phantoms and drowned when those mobs are in the game.
+config.updateaquaticbackport.mobs.skeletonHorsesUnderwater=Skeleton Horses Underwater
+config.updateaquaticbackport.mobs.skeletonHorsesUnderwater.tooltip=Skeleton horses keep their rider under water, move faster there than other horses, and make their own sounds under water.

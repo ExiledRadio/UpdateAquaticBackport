@@ -1311,5 +1311,132 @@
       "updateaquaticbackport:ambient/underwater/additions/dark3",
       "updateaquaticbackport:ambient/underwater/additions/dark4"
     ]
+  },
+  "entity.squid.squirt": {
+    "sounds": [
+      "updateaquaticbackport:entity/squid/squirt1",
+      "updateaquaticbackport:entity/squid/squirt2",
+      "updateaquaticbackport:entity/squid/squirt3"
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.squid.squirt"
+  },
+  "entity.skeleton_horse.ambient_water": {
+    "sounds": [
+      "updateaquaticbackport:mob/horse/skeleton/water/idle1",
+      "updateaquaticbackport:mob/horse/skeleton/water/idle2",
+      "updateaquaticbackport:mob/horse/skeleton/water/idle3",
+      "updateaquaticbackport:mob/horse/skeleton/water/idle4",
+      "updateaquaticbackport:mob/horse/skeleton/water/idle5"
+    ],
+    "subtitle": "subtitles.entity.skeleton_horse.ambient"
+  },
+  "entity.skeleton_horse.gallop_water": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/gallop1",
+        "volume": 0.45
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/gallop2",
+        "volume": 0.45
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/gallop3",
+        "volume": 0.45
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/gallop4",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.entity.horse.gallop"
+  },
+  "entity.skeleton_horse.step_water": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/soft1",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/soft2",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/soft3",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/soft4",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/soft5",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:mob/horse/skeleton/water/soft6",
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.skeleton_horse.swim": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:liquid/swim9",
+        "volume": 0.4
+      },
+      {
+        "name": "updateaquaticbackport:liquid/swim10",
+        "volume": 0.4
+      },
+      {
+        "name": "updateaquaticbackport:liquid/swim11",
+        "volume": 0.4
+      },
+      {
+        "name": "updateaquaticbackport:liquid/swim12",
+        "volume": 0.4
+      },
+      {
+        "name": "updateaquaticbackport:liquid/swim14",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:liquid/swim15",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:liquid/swim16",
+        "volume": 0.6
+      },
+      {
+        "name": "updateaquaticbackport:liquid/swim17",
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.skeleton_horse.swim"
+  },
+  "entity.parrot.imitate.phantom": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity.phantom.ambient",
+        "pitch": 1.7,
+        "type": "event",
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.parrot.imitate.phantom"
+  },
+  "entity.parrot.imitate.drowned": {
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:entity.drowned.ambient",
+        "pitch": 1.8,
+        "type": "event",
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.entity.parrot.imitate.drowned"
   }
 }
