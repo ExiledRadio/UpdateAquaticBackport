@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "updateaquaticbackport:birch_pressure_plate_up"
+    },
+    "powered=true": {
+      "model": "updateaquaticbackport:birch_pressure_plate_down"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "updateaquaticbackport:dark_oak_pressure_plate_up"
+    },
+    "powered=true": {
+      "model": "updateaquaticbackport:dark_oak_pressure_plate_down"
+    }
+  }
+}

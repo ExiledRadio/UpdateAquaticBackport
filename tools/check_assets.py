@@ -72,8 +72,9 @@ def model_chain(ns, path, where):
 
 
 def check_model(name, where, default_dir):
+    """default_dir is prefixed to blockstate model names ("block"), as 1.12.2's loader always does."""
     ns, path = split(name)
-    if "/" not in path:
+    if default_dir:
         path = default_dir + "/" + path
     key = (ns, path)
     if key in model_cache:
@@ -180,7 +181,7 @@ def check_items(lines, lang):
         if model == "NO_MODEL_REQUEST":
             errors.append("%s: item has no model request" % registry)
             continue
-        check_model("%s:item/%s" % (MODID, model), "%s@%s item" % (registry, meta), "item")
+        check_model("%s:item/%s" % (MODID, model), "%s@%s item" % (registry, meta), "")
         if key + "=" not in lang:
             errors.append("%s@%s: no language entry %s" % (registry, meta, key))
     return len(lines)

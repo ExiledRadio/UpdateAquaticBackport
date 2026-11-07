@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "updateaquaticbackport:acacia_pressure_plate_up"
+    },
+    "powered=true": {
+      "model": "updateaquaticbackport:acacia_pressure_plate_down"
+    }
+  }
+}

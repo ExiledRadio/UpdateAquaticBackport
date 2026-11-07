@@ -30,7 +30,8 @@ def _object(path):
 
 
 VANILLA_SOUNDS = json.loads(_object("minecraft/sounds.json").decode("utf-8"))
-VANILLA_LANG = json.loads(_object("minecraft/lang/en_us.json").decode("utf-8"))
+# English is the one language shipped inside the client jar rather than the asset index.
+VANILLA_LANG = json.loads(JAR.read("assets/minecraft/lang/en_us.json").decode("utf-8"))
 
 
 def write(rel, data):

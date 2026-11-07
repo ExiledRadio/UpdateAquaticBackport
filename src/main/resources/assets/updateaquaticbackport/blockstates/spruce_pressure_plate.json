@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "updateaquaticbackport:spruce_pressure_plate_up"
+    },
+    "powered=true": {
+      "model": "updateaquaticbackport:spruce_pressure_plate_down"
+    }
+  }
+}

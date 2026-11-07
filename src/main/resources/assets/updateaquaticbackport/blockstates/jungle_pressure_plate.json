@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "updateaquaticbackport:jungle_pressure_plate_up"
+    },
+    "powered=true": {
+      "model": "updateaquaticbackport:jungle_pressure_plate_down"
+    }
+  }
+}

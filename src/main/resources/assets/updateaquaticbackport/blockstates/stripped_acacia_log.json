@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "updateaquaticbackport:stripped_acacia_log"
+    },
+    "axis=z": {
+      "model": "updateaquaticbackport:stripped_acacia_log",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "updateaquaticbackport:stripped_acacia_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=none": {
+      "model": "updateaquaticbackport:stripped_acacia_wood"
+    }
+  }
+}

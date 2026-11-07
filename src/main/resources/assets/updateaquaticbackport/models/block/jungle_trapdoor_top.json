@@ -1,0 +1,6 @@
+{
+  "parent": "block/trapdoor_top",
+  "textures": {
+    "texture": "updateaquaticbackport:blocks/jungle_trapdoor"
+  }
+}
