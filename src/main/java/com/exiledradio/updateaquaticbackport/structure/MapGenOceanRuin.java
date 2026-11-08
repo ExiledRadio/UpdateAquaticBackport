@@ -71,7 +71,7 @@ public class MapGenOceanRuin extends ScatteredStructure {
 
     /**
      * Seed maps tell warm ruins from cold ones: Backport Core's seed-parity dump names starts by this
-     * ({@code ScatteredStructure.variantAt}, Core 1.2.0 and later; no {@code @Override}, so this still builds
+     * ({@code ScatteredStructure.variantAt}, Core 1.1.0 and later; no {@code @Override}, so this still builds
      * against Core 1.1.0).
      */
     public String variantAt(World world, int chunkX, int chunkZ) {

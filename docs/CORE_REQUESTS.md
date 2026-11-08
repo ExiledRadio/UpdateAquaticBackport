@@ -3,7 +3,7 @@
 Things this mod needs from Backport Core (`E:\MincraftModding\Workspaces\BackportCore`). This repo never edits
 Core; each request says what is wanted and what this mod does until it exists.
 
-## 1. Look and feel: 1.13 pieces the `presentation` module does not cover yet (Core 1.2.0)
+## 1. Look and feel: 1.13 pieces the `presentation` module does not cover yet (Core 1.1.0)
 
 Stream Lf registers 1.13 with `Presentation.version` (panorama, overlay, splashes, the Allow Snooper default,
 F3+C, F3+I) and runs the underwater fog as a `FogPipeline` step. These 1.13 items need an owner Core does not
@@ -29,7 +29,7 @@ have yet:
 Out of scope for 1.12.2 (no counterpart): Command Suggestions (1.12.2 has no Brigadier suggestions), Optimize World
 (the Flattening's converter), data packs, the LWJGL 3 key names (letter keys in lowercase).
 
-## Done in Backport Core 1.2.0 (core-finish, 2026-11-08)
+## Done in Backport Core 1.1.0 (core-finish, 2026-11-08)
 
 Used here on branch `ua-lookfeel2`: Video Settings by version (no 3D Anaglyph, numbered GUI Scale: Core's 1.13
 table), the title-screen fade-in, the F3 text pipeline (1.13's lines, registered here), the in-game music owner

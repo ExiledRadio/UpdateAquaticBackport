@@ -83,7 +83,7 @@ under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin`, `BlockLog`, 
 ## P4 and P5: moved to Backport Core
 
 The villages' 1.13 biome point (P4) and the 1.13 pick of the strongholds' and spawn point's biome search (P5)
-are Backport Core 1.2.0's patches P9 and P8 now (its `docs/PATCHES.md`), shared by every backport of 1.13 and
+are Backport Core 1.1.0's patches P9 and P8 now (its `docs/PATCHES.md`), shared by every backport of 1.13 and
 later, so each of them alone gets them. This mod only registers 1.13's structure numbers with Core's placement
 table (`structure/Placement113`). The numbers P4 and P5 had are not reused.
 
