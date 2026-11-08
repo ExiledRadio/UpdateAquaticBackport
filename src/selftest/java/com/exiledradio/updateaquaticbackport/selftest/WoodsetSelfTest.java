@@ -2,7 +2,6 @@ package com.exiledradio.updateaquaticbackport.selftest;
 
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.common.Content;
-import com.exiledradio.updateaquaticbackport.common.ModCreativeTab;
 import com.exiledradio.updateaquaticbackport.common.Owners;
 import com.exiledradio.updateaquaticbackport.woodset.AxeStripping;
 import com.exiledradio.updateaquaticbackport.woodset.BlockSeaPickle;
@@ -94,7 +93,9 @@ public final class WoodsetSelfTest implements SelfTest {
             Block b = block(n);
             c.ok(b != null && Content.id(n).equals(b.getRegistryName()), "block " + n);
             c.ok(item(n) instanceof ItemBlock && Item.getItemFromBlock(b) == item(n), "item " + n);
-            c.ok(b != null && b.getCreativeTab() == ModCreativeTab.TAB, "creative tab " + n);
+            c.ok(b != null && b.getCreativeTab() != null
+                    && b.getCreativeTab() == com.exiledradio.backportcore.creative.VanillaOrder.tab("minecraft:" + n),
+                    "vanilla creative tab " + n);
         }
         c.eq(29, WoodsetContent.blocks().size(), "block count");
         for (Block b : WoodsetContent.blocks()) {

@@ -1,5 +1,4 @@
 # Italiano - our own text; vanilla names come from Mojang (tools/lang/build_langs.py)
-itemGroup.updateaquaticbackport=Update Aquatic Backport
 config.updateaquaticbackport.woodset=Blocchi condivisi della 1.13
 config.updateaquaticbackport.kelp=Alghe ed erba acquatica
 config.updateaquaticbackport.coral=Coralli

@@ -46,6 +46,8 @@ public final class UpdateAquaticBackport {
     public void preInit(FMLPreInitializationEvent event) {
         // 1.13's structure placement numbers, for Backport Core's table (seed parity with 1.13).
         com.exiledradio.updateaquaticbackport.structure.Placement113.register();
+        // This mod's spawn eggs in Miscellaneous where vanilla lists each mob's (Backport Core's creative placement).
+        com.exiledradio.backportcore.creative.CreativePlacement.placeSpawnEggs(MOD_ID);
         NetworkHandler.init();
         com.exiledradio.updateaquaticbackport.lookfeel.LookAndFeel.preInit();
         com.exiledradio.updateaquaticbackport.structure.StructureContent.preInit();

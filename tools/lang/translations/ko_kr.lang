@@ -1,5 +1,4 @@
 # Korean - our own text; vanilla names come from Mojang (tools/lang/build_langs.py)
-itemGroup.updateaquaticbackport=Update Aquatic Backport
 config.updateaquaticbackport.woodset=공용 1.13 블록
 config.updateaquaticbackport.kelp=켈프와 해초
 config.updateaquaticbackport.coral=산호

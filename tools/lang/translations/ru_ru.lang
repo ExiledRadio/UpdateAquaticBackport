@@ -1,5 +1,4 @@
 # Russian - our own text; vanilla names come from Mojang (tools/lang/build_langs.py)
-itemGroup.updateaquaticbackport=Update Aquatic Backport
 config.updateaquaticbackport.woodset=Общие блоки 1.13
 config.updateaquaticbackport.kelp=Ламинария и морская трава
 config.updateaquaticbackport.coral=Кораллы
