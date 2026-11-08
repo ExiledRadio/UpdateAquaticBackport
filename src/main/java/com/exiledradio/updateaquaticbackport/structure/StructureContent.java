@@ -1,5 +1,6 @@
 package com.exiledradio.updateaquaticbackport.structure;
 
+import com.exiledradio.backportcore.locate.StructureLocate;
 import com.exiledradio.backportcore.structure.ModernPalette;
 import com.exiledradio.backportcore.structure.ScatteredStructure;
 import com.exiledradio.backportcore.structure.Structures;
@@ -101,6 +102,27 @@ public final class StructureContent {
         ScatteredStructure.register(Structures.SHIPWRECK, world -> generates(world) ? new MapGenShipwreck() : null);
         ScatteredStructure.register(Structures.OCEAN_RUIN, world -> generates(world) ? new MapGenOceanRuin() : null);
         ScatteredStructure.register(Structures.BURIED_TREASURE, world -> generates(world) ? new MapGenBuriedTreasure() : null);
+        registerLocate();
+    }
+
+    /**
+     * Backport Core's {@code /locate structure}, under today's ids and tags: a shipwreck is beached where its start's
+     * biome makes it one, an ocean ruin warm or cold by its ocean, and buried treasure is reported at the chest's
+     * column ((9, 9) in the chunk, today's {@code locate_offset}).
+     */
+    static void registerLocate() {
+        StructureLocate.scattered("minecraft:shipwrecks", Structures.SHIPWRECK,
+                (world, structure, x, z) -> Boolean.TRUE.equals(MapGenShipwreck.beached(world, x, z))
+                        ? "minecraft:shipwreck_beached" : "minecraft:shipwreck",
+                "minecraft:shipwreck", "minecraft:shipwreck_beached");
+        StructureLocate.tag("minecraft:shipwreck", "minecraft:shipwreck", "minecraft:shipwreck_beached");
+        StructureLocate.scattered("minecraft:ocean_ruins", Structures.OCEAN_RUIN, (world, structure, x, z) -> {
+            String variant = structure.variantAt(world, x, z);
+            return variant == null ? null : "minecraft:ocean_ruin_" + variant;
+        }, "minecraft:ocean_ruin_cold", "minecraft:ocean_ruin_warm");
+        StructureLocate.tag("minecraft:ocean_ruin", "minecraft:ocean_ruin_cold", "minecraft:ocean_ruin_warm");
+        StructureLocate.scattered("minecraft:buried_treasures", Structures.BURIED_TREASURE, null, 9, 0, 9,
+                "minecraft:buried_treasure");
     }
 
     /** Today's ocean structures are the overworld's, and only where the world generates structures. */

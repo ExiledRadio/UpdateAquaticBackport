@@ -63,6 +63,7 @@ public final class SelfTestRunner {
             new SwimSelfTest(),
             new WaterlogSelfTest(),
             new LookFeelSelfTest(),
+            new LocateSelfTest(),
     };
 
     private final List<String> wanted;

@@ -150,6 +150,7 @@ A new world generated with this mod matches what 1.13 generates for the same see
 *   **Ocean ruins**: small and large stone brick ruins, cracked and mossy, in ordinary, cold and frozen oceans, and sandstone ruins in warm and lukewarm ones. Large ruins often stand among 4 to 8 small ones. Their chests hold current Java's ruin loot, and **drowned** wait in them.
 *   **Buried treasure** under beaches: one chest, buried in sand on the stone below, with a **heart of the sea**, iron, gold, emeralds, diamonds, prismarine crystals, TNT, cooked fish and potions of Water Breathing.
 *   **Buried treasure maps** in shipwreck map chests and ocean ruin chests: they show the land around the nearest buried treasure, marked with a **red X**.
+*   **`/locate structure`** (Backport Core's, as in current Java) finds them: `minecraft:shipwreck`, `minecraft:shipwreck_beached`, `minecraft:ocean_ruin_cold`, `minecraft:ocean_ruin_warm` and `minecraft:buried_treasure`, or `#minecraft:shipwreck` and `#minecraft:ocean_ruin` for either kind. It picks the same one current Java would for the seed, including ones not generated yet, and names buried treasure by its chest's column.
 
 ## New: waterlogging
 
