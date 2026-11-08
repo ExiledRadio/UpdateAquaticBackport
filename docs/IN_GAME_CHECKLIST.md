@@ -65,7 +65,7 @@ to Village & Pillage 2.4.0 and Buzzy Bees 1.0.0). These need a real client, whic
 *   A world saved by an earlier dev build loading with this release (only synthetic old chunks were tested).
 *   Sponges next to kelp (in 1.14.4 they drop the kelp; here it is removed without a drop).
 
-## Look and feel (stream Lf, with Backport Core 1.2.0)
+## Look and feel (stream Lf, with Backport Core 1.1.0)
 
 Self-tests: `gradlew runServer -Pselftest=lookfeel` (registration, assets, splash pool, the Allow Snooper
 default, lang) and `gradlew runClient -Pselftest=client` (title screen, F3 key map, fog step, the copied commands;
@@ -85,7 +85,7 @@ log only).
 - [ ] **Options**: a fresh instance has Allow Snooper off (Options > Snooper Settings).
 - [ ] **Controls**: mouse buttons read "Left Button", "Right Button", "Middle Button".
 
-## 1.13's pieces in Backport Core's finished presentation module (Core 1.2.0)
+## 1.13's pieces in Backport Core's finished presentation module (Core 1.1.0)
 
 - [ ] **Title screen**: on the first start the panorama shows at once, then the logo, splash, buttons and text fade
       in over a second (1.13). No 3D Anaglyph on Video Settings; GUI Scale reads Auto, 1, 2, 3 (4 on a 1080p window).
