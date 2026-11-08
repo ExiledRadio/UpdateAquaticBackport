@@ -11,7 +11,7 @@ import com.exiledradio.updateaquaticbackport.coral.CoralContent;
 import com.exiledradio.updateaquaticbackport.coral.CoralGenerator;
 import com.exiledradio.updateaquaticbackport.coral.CoralPickles;
 import com.exiledradio.updateaquaticbackport.coral.CoralType;
-import com.exiledradio.updateaquaticbackport.woodset.WoodsetContent;
+import com.exiledradio.updateaquaticbackport.pickle.SeaPickleContent;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -216,14 +216,11 @@ public final class CoralSelfTest implements SelfTest {
             world.setBlockState(q, coralBlock.getDefaultState(), 2);
         }
         BlockPos pickleAt = reef.add(5, 1, 5);
-        // This mod's own sea pickle (1.13's block). Until it becomes an owned block, the woodset stream still
-        // gives way to Village & Pillage 2.4.0, which registers one too: then there is none of ours to test.
+        // This mod's own sea pickle, registered in every game.
         Block seaPickle = Owners.ourBlock("sea_pickle");
+        c.ok(seaPickle != null && seaPickle == SeaPickleContent.seaPickle(), "our own sea pickle grows on the coral");
         if (seaPickle != null) {
-            c.ok(seaPickle == WoodsetContent.seaPickle(), "our sea pickle is the woodset stream's");
             picklesOnCoral(c, world, player, reef, pickleAt, seaPickle);
-        } else {
-            c.ok(Owners.present(Owners.VILLAGE_AND_PILLAGE), "our sea pickle is missing only while Village & Pillage ships one");
         }
 
         // 8. reef shapes in a deep pool ----------------------------------------------------------------------

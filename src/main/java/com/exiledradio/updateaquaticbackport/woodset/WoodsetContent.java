@@ -34,8 +34,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Stripped logs and stripped wood, the five woods' trapdoors, buttons and pressure plates, blue ice and
- * sea pickles: 1.13 blocks that another mod of the family owns.
+ * Stripped logs and stripped wood, the five woods' trapdoors, buttons and pressure plates, and blue ice:
+ * 1.13 blocks that another mod of the family owns. (Sea pickles were here too until they became this
+ * mod's own: {@code pickle.SeaPickleContent}.)
  *
  * <h2>Only when the owner is absent</h2>
  * The owner shipped these first (Rule 1 of the family plan). When it is installed nothing here is
@@ -74,7 +75,6 @@ public final class WoodsetContent {
     private static final Map<Wood, BlockWoodRedstone.PressurePlate> PLATES = new EnumMap<Wood, BlockWoodRedstone.PressurePlate>(Wood.class);
 
     private static Block blueIce;
-    private static Block seaPickle;
 
     /** Every block this package registers, all with an item, in creative-tab order. */
     private static final List<Block> BLOCKS = new ArrayList<Block>();
@@ -114,11 +114,6 @@ public final class WoodsetContent {
         return blueIce;
     }
 
-    @Nullable
-    public static Block seaPickle() {
-        return seaPickle;
-    }
-
     /** @return every block, each with an item, for the client's model registration and tests */
     public static List<Block> blocks() {
         return Collections.unmodifiableList(BLOCKS);
@@ -155,8 +150,8 @@ public final class WoodsetContent {
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         if (!enabled()) {
             UpdateAquaticBackport.LOGGER.info(Owners.present(Owners.VILLAGE_AND_PILLAGE)
-                    ? "Stripped logs, wood trapdoors, blue ice and sea pickles come from their owner; not registering copies."
-                    : "Stripped logs, wood trapdoors, blue ice and sea pickles are off (woodset.enabled).");
+                    ? "Stripped logs, wood trapdoors and blue ice come from their owner; not registering copies."
+                    : "Stripped logs, wood trapdoors and blue ice are off (woodset.enabled).");
             return;
         }
         IForgeRegistry<Block> registry = event.getRegistry();
@@ -198,10 +193,6 @@ public final class WoodsetContent {
 
         blueIce = new BlockBlueIce();
         register(registry, "blue_ice", blueIce, "pickaxe");
-        seaPickle = new BlockSeaPickle();
-        register(registry, "sea_pickle", seaPickle, null);
-        // The owner's rule, copied with its block: a stored waterlogged flag becomes real water once.
-        com.exiledradio.backportcore.waterlog.Waterlogging.migrateStoredProperty(seaPickle, BlockSeaPickle.WATERLOGGED);
 
         // Vanilla's logs' numbers: catch fire as easily, burn away as fast.
         for (Wood wood : Wood.values()) {
@@ -237,8 +228,8 @@ public final class WoodsetContent {
     }
 
     /**
-     * A world saved with the owner installed, opened without it: its stripped logs, trapdoors, blue ice
-     * and sea pickles become ours. The states are the same, so this is a rename and nothing moves.
+     * A world saved with the owner installed, opened without it: its stripped logs, trapdoors and blue
+     * ice become ours. The states are the same, so this is a rename and nothing moves.
      */
     @SubscribeEvent
     public static void remapOwner(RegistryEvent.MissingMappings<Block> event) {
@@ -352,7 +343,7 @@ public final class WoodsetContent {
         registry.register(recipe);
     }
 
-    /** Charcoal from every stripped log and wood, as from logs; lime dye from sea pickles, as 1.14. */
+    /** Charcoal from every stripped log and wood, as from logs. */
     private static void registerSmelting() {
         FurnaceRecipes furnace = FurnaceRecipes.instance();
         ItemStack charcoal = new ItemStack(Items.COAL, 1, 1);
@@ -360,8 +351,6 @@ public final class WoodsetContent {
             furnace.addSmeltingRecipeForBlock(STRIPPED_LOGS.get(wood), charcoal.copy(), 0.15F);
             furnace.addSmeltingRecipeForBlock(STRIPPED_WOOD.get(wood), charcoal.copy(), 0.15F);
         }
-        // 1.12.2 already has lime dye: dye metadata 10. 1.14's flora additions are other colors.
-        furnace.addSmeltingRecipeForBlock(seaPickle, new ItemStack(Items.DYE, 1, 10), 0.1F);
     }
 
     /**

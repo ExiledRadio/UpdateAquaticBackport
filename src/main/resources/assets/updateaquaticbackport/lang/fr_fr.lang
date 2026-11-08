@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Autres blocs et objets
 config.updateaquaticbackport.mobs=Changements des créatures
 config.updateaquaticbackport.water=Eau
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Hache qui écorce
-tile.updateaquaticbackport.acacia_button.name=Bouton en acacia
-tile.updateaquaticbackport.acacia_pressure_plate.name=Plaque de pression en acacia
-tile.updateaquaticbackport.acacia_trapdoor.name=Trappe en acacia
-tile.updateaquaticbackport.birch_button.name=Bouton en bouleau
-tile.updateaquaticbackport.birch_pressure_plate.name=Plaque de pression en bouleau
-tile.updateaquaticbackport.birch_trapdoor.name=Trappe en bouleau
-tile.updateaquaticbackport.blue_ice.name=Glace bleue
-tile.updateaquaticbackport.dark_oak_button.name=Bouton en chêne noir
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Plaque de pression en chêne noir
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Trappe en chêne noir
-tile.updateaquaticbackport.jungle_button.name=Bouton en acajou
-tile.updateaquaticbackport.jungle_pressure_plate.name=Plaque de pression en acajou
-tile.updateaquaticbackport.jungle_trapdoor.name=Trappe en acajou
-tile.updateaquaticbackport.sea_pickle.name=Cornichon de mer
-tile.updateaquaticbackport.spruce_button.name=Bouton en sapin
-tile.updateaquaticbackport.spruce_pressure_plate.name=Plaque de pression en sapin
-tile.updateaquaticbackport.spruce_trapdoor.name=Trappe en sapin
-tile.updateaquaticbackport.stripped_acacia_log.name=Bûche d'acacia écorcée
-tile.updateaquaticbackport.stripped_acacia_wood.name=Bois d'acacia écorcé
-tile.updateaquaticbackport.stripped_birch_log.name=Bûche de bouleau écorcée
-tile.updateaquaticbackport.stripped_birch_wood.name=Bois de bouleau écorcé
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Bûche de chêne noir écorcée
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Bois de chêne noir écorcé
-tile.updateaquaticbackport.stripped_jungle_log.name=Bûche d'acajou écorcée
-tile.updateaquaticbackport.stripped_jungle_wood.name=Bois d'acajou écorcé
-tile.updateaquaticbackport.stripped_oak_log.name=Bûche de chêne écorcée
-tile.updateaquaticbackport.stripped_oak_wood.name=Bois de chêne écorcé
-tile.updateaquaticbackport.stripped_spruce_log.name=Bûche de sapin écorcée
-tile.updateaquaticbackport.stripped_spruce_wood.name=Bois de sapin écorcé
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Activé
 config.updateaquaticbackport.mobs.enabled.tooltip=Les changements de la 1.13 apportés aux créatures existantes : les morts-vivants qui coulent, l'encre des poulpes, les ours blancs sur la glace, et le reste.
 config.updateaquaticbackport.water.enabled=Activé
 config.updateaquaticbackport.water.enabled.tooltip=Les couleurs de l'eau selon le biome, le brouillard sous l'eau, la recharge progressive de l'air et le reste des changements de l'eau de la 1.13.
-config.updateaquaticbackport.woodset.tooltip=Les bûches et bois écorcés, les trappes, boutons et plaques de pression des cinq essences de bois, la glace bleue et les cornichons de mer.
+config.updateaquaticbackport.woodset.tooltip=Les bûches et bois écorcés, les trappes, boutons et plaques de pression des cinq essences de bois et la glace bleue.
 config.updateaquaticbackport.kelp.tooltip=Les algues, les algues séchées et l'herbe aquatique.
 config.updateaquaticbackport.coral.tooltip=Les coraux, les blocs de corail, les gorgones et les récifs coralliens.
 config.updateaquaticbackport.fish.tooltip=Les morues, les saumons, les poissons-globes et les poissons tropicaux, ainsi que leurs seaux.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Les données du bloc ont été copiées côté client
 debug.inspect.client.entity=Les données de l'entité ont été copiées côté client dans le presse-papiers
 debug.inspect.server.block=Les données du bloc ont été copiées côté serveur dans le presse-papiers
 debug.inspect.server.entity=Les données de l'entité ont été copiées côté serveur dans le presse-papiers
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Cornichon de mer
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Hache qui écorce
+tile.updateaquaticbackport.acacia_button.name=Bouton en acacia
+tile.updateaquaticbackport.acacia_pressure_plate.name=Plaque de pression en acacia
+tile.updateaquaticbackport.acacia_trapdoor.name=Trappe en acacia
+tile.updateaquaticbackport.birch_button.name=Bouton en bouleau
+tile.updateaquaticbackport.birch_pressure_plate.name=Plaque de pression en bouleau
+tile.updateaquaticbackport.birch_trapdoor.name=Trappe en bouleau
+tile.updateaquaticbackport.blue_ice.name=Glace bleue
+tile.updateaquaticbackport.dark_oak_button.name=Bouton en chêne noir
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Plaque de pression en chêne noir
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Trappe en chêne noir
+tile.updateaquaticbackport.jungle_button.name=Bouton en acajou
+tile.updateaquaticbackport.jungle_pressure_plate.name=Plaque de pression en acajou
+tile.updateaquaticbackport.jungle_trapdoor.name=Trappe en acajou
+tile.updateaquaticbackport.spruce_button.name=Bouton en sapin
+tile.updateaquaticbackport.spruce_pressure_plate.name=Plaque de pression en sapin
+tile.updateaquaticbackport.spruce_trapdoor.name=Trappe en sapin
+tile.updateaquaticbackport.stripped_acacia_log.name=Bûche d'acacia écorcée
+tile.updateaquaticbackport.stripped_acacia_wood.name=Bois d'acacia écorcé
+tile.updateaquaticbackport.stripped_birch_log.name=Bûche de bouleau écorcée
+tile.updateaquaticbackport.stripped_birch_wood.name=Bois de bouleau écorcé
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Bûche de chêne noir écorcée
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Bois de chêne noir écorcé
+tile.updateaquaticbackport.stripped_jungle_log.name=Bûche d'acajou écorcée
+tile.updateaquaticbackport.stripped_jungle_wood.name=Bois d'acajou écorcé
+tile.updateaquaticbackport.stripped_oak_log.name=Bûche de chêne écorcée
+tile.updateaquaticbackport.stripped_oak_wood.name=Bois de chêne écorcé
+tile.updateaquaticbackport.stripped_spruce_log.name=Bûche de sapin écorcée
+tile.updateaquaticbackport.stripped_spruce_wood.name=Bois de sapin écorcé

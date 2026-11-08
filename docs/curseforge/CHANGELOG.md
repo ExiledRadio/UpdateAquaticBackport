@@ -39,6 +39,7 @@ A new world generated with this mod matches what 1.13 generates for the same see
 *   **Coral blocks** in tube, brain, bubble, fire and horn, and their **dead** forms. A coral block with no water touching it dies a few seconds later. Mined with a pickaxe it drops its dead form; with Silk Touch, itself.
 *   **Coral** and **coral fans** in the same five, living and dead. Fans go on the floor or on the side of a block. Placed in water they are waterlogged; out of water, and not touching any, they die. A bucket takes their water or gives it back. They drop only with Silk Touch.
 *   **Coral reefs** in warm oceans: coral trees, claws and mushrooms, with coral, fans and sea pickles growing on them.
+*   **Sea pickles**, one to four in a block: right-click with another to add one. They hold water and glow only in it, 6, 9, 12 or 15 light for one to four, and smelt into lime dye.
 *   **Bone meal on a sea pickle on a coral block** makes it four pickles and spreads more over the coral around.
 *   Bone meal on the floor of a warm ocean grows coral and fans among the seagrass.
 
@@ -118,7 +119,7 @@ A new world generated with this mod matches what 1.13 generates for the same see
 *   **The plain pumpkin can no longer be worn**, and it never builds a golem, however it is placed.
 *   **Middle-clicking wood** (the bark block) picks the wood item.
 *   **Wood**: four logs make three wood, a block with bark on every side. It makes four planks, smelts into charcoal and burns like a log. Logs are now named "Oak Log" and so on; "Oak Wood" is the bark block.
-*   **Stripped logs and stripped wood** in all six woods, **spruce, birch, jungle, acacia and dark oak trapdoors, buttons and pressure plates**, **blue ice** and **sea pickles**, with axe stripping. Vanilla's trapdoor, wooden button and wooden pressure plate take oak planks only, as in 1.13, and are named Oak Trapdoor and Oak Pressure Plate.
+*   **Stripped logs and stripped wood** in all six woods, **spruce, birch, jungle, acacia and dark oak trapdoors, buttons and pressure plates** and **blue ice**, with axe stripping. Vanilla's trapdoor, wooden button and wooden pressure plate take oak planks only, as in 1.13, and are named Oak Trapdoor and Oak Pressure Plate.
 *   **Packed ice** from nine ice.
 *   **Debug stick** (`/give @p updateaquaticbackport:debug_stick`): in creative, for operators, attack a block to pick one of its properties and use the stick on it to change that property.
 *   **Shulker box**: two shulker shells and a chest now make an undyed shulker box. Dye it any color as before, or use a dyed shulker box on a cauldron with water to wash the color out, contents kept.
@@ -181,8 +182,9 @@ With Backport Core 1.1.0 the game looks the way 1.13 did, not only plays like it
 
 ## Works with Village & Pillage Backport
 
-*   **Shared blocks**: stripped logs and wood, the wood trapdoors, buttons and pressure plates, blue ice and sea pickles belong to Village & Pillage Backport, which added them first. Whichever installed mod owns a shared block provides it: with Village & Pillage installed, this mod registers none of its own and uses Village & Pillage's everywhere (axes strip logs into its stripped logs, and icebergs carry its blue ice). Without it, this mod registers identical copies of its own.
-*   **The composter** takes kelp, dried kelp and seagrass at 30% and the dried kelp block at 50%.
+*   **Sea pickles are this mod's own**, as an ocean block, whatever else is installed. Village & Pillage Backport 2.5.0 and later use them: its wandering trader sells them, and the 1.14 desert house that has sea pickles places two. Sea pickles from a world made with Village & Pillage 2.3.0 or 2.4.0, placed or in chests, become this mod's as the world loads, with the same count and water.
+*   **Shared blocks**: stripped logs and wood, the wood trapdoors, buttons and pressure plates and blue ice belong to Village & Pillage Backport, which added them first. Whichever installed mod owns a shared block provides it: with Village & Pillage installed, this mod registers none of its own and uses Village & Pillage's everywhere (axes strip logs into its stripped logs, and icebergs carry its blue ice). Without it, this mod registers identical copies of its own.
+*   **The composter** takes kelp, dried kelp and seagrass at 30%, the dried kelp block at 50% and sea pickles at 65%.
 *   **Cats** scare phantoms away and hiss at them, and bring phantom membrane among their morning gifts. Stray cats and foxes hunt baby turtles on land.
 *   **The stonecutter** cuts the prismarine stairs and slabs.
 

@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=その他のブロックとアイテム
 config.updateaquaticbackport.mobs=Mobの変更
 config.updateaquaticbackport.water=水
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=斧で剥がす
-tile.updateaquaticbackport.acacia_button.name=アカシアのボタン
-tile.updateaquaticbackport.acacia_pressure_plate.name=アカシアの感圧板
-tile.updateaquaticbackport.acacia_trapdoor.name=アカシアのトラップドア
-tile.updateaquaticbackport.birch_button.name=シラカバのボタン
-tile.updateaquaticbackport.birch_pressure_plate.name=シラカバの感圧板
-tile.updateaquaticbackport.birch_trapdoor.name=シラカバのトラップドア
-tile.updateaquaticbackport.blue_ice.name=青氷
-tile.updateaquaticbackport.dark_oak_button.name=ダークオークのボタン
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=ダークオークの感圧板
-tile.updateaquaticbackport.dark_oak_trapdoor.name=ダークオークのトラップドア
-tile.updateaquaticbackport.jungle_button.name=ジャングルのボタン
-tile.updateaquaticbackport.jungle_pressure_plate.name=ジャングルの感圧板
-tile.updateaquaticbackport.jungle_trapdoor.name=ジャングルのトラップドア
-tile.updateaquaticbackport.sea_pickle.name=シーピクルス
-tile.updateaquaticbackport.spruce_button.name=トウヒのボタン
-tile.updateaquaticbackport.spruce_pressure_plate.name=トウヒの感圧板
-tile.updateaquaticbackport.spruce_trapdoor.name=トウヒのトラップドア
-tile.updateaquaticbackport.stripped_acacia_log.name=樹皮を剥いだアカシアの原木
-tile.updateaquaticbackport.stripped_acacia_wood.name=樹皮を剥いだアカシアの木
-tile.updateaquaticbackport.stripped_birch_log.name=樹皮を剥いだシラカバの原木
-tile.updateaquaticbackport.stripped_birch_wood.name=樹皮を剥いだシラカバの木
-tile.updateaquaticbackport.stripped_dark_oak_log.name=樹皮を剥いだダークオークの原木
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=樹皮を剥いだダークオークの木
-tile.updateaquaticbackport.stripped_jungle_log.name=樹皮を剥いだジャングルの原木
-tile.updateaquaticbackport.stripped_jungle_wood.name=樹皮を剥いだジャングルの木
-tile.updateaquaticbackport.stripped_oak_log.name=樹皮を剥いだオークの原木
-tile.updateaquaticbackport.stripped_oak_wood.name=樹皮を剥いだオークの木
-tile.updateaquaticbackport.stripped_spruce_log.name=樹皮を剥いだトウヒの原木
-tile.updateaquaticbackport.stripped_spruce_wood.name=樹皮を剥いだトウヒの木
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=有効
 config.updateaquaticbackport.mobs.enabled.tooltip=1.13での既存のMobへの変更です。水に沈むアンデッド、イカスミを吐くイカ、氷上のシロクマなどです。
 config.updateaquaticbackport.water.enabled=有効
 config.updateaquaticbackport.water.enabled.tooltip=バイオームごとの水の色、水中の霧、酸素の段階的な回復など、1.13の水に関する変更です。
-config.updateaquaticbackport.woodset.tooltip=樹皮を剥いだ原木と木、5種類の木のトラップドア、ボタン、感圧板、青氷、シーピクルスです。
+config.updateaquaticbackport.woodset.tooltip=樹皮を剥いだ原木と木、5種類の木のトラップドア、ボタン、感圧板、青氷です。
 config.updateaquaticbackport.kelp.tooltip=コンブ、乾燥した昆布、海草です。
 config.updateaquaticbackport.coral.tooltip=サンゴ、サンゴブロック、ウチワサンゴ、サンゴ礁です。
 config.updateaquaticbackport.fish.tooltip=タラ、サケ、フグ、熱帯魚と、それらのバケツです。
@@ -439,3 +406,38 @@ debug.inspect.client.block=クライアント側のブロックデータをク�
 debug.inspect.client.entity=クライアント側のエンティティデータをクリップボードにコピーしました
 debug.inspect.server.block=サーバー側のブロックデータをクリップボードにコピーしました
 debug.inspect.server.entity=サーバー側のエンティティデータをクリップボードにコピーしました
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=シーピクルス
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=斧で剥がす
+tile.updateaquaticbackport.acacia_button.name=アカシアのボタン
+tile.updateaquaticbackport.acacia_pressure_plate.name=アカシアの感圧板
+tile.updateaquaticbackport.acacia_trapdoor.name=アカシアのトラップドア
+tile.updateaquaticbackport.birch_button.name=シラカバのボタン
+tile.updateaquaticbackport.birch_pressure_plate.name=シラカバの感圧板
+tile.updateaquaticbackport.birch_trapdoor.name=シラカバのトラップドア
+tile.updateaquaticbackport.blue_ice.name=青氷
+tile.updateaquaticbackport.dark_oak_button.name=ダークオークのボタン
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=ダークオークの感圧板
+tile.updateaquaticbackport.dark_oak_trapdoor.name=ダークオークのトラップドア
+tile.updateaquaticbackport.jungle_button.name=ジャングルのボタン
+tile.updateaquaticbackport.jungle_pressure_plate.name=ジャングルの感圧板
+tile.updateaquaticbackport.jungle_trapdoor.name=ジャングルのトラップドア
+tile.updateaquaticbackport.spruce_button.name=トウヒのボタン
+tile.updateaquaticbackport.spruce_pressure_plate.name=トウヒの感圧板
+tile.updateaquaticbackport.spruce_trapdoor.name=トウヒのトラップドア
+tile.updateaquaticbackport.stripped_acacia_log.name=樹皮を剥いだアカシアの原木
+tile.updateaquaticbackport.stripped_acacia_wood.name=樹皮を剥いだアカシアの木
+tile.updateaquaticbackport.stripped_birch_log.name=樹皮を剥いだシラカバの原木
+tile.updateaquaticbackport.stripped_birch_wood.name=樹皮を剥いだシラカバの木
+tile.updateaquaticbackport.stripped_dark_oak_log.name=樹皮を剥いだダークオークの原木
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=樹皮を剥いだダークオークの木
+tile.updateaquaticbackport.stripped_jungle_log.name=樹皮を剥いだジャングルの原木
+tile.updateaquaticbackport.stripped_jungle_wood.name=樹皮を剥いだジャングルの木
+tile.updateaquaticbackport.stripped_oak_log.name=樹皮を剥いだオークの原木
+tile.updateaquaticbackport.stripped_oak_wood.name=樹皮を剥いだオークの木
+tile.updateaquaticbackport.stripped_spruce_log.name=樹皮を剥いだトウヒの原木
+tile.updateaquaticbackport.stripped_spruce_wood.name=樹皮を剥いだトウヒの木

@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public final class ModConfig {
 
     @Config.LangKey("config.updateaquaticbackport.woodset")
-    @Config.Comment("Stripped logs and wood, the five wood trapdoors, buttons and pressure plates, blue ice and sea pickles.")
+    @Config.Comment("Stripped logs and wood, the five wood trapdoors, buttons and pressure plates, and blue ice.")
     public static final Woodset woodset = new Woodset();
 
     @Config.LangKey("config.updateaquaticbackport.kelp")

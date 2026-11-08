@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Прочие блоки и предметы
 config.updateaquaticbackport.mobs=Изменения мобов
 config.updateaquaticbackport.water=Вода
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Обтёсывание топором
-tile.updateaquaticbackport.acacia_button.name=Акациевая кнопка
-tile.updateaquaticbackport.acacia_pressure_plate.name=Акациевая нажимная пластина
-tile.updateaquaticbackport.acacia_trapdoor.name=Акациевый люк
-tile.updateaquaticbackport.birch_button.name=Берёзовая кнопка
-tile.updateaquaticbackport.birch_pressure_plate.name=Берёзовая нажимная пластина
-tile.updateaquaticbackport.birch_trapdoor.name=Берёзовый люк
-tile.updateaquaticbackport.blue_ice.name=Синий лёд
-tile.updateaquaticbackport.dark_oak_button.name=Кнопка из тёмного дуба
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Нажимная пластина из тёмного дуба
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Люк из тёмного дуба
-tile.updateaquaticbackport.jungle_button.name=Кнопка из джунглевого дерева
-tile.updateaquaticbackport.jungle_pressure_plate.name=Нажимная пластина из джунглевого дерева
-tile.updateaquaticbackport.jungle_trapdoor.name=Люк из джунглевого дерева
-tile.updateaquaticbackport.sea_pickle.name=Морской огурец
-tile.updateaquaticbackport.spruce_button.name=Еловая кнопка
-tile.updateaquaticbackport.spruce_pressure_plate.name=Еловая нажимная пластина
-tile.updateaquaticbackport.spruce_trapdoor.name=Еловый люк
-tile.updateaquaticbackport.stripped_acacia_log.name=Обтёсанное акациевое бревно
-tile.updateaquaticbackport.stripped_acacia_wood.name=Обтёсанная акациевая древесина
-tile.updateaquaticbackport.stripped_birch_log.name=Обтёсанное берёзовое бревно
-tile.updateaquaticbackport.stripped_birch_wood.name=Обтёсанная берёзовая древесина
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Обтёсанное бревно тёмного дуба
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Обтёсанная древесина тёмного дуба
-tile.updateaquaticbackport.stripped_jungle_log.name=Обтёсанное бревно джунглевого дерева
-tile.updateaquaticbackport.stripped_jungle_wood.name=Обтёсанная древесина джунглевого дерева
-tile.updateaquaticbackport.stripped_oak_log.name=Обтёсанное дубовое бревно
-tile.updateaquaticbackport.stripped_oak_wood.name=Обтёсанная дубовая древесина
-tile.updateaquaticbackport.stripped_spruce_log.name=Обтёсанное еловое бревно
-tile.updateaquaticbackport.stripped_spruce_wood.name=Обтёсанная еловая древесина
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Включено
 config.updateaquaticbackport.mobs.enabled.tooltip=Изменения 1.13 для существующих мобов: нежить тонет, спруты выпускают чернила, белые медведи на льду и всё остальное.
 config.updateaquaticbackport.water.enabled=Включено
 config.updateaquaticbackport.water.enabled.tooltip=Цвет воды по биомам, туман под водой, постепенное восстановление воздуха и остальные изменения воды из 1.13.
-config.updateaquaticbackport.woodset.tooltip=Обтёсанные брёвна и древесина, люки, кнопки и нажимные пластины пяти пород дерева, синий лёд и морские огурцы.
+config.updateaquaticbackport.woodset.tooltip=Обтёсанные брёвна и древесина, люки, кнопки и нажимные пластины пяти пород дерева и синий лёд.
 config.updateaquaticbackport.kelp.tooltip=Ламинария, сушёная ламинария и морская трава.
 config.updateaquaticbackport.coral.tooltip=Кораллы, коралловые блоки, веерные кораллы и коралловые рифы.
 config.updateaquaticbackport.fish.tooltip=Треска, лосось, иглобрюх и тропическая рыба, а также вёдра с ними.
@@ -439,3 +406,38 @@ debug.inspect.client.block=В буфер обмена скопированы к�
 debug.inspect.client.entity=В буфер обмена скопированы клиентские данные сущности
 debug.inspect.server.block=В буфер обмена скопированы серверные данные блока
 debug.inspect.server.entity=В буфер обмена скопированы серверные данные сущности
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Морской огурец
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Обтёсывание топором
+tile.updateaquaticbackport.acacia_button.name=Акациевая кнопка
+tile.updateaquaticbackport.acacia_pressure_plate.name=Акациевая нажимная пластина
+tile.updateaquaticbackport.acacia_trapdoor.name=Акациевый люк
+tile.updateaquaticbackport.birch_button.name=Берёзовая кнопка
+tile.updateaquaticbackport.birch_pressure_plate.name=Берёзовая нажимная пластина
+tile.updateaquaticbackport.birch_trapdoor.name=Берёзовый люк
+tile.updateaquaticbackport.blue_ice.name=Синий лёд
+tile.updateaquaticbackport.dark_oak_button.name=Кнопка из тёмного дуба
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Нажимная пластина из тёмного дуба
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Люк из тёмного дуба
+tile.updateaquaticbackport.jungle_button.name=Кнопка из джунглевого дерева
+tile.updateaquaticbackport.jungle_pressure_plate.name=Нажимная пластина из джунглевого дерева
+tile.updateaquaticbackport.jungle_trapdoor.name=Люк из джунглевого дерева
+tile.updateaquaticbackport.spruce_button.name=Еловая кнопка
+tile.updateaquaticbackport.spruce_pressure_plate.name=Еловая нажимная пластина
+tile.updateaquaticbackport.spruce_trapdoor.name=Еловый люк
+tile.updateaquaticbackport.stripped_acacia_log.name=Обтёсанное акациевое бревно
+tile.updateaquaticbackport.stripped_acacia_wood.name=Обтёсанная акациевая древесина
+tile.updateaquaticbackport.stripped_birch_log.name=Обтёсанное берёзовое бревно
+tile.updateaquaticbackport.stripped_birch_wood.name=Обтёсанная берёзовая древесина
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Обтёсанное бревно тёмного дуба
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Обтёсанная древесина тёмного дуба
+tile.updateaquaticbackport.stripped_jungle_log.name=Обтёсанное бревно джунглевого дерева
+tile.updateaquaticbackport.stripped_jungle_wood.name=Обтёсанная древесина джунглевого дерева
+tile.updateaquaticbackport.stripped_oak_log.name=Обтёсанное дубовое бревно
+tile.updateaquaticbackport.stripped_oak_wood.name=Обтёсанная дубовая древесина
+tile.updateaquaticbackport.stripped_spruce_log.name=Обтёсанное еловое бревно
+tile.updateaquaticbackport.stripped_spruce_wood.name=Обтёсанная еловая древесина

@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Outros blocos e itens
 config.updateaquaticbackport.mobs=Mudanças nas criaturas
 config.updateaquaticbackport.water=Água
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Machado descasca
-tile.updateaquaticbackport.acacia_button.name=Botão de Acácia
-tile.updateaquaticbackport.acacia_pressure_plate.name=Placa de Pressão de Acácia
-tile.updateaquaticbackport.acacia_trapdoor.name=Alçapão de Acácia
-tile.updateaquaticbackport.birch_button.name=Botão de Bétula
-tile.updateaquaticbackport.birch_pressure_plate.name=Placa de Pressão de Bétula
-tile.updateaquaticbackport.birch_trapdoor.name=Alçapão de Bétula
-tile.updateaquaticbackport.blue_ice.name=Gelo Azul
-tile.updateaquaticbackport.dark_oak_button.name=Botão de Carvalho Escuro
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Placa de Pressão de Carvalho Escuro
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Alçapão de Carvalho Escuro
-tile.updateaquaticbackport.jungle_button.name=Botão da Selva
-tile.updateaquaticbackport.jungle_pressure_plate.name=Placa de Pressão da Selva
-tile.updateaquaticbackport.jungle_trapdoor.name=Alçapão da Selva
-tile.updateaquaticbackport.sea_pickle.name=Pepino-do-Mar
-tile.updateaquaticbackport.spruce_button.name=Botão de Abeto
-tile.updateaquaticbackport.spruce_pressure_plate.name=Placa de Pressão de Abeto
-tile.updateaquaticbackport.spruce_trapdoor.name=Alçapão de Abeto
-tile.updateaquaticbackport.stripped_acacia_log.name=Tronco de Acácia Descascado
-tile.updateaquaticbackport.stripped_acacia_wood.name=Madeira de Acácia Descascada
-tile.updateaquaticbackport.stripped_birch_log.name=Tronco de Bétula Descascado
-tile.updateaquaticbackport.stripped_birch_wood.name=Madeira de Bétula Descascada
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Tronco de Carvalho Escuro Descascado
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Madeira de Carvalho Escuro Descascada
-tile.updateaquaticbackport.stripped_jungle_log.name=Tronco da Selva Descascado
-tile.updateaquaticbackport.stripped_jungle_wood.name=Madeira da Selva Descascada
-tile.updateaquaticbackport.stripped_oak_log.name=Tronco de Carvalho Descascado
-tile.updateaquaticbackport.stripped_oak_wood.name=Madeira de Carvalho Descascada
-tile.updateaquaticbackport.stripped_spruce_log.name=Tronco de Abeto Descascado
-tile.updateaquaticbackport.stripped_spruce_wood.name=Madeira de Abeto Descascada
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Ativado
 config.updateaquaticbackport.mobs.enabled.tooltip=As mudanças da 1.13 nas criaturas que já existiam: mortos-vivos que afundam, a tinta das Lulas, Ursos-Polares no gelo e o resto.
 config.updateaquaticbackport.water.enabled=Ativado
 config.updateaquaticbackport.water.enabled.tooltip=Cores da água por bioma, neblina debaixo d'água, recuperação gradual do ar e o resto das mudanças da água da 1.13.
-config.updateaquaticbackport.woodset.tooltip=Troncos e Madeiras descascados, os Alçapões, Botões e Placas de Pressão das cinco madeiras, Gelo Azul e Pepinos-do-Mar.
+config.updateaquaticbackport.woodset.tooltip=Troncos e Madeiras descascados, os Alçapões, Botões e Placas de Pressão das cinco madeiras e o Gelo Azul.
 config.updateaquaticbackport.kelp.tooltip=Alga, Algas Secas e Erva-Marinha.
 config.updateaquaticbackport.coral.tooltip=Corais, blocos de coral, gorgônias e recifes de coral.
 config.updateaquaticbackport.fish.tooltip=Bacalhau, Salmão, Baiacu e Peixe Tropical, e seus baldes.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Dados do bloco do cliente copiados para a área de tr
 debug.inspect.client.entity=Dados da entidade do cliente copiados para a área de transferência
 debug.inspect.server.block=Dados do bloco do servidor copiados para a área de transferência
 debug.inspect.server.entity=Dados da entidade do servidor copiados para a área de transferência
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Pepino-do-Mar
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Machado descasca
+tile.updateaquaticbackport.acacia_button.name=Botão de Acácia
+tile.updateaquaticbackport.acacia_pressure_plate.name=Placa de Pressão de Acácia
+tile.updateaquaticbackport.acacia_trapdoor.name=Alçapão de Acácia
+tile.updateaquaticbackport.birch_button.name=Botão de Bétula
+tile.updateaquaticbackport.birch_pressure_plate.name=Placa de Pressão de Bétula
+tile.updateaquaticbackport.birch_trapdoor.name=Alçapão de Bétula
+tile.updateaquaticbackport.blue_ice.name=Gelo Azul
+tile.updateaquaticbackport.dark_oak_button.name=Botão de Carvalho Escuro
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Placa de Pressão de Carvalho Escuro
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Alçapão de Carvalho Escuro
+tile.updateaquaticbackport.jungle_button.name=Botão da Selva
+tile.updateaquaticbackport.jungle_pressure_plate.name=Placa de Pressão da Selva
+tile.updateaquaticbackport.jungle_trapdoor.name=Alçapão da Selva
+tile.updateaquaticbackport.spruce_button.name=Botão de Abeto
+tile.updateaquaticbackport.spruce_pressure_plate.name=Placa de Pressão de Abeto
+tile.updateaquaticbackport.spruce_trapdoor.name=Alçapão de Abeto
+tile.updateaquaticbackport.stripped_acacia_log.name=Tronco de Acácia Descascado
+tile.updateaquaticbackport.stripped_acacia_wood.name=Madeira de Acácia Descascada
+tile.updateaquaticbackport.stripped_birch_log.name=Tronco de Bétula Descascado
+tile.updateaquaticbackport.stripped_birch_wood.name=Madeira de Bétula Descascada
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Tronco de Carvalho Escuro Descascado
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Madeira de Carvalho Escuro Descascada
+tile.updateaquaticbackport.stripped_jungle_log.name=Tronco da Selva Descascado
+tile.updateaquaticbackport.stripped_jungle_wood.name=Madeira da Selva Descascada
+tile.updateaquaticbackport.stripped_oak_log.name=Tronco de Carvalho Descascado
+tile.updateaquaticbackport.stripped_oak_wood.name=Madeira de Carvalho Descascada
+tile.updateaquaticbackport.stripped_spruce_log.name=Tronco de Abeto Descascado
+tile.updateaquaticbackport.stripped_spruce_wood.name=Madeira de Abeto Descascada

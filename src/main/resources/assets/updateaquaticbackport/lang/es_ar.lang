@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Otros bloques e ítems
 config.updateaquaticbackport.mobs=Cambios en las criaturas
 config.updateaquaticbackport.water=Agua
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Hacha raspando
-tile.updateaquaticbackport.acacia_button.name=Botón de acacia
-tile.updateaquaticbackport.acacia_pressure_plate.name=Placa de presión de acacia
-tile.updateaquaticbackport.acacia_trapdoor.name=Trampilla de acacia
-tile.updateaquaticbackport.birch_button.name=Botón de abedul
-tile.updateaquaticbackport.birch_pressure_plate.name=Placa de presión de abedul
-tile.updateaquaticbackport.birch_trapdoor.name=Trampilla de abedul
-tile.updateaquaticbackport.blue_ice.name=Hielo azul
-tile.updateaquaticbackport.dark_oak_button.name=Botón de roble oscuro
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Placa de presión de roble oscuro
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Trampilla de roble oscuro
-tile.updateaquaticbackport.jungle_button.name=Botón de jungla
-tile.updateaquaticbackport.jungle_pressure_plate.name=Placa de presión de jungla
-tile.updateaquaticbackport.jungle_trapdoor.name=Trampilla de jungla
-tile.updateaquaticbackport.sea_pickle.name=Pepino de mar
-tile.updateaquaticbackport.spruce_button.name=Botón de abeto
-tile.updateaquaticbackport.spruce_pressure_plate.name=Placa de presión de abeto
-tile.updateaquaticbackport.spruce_trapdoor.name=Trampilla de abeto
-tile.updateaquaticbackport.stripped_acacia_log.name=Tronco de acacia sin corteza
-tile.updateaquaticbackport.stripped_acacia_wood.name=Leño de acacia sin corteza
-tile.updateaquaticbackport.stripped_birch_log.name=Tronco de abedul sin corteza
-tile.updateaquaticbackport.stripped_birch_wood.name=Leño de abedul sin corteza
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Tronco de roble oscuro sin corteza
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Leño de roble oscuro sin corteza
-tile.updateaquaticbackport.stripped_jungle_log.name=Tronco de jungla sin corteza
-tile.updateaquaticbackport.stripped_jungle_wood.name=Leño de jungla sin corteza
-tile.updateaquaticbackport.stripped_oak_log.name=Tronco de roble sin corteza
-tile.updateaquaticbackport.stripped_oak_wood.name=Leño de roble sin corteza
-tile.updateaquaticbackport.stripped_spruce_log.name=Tronco de abeto sin corteza
-tile.updateaquaticbackport.stripped_spruce_wood.name=Leño de abeto sin corteza
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Activado
 config.updateaquaticbackport.mobs.enabled.tooltip=Los cambios de la 1.13 en las criaturas que ya existían: los no muertos que se hunden, la tinta de los calamares, los osos polares sobre el hielo y el resto.
 config.updateaquaticbackport.water.enabled=Activado
 config.updateaquaticbackport.water.enabled.tooltip=Colores del agua según el bioma, niebla bajo el agua, recuperación gradual del aire y el resto de los cambios del agua de la 1.13.
-config.updateaquaticbackport.woodset.tooltip=Troncos y leños sin corteza, las trampillas, botones y placas de presión de las cinco maderas, el hielo azul y los pepinos de mar.
+config.updateaquaticbackport.woodset.tooltip=Troncos y leños sin corteza, las trampillas, botones y placas de presión de las cinco maderas y el hielo azul.
 config.updateaquaticbackport.kelp.tooltip=Algas, algas secas y planta marina.
 config.updateaquaticbackport.coral.tooltip=Corales, bloques de coral, gorgonias y arrecifes de coral.
 config.updateaquaticbackport.fish.tooltip=Bacalaos, salmones, peces globo y peces tropicales, y sus cubetas.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Se copiaron los datos del bloque (lado del cliente)
 debug.inspect.client.entity=Se copiaron los datos de la entidad (lado del cliente)
 debug.inspect.server.block=Se copiaron los datos del bloque (lado del servidor)
 debug.inspect.server.entity=Se copiaron los datos de la entidad (lado del servidor)
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Pepino de mar
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Hacha raspando
+tile.updateaquaticbackport.acacia_button.name=Botón de acacia
+tile.updateaquaticbackport.acacia_pressure_plate.name=Placa de presión de acacia
+tile.updateaquaticbackport.acacia_trapdoor.name=Trampilla de acacia
+tile.updateaquaticbackport.birch_button.name=Botón de abedul
+tile.updateaquaticbackport.birch_pressure_plate.name=Placa de presión de abedul
+tile.updateaquaticbackport.birch_trapdoor.name=Trampilla de abedul
+tile.updateaquaticbackport.blue_ice.name=Hielo azul
+tile.updateaquaticbackport.dark_oak_button.name=Botón de roble oscuro
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Placa de presión de roble oscuro
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Trampilla de roble oscuro
+tile.updateaquaticbackport.jungle_button.name=Botón de jungla
+tile.updateaquaticbackport.jungle_pressure_plate.name=Placa de presión de jungla
+tile.updateaquaticbackport.jungle_trapdoor.name=Trampilla de jungla
+tile.updateaquaticbackport.spruce_button.name=Botón de abeto
+tile.updateaquaticbackport.spruce_pressure_plate.name=Placa de presión de abeto
+tile.updateaquaticbackport.spruce_trapdoor.name=Trampilla de abeto
+tile.updateaquaticbackport.stripped_acacia_log.name=Tronco de acacia sin corteza
+tile.updateaquaticbackport.stripped_acacia_wood.name=Leño de acacia sin corteza
+tile.updateaquaticbackport.stripped_birch_log.name=Tronco de abedul sin corteza
+tile.updateaquaticbackport.stripped_birch_wood.name=Leño de abedul sin corteza
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Tronco de roble oscuro sin corteza
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Leño de roble oscuro sin corteza
+tile.updateaquaticbackport.stripped_jungle_log.name=Tronco de jungla sin corteza
+tile.updateaquaticbackport.stripped_jungle_wood.name=Leño de jungla sin corteza
+tile.updateaquaticbackport.stripped_oak_log.name=Tronco de roble sin corteza
+tile.updateaquaticbackport.stripped_oak_wood.name=Leño de roble sin corteza
+tile.updateaquaticbackport.stripped_spruce_log.name=Tronco de abeto sin corteza
+tile.updateaquaticbackport.stripped_spruce_wood.name=Leño de abeto sin corteza
