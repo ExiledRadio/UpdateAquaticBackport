@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Ocean ruins: today's structure set {@code ocean_ruins} (spacing 20, separation 8, salt 14357621), shared
- * by {@code ocean_ruin_warm} and {@code ocean_ruin_cold}, whose biomes never overlap. Both have a large
+ * Ocean ruins, placed as 1.13 places them ({@code OceanRuinStructure}: spacing 16, separation 8, salt
+ * 14357621; 1.16 later widened it to today's 20), warm or cold by the biome at the chunk's block (9, 9). Both have a large
  * probability of 0.3 and a cluster probability of 0.9 ({@code OceanRuinPieces}).
  */
 public class MapGenOceanRuin extends ScatteredStructure {
@@ -44,7 +44,7 @@ public class MapGenOceanRuin extends ScatteredStructure {
     public static final ResourceLocation[] BIG_WARM = names("big_warm_4", "big_warm_5", "big_warm_6", "big_warm_7");
 
     public MapGenOceanRuin() {
-        super(StructureContent.OCEAN_RUIN_SAVE, new ScatteredPlacement(20, 8, 14357621));
+        super(StructureContent.OCEAN_RUIN_SAVE, new ScatteredPlacement(16, 8, 14357621));
     }
 
     private static ResourceLocation[] names(String... names) {
@@ -63,6 +63,16 @@ public class MapGenOceanRuin extends ScatteredStructure {
     @Override
     protected StructureStart getStructureStart(int chunkX, int chunkZ) {
         return new Start(this.world, this.rand, chunkX, chunkZ);
+    }
+
+    /**
+     * Seed maps tell warm ruins from cold ones: Backport Core's seed-parity dump names starts by this
+     * ({@code ScatteredStructure.variantAt}, Core 1.2.0 and later; no {@code @Override}, so this still builds
+     * against Core 1.1.0).
+     */
+    public String variantAt(World world, int chunkX, int chunkZ) {
+        Boolean warm = StructureBiomes.warmRuin(StructureBiomes.ocean(world, chunkX, chunkZ));
+        return warm == null ? null : warm ? "warm" : "cold";
     }
 
     public static class Start extends StructureStart {

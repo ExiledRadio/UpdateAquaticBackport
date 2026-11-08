@@ -9,8 +9,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
 /**
- * Today's biome rules for the ocean structures, read at the start chunk's middle (block 8, 8, as today's
- * {@code onTopOfChunkCenter}) through the biome provider, so no chunk is loaded:
+ * 1.13's biome rules for the ocean structures, read where 1.13 reads them: the block-scale biome at block
+ * (9, 9) of the start chunk ({@code getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9))}), through the biome
+ * provider, so no chunk is loaded. The biome lists are the same in 1.13 and today:
  *
  * <ul>
  *   <li>{@code has_structure/shipwreck} is {@code #is_ocean}: every ocean, by {@link OceanKind} (the
@@ -28,11 +29,12 @@ public final class StructureBiomes {
     }
 
     public static Biome middle(World world, int chunkX, int chunkZ) {
-        return world.getBiomeProvider().getBiome(new BlockPos((chunkX << 4) + 8, 0, (chunkZ << 4) + 8));
+        return world.getBiomeProvider().getBiome(new BlockPos((chunkX << 4) + 9, 0, (chunkZ << 4) + 9));
     }
 
     public static OceanKind ocean(World world, int chunkX, int chunkZ) {
-        return OceanKind.of(middle(world, chunkX, chunkZ), world.getSeed(), (chunkX << 4) + 8, (chunkZ << 4) + 8);
+        // With the ocean stream's map, a vanilla ocean is a normal-temperature one, as 1.13's MixOceans makes it.
+        return OceanKind.of(world, middle(world, chunkX, chunkZ), (chunkX << 4) + 9, (chunkZ << 4) + 9);
     }
 
     public static boolean isBeach(Biome biome) {

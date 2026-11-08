@@ -15,9 +15,9 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 /**
- * Shipwrecks: today's structure set {@code shipwrecks} (spacing 24, separation 4, salt 165745295), shared
- * by the sunken {@code shipwreck} (any ocean) and the {@code shipwreck_beached} (beaches). Their biomes
- * never overlap, so the biome at the chunk's middle decides which one a candidate chunk gets.
+ * Shipwrecks, placed as 1.13 places them ({@code ShipwreckStructure}: spacing 16, separation 8, salt
+ * 165745295; 1.16 later widened it to today's 24 and 4), sunken in any ocean and beached on beaches. Their
+ * biomes never overlap, so the biome at the chunk's block (9, 9) decides which one a candidate chunk gets.
  */
 public class MapGenShipwreck extends ScatteredStructure {
 
@@ -33,7 +33,7 @@ public class MapGenShipwreck extends ScatteredStructure {
             "rightsideup_fronthalf_degraded", "rightsideup_backhalf_degraded");
 
     public MapGenShipwreck() {
-        super(StructureContent.SHIPWRECK_SAVE, new ScatteredPlacement(24, 4, 165745295));
+        super(StructureContent.SHIPWRECK_SAVE, new ScatteredPlacement(16, 8, 165745295));
     }
 
     private static ResourceLocation[] names(String... names) {

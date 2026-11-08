@@ -16,7 +16,7 @@ import java.util.Random;
  * <p>1.12.2 only builds a monument on vanilla's deep ocean, with nothing but vanilla's water biomes for
  * 29 blocks around; with deep oceans split by temperature it would hardly ever find one. 1.14.4's
  * {@code OceanMonumentStructure} asks instead that the center be any deep ocean and the surroundings any
- * ocean or river. Everything else - the spacing (32 chunks, 5 apart), the seed, the structure, its
+ * ocean or river, both squares measured from the chunk's block (9, 9). Everything else - the spacing (32 chunks, 5 apart), the seed, the structure, its
  * guardians and its saved name ("Monument") - is vanilla's own, so existing monuments are untouched.
  */
 final class OceanMonuments extends StructureOceanMonument {
@@ -57,7 +57,9 @@ final class OceanMonuments extends StructureOceanMonument {
         if (chunkX != startX || chunkZ != startZ) {
             return false;
         }
-        return this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 8, chunkZ * 16 + 8, 16, this.spawnBiomes)
-                && this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 8, chunkZ * 16 + 8, 29, this.waterBiomes);
+        // 1.13 measures both squares from the chunk's block (9, 9); for the 29-block square that starts one 1:4
+        // cell later than 1.12.2's (8, 8) does.
+        return this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 9, chunkZ * 16 + 9, 16, this.spawnBiomes)
+                && this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 9, chunkZ * 16 + 9, 29, this.waterBiomes);
     }
 }

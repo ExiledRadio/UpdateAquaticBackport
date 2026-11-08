@@ -10,8 +10,19 @@ First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their 
 *   **Ocean floors** by temperature: sand in warm and lukewarm oceans, gravel in cold and frozen ones, with patches of clay, sand and gravel.
 *   **Frozen oceans** freeze over in patches, with open water between, and carry **icebergs**: great masses of packed ice with snow on top, smaller icebergs, and rarely one of blue ice. Blue ice also grows on packed ice under the water. Deep frozen oceans have icebergs but no sea ice.
 *   **Underwater caves and ravines** cut through the ocean floor, filled with water, with obsidian at the bottom (and magma blocks when bubble columns are on). `oceans.underwaterCaves` switches them off.
-*   **Ocean monuments** now generate in every kind of deep ocean, not only the plain one.
+*   **Ocean monuments** now generate in every kind of deep ocean, not only the plain one, by 1.13's rule.
 *   Squid in every ocean, as many as in 1.13; polar bears on frozen oceans.
+
+## Seed maps: worlds match 1.13
+
+A new world generated with this mod matches what 1.13 generates for the same seed, so seed map sites set to 1.13 show its biomes and structures where they really are. This was checked against Minecraft 1.13.2's own code over six seeds: every biome in a 2,048-block square and every structure start in an 8,192-block square came out the same.
+
+*   **Biomes**: the ocean temperatures as above, and the rare biome variants (sunflower plains, flower forests, tall birch forests, gravelly mountains and the like) in 1.13's places. 1.12.2 placed those from a noise it never seeded with the world seed.
+*   **Temples**: desert pyramids, jungle temples, witch huts and igloos each have their own grid, as since 1.13, instead of sharing one.
+*   **Shipwrecks and ocean ruins** are as far apart as in 1.13 (one per 16 chunks, at least 8 apart).
+*   **Villages, temples and ocean structures** check the biome at the same block 1.13 does, and **ocean monuments** measure their surroundings from it.
+*   **Strongholds and the world spawn** search for their biome the way 1.13 does, and strongholds can be in mushroom field shores. The spawn point's final spot is still chosen 1.12.2's way.
+*   Mineshafts, mansions and slime chunks were already the same.
 
 ## New: kelp and seagrass
 

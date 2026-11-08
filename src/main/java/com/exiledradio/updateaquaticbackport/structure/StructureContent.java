@@ -31,11 +31,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * treasure map with its red X.
  *
  * <ul>
- *   <li>Placement is today's (structure sets {@code shipwrecks}, {@code ocean_ruins},
- *       {@code buried_treasures}), driven by Backport Core's {@link ScatteredStructure} from the populate
- *       step and laid out on its terrain heights, so it works on any terrain Core can predict.</li>
- *   <li>Biomes are today's: sunken shipwrecks in every ocean, beached ones and buried treasure on beaches,
- *       warm ruins in warm and lukewarm oceans, cold ruins in the rest ({@link StructureBiomes}).</li>
+ *   <li>Placement is 1.13's (spacing, separation and salt of {@code ShipwreckStructure},
+ *       {@code OceanRuinStructure} and {@code BuriedTreasureStructure}), so the same seed puts them where
+ *       1.13 does; driven by Backport Core's {@link ScatteredStructure} from the populate step and laid out
+ *       on its terrain heights, so it works on any terrain Core can predict.</li>
+ *   <li>Biomes are 1.13's, read at the chunk's block (9, 9): sunken shipwrecks in every ocean, beached ones
+ *       and buried treasure on beaches, warm ruins in warm and lukewarm oceans, cold ruins in the rest
+ *       ({@link StructureBiomes}).</li>
  *   <li>Structure files are Mojang's own, in {@code assets/updateaquaticbackport/structures/}; loot tables
  *       are today's, under {@code updateaquaticbackport:chests/}, set by the files' data markers.</li>
  *   <li>Dolphins and treasure maps find them through Core's {@link Structures}.</li>

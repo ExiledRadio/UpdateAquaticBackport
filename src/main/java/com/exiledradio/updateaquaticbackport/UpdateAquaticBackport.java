@@ -61,6 +61,9 @@ public final class UpdateAquaticBackport {
         com.exiledradio.updateaquaticbackport.common.WaterSpawning.init();
         com.exiledradio.updateaquaticbackport.trident.TridentContent.init();
         com.exiledradio.updateaquaticbackport.structure.StructureContent.init();
+        // 1.13's placement of 1.12.2's own structures and biome variants, for seed parity with 1.13.
+        net.minecraftforge.common.MinecraftForge.TERRAIN_GEN_BUS.register(com.exiledradio.updateaquaticbackport.structure.Placement113.class);
+        com.exiledradio.updateaquaticbackport.structure.Placement113.init();
     }
 
     @Mod.EventHandler
