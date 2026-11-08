@@ -619,7 +619,7 @@ public final class FishSelfTest implements SelfTest {
             cod.setDead();
         }
 
-        // Creative keeps the water bucket and gets the fish bucket once.
+        // Creative keeps the water bucket and gets a fish bucket every time.
         player.interactionManager.setGameType(GameType.CREATIVE);
         player.inventory.clear();
         EntitySalmon salmon = new EntitySalmon(world);
@@ -629,6 +629,20 @@ public final class FishSelfTest implements SelfTest {
         player.interactOn(salmon, EnumHand.MAIN_HAND);
         c.eq(Items.WATER_BUCKET, player.getHeldItem(EnumHand.MAIN_HAND).getItem(), "creative keeps the water bucket");
         c.ok(player.inventory.hasItemStack(new ItemStack(Owners.ours("salmon_bucket"))), "and gets a bucket of salmon");
+        // A second, identical salmon gives a second bucket, as in current Java. 1.12.2's hasItemStack check
+        // made every salmon after the first vanish without one.
+        EntitySalmon second = new EntitySalmon(world);
+        second.setLocationAndAngles(mid.getX() + 0.5, mid.getY(), mid.getZ() + 3.5, 0, 0);
+        world.spawnEntity(second);
+        player.interactOn(second, EnumHand.MAIN_HAND);
+        int salmonBuckets = 0;
+        for (ItemStack stack : player.inventory.mainInventory) {
+            if (stack.getItem() == Owners.ours("salmon_bucket")) {
+                salmonBuckets++;
+            }
+        }
+        c.eq(2, salmonBuckets, "a second salmon in creative gives a second bucket");
+        c.ok(second.isDead, "and is scooped up");
         player.interactionManager.setGameType(GameType.SURVIVAL);
         player.inventory.clear();
     }

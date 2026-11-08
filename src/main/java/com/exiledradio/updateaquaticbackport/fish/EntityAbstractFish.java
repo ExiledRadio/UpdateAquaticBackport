@@ -292,15 +292,23 @@ public abstract class EntityAbstractFish extends EntityCreature implements IAnim
         if (filled.isEmpty()) {
             return super.processInteract(player, hand);
         }
+        // The server alone fills the bucket and removes the fish; the client only claims the click so it
+        // is not also used as a bucket on the water behind. Doing it on both sides showed a result the
+        // server could still refuse (out of reach, already scooped), which then snapped back.
+        if (this.world.isRemote) {
+            return true;
+        }
         this.playSound(FishContent.BUCKET_FILL_FISH, 1.0F, 1.0F);
         this.writeBucketData(filled);
         if (player instanceof EntityPlayerMP && !(player instanceof FakePlayer)) {
             FishTriggers.FILLED_BUCKET.trigger((EntityPlayerMP) player, filled);
         }
         if (player.capabilities.isCreativeMode) {
-            // Current Java: creative keeps the water bucket and gets the fish bucket once.
-            if (!player.inventory.hasItemStack(filled)) {
-                player.inventory.addItemStackToInventory(filled);
+            // Current Java (ItemUtils.createFilledResult without duplicate prevention): creative keeps the
+            // water bucket and always gets this fish's bucket as well. This used 1.12.2's hasItemStack, which
+            // ignores the bucket's data, so after the first cod bucket every later cod scooped just vanished.
+            if (!player.inventory.addItemStackToInventory(filled)) {
+                player.dropItem(filled, false);
             }
         } else {
             held.shrink(1);
