@@ -64,3 +64,23 @@ to Village & Pillage 2.4.0 and Buzzy Bees 1.0.0). These need a real client, whic
     oceans and structures.
 *   A world saved by an earlier dev build loading with this release (only synthetic old chunks were tested).
 *   Sponges next to kelp (in 1.14.4 they drop the kelp; here it is removed without a drop).
+
+## Look and feel (stream Lf, with Backport Core 1.2.0)
+
+Self-tests: `gradlew runServer -Pselftest=lookfeel` (registration, assets, splash pool, the Allow Snooper
+default, lang) and `gradlew runClient -Pselftest=client` (title screen, F3 key map, fog step, the copied commands;
+log only).
+
+- [ ] **Title screen**: 1.13's ocean panorama (coral, kelp, a shipwreck) turns all the way round, sharp, with the
+      gradient over it. With a newer update backport installed, the newer panorama shows instead.
+- [ ] **Splashes**: over several launches "Thank you for the fish!", "All rumors are true!", "Truly gone fishing!".
+- [ ] **World loading**: "Preparing spawn area: N%".
+- [ ] **F3 + C**: "[Debug]: Copied location to clipboard"; pasting gives `/tp @s x y z yaw pitch`, which works as a
+      command. Holding F3 + C still crashes the game after 6 seconds, as before.
+- [ ] **F3 + I** on a chest with cheats on: "Copied server-side block data" in singleplayer, and the pasted
+      `/setblock ... replace {Items:[...]}` recreates it; Shift + F3 + I says client-side. On a mob: `/summon ...`.
+      On a server (no server query in 1.12.2): client-side data.
+- [ ] **F3 + Q** lists the F3 + C and F3 + I lines.
+- [ ] **Underwater fog** looks as before this change (it now runs as a step of Backport Core's fog pipeline).
+- [ ] **Options**: a fresh instance has Allow Snooper off (Options > Snooper Settings).
+- [ ] **Controls**: mouse buttons read "Left Button", "Right Button", "Middle Button".

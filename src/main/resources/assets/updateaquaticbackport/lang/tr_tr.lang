@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Yüzme
 config.updateaquaticbackport.swimming.enabled.tooltip=Yüzmek için başınız su altındayken koşun: 0.6 blok yüksekliğinde bir şekilde yatarsınız, daha hızlı gidersiniz, baktığınız yöne ilerlersiniz ve bir blokluk boşluklardan geçebilirsiniz. Sunucuda sunucunun ayarı geçerlidir.
 config.updateaquaticbackport.swimming.crawling=Sürünme
 config.updateaquaticbackport.swimming.crawling.tooltip=Ayakta durmaya ya da eğilmeye yer yoksa sürünürsünüz: yeniden yer açılana kadar eğilme hızında yere yatarak. Bu, bir blokluk bir boşluğa yüzerek girdiğinizde ya da kapalı bir tuzak kapısının altında olur.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Konumu /tp komutu olarak kopyala, ya da 10 saniye basılı tutarak oyunu çökert
+debug.copy_location.message=Konum panoya kopyalandı
+debug.inspect.help=F3 + I = Varlık veya blok verilerini panoya kopyalar
+debug.inspect.client.block=İstemci taraflı blok verisi panoya kopyalandı
+debug.inspect.client.entity=İstemci taraflı varlık verisi panoya kopyalandı
+debug.inspect.server.block=Sunucu taraflı blok verisi panoya kopyalandı
+debug.inspect.server.entity=Sunucu taraflı varlık verisi panoya kopyalandı
+disconnect.loginFailed=Giriş yapılamadı
+disconnect.loginFailedInfo=Giriş yapılamadı: %s
+key.mouse.left=Sol Tuş
+key.mouse.middle=Orta Tuş
+key.mouse.right=Sağ Tuş
+multiplayer.disconnect.banned=Bu sunucudan yasaklandınız
+multiplayer.disconnect.ip_banned=IP adresiniz bu sunucudan yasaklandı
+multiplayer.disconnect.kicked=Bir yönetici tarafından atıldın
+multiplayer.downloadingTerrain=Arazi yükleniyor...
+options.narrator.off=KAPALI
+selectWorld.edit.openFolder=Dünya Klasörünü Aç
+selectWorld.edit.save=Kaydet
+selectWorld.versionJoinButton=Yine De Yükle
+selectWorld.versionWarning=Bu dünya en son %s sürümünde oynanmış ve bu sürümde yüklenmesi bozulmasına sebep olabilir!

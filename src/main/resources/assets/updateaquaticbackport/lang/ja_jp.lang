@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=水泳
 config.updateaquaticbackport.swimming.enabled.tooltip=頭が水中にある状態でダッシュすると泳ぎます。高さ0.6ブロックの姿勢で横になり、速く移動し、視線の方向へ進み、1ブロックの隙間を通れます。サーバーではサーバーの設定が優先されます。
 config.updateaquaticbackport.swimming.crawling=這う
 config.updateaquaticbackport.swimming.crawling.tooltip=立つこともスニークすることもできない場所では、再び空間ができるまでスニークの速さで地面に伏せて這います。1ブロックの隙間に泳いで入ったときや、閉じたトラップドアの下などで起こります。
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = /tpコマンドとして座標をコピー、10秒間長押しでゲームをクラッシュ
+debug.copy_location.message=クリップボードに座標をコピーしました
+debug.inspect.help=F3 + I = エンティティまたはブロックのデータをクリップボードにコピー
+debug.inspect.client.block=クライアント側のブロックデータをクリップボードにコピーしました
+debug.inspect.client.entity=クライアント側のエンティティデータをクリップボードにコピーしました
+debug.inspect.server.block=サーバー側のブロックデータをクリップボードにコピーしました
+debug.inspect.server.entity=サーバー側のエンティティデータをクリップボードにコピーしました
+disconnect.loginFailed=ログインに失敗しました
+disconnect.loginFailedInfo=ログインに失敗しました：%s
+key.mouse.left=左ボタン
+key.mouse.middle=中央ボタン
+key.mouse.right=右ボタン
+multiplayer.disconnect.banned=このサーバーへのアクセスは禁止されています
+multiplayer.disconnect.ip_banned=あなたのIPアドレスはこのサーバーへのアクセスを禁止されています
+multiplayer.disconnect.kicked=管理者に退出させられました
+multiplayer.downloadingTerrain=地形情報を読み込み中…
+options.narrator.off=オフ
+selectWorld.edit.openFolder=ワールドフォルダーを開く
+selectWorld.edit.save=保存
+selectWorld.versionJoinButton=構わず読み込む
+selectWorld.versionWarning=このワールドが最後にプレイされたのはバージョン%sです。現在のバージョンでワールドを読み込むとデータが破損する可能性があります。

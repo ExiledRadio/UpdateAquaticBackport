@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Nuoto
 config.updateaquaticbackport.swimming.enabled.tooltip=Corri con la testa sott'acqua per nuotare: ti distendi in una forma alta 0.6 blocchi, vai più veloce, segui la direzione dello sguardo e passi per aperture di un blocco. Su un server vale l'impostazione del server.
 config.updateaquaticbackport.swimming.crawling=Strisciare
 config.updateaquaticbackport.swimming.crawling.tooltip=Senza spazio per stare in piedi né per accovacciarti, strisci: disteso a terra alla velocità da accovacciato, finché non c'è di nuovo spazio. Succede entrando a nuoto in un'apertura di un blocco o sotto una botola chiusa.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Copia la posizione come comando «/tp» o tienili premuti per 10 secondi per arrestare il gioco
+debug.copy_location.message=Posizione copiata negli appunti
+debug.inspect.help=F3 + I = Copia negli appunti i dati blocco o entità
+debug.inspect.client.block=Dati blocco (lato client) copiati negli appunti
+debug.inspect.client.entity=Dati entità (lato client) copiati negli appunti
+debug.inspect.server.block=Dati blocco (lato server) copiati negli appunti
+debug.inspect.server.entity=Dati entità (lato server) copiati negli appunti
+disconnect.loginFailed=Accesso non riuscito
+disconnect.loginFailedInfo=Accesso non riuscito: %s
+key.mouse.left=Tasto sin.
+key.mouse.middle=Tasto centr.
+key.mouse.right=Tasto destro
+multiplayer.disconnect.banned=Un operatore ti ha bannato dal server
+multiplayer.disconnect.ip_banned=Un operatore ha bannato il tuo IP da questo server
+multiplayer.disconnect.kicked=Espulsione da un operatore
+multiplayer.downloadingTerrain=Caricamento del terreno...
+options.narrator.off=No
+selectWorld.edit.openFolder=Apri la cartella del mondo
+selectWorld.edit.save=Salva
+selectWorld.versionJoinButton=Carica comunque
+selectWorld.versionWarning=L'ultima volta questo mondo è stato caricato nella versione %s. Caricarlo in questa versione potrebbe danneggiarlo!

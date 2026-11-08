@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Pływanie
 config.updateaquaticbackport.swimming.enabled.tooltip=Biegnij z głową pod wodą, aby płynąć: kładziesz się płasko w kształcie o wysokości 0.6 bloku, poruszasz się szybciej, płyniesz tam, gdzie patrzysz, i mieścisz się w szczelinach o wysokości jednego bloku. Na serwerze liczy się ustawienie serwera.
 config.updateaquaticbackport.swimming.crawling=Czołganie
 config.updateaquaticbackport.swimming.crawling.tooltip=Gdy nie ma miejsca, by stać ani się skradać, czołgasz się: płasko przy ziemi z prędkością skradania, dopóki znów nie będzie miejsca. Dzieje się tak po wpłynięciu w szczelinę o wysokości jednego bloku lub pod zamkniętą klapą.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Kopiowanie lokalizacji jako polecenia /tp; lub przytrzymaj F3 + C przez 10 sekund, aby spowodować awarię gry
+debug.copy_location.message=Skopiowano położenie do schowka
+debug.inspect.help=F3 + I = Kopiuj dane bytów lub bloków do schowka
+debug.inspect.client.block=Skopiowano dane bloków z klienta do schowka
+debug.inspect.client.entity=Skopiowano dane bytów z klienta do schowka
+debug.inspect.server.block=Skopiowano dane bloków z serwera do schowka
+debug.inspect.server.entity=Skopiowano dane bytów z serwera do schowka
+disconnect.loginFailed=Nie udało się zalogować
+disconnect.loginFailedInfo=Nie udało się zalogować: %s
+key.mouse.left=Lewy przyc.
+key.mouse.middle=Środk. przyc.
+key.mouse.right=Prawy przyc.
+multiplayer.disconnect.banned=Zablokowano cię na tym serwerze
+multiplayer.disconnect.ip_banned=Twój adres IP został zablokowany na tym serwerze
+multiplayer.disconnect.kicked=Wyrzucono przez operatora
+multiplayer.downloadingTerrain=Wczytywanie terenu…
+options.narrator.off=Wył.
+selectWorld.edit.openFolder=Otwórz folder świata
+selectWorld.edit.save=Zapisz
+selectWorld.versionJoinButton=Wczytaj mimo to
+selectWorld.versionWarning=Ten świat był ostatnio otwierany w wersji %s i załadowanie go w tej wersji może spowodować uszkodzenie!

@@ -1,5 +1,6 @@
 package com.exiledradio.updateaquaticbackport.water.client;
 
+import com.exiledradio.backportcore.presentation.client.FogPipeline;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.water.FloatingItems;
 import com.exiledradio.updateaquaticbackport.water.GradualAir;
@@ -29,7 +30,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.GuiIngameForge;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -224,18 +224,21 @@ public final class WaterClient {
         return entity instanceof EntityLivingBase && ((EntityLivingBase) entity).isPotionActive(MobEffects.BLINDNESS);
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void fogColor(EntityViewRenderEvent.FogColors event) {
+    /**
+     * The fog color under water. A step of Backport Core's fog pipeline ({@code lookfeel.client.UnderwaterFogStep},
+     * version 1.13), so later versions' fog changes run after it.
+     */
+    public static void fogColor(FogPipeline.Colors event) {
         if (!fogOn()) {
             return;
         }
-        if (event.getState().getMaterial() != Material.WATER) {
+        if (event.state.getMaterial() != Material.WATER) {
             waterFogUpdateTime = -1L;
             return;
         }
-        Entity entity = event.getEntity();
+        Entity entity = event.entity;
         World world = entity.world;
-        float partialTicks = (float) event.getRenderPartialTicks();
+        float partialTicks = (float) event.partialTicks;
         Vec3d eye = ActiveRenderInfo.projectViewFromEntity(entity, partialTicks);
 
         // The biome's water fog color, blending from the last one over 5 seconds.
@@ -293,25 +296,25 @@ public final class WaterClient {
             g = ag;
             b = ab;
         }
-        event.setRed(r);
-        event.setGreen(g);
-        event.setBlue(b);
+        event.red = r;
+        event.green = g;
+        event.blue = b;
     }
 
     private static float lerp(float t, float from, float to) {
         return from + t * (to - from);
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void fogDensity(EntityViewRenderEvent.FogDensity event) {
-        if (!fogOn() || event.getState().getMaterial() != Material.WATER) {
+    /** The fog density under water: a step of Backport Core's fog pipeline, as {@link #fogColor}. */
+    public static void fogDensity(FogPipeline.Density event) {
+        if (!fogOn() || event.state.getMaterial() != Material.WATER) {
             return;
         }
-        Entity entity = event.getEntity();
+        Entity entity = event.entity;
         if (blind(entity)) {
             return; // vanilla's blindness fog wins, as in 1.14.4
         }
-        // A cancelled event skips vanilla's fog setup, mode included.
+        // Core's pipeline cancels the event once a step sets a density, which skips vanilla's fog setup, mode included.
         GlStateManager.setFog(GlStateManager.FogMode.EXP2);
         float density;
         if (entity instanceof EntityPlayerSP) {
@@ -324,8 +327,7 @@ public final class WaterClient {
         } else {
             density = entity instanceof EntityLivingBase ? 0.05F : 0.1F;
         }
-        event.setDensity(density);
-        event.setCanceled(true);
+        event.set(density);
     }
 
     // ---------------------------------------------------------------------------------- air bar
