@@ -144,4 +144,65 @@ public final class DolphinContent {
         }
         UpdateAquaticBackport.LOGGER.info("Dolphins spawn in {} ocean biomes.", SPAWN_BIOMES.size());
     }
+
+    /** Current Java's water creature cap: 5 per player. */
+    public static final int WATER_CREATURE_CAP = 5;
+
+    /** How far round a player its cap counts, in blocks: current Java's spawning range. */
+    private static final double CAP_RANGE = 128.0D;
+
+    /**
+     * Holds natural dolphin spawns to current Java's mob cap, checked for every spawn.
+     *
+     * <h2>Why dolphins swarmed</h2>
+     * 1.12.2's spawner checks a category's cap once per tick. If the count is under it, every chunk
+     * around every player then gets its spawn attempts in the same tick, each spawning up to four. In
+     * open ocean that is one or two water mobs. In any water a tick's attempts can reach, it was dozens
+     * of dolphins at once, and those near the player never despawn. Current Java checks the cap per
+     * spawn, and counts it per player (the local mob cap), so a lake holds a pod or two and no more.
+     *
+     * <p>So a natural dolphin spawn is refused unless some player within range of it has fewer than 5
+     * water creatures (squid included, as in current Java) within range of them. Spawners, eggs and
+     * commands are not natural spawns and are left alone.
+     */
+    @SubscribeEvent
+    public static void checkSpawn(net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn event) {
+        if (!(event.getEntityLiving() instanceof EntityDolphin) || event.isSpawner() || event.getWorld().isRemote) {
+            return;
+        }
+        if (!underLocalCap(event.getWorld(), event.getX(), event.getZ())) {
+            event.setResult(net.minecraftforge.fml.common.eventhandler.Event.Result.DENY);
+        }
+    }
+
+    /** @return true if a player in range of this spot has room under the water creature cap */
+    public static boolean underLocalCap(net.minecraft.world.World world, double x, double z) {
+        for (net.minecraft.entity.player.EntityPlayer player : world.playerEntities) {
+            if (player.isSpectator()) {
+                continue;
+            }
+            double dx = player.posX - x;
+            double dz = player.posZ - z;
+            if (dx * dx + dz * dz > CAP_RANGE * CAP_RANGE) {
+                continue;
+            }
+            if (waterCreaturesAround(world, player.posX, player.posZ) < WATER_CREATURE_CAP) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** @return how many water creatures count against the cap round this spot, stopping at the cap */
+    public static int waterCreaturesAround(net.minecraft.world.World world, double x, double z) {
+        net.minecraft.util.math.AxisAlignedBB around = new net.minecraft.util.math.AxisAlignedBB(
+                x - CAP_RANGE, 0.0D, z - CAP_RANGE, x + CAP_RANGE, world.getHeight(), z + CAP_RANGE);
+        int count = 0;
+        for (EntityLiving mob : world.getEntitiesWithinAABB(EntityLiving.class, around)) {
+            if (mob.isCreatureType(EnumCreatureType.WATER_CREATURE, true) && ++count >= WATER_CREATURE_CAP) {
+                break;
+            }
+        }
+        return count;
+    }
 }

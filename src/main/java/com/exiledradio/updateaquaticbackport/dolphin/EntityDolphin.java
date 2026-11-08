@@ -410,6 +410,15 @@ public class EntityDolphin extends EntityCreature implements IAnimals {
         return !this.getLeashed();
     }
 
+    /**
+     * 1.13's dolphin group is 1-2. 1.12.2's spawner ignores a spawn entry's group size and spawns up to
+     * this many per chunk per round instead, 4 by default.
+     */
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return DolphinContent.GROUP_MAX;
+    }
+
     @Override
     public int getTalkInterval() {
         return 120;

@@ -189,6 +189,41 @@ public final class DolphinSelfTest implements SelfTest {
         world.setBlockState(col.up(3), Blocks.STONE.getDefaultState(), 2 | 16);
         c.ok(!EntityDolphin.canSpawnAt(world, col.up(4), OceanKind.NORMAL, r), "not with stone below");
 
+        // Current Java's local cap, checked per spawn: 5 water creatures round a player, squid included.
+        EntityDolphin grouped = spawn(corner.add(3, 1, 3));
+        c.eq(2, grouped.getMaxSpawnedInChunk(), "1.13's group of 1-2 per spawner round");
+        grouped.setDead();
+        net.minecraft.entity.player.EntityPlayerMP watcher = Players.real(world, "dolphincap");
+        watcher.setPosition(corner.getX() + 0.5D, corner.getY() + 1, corner.getZ() + 0.5D);
+        world.playerEntities.add(watcher);
+        try {
+            double x = corner.getX() + 8.5D;
+            double z = corner.getZ() + 8.5D;
+            int already = com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.waterCreaturesAround(world, x, z);
+            java.util.List<net.minecraft.entity.passive.EntitySquid> squid = new java.util.ArrayList<>();
+            while (com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.waterCreaturesAround(world, x, z)
+                    < com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.WATER_CREATURE_CAP
+                    && squid.size() < 10) {
+                if (squid.isEmpty()) {
+                    c.ok(com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.underLocalCap(world, x, z),
+                            "a spawn is allowed under the cap (" + already + " water creatures nearby)");
+                }
+                net.minecraft.entity.passive.EntitySquid one = new net.minecraft.entity.passive.EntitySquid(world);
+                one.setPosition(x, corner.getY() + 1, z);
+                world.spawnEntity(one);
+                squid.add(one);
+            }
+            c.ok(!com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.underLocalCap(world, x, z),
+                    "a spawn is refused once 5 water creatures (squid included) are round the player");
+            for (net.minecraft.entity.passive.EntitySquid one : squid) {
+                one.setDead();
+            }
+        } finally {
+            world.playerEntities.remove(watcher);
+        }
+        c.ok(!com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.underLocalCap(world,
+                corner.getX() + 8.5D, corner.getZ() + 8.5D), "no player in range, no natural spawn");
+
         EntityDolphin leashed = spawn(corner.add(2, 1, 2));
         c.ok(leashed.canDespawn(), "an ordinary dolphin can despawn");
         leashed.setLeashHolder(Players.real(world, "dolphinleash"), false);
