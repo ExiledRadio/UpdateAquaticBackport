@@ -28,3 +28,11 @@ have yet:
 
 Out of scope for 1.12.2 (no counterpart): Command Suggestions (1.12.2 has no Brigadier suggestions), Optimize World
 (the Flattening's converter), data packs, the LWJGL 3 key names (letter keys in lowercase).
+
+## Done in Backport Core 1.2.0 (core-finish, 2026-11-08)
+
+Used here on branch `ua-lookfeel2`: Video Settings by version (no 3D Anaglyph, numbered GUI Scale: Core's 1.13
+table), the title-screen fade-in, the F3 text pipeline (1.13's lines, registered here), the in-game music owner
+(`music.under_water`, registered here, with 1.13's three tracks), Edit World's Make Backup and Open Backups Folder,
+and vanilla text by version (`vanilla_text/`). Core's waterlogging rules now make the prismarine stairs and slabs
+`Waterloggable` here. Still open: Fullscreen Resolution and Biome Blend, the world list's search bar.

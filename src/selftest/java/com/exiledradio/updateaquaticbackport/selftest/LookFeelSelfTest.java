@@ -47,6 +47,33 @@ public final class LookFeelSelfTest implements SelfTest {
         c.ok(v113 != null && v113.owners().contains(ID), "1.13 is registered by " + ID + ": " + v113);
         c.eq(GameVersion.parse("1.13"), Presentation.newest(), "the newest installed version (this mod alone)");
         c.eq(LoadingRevision.TEXT_1_13, Presentation.loadingRevision(), "the world-loading screen revision");
+        // Core's finished presentation module: vanilla text, the underwater music, Core's 1.13 table.
+        c.ok(Presentation.vanillaTexts().contains(new ResourceLocation(ID, "vanilla_text")), "1.13's vanilla text is registered");
+        net.minecraft.util.SoundEvent music = net.minecraft.util.SoundEvent.REGISTRY.getObject(new ResourceLocation(ID, "music.under_water"));
+        c.ok(music != null && music == com.exiledradio.updateaquaticbackport.common.SharedSounds.MUSIC_UNDER_WATER, "music.under_water is registered");
+        for (String track : new String[] {"axolotl", "dragon_fish", "shuniji"}) {
+            c.ok(LookFeelSelfTest.class.getResource("/assets/" + ID + "/sounds/music/game/water/" + track + ".ogg") != null, track + ".ogg is in the jar");
+        }
+        c.ok(com.exiledradio.backportcore.presentation.VanillaRevisions.anaglyphRemoved() && com.exiledradio.backportcore.presentation.VanillaRevisions.numberedGuiScale()
+                && com.exiledradio.backportcore.presentation.VanillaRevisions.titleFadeIn() && !com.exiledradio.backportcore.presentation.VanillaRevisions.vboRemoved(),
+                "Core's 1.13 table: no Anaglyph, numbered GUI Scale, the fade-in; VBOs stay until 1.14");
+        c.eq(com.exiledradio.backportcore.presentation.VanillaRevisions.Startup.NONE, com.exiledradio.backportcore.presentation.VanillaRevisions.startup(),
+                "no startup screen of Core's at 1.13 (1.14 brought it)");
+        // CORE_REQUESTS 7: prismarine stairs and slabs are 1.13's waterloggable shapes, water sources only.
+        net.minecraft.block.Block stairs = net.minecraftforge.fml.common.registry.ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ID, "prismarine_stairs"));
+        c.ok(stairs instanceof com.exiledradio.backportcore.waterlog.Waterloggable, "prismarine stairs are Waterloggable: " + stairs);
+        if (stairs != null) {
+            net.minecraft.block.state.IBlockState s = stairs.getDefaultState();
+            c.ok(com.exiledradio.backportcore.waterlog.WaterRules.decide(s, git.jbredwards.fluidlogged_api.api.util.FluidState.of(net.minecraftforge.fluids.FluidRegistry.WATER)) == null
+                    && com.exiledradio.backportcore.waterlog.WaterRules.decide(s, git.jbredwards.fluidlogged_api.api.util.FluidState.of(net.minecraftforge.fluids.FluidRegistry.LAVA)) == Boolean.FALSE,
+                    "prismarine stairs take water, not lava");
+        }
+        for (net.minecraft.block.Block b : net.minecraftforge.fml.common.registry.ForgeRegistries.BLOCKS) {
+            if (b instanceof com.exiledradio.updateaquaticbackport.blocks.BlockPrismarineSlab) {
+                com.exiledradio.updateaquaticbackport.blocks.BlockPrismarineSlab slab = (com.exiledradio.updateaquaticbackport.blocks.BlockPrismarineSlab) b;
+                c.eq(!slab.isDouble(), slab.canHoldWater(slab.getDefaultState(), null, null), b.getRegistryName() + " holds water only as a half slab");
+            }
+        }
     }
 
     private static void panorama(Check c) throws IOException {
@@ -133,12 +160,18 @@ public final class LookFeelSelfTest implements SelfTest {
 
     // ------------------------------------------------------------------------------------------
 
+    /** The mod's own lang file and its vanilla text (Core's, newest version wins) for one language. */
     private static Map<String, String> langFile(String code) throws IOException {
         Map<String, String> out = new HashMap<String, String>();
-        for (String line : lines(new ResourceLocation(ID, "lang/" + code + ".lang"))) {
-            int eq = line.indexOf('=');
-            if (eq > 0 && !line.startsWith("#")) {
-                out.put(line.substring(0, eq), line.substring(eq + 1));
+        for (String folder : new String[] {"lang/", "vanilla_text/"}) {
+            for (String line : lines(new ResourceLocation(ID, folder + code + ".lang"))) {
+                int eq = line.indexOf('=');
+                if (eq > 0 && !line.startsWith("#")) {
+                    if (folder.startsWith("vanilla") && out.containsKey(line.substring(0, eq))) {
+                        throw new IOException(code + ": " + line.substring(0, eq) + " is in lang/ and vanilla_text/");
+                    }
+                    out.put(line.substring(0, eq), line.substring(eq + 1));
+                }
             }
         }
         return out;

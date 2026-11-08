@@ -1,4 +1,12 @@
 {
+  "music.under_water": {
+    "category": "music",
+    "sounds": [
+      {"name": "updateaquaticbackport:music/game/water/shuniji", "stream": true, "volume": 0.4},
+      {"name": "updateaquaticbackport:music/game/water/dragon_fish", "stream": true, "volume": 0.4},
+      {"name": "updateaquaticbackport:music/game/water/axolotl", "stream": true, "volume": 0.4}
+    ]
+  },
   "item.axe.strip": {
     "category": "block",
     "sounds": [

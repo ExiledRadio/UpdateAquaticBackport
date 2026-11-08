@@ -48,6 +48,7 @@ public final class LookAndFeelClient {
             v113.debugKey(Keyboard.KEY_I, "debug.inspect.help", LookAndFeelClient::inspect);
         }
         UnderwaterFogStep.register();
+        LookAndFeel113.register();
     }
 
     /** F3+C: the player's position and look as a teleport command. Holding F3+C still crashes the game, as 1.12.2's. */
