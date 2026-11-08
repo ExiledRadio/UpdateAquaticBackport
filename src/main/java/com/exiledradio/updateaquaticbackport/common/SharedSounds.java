@@ -27,6 +27,9 @@ public final class SharedSounds {
     public static final SoundEvent WET_GRASS_HIT = event("block.wet_grass.hit");
     public static final SoundEvent WET_GRASS_FALL = event("block.wet_grass.fall");
 
+    /** 1.13's {@code music.under_water} (1.13-pre1): Axolotl, Dragon Fish and Shuniji, played by Backport Core's music owner. */
+    public static final SoundEvent MUSIC_UNDER_WATER = event("music.under_water");
+
     /** 1.13's {@code SoundType.WET_GRASS}: volume 1, pitch 1. */
     public static final SoundType WET_GRASS = new SoundType(1.0F, 1.0F,
             WET_GRASS_BREAK, WET_GRASS_STEP, WET_GRASS_PLACE, WET_GRASS_HIT, WET_GRASS_FALL);
@@ -42,6 +45,6 @@ public final class SharedSounds {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void register(RegistryEvent.Register<SoundEvent> event) {
-        event.getRegistry().registerAll(WET_GRASS_BREAK, WET_GRASS_STEP, WET_GRASS_PLACE, WET_GRASS_HIT, WET_GRASS_FALL);
+        event.getRegistry().registerAll(WET_GRASS_BREAK, WET_GRASS_STEP, WET_GRASS_PLACE, WET_GRASS_HIT, WET_GRASS_FALL, MUSIC_UNDER_WATER);
     }
 }

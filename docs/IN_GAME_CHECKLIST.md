@@ -84,3 +84,17 @@ log only).
 - [ ] **Underwater fog** looks as before this change (it now runs as a step of Backport Core's fog pipeline).
 - [ ] **Options**: a fresh instance has Allow Snooper off (Options > Snooper Settings).
 - [ ] **Controls**: mouse buttons read "Left Button", "Right Button", "Middle Button".
+
+## 1.13's pieces in Backport Core's finished presentation module (Core 1.2.0)
+
+- [ ] **Title screen**: on the first start the panorama shows at once, then the logo, splash, buttons and text fade
+      in over a second (1.13). No 3D Anaglyph on Video Settings; GUI Scale reads Auto, 1, 2, 3 (4 on a 1080p window).
+- [ ] **Music**: under water in an ocean or river, after a while, Axolotl, Dragon Fish or Shuniji (1.13); it keeps
+      playing while you stay, and stops for the game music when another track is asked for.
+- [ ] **F3**: "Integrated server @ N ms ticks, N tx, N rx" on the third line; "minecraft:overworld FC: 0" above
+      XYZ; "Looking at block" and, over water, "Looking at liquid"; on the right "Targeted Block", "Targeted Fluid"
+      (minecraft:water, level) and "Targeted Entity".
+- [ ] **Edit World**: Make Backup (a toast "Backed up: <world>", a zip in .minecraft/backups) and Open Backups Folder.
+- [ ] **Prismarine stairs and slabs**: a bucket of water waterlogs them; lava does not; flowing water does not run in;
+      a half slab between two water sources fills by itself.
+- [ ] **Text**: "Left Button", "Loading terrain...", "Open World Folder", "Raw Cod" (1.13.2's wording through Core).
