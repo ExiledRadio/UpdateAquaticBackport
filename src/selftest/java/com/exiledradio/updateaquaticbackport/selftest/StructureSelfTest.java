@@ -113,8 +113,11 @@ public final class StructureSelfTest implements SelfTest {
             c.ok(Structures.has(kind), kind + " has a locator");
             c.ok(ScatteredStructure.of(world, kind) != null, kind + " generates in the overworld");
         }
-        placement(Structures.SHIPWRECK, 24, 4, 165745295);
-        placement(Structures.OCEAN_RUIN, 20, 8, 14357621);
+        // The newest installed version's grids (Backport Core's placement table): 1.13's 16/8 with this mod alone,
+        // 1.16's 24/4 and 20/8 beside a 1.16 backport.
+        boolean v116 = com.exiledradio.backportcore.worldgen.StructurePlacements.isAtLeast("1.16");
+        placement(Structures.SHIPWRECK, v116 ? 24 : 16, v116 ? 4 : 8, 165745295);
+        placement(Structures.OCEAN_RUIN, v116 ? 20 : 16, 8, 14357621);
         placement(Structures.BURIED_TREASURE, 1, 0, 0);
 
         // legacy_type_2 at 0.01 over 200 000 chunks.

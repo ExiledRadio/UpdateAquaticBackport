@@ -80,45 +80,12 @@ under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin`, `BlockLog`, 
     item; an upright log of each type still picks its log with the right metadata; stone picks stone. The
     client's middle click itself (`ForgeHooks.onPickBlock`) is not run headlessly.
 
-## P4. Villages start by 1.13's biome point
+## P4 and P5: moved to Backport Core
 
-*   **Class**: `net.minecraft.world.gen.structure.MapGenVillage`. **Transformer**: `asm/VillageBiomePatch`.
-    **Hook**: `structure/Placement113.villageBiomes(provider, x, z, radius, biomes)`. **Since**: 1.0.0.
-*   **Vanilla 1.13+**: `VillageStructure.hasStartAt` reads the block-scale biome at block (9, 9) of the
-    candidate chunk; 1.12.2's `canSpawnStructureAtCoords` reads the 1:4 cell at (8, 8)
-    (`areBiomesViable(x * 16 + 8, z * 16 + 8, 0, VILLAGE_SPAWN_BIOMES)`). The grid (32/8, salt 10387312) and
-    the biome list are the same, so only villages near a biome edge move; that is enough to differ from
-    1.13's seed maps.
-*   **Why a patch**: replacing the village generator through `InitMapGenEvent` would take the slot Village &
-    Pillage's 1.14 villages need (they replace exactly vanilla's class), and its released versions would then
-    build no villages at all. The patch keeps vanilla's class, and V&P's subclass, which calls this method,
-    gets 1.13's point too.
-*   **What changes**: the one `INVOKEVIRTUAL BiomeProvider.areBiomesViable(IIILjava/util/List;)Z` in
-    `canSpawnStructureAtCoords(II)Z` becomes `INVOKESTATIC Placement113.villageBiomes`, same arguments with the
-    provider first. For radius 0 the hook asks `provider.getBiome(x + 1, z + 1)` (block scale) and the list;
-    any other radius goes to `areBiomesViable` unchanged.
-*   **Fails safe**: if the method is missing or has other than one such call, nothing is patched and villages
-    keep 1.12.2's point.
-*   **Tested**: Backport Core's vanilla oracle (`tools/vanilla-oracle`, `Oracle1132` against
-    `OverworldDump` on a real server) gives the same village start chunks as 1.13.2's own code over 6 seeds,
-    blocks -4096..4095.
-
-## P5. Biome searches pick as 1.13's does
-
-*   **Class**: `net.minecraft.world.biome.BiomeProvider`. **Transformer**: `asm/BiomeSearchPatch`. **Hook**:
-    `structure/Placement113.findBiomePosition(provider, x, z, range, biomes, random)`. **Since**: 1.0.0.
-*   **Vanilla 1.13+**: `findBiomePosition` keeps one matching 1:4 cell of the square, replacing it with chance
-    `1 / (n + 1)`, and counts `n` for every matching cell. 1.12.2 counts only the cells it keeps, so it draws
-    different random numbers. The search places all 128 strongholds (one shared random, so one difference
-    moves every later stronghold) and starts the spawn point.
-*   **Why a patch**: strongholds and `WorldServer.createSpawnPosition` call the method directly; only the
-    method itself reaches both, and the other world types' providers that inherit it.
-*   **What changes**: the method's whole body becomes `return Placement113.findBiomePosition(this, x, z, range,
-    biomes, random)`, 1.13's loop over `getBiomesForGeneration` of the same square. No branch is added (the
-    old body and its frames are removed).
-*   **Fails safe**: if the method is missing, nothing is patched.
-*   **Tested**: Backport Core's vanilla oracle gives the same 128 strongholds and spawn biome search as
-    1.13.2's code over 6 seeds.
+The villages' 1.13 biome point (P4) and the 1.13 pick of the strongholds' and spawn point's biome search (P5)
+are Backport Core 1.2.0's patches P9 and P8 now (its `docs/PATCHES.md`), shared by every backport of 1.13 and
+later, so each of them alone gets them. This mod only registers 1.13's structure numbers with Core's placement
+table (`structure/Placement113`). The numbers P4 and P5 had are not reused.
 
 ## Not in this coremod: swimming and crawling
 

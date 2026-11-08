@@ -3,6 +3,8 @@ package com.exiledradio.updateaquaticbackport.structure;
 import com.exiledradio.backportcore.structure.ModernTemplate;
 import com.exiledradio.backportcore.structure.ScatteredPlacement;
 import com.exiledradio.backportcore.structure.ScatteredStructure;
+import com.exiledradio.backportcore.structure.Structures;
+import com.exiledradio.backportcore.worldgen.StructurePlacements;
 import com.exiledradio.backportcore.terrain.TerrainHeights;
 import com.exiledradio.updateaquaticbackport.common.Content;
 
@@ -22,7 +24,8 @@ import java.util.Random;
 
 /**
  * Ocean ruins, placed as 1.13 places them ({@code OceanRuinStructure}: spacing 16, separation 8, salt
- * 14357621; 1.16 later widened it to today's 20), warm or cold by the biome at the chunk's block (9, 9). Both have a large
+ * 14357621; 1.16 later widened it to today's 20, given by Backport Core's placement table with a 1.16 backport),
+ * warm or cold by the biome at the version's point ({@link StructureBiomes#middle}). Both have a large
  * probability of 0.3 and a cluster probability of 0.9 ({@code OceanRuinPieces}).
  */
 public class MapGenOceanRuin extends ScatteredStructure {
@@ -44,7 +47,8 @@ public class MapGenOceanRuin extends ScatteredStructure {
     public static final ResourceLocation[] BIG_WARM = names("big_warm_4", "big_warm_5", "big_warm_6", "big_warm_7");
 
     public MapGenOceanRuin() {
-        super(StructureContent.OCEAN_RUIN_SAVE, new ScatteredPlacement(16, 8, 14357621));
+        // The newest installed version's grid: 1.13's 16/8 (Placement113), 1.16's 20/8 with the Nether backport.
+        super(StructureContent.OCEAN_RUIN_SAVE, StructurePlacements.placement(Structures.OCEAN_RUIN, new ScatteredPlacement(16, 8, 14357621)));
     }
 
     private static ResourceLocation[] names(String... names) {

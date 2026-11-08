@@ -2,7 +2,7 @@
 
 First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their floors, kelp, seagrass and coral reefs, icebergs and underwater caves; cod, salmon, pufferfish, tropical fish, turtles, dolphins, the drowned and phantoms; the trident and its four enchantments, the conduit, bubble columns, Slow Falling and the Turtle Master; carved pumpkins, prismarine stairs and slabs, wood blocks and 1.13's water. Where current Java has changed something since 1.13, this mod does it the current way.
 
-**Requires Backport Core 1.1.0 or newer and Fluidlogged API 3.3.3 or newer**, on the client and the server, with Forge 14.23.5.2847 or newer.
+**Requires Backport Core 1.2.0 or newer and Fluidlogged API 3.3.3 or newer**, on the client and the server, with Forge 14.23.5.2847 or newer.
 
 ## New: ocean biomes and terrain
 
@@ -23,6 +23,7 @@ A new world generated with this mod matches what 1.13 generates for the same see
 *   **Villages, temples and ocean structures** check the biome at the same block 1.13 does, and **ocean monuments** measure their surroundings from it.
 *   **Strongholds and the world spawn** search for their biome the way 1.13 does, and strongholds can be in mushroom field shores. The spawn point's final spot is still chosen 1.12.2's way.
 *   Mineshafts, mansions and slime chunks were already the same.
+*   With a backport of a later update installed as well, the world matches that update instead: its numbers win.
 
 ## New: kelp and seagrass
 

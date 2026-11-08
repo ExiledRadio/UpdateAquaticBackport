@@ -13,7 +13,8 @@ import java.util.Random;
 /**
  * Buried treasure: every chunk a candidate (spacing 1, separation 0, salt 0), kept with chance 0.01 seeded
  * by salt 10387320 (1.13's {@code BuriedTreasureStructure}; today's {@code legacy_type_2} reducer is the same
- * roll), on beaches by the biome at block (9, 9); the chest goes at block (9, 9) of the chunk.
+ * roll), on beaches by the biome at the version's point ({@link StructureBiomes#middle}); the chest goes at
+ * block (9, 9) of the chunk.
  */
 public class MapGenBuriedTreasure extends ScatteredStructure {
 

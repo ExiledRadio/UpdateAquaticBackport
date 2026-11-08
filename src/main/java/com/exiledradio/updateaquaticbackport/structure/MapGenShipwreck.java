@@ -2,6 +2,8 @@ package com.exiledradio.updateaquaticbackport.structure;
 
 import com.exiledradio.backportcore.structure.ScatteredPlacement;
 import com.exiledradio.backportcore.structure.ScatteredStructure;
+import com.exiledradio.backportcore.structure.Structures;
+import com.exiledradio.backportcore.worldgen.StructurePlacements;
 import com.exiledradio.backportcore.terrain.TerrainHeights;
 import com.exiledradio.updateaquaticbackport.common.Content;
 
@@ -16,8 +18,9 @@ import java.util.Random;
 
 /**
  * Shipwrecks, placed as 1.13 places them ({@code ShipwreckStructure}: spacing 16, separation 8, salt
- * 165745295; 1.16 later widened it to today's 24 and 4), sunken in any ocean and beached on beaches. Their
- * biomes never overlap, so the biome at the chunk's block (9, 9) decides which one a candidate chunk gets.
+ * 165745295; 1.16 later widened it to today's 24 and 4, which Backport Core's placement table gives when a 1.16
+ * backport is installed), sunken in any ocean and beached on beaches. Their biomes never overlap, so the biome at
+ * the version's point ({@link StructureBiomes#middle}) decides which one a candidate chunk gets.
  */
 public class MapGenShipwreck extends ScatteredStructure {
 
@@ -33,7 +36,8 @@ public class MapGenShipwreck extends ScatteredStructure {
             "rightsideup_fronthalf_degraded", "rightsideup_backhalf_degraded");
 
     public MapGenShipwreck() {
-        super(StructureContent.SHIPWRECK_SAVE, new ScatteredPlacement(16, 8, 165745295));
+        // The newest installed version's grid: 1.13's 16/8 (Placement113), 1.16's 24/4 with the Nether backport.
+        super(StructureContent.SHIPWRECK_SAVE, StructurePlacements.placement(Structures.SHIPWRECK, new ScatteredPlacement(16, 8, 165745295)));
     }
 
     private static ResourceLocation[] names(String... names) {

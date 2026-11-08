@@ -29,7 +29,7 @@ import org.apache.logging.log4j.Logger;
         name = UpdateAquaticBackport.MOD_NAME,
         version = UpdateAquaticBackport.VERSION,
         acceptedMinecraftVersions = "[1.12.2]",
-        dependencies = "required-after:backportcore@[1.1.0,);required-after:fluidlogged_api@[3.3.3,)"
+        dependencies = "required-after:backportcore@[1.2.0,);required-after:fluidlogged_api@[3.3.3,)"
 )
 public final class UpdateAquaticBackport {
 
@@ -44,6 +44,8 @@ public final class UpdateAquaticBackport {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        // 1.13's structure placement numbers, for Backport Core's table (seed parity with 1.13).
+        com.exiledradio.updateaquaticbackport.structure.Placement113.register();
         NetworkHandler.init();
         com.exiledradio.updateaquaticbackport.structure.StructureContent.preInit();
         com.exiledradio.updateaquaticbackport.swim.SwimContent.preInit(event.getSide().isClient());
@@ -61,9 +63,6 @@ public final class UpdateAquaticBackport {
         com.exiledradio.updateaquaticbackport.common.WaterSpawning.init();
         com.exiledradio.updateaquaticbackport.trident.TridentContent.init();
         com.exiledradio.updateaquaticbackport.structure.StructureContent.init();
-        // 1.13's placement of 1.12.2's own structures and biome variants, for seed parity with 1.13.
-        net.minecraftforge.common.MinecraftForge.TERRAIN_GEN_BUS.register(com.exiledradio.updateaquaticbackport.structure.Placement113.class);
-        com.exiledradio.updateaquaticbackport.structure.Placement113.init();
     }
 
     @Mod.EventHandler

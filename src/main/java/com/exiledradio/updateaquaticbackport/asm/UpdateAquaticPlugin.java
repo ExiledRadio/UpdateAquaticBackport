@@ -13,8 +13,8 @@ import java.util.Map;
  *   <li>{@link PumpkinHeadPatch}: the plain pumpkin is no longer worn on the head.</li>
  *   <li>{@link PumpkinGolemPatch}: the plain pumpkin no longer builds golems, however it is placed.</li>
  *   <li>{@link WoodPickBlockPatch}: middle-clicking 1.13's wood (a bark log) picks the wood item.</li>
- *   <li>{@link VillageBiomePatch}: villages start by the biome 1.13 reads, for seed parity.</li>
- *   <li>{@link BiomeSearchPatch}: strongholds and the spawn point's biome search pick as 1.13's does.</li>
+ * The village biome point and the strongholds' and spawn point's biome search (1.0.0's P4 and P5) are
+ * Backport Core's patches P9 and P8 since Core 1.2.0, shared by every backport of 1.13 and later.
  * </ul>
  * Sorted after FML's deobfuscation (index 1001), so a release sees SRG member names and the development
  * environment MCP names; every patch matches both. Each patch changes only the instructions it names, finds
@@ -35,8 +35,6 @@ public final class UpdateAquaticPlugin implements IFMLLoadingPlugin {
                 PumpkinHeadPatch.class.getName(),
                 PumpkinGolemPatch.class.getName(),
                 WoodPickBlockPatch.class.getName(),
-                VillageBiomePatch.class.getName(),
-                BiomeSearchPatch.class.getName(),
         };
     }
 
