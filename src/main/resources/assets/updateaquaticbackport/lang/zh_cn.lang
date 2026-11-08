@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=游泳
 config.updateaquaticbackport.swimming.enabled.tooltip=头部在水下时疾跑即可游泳：你会以0.6格高的姿态平躺，移动更快，朝视线方向前进，并能穿过一格高的空隙。在服务器上以服务器的设置为准。
 config.updateaquaticbackport.swimming.crawling=爬行
 config.updateaquaticbackport.swimming.crawling.tooltip=既没有站立空间也无法潜行时，你会改为爬行：以潜行速度平趴在地上，直到再次有足够空间。游进一格高的空隙或位于关闭的活板门下方时就会如此。
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = 将位置复制为/tp命令，或长按10秒使游戏崩溃
+debug.copy_location.message=坐标已复制到剪贴板
+debug.inspect.help=F3 + I = 将实体或方块的数据复制到剪贴板
+debug.inspect.client.block=客户端方块数据已复制到剪贴板
+debug.inspect.client.entity=客户端实体数据已复制到剪贴板
+debug.inspect.server.block=服务端方块数据已复制到剪贴板
+debug.inspect.server.entity=服务端实体数据已复制到剪贴板
+disconnect.loginFailed=登入失败
+disconnect.loginFailedInfo=登录失败：%s
+key.mouse.left=左键
+key.mouse.middle=中键
+key.mouse.right=右键
+multiplayer.disconnect.banned=你已被此服务器封禁
+multiplayer.disconnect.ip_banned=你的IP地址已被此服务器封禁
+multiplayer.disconnect.kicked=被管理员踢出游戏
+multiplayer.downloadingTerrain=加载地形中…
+options.narrator.off=关
+selectWorld.edit.openFolder=打开世界文件夹
+selectWorld.edit.save=保存
+selectWorld.versionJoinButton=仍然加载
+selectWorld.versionWarning=此世界上次是在%s版本中打开的，在此版本中加载可能会导致数据损坏！

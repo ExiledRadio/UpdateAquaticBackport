@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Плавание
 config.updateaquaticbackport.swimming.enabled.tooltip=Бегите, опустив голову под воду, чтобы плыть: вы ложитесь горизонтально в фигуру высотой 0.6 блока, двигаетесь быстрее, плывёте туда, куда смотрите, и пролезаете в проёмы высотой в один блок. На сервере действует настройка сервера.
 config.updateaquaticbackport.swimming.crawling=Ползание
 config.updateaquaticbackport.swimming.crawling.tooltip=Если нет места ни встать, ни красться, вы ползёте: лёжа на земле со скоростью крадущегося, пока снова не появится место. Это бывает, если заплыть в проём высотой в один блок или оказаться под закрытым люком.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Скопировать координаты как команду /tp; удерживайте 10 секунд, чтобы вызвать сбой игры
+debug.copy_location.message=Координаты скопированы в буфер обмена
+debug.inspect.help=F3 + I = Скопировать в буфер обмена данные сущности или блока
+debug.inspect.client.block=В буфер обмена скопированы клиентские данные блока
+debug.inspect.client.entity=В буфер обмена скопированы клиентские данные сущности
+debug.inspect.server.block=В буфер обмена скопированы серверные данные блока
+debug.inspect.server.entity=В буфер обмена скопированы серверные данные сущности
+disconnect.loginFailed=Ошибка входа
+disconnect.loginFailedInfo=Ошибка входа: %s
+key.mouse.left=ЛКМ
+key.mouse.middle=СКМ
+key.mouse.right=ПКМ
+multiplayer.disconnect.banned=Вы заблокированы на этом сервере
+multiplayer.disconnect.ip_banned=Ваш IP-адрес заблокирован на этом сервере
+multiplayer.disconnect.kicked=Вы были исключены оператором
+multiplayer.downloadingTerrain=Загрузка территории...
+options.narrator.off=Выкл
+selectWorld.edit.openFolder=Открыть папку мира
+selectWorld.edit.save=Сохранить
+selectWorld.versionJoinButton=Загрузить
+selectWorld.versionWarning=Этот мир сохранён в версии %s и может быть повреждён при загрузке в этой версии!

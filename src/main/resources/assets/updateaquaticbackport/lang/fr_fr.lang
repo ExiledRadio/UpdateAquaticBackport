@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Nage
 config.updateaquaticbackport.swimming.enabled.tooltip=Courez la tête sous l'eau pour nager : vous êtes allongé dans une forme de 0.6 bloc de haut, allez plus vite, suivez la direction de votre regard et passez par les ouvertures d'un bloc. Sur un serveur, c'est le réglage du serveur qui compte.
 config.updateaquaticbackport.swimming.crawling=Ramper
 config.updateaquaticbackport.swimming.crawling.tooltip=Sans la place de vous tenir debout ni de vous accroupir, vous rampez : allongé au sol à la vitesse accroupie, jusqu'à ce qu'il y ait de nouveau de la place. Cela arrive en entrant à la nage dans une ouverture d'un bloc, ou sous une trappe fermée.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Copier la position en tant que commande /tp ou maintenir pendant 10 secondes pour faire planter le jeu
+debug.copy_location.message=Position copiée dans le presse-papiers
+debug.inspect.help=F3 + I = Copier les données d'entité ou de bloc dans le presse-papiers
+debug.inspect.client.block=Les données du bloc ont été copiées côté client dans le presse-papiers
+debug.inspect.client.entity=Les données de l'entité ont été copiées côté client dans le presse-papiers
+debug.inspect.server.block=Les données du bloc ont été copiées côté serveur dans le presse-papiers
+debug.inspect.server.entity=Les données de l'entité ont été copiées côté serveur dans le presse-papiers
+disconnect.loginFailed=Échec de l'authentification
+disconnect.loginFailedInfo=Échec de la connexion : %s
+key.mouse.left=Clic gauche
+key.mouse.middle=Clic molette
+key.mouse.right=Clic droit
+multiplayer.disconnect.banned=Vous êtes banni(e) de ce serveur
+multiplayer.disconnect.ip_banned=Votre adresse IP est bannie de ce serveur
+multiplayer.disconnect.kicked=Expulsé(e) par un opérateur
+multiplayer.downloadingTerrain=Chargement du terrain...
+options.narrator.off=Désactivé
+selectWorld.edit.openFolder=Ouvrir le dossier du monde
+selectWorld.edit.save=Sauvegarder
+selectWorld.versionJoinButton=Charger quand même
+selectWorld.versionWarning=Ce monde a été ouvert pour la dernière fois en version %s et le charger dans la version actuelle pourrait entraîner sa corruption !

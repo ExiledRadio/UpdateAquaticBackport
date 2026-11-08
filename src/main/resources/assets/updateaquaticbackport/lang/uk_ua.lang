@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Плавання
 config.updateaquaticbackport.swimming.enabled.tooltip=Біжіть, опустивши голову під воду, щоб плисти: ви лягаєте горизонтально у фігуру заввишки 0.6 блока, рухаєтеся швидше, пливете туди, куди дивитеся, і пролазите в отвори заввишки один блок. На сервері діє налаштування сервера.
 config.updateaquaticbackport.swimming.crawling=Повзання
 config.updateaquaticbackport.swimming.crawling.tooltip=Якщо немає місця ні встати, ні крастися, ви повзете: лежачи на землі зі швидкістю скрадання, доки знову не з'явиться місце. Так буває, якщо запливти в отвір заввишки один блок або опинитися під зачиненим люком.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Скопіювати розташування як команду /tp; тримайте 10 секунд, щоб спричинити збій гри
+debug.copy_location.message=Скопійовано розташування в буфер обміну
+debug.inspect.help=F3 + I = Скопіювати в буфер обміну дані сутности чи блока
+debug.inspect.client.block=Клієнтські дані блока скопійовано до буфера обміну
+debug.inspect.client.entity=Клієнтські дані сутностей скопійовано до буфера обміну
+debug.inspect.server.block=Серверні дані блоків скопійовано до буфера обміну
+debug.inspect.server.entity=Серверні дані сутностей скопійовано до буфера обміну
+disconnect.loginFailed=Не вдалося авторизуватися
+disconnect.loginFailedInfo=Не вдалося ввійти: %s
+key.mouse.left=ЛКМ
+key.mouse.middle=СКМ
+key.mouse.right=ПКМ
+multiplayer.disconnect.banned=Ви заблоковані на цьому сервері
+multiplayer.disconnect.ip_banned=Вашу IP-адресу було заблоковано на цьому сервері
+multiplayer.disconnect.kicked=Викинуто оператором
+multiplayer.downloadingTerrain=Завантаження місцевости…
+options.narrator.off=ВИМК.
+selectWorld.edit.openFolder=Відкрити теку світу
+selectWorld.edit.save=Зберегти
+selectWorld.versionJoinButton=Завантажити
+selectWorld.versionWarning=Востаннє цей світ було відкрито у версії %s, а завантаження його на цій версії може спричинити псування!

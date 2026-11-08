@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Nadar
 config.updateaquaticbackport.swimming.enabled.tooltip=Corra com a cabeça debaixo d'água para nadar: você fica deitado numa forma de 0.6 bloco de altura, anda mais rápido, segue para onde olha e passa por vãos de um bloco. Num servidor, vale a configuração do servidor.
 config.updateaquaticbackport.swimming.crawling=Rastejar
 config.updateaquaticbackport.swimming.crawling.tooltip=Sem espaço para ficar em pé nem agachar, você rasteja: deitado no chão na velocidade de agachar, até haver espaço de novo. Acontece ao entrar nadando num vão de um bloco ou debaixo de um alçapão fechado.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Copiar a posição como comando /tp, ou segure por 10 segundos para interromper o jogo
+debug.copy_location.message=Posição copiada para a área de transferência
+debug.inspect.help=F3 + I = Copiar dados da entidade ou bloco para a área de transferência
+debug.inspect.client.block=Dados do bloco do cliente copiados para a área de transferência
+debug.inspect.client.entity=Dados da entidade do cliente copiados para a área de transferência
+debug.inspect.server.block=Dados do bloco do servidor copiados para a área de transferência
+debug.inspect.server.entity=Dados da entidade do servidor copiados para a área de transferência
+disconnect.loginFailed=Não foi possível iniciar a sessão
+disconnect.loginFailedInfo=Falha ao iniciar sessão: %s
+key.mouse.left=Botão esq.
+key.mouse.middle=Botão do meio
+key.mouse.right=Botão direito
+multiplayer.disconnect.banned=Você foi banido(a) desse servidor
+multiplayer.disconnect.ip_banned=Seu endereço IP foi banido desse servidor
+multiplayer.disconnect.kicked=Expulsão por um operador
+multiplayer.downloadingTerrain=Carregando terreno...
+options.narrator.off=Desligada
+selectWorld.edit.openFolder=Abrir pasta do mundo
+selectWorld.edit.save=Salvar
+selectWorld.versionJoinButton=Carregar mesmo assim
+selectWorld.versionWarning=Esse mundo foi jogado pela última vez na versão %s. Carregá-lo nessa versão pode corrompê-lo!

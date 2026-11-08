@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=수영
 config.updateaquaticbackport.swimming.enabled.tooltip=머리가 물속에 있을 때 달리면 수영합니다. 높이 0.6블록의 자세로 엎드려 더 빠르게 움직이고, 바라보는 방향으로 나아가며, 한 블록 높이의 틈을 지나갈 수 있습니다. 서버에서는 서버의 설정이 적용됩니다.
 config.updateaquaticbackport.swimming.crawling=기어가기
 config.updateaquaticbackport.swimming.crawling.tooltip=서거나 웅크릴 공간이 없으면 다시 공간이 생길 때까지 웅크리기 속도로 땅에 엎드려 기어갑니다. 한 블록 높이의 틈으로 헤엄쳐 들어가거나 닫힌 다락문 아래에 있을 때 이렇게 됩니다.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = 위치를 /tp 명령어로 복사, 10초 동안 누르고 있으면 게임에 크래시를 발생시킴
+debug.copy_location.message=위치를 클립보드에 복사했습니다
+debug.inspect.help=F3 + I = 개체 또는 블록 데이터를 클립보드에 복사
+debug.inspect.client.block=클라이언트 측 블록 데이터를 클립보드에 복사했습니다
+debug.inspect.client.entity=클라이언트 측 개체 데이터를 클립보드에 복사했습니다
+debug.inspect.server.block=서버 측 블록 데이터를 클립보드에 복사했습니다
+debug.inspect.server.entity=서버 측 개체 데이터를 클립보드에 복사했습니다
+disconnect.loginFailed=로그인에 실패했습니다
+disconnect.loginFailedInfo=로그인에 실패했습니다: %s
+key.mouse.left=왼쪽 버튼
+key.mouse.middle=가운데 버튼
+key.mouse.right=오른쪽 버튼
+multiplayer.disconnect.banned=서버에서 차단되었습니다
+multiplayer.disconnect.ip_banned=서버에서 IP 주소가 차단되었습니다
+multiplayer.disconnect.kicked=관리자에게 추방당함
+multiplayer.downloadingTerrain=지형 불러오는 중...
+options.narrator.off=꺼짐
+selectWorld.edit.openFolder=세계 폴더 열기
+selectWorld.edit.save=저장
+selectWorld.versionJoinButton=무시하고 불러오기
+selectWorld.versionWarning=이 세계는 %s 버전에서 마지막으로 플레이되었으며, 사용 중인 버전으로 불러오면 손상될 수 있습니다!

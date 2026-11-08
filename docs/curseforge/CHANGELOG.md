@@ -166,6 +166,17 @@ A new world generated with this mod matches what 1.13 generates for the same see
 *   Players raise a trident over their head to throw it.
 *   On a server, the server's own swimming and crawling settings count for everyone on it.
 
+## New: 1.13's look and feel
+
+With Backport Core 1.2.0 the game looks the way 1.13 did, not only plays like it. When another update backport is installed too, the newest update's look wins, as in vanilla.
+
+*   **The title screen** shows 1.13's ocean panorama, sharp and turning all the way round, with 1.13's gradient over it.
+*   **Splashes**: "Thank you for the fish!", "All rumors are true!" and "Truly gone fishing!".
+*   **The world-loading screen** shows "Preparing spawn area" with a percentage.
+*   **F3 + C** copies your location as a `/tp` command, and **F3 + I** copies the block or entity you look at as a `/setblock` or `/summon` command (with its data when you may use commands). F3 + Q lists both.
+*   **Allow Snooper** is off by default, as from 1.13 (set once; your own choice stays yours afterwards).
+*   1.13's wording for vanilla text: "Left Button", "Loading terrain...", "Open World Folder", "Load Anyway" and more, in every language.
+
 ## Works with Village & Pillage Backport
 
 *   **Shared blocks**: stripped logs and wood, the wood trapdoors, buttons and pressure plates, blue ice and sea pickles belong to Village & Pillage Backport, which added them first. Whichever installed mod owns a shared block provides it: with Village & Pillage installed, this mod registers none of its own and uses Village & Pillage's everywhere (axes strip logs into its stripped logs, and icebergs carry its blue ice). Without it, this mod registers identical copies of its own.

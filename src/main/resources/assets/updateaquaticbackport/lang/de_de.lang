@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Schwimmen
 config.updateaquaticbackport.swimming.enabled.tooltip=Sprinte mit dem Kopf unter Wasser, um zu schwimmen: Du liegst flach in einer 0.6 Blöcke hohen Form, bist schneller, folgst deinem Blick und passt durch Lücken von einem Block. Auf einem Server zählt die Einstellung des Servers.
 config.updateaquaticbackport.swimming.crawling=Kriechen
 config.updateaquaticbackport.swimming.crawling.tooltip=Ist weder zum Stehen noch zum Schleichen Platz, kriechst du: flach am Boden mit Schleichgeschwindigkeit, bis wieder Platz ist. Das passiert, wenn du in eine Lücke von einem Block schwimmst oder unter einer geschlossenen Falltür.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Position als /tp‐Befehl kopieren oder 10 Sekunden gedrückt halten, um einen Absturz zu erzwingen
+debug.copy_location.message=Position wurde in die Zwischenablage kopiert
+debug.inspect.help=F3 + I = Block- oder Objektdaten in Zwischenablage kopieren
+debug.inspect.client.block=Clientseitige Blockdaten in die Zwischenablage kopiert
+debug.inspect.client.entity=Clientseitige Objektdaten in die Zwischenablage kopiert
+debug.inspect.server.block=Serverseitige Blockdaten in Zwischenablage kopiert
+debug.inspect.server.entity=Serverseitige Objektdaten in Zwischenablage kopiert
+disconnect.loginFailed=Anmeldung fehlgeschlagen
+disconnect.loginFailedInfo=Anmeldung fehlgeschlagen: %s
+key.mouse.left=Linksklick
+key.mouse.middle=Mittelklick
+key.mouse.right=Rechtsklick
+multiplayer.disconnect.banned=Du wurdest auf diesem Server gesperrt
+multiplayer.disconnect.ip_banned=Deine IP‐Adresse wurde auf diesem Server gesperrt
+multiplayer.disconnect.kicked=Von einem Operator hinausgeworfen
+multiplayer.downloadingTerrain=Landschaft wird geladen …
+options.narrator.off=Aus
+selectWorld.edit.openFolder=Weltordner öffnen
+selectWorld.edit.save=Speichern
+selectWorld.versionJoinButton=Trotzdem laden
+selectWorld.versionWarning=Diese Welt wurde zuletzt in der Version %s gespielt. Das Laden dieser Welt könnte Schäden verursachen!

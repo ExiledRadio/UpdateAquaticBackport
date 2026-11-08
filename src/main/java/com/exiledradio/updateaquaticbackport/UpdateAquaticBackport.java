@@ -47,6 +47,7 @@ public final class UpdateAquaticBackport {
         // 1.13's structure placement numbers, for Backport Core's table (seed parity with 1.13).
         com.exiledradio.updateaquaticbackport.structure.Placement113.register();
         NetworkHandler.init();
+        com.exiledradio.updateaquaticbackport.lookfeel.LookAndFeel.preInit();
         com.exiledradio.updateaquaticbackport.structure.StructureContent.preInit();
         com.exiledradio.updateaquaticbackport.swim.SwimContent.preInit(event.getSide().isClient());
 

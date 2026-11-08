@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=Zwemmen
 config.updateaquaticbackport.swimming.enabled.tooltip=Ren met je hoofd onder water om te zwemmen: je ligt plat in een vorm van 0.6 blok hoog, gaat sneller, zwemt waar je naartoe kijkt en past door openingen van één blok. Op een server telt de instelling van de server.
 config.updateaquaticbackport.swimming.crawling=Kruipen
 config.updateaquaticbackport.swimming.crawling.tooltip=Is er geen ruimte om te staan of te sluipen, dan kruip je: plat op de grond op sluipsnelheid, tot er weer ruimte is. Dat gebeurt als je een opening van één blok in zwemt, of onder een gesloten valluik.
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = Locatie als /tp-opdracht kopiëren. Houd F3 + C voor tien seconden ingedrukt om het spel te crashen.
+debug.copy_location.message=Locatie gekopieerd
+debug.inspect.help=F3 + I = Entiteit- of blokgegevens kopiëren
+debug.inspect.client.block=Blokgegevens van cliënt naar klembord gekopieerd
+debug.inspect.client.entity=Entiteitgegevens van cliënt naar klembord gekopieerd
+debug.inspect.server.block=Blokgegevens van de server naar klembord gekopieerd
+debug.inspect.server.entity=Entiteitgegevens van de server naar klembord gekopieerd
+disconnect.loginFailed=Aanmelden mislukt
+disconnect.loginFailedInfo=Aanmelden mislukt: %s
+key.mouse.left=Linksklikken
+key.mouse.middle=Muiswiel
+key.mouse.right=Rechtsklikken
+multiplayer.disconnect.banned=Je bent geblokkeerd op deze server
+multiplayer.disconnect.ip_banned=Jouw IP-adres is geblokkeerd op deze server
+multiplayer.disconnect.kicked=Uit de server gezet door een beheerder
+multiplayer.downloadingTerrain=Terrein laden...
+options.narrator.off=UIT
+selectWorld.edit.openFolder=Map openen
+selectWorld.edit.save=Opslaan
+selectWorld.versionJoinButton=Toch laden
+selectWorld.versionWarning=Deze wereld werd voor het laatst gespeeld in %s. Het laden van de wereld in deze versie kan beschadigingen veroorzaken!

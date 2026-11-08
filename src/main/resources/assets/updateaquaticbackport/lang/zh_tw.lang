@@ -443,3 +443,28 @@ config.updateaquaticbackport.swimming.enabled=游泳
 config.updateaquaticbackport.swimming.enabled.tooltip=頭部在水下時跑步即可游泳：你會以 0.6 格高的姿態平躺，移動更快，朝視線方向前進，並能穿過一格高的空隙。在伺服器上以伺服器的設定為準。
 config.updateaquaticbackport.swimming.crawling=爬行
 config.updateaquaticbackport.swimming.crawling.tooltip=既沒有站立空間也無法潛行時，你會改為爬行：以潛行速度平趴在地上，直到再次有足夠空間。游進一格高的空隙或位於關閉的地板門下方時就會如此。
+
+# --- look and feel ---
+# Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
+# 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
+debug.copy_location.help=F3 + C = 將位置複製為 /tp 指令，長按 10 秒使遊戲崩潰
+debug.copy_location.message=將位置複製到剪貼簿
+debug.inspect.help=F3 + I = 將實體或方塊的資料複製到剪貼簿
+debug.inspect.client.block=已將用戶端方塊資料複製到剪貼簿
+debug.inspect.client.entity=已將用戶端實體資料複製到剪貼簿
+debug.inspect.server.block=已將伺服器端方塊資料複製到剪貼簿
+debug.inspect.server.entity=已將伺服器端實體資料複製到剪貼簿
+disconnect.loginFailed=登入失敗
+disconnect.loginFailedInfo=登入失敗：%s
+key.mouse.left=左鍵
+key.mouse.middle=中鍵
+key.mouse.right=右鍵
+multiplayer.disconnect.banned=您已經被這個伺服器封鎖
+multiplayer.disconnect.ip_banned=您的 IP 位址已被這個伺服器封鎖
+multiplayer.disconnect.kicked=已被管理員踢出
+multiplayer.downloadingTerrain=正在載入地形...
+options.narrator.off=關閉
+selectWorld.edit.openFolder=開啟世界資料夾
+selectWorld.edit.save=儲存
+selectWorld.versionJoinButton=依然載入
+selectWorld.versionWarning=這個世界最後遊玩的版本為 %s，使用目前版本載入可能會導致損壞！
