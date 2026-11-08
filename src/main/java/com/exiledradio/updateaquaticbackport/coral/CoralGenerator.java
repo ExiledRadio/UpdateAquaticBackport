@@ -111,8 +111,6 @@ public final class CoralGenerator implements IWorldGenerator {
         for (IProperty p : state.getPropertyKeys()) {
             if ("pickles".equals(p.getName())) {
                 state = state.withProperty(p, Integer.valueOf(count));
-            } else if ("waterlogged".equals(p.getName())) {
-                state = state.withProperty(p, Boolean.TRUE);
             }
         }
         return state;

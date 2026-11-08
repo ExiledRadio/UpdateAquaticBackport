@@ -248,11 +248,15 @@ public final class WoodsetSelfTest implements SelfTest {
             c.eq(n <= 4, added, "add pickle " + n);
         }
         c.eq(4, world.getBlockState(p).getValue(BlockSeaPickle.PICKLES), "four pickles");
+        // Current Java: water beside a pickle does nothing; only water in it (waterlogged) lights it.
         world.setBlockState(p.north(), Blocks.WATER.getDefaultState(), 3);
-        ps = world.getBlockState(p);
-        c.ok(ps.getValue(BlockSeaPickle.WATERLOGGED) && ps.getLightValue(world, p) == 15, "water beside lights " + ps);
+        c.eq(0, world.getBlockState(p).getLightValue(world, p), "water beside does not light it");
         world.setBlockToAir(p.north());
-        c.ok(!world.getBlockState(p).getValue(BlockSeaPickle.WATERLOGGED), "drained goes dark");
+        com.exiledradio.backportcore.waterlog.Waterlogging.setWater(world, p, true, 3);
+        c.eq(15, world.getBlockState(p).getLightValue(world, p), "four waterlogged pickles give 15");
+        com.exiledradio.backportcore.waterlog.Waterlogging.setWater(world, p, false, 3);
+        c.eq(0, world.getBlockState(p).getLightValue(world, p), "drained goes dark");
+        c.eq(pickle, world.getBlockState(p).getBlock(), "and is not broken by draining");
         for (int n = 1; n <= 4; n++) {
             IBlockState wet = pickle.getDefaultState().withProperty(BlockSeaPickle.PICKLES, n).withProperty(BlockSeaPickle.WATERLOGGED, true);
             c.eq(3 + 3 * n, wet.getLightValue(), "light " + n);

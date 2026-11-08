@@ -89,7 +89,8 @@ public final class CoralPickles {
                             && isLivingCoralBlock(world.getBlockState(at.down()))) {
                         IBlockState more = CoralGenerator.seaPickle(rand.nextInt(4) + 1);
                         if (more != null) {
-                            world.setBlockState(at, more, 3);
+                            // Real water, as the pickle keeps it now; its stored flag is no longer set.
+                            com.exiledradio.backportcore.waterlog.Waterlogging.placeWithWater(world, at, more, 3);
                         }
                     }
                 }
