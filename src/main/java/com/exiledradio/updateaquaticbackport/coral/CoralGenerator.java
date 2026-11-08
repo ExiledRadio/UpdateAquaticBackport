@@ -3,7 +3,7 @@ package com.exiledradio.updateaquaticbackport.coral;
 import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
-import com.exiledradio.updateaquaticbackport.common.Owners;
+import com.exiledradio.updateaquaticbackport.pickle.SeaPickleContent;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -33,8 +33,7 @@ import java.util.Random;
  *       on each open side 20% a wall fan;</li>
  *   <li>one chunk in 16 gets up to 20 sea pickles scattered on the floor.</li>
  * </ul>
- * Sea pickles are the owner's when it is installed, else this mod's (through {@code Owners}); with neither
- * there are no pickles.
+ * Sea pickles are this mod's own ({@code pickle.SeaPickleContent}), whatever else is installed.
  */
 public final class CoralGenerator implements IWorldGenerator {
 
@@ -97,13 +96,13 @@ public final class CoralGenerator implements IWorldGenerator {
     }
 
     /**
-     * A sea pickle state with this many pickles, waterlogged: the owner's or ours, matched by property
-     * name so the owner's class is never linked.
+     * A sea pickle state with this many pickles, waterlogged: this mod's own pickle, matched by property
+     * name.
      */
     @Nullable
     @SuppressWarnings({"rawtypes", "unchecked"})
     static IBlockState seaPickle(int count) {
-        Block block = Owners.block(Owners.VILLAGE_AND_PILLAGE, "sea_pickle");
+        Block block = SeaPickleContent.seaPickle();
         if (block == null) {
             return null;
         }

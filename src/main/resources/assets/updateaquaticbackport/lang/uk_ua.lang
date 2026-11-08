@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Інші блоки й предмети
 config.updateaquaticbackport.mobs=Зміни мобів
 config.updateaquaticbackport.water=Вода
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Сокира скрегоче
-tile.updateaquaticbackport.acacia_button.name=Акацієва кнопка
-tile.updateaquaticbackport.acacia_pressure_plate.name=Акацієва натискна плита
-tile.updateaquaticbackport.acacia_trapdoor.name=Акацієвий люк
-tile.updateaquaticbackport.birch_button.name=Березова кнопка
-tile.updateaquaticbackport.birch_pressure_plate.name=Березова натискна плита
-tile.updateaquaticbackport.birch_trapdoor.name=Березовий люк
-tile.updateaquaticbackport.blue_ice.name=Синій лід
-tile.updateaquaticbackport.dark_oak_button.name=Темно-дубова кнопка
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Темно-дубова натискна плита
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Темно-дубовий люк
-tile.updateaquaticbackport.jungle_button.name=Тропічна кнопка
-tile.updateaquaticbackport.jungle_pressure_plate.name=Тропічна натискна плита
-tile.updateaquaticbackport.jungle_trapdoor.name=Тропічний люк
-tile.updateaquaticbackport.sea_pickle.name=Морський огірок
-tile.updateaquaticbackport.spruce_button.name=Смерекова кнопка
-tile.updateaquaticbackport.spruce_pressure_plate.name=Смерекова натискна плита
-tile.updateaquaticbackport.spruce_trapdoor.name=Смерековий люк
-tile.updateaquaticbackport.stripped_acacia_log.name=Обтесана акацієва колода
-tile.updateaquaticbackport.stripped_acacia_wood.name=Обтесана акацієва деревина
-tile.updateaquaticbackport.stripped_birch_log.name=Обтесана березова колода
-tile.updateaquaticbackport.stripped_birch_wood.name=Обтесана березова деревина
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Обтесана темно-дубова колода
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Обтесана темно-дубова деревина
-tile.updateaquaticbackport.stripped_jungle_log.name=Обтесана тропічна колода
-tile.updateaquaticbackport.stripped_jungle_wood.name=Обтесана тропічна деревина
-tile.updateaquaticbackport.stripped_oak_log.name=Обтесана дубова колода
-tile.updateaquaticbackport.stripped_oak_wood.name=Обтесана дубова деревина
-tile.updateaquaticbackport.stripped_spruce_log.name=Обтесана смерекова колода
-tile.updateaquaticbackport.stripped_spruce_wood.name=Обтесана смерекова деревина
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Увімкнено
 config.updateaquaticbackport.mobs.enabled.tooltip=Зміни 1.13 для наявних мобів: нежить тоне, кальмари випускають чорнило, білі ведмеді на льоду та решта.
 config.updateaquaticbackport.water.enabled=Увімкнено
 config.updateaquaticbackport.water.enabled.tooltip=Колір води залежно від біому, туман під водою, поступове відновлення повітря та решта змін води з 1.13.
-config.updateaquaticbackport.woodset.tooltip=Обтесані колоди й деревина, люки, кнопки та натискні плити п’яти порід дерева, синій лід і морські огірки.
+config.updateaquaticbackport.woodset.tooltip=Обтесані колоди й деревина, люки, кнопки та натискні плити п’яти порід дерева і синій лід.
 config.updateaquaticbackport.kelp.tooltip=Ламінарія, висушена ламінарія та морська трава.
 config.updateaquaticbackport.coral.tooltip=Корали, коралові блоки, віяла з коралів і коралові рифи.
 config.updateaquaticbackport.fish.tooltip=Тріска, лосось, скелезуб і тропічна риба, а також відра з ними.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Клієнтські дані блока скопій
 debug.inspect.client.entity=Клієнтські дані сутностей скопійовано до буфера обміну
 debug.inspect.server.block=Серверні дані блоків скопійовано до буфера обміну
 debug.inspect.server.entity=Серверні дані сутностей скопійовано до буфера обміну
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Морський огірок
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Сокира скрегоче
+tile.updateaquaticbackport.acacia_button.name=Акацієва кнопка
+tile.updateaquaticbackport.acacia_pressure_plate.name=Акацієва натискна плита
+tile.updateaquaticbackport.acacia_trapdoor.name=Акацієвий люк
+tile.updateaquaticbackport.birch_button.name=Березова кнопка
+tile.updateaquaticbackport.birch_pressure_plate.name=Березова натискна плита
+tile.updateaquaticbackport.birch_trapdoor.name=Березовий люк
+tile.updateaquaticbackport.blue_ice.name=Синій лід
+tile.updateaquaticbackport.dark_oak_button.name=Темно-дубова кнопка
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Темно-дубова натискна плита
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Темно-дубовий люк
+tile.updateaquaticbackport.jungle_button.name=Тропічна кнопка
+tile.updateaquaticbackport.jungle_pressure_plate.name=Тропічна натискна плита
+tile.updateaquaticbackport.jungle_trapdoor.name=Тропічний люк
+tile.updateaquaticbackport.spruce_button.name=Смерекова кнопка
+tile.updateaquaticbackport.spruce_pressure_plate.name=Смерекова натискна плита
+tile.updateaquaticbackport.spruce_trapdoor.name=Смерековий люк
+tile.updateaquaticbackport.stripped_acacia_log.name=Обтесана акацієва колода
+tile.updateaquaticbackport.stripped_acacia_wood.name=Обтесана акацієва деревина
+tile.updateaquaticbackport.stripped_birch_log.name=Обтесана березова колода
+tile.updateaquaticbackport.stripped_birch_wood.name=Обтесана березова деревина
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Обтесана темно-дубова колода
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Обтесана темно-дубова деревина
+tile.updateaquaticbackport.stripped_jungle_log.name=Обтесана тропічна колода
+tile.updateaquaticbackport.stripped_jungle_wood.name=Обтесана тропічна деревина
+tile.updateaquaticbackport.stripped_oak_log.name=Обтесана дубова колода
+tile.updateaquaticbackport.stripped_oak_wood.name=Обтесана дубова деревина
+tile.updateaquaticbackport.stripped_spruce_log.name=Обтесана смерекова колода
+tile.updateaquaticbackport.stripped_spruce_wood.name=Обтесана смерекова деревина

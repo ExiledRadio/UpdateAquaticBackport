@@ -23,7 +23,10 @@ import javax.annotation.Nullable;
  */
 public final class Owners {
 
-    /** Owns stripped logs and wood, blue ice, sea pickles and the five woods' trapdoors, buttons and plates. */
+    /**
+     * Owns stripped logs and wood, blue ice and the five woods' trapdoors, buttons and plates. Not sea
+     * pickles: they shipped there first, but they are this mod's own (Backport Core's ownership table).
+     */
     public static final String VILLAGE_AND_PILLAGE = "villagerbackport";
 
     private Owners() {

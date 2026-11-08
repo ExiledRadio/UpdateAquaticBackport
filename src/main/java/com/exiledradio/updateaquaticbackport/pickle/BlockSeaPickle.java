@@ -1,6 +1,4 @@
-// Copied from the owning mod by tools/woodset/copy_from_owner.py. Do not edit here: the copy must
-// stay identical to the owner's block, so the owner can take our blocks over by renaming them.
-package com.exiledradio.updateaquaticbackport.woodset;
+package com.exiledradio.updateaquaticbackport.pickle;
 
 import com.exiledradio.backportcore.waterlog.Waterloggable;
 import com.exiledradio.backportcore.waterlog.Waterlogging;
@@ -39,6 +37,11 @@ import java.util.Random;
 /**
  * Current Java's sea pickle: one to four in a block, waterloggable, glowing only in water.
  *
+ * <p>This mod's own block: sea pickles are an ocean block, so they belong to Update Aquatic (Backport
+ * Core's ownership table). Village &amp; Pillage Backport shipped them first, from 2.3.0, and this class
+ * began as a copy of its block; the states and metadata stay the same as that one's, so a world's
+ * {@code villagerbackport:sea_pickle} becomes this block by a rename ({@link SeaPickleContent}).
+ *
  * <h2>What carries over</h2>
  * <ul>
  *   <li>{@code pickles} 1 to 4. Right-clicking a pickle block holding a sea pickle adds one, up to four,
@@ -57,10 +60,10 @@ import java.util.Random;
  * live or dead model follow that water ({@link #getLightValue(IBlockState, IBlockAccess, BlockPos)},
  * {@link #getActualState}).
  *
- * <p>The {@code waterlogged} property stays, with its metadata bit (4), because worlds saved by 2.4.0 and
- * earlier stored it: back then a pickle had no water of its own and the property said whether water was
- * beside it. Nothing sets it now. A pickle stored with it true is given a real water source once - when
- * its chunk first loads ({@link Waterlogging#migrateStoredProperty}, called by {@link WoodsetContent}), or
+ * <p>The {@code waterlogged} property stays, with its metadata bit (4), because worlds saved by Village
+ * &amp; Pillage 2.4.0 and earlier stored it: back then a pickle had no water of its own and the property
+ * said whether water was beside it. Nothing sets it now. A pickle stored with it true is given a real water source once - when
+ * its chunk first loads ({@link Waterlogging#migrateStoredProperty}, called by {@link SeaPickleContent}), or
  * at its first update if it got there some other way, such as a structure file or a command - and the
  * property is cleared. {@link #getActualState} reports the real water, for the models.
  *

@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Weitere Blöcke & Gegenstände
 config.updateaquaticbackport.mobs=Änderungen an Kreaturen
 config.updateaquaticbackport.water=Wasser
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Axt schabt
-tile.updateaquaticbackport.acacia_button.name=Akazienholzknopf
-tile.updateaquaticbackport.acacia_pressure_plate.name=Akazienholzdruckplatte
-tile.updateaquaticbackport.acacia_trapdoor.name=Akazienholzfalltür
-tile.updateaquaticbackport.birch_button.name=Birkenholzknopf
-tile.updateaquaticbackport.birch_pressure_plate.name=Birkenholzdruckplatte
-tile.updateaquaticbackport.birch_trapdoor.name=Birkenholzfalltür
-tile.updateaquaticbackport.blue_ice.name=Blaueis
-tile.updateaquaticbackport.dark_oak_button.name=Schwarzeichenholzknopf
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Schwarzeichenholzdruckplatte
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Schwarzeichenholzfalltür
-tile.updateaquaticbackport.jungle_button.name=Tropenholzknopf
-tile.updateaquaticbackport.jungle_pressure_plate.name=Tropenholzdruckplatte
-tile.updateaquaticbackport.jungle_trapdoor.name=Tropenholzfalltür
-tile.updateaquaticbackport.sea_pickle.name=Meeresgurke
-tile.updateaquaticbackport.spruce_button.name=Fichtenholzknopf
-tile.updateaquaticbackport.spruce_pressure_plate.name=Fichtenholzdruckplatte
-tile.updateaquaticbackport.spruce_trapdoor.name=Fichtenholzfalltür
-tile.updateaquaticbackport.stripped_acacia_log.name=Entrindeter Akazienstamm
-tile.updateaquaticbackport.stripped_acacia_wood.name=Entrindetes Akazienholz
-tile.updateaquaticbackport.stripped_birch_log.name=Entrindeter Birkenstamm
-tile.updateaquaticbackport.stripped_birch_wood.name=Entrindetes Birkenholz
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Entrindeter Schwarzeichenstamm
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Entrindetes Schwarzeichenholz
-tile.updateaquaticbackport.stripped_jungle_log.name=Entrindeter Tropenbaumstamm
-tile.updateaquaticbackport.stripped_jungle_wood.name=Entrindetes Tropenholz
-tile.updateaquaticbackport.stripped_oak_log.name=Entrindeter Eichenstamm
-tile.updateaquaticbackport.stripped_oak_wood.name=Entrindetes Eichenholz
-tile.updateaquaticbackport.stripped_spruce_log.name=Entrindeter Fichtenstamm
-tile.updateaquaticbackport.stripped_spruce_wood.name=Entrindetes Fichtenholz
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Aktiviert
 config.updateaquaticbackport.mobs.enabled.tooltip=Die Änderungen von 1.13 an bestehenden Kreaturen: Untote sinken, Tintenfische versprühen Tinte, Eisbären auf Eis und der Rest.
 config.updateaquaticbackport.water.enabled=Aktiviert
 config.updateaquaticbackport.water.enabled.tooltip=Wasserfarben je nach Biom, Nebel unter Wasser, allmähliches Wiederauffüllen der Luft und die übrigen Wasseränderungen von 1.13.
-config.updateaquaticbackport.woodset.tooltip=Entrindete Stämme und entrindetes Holz, die Falltüren, Knöpfe und Druckplatten der fünf Holzarten, Blaueis und Meeresgurken.
+config.updateaquaticbackport.woodset.tooltip=Entrindete Stämme und entrindetes Holz, die Falltüren, Knöpfe und Druckplatten der fünf Holzarten und Blaueis.
 config.updateaquaticbackport.kelp.tooltip=Seetang, Getrockneter Seetang und Seegras.
 config.updateaquaticbackport.coral.tooltip=Korallen, Korallenblöcke, Korallenfächer und Korallenriffe.
 config.updateaquaticbackport.fish.tooltip=Kabeljau, Lachs, Kugelfisch und Tropenfisch, samt ihren Eimern.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Clientseitige Blockdaten in die Zwischenablage kopier
 debug.inspect.client.entity=Clientseitige Objektdaten in die Zwischenablage kopiert
 debug.inspect.server.block=Serverseitige Blockdaten in Zwischenablage kopiert
 debug.inspect.server.entity=Serverseitige Objektdaten in Zwischenablage kopiert
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Meeresgurke
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Axt schabt
+tile.updateaquaticbackport.acacia_button.name=Akazienholzknopf
+tile.updateaquaticbackport.acacia_pressure_plate.name=Akazienholzdruckplatte
+tile.updateaquaticbackport.acacia_trapdoor.name=Akazienholzfalltür
+tile.updateaquaticbackport.birch_button.name=Birkenholzknopf
+tile.updateaquaticbackport.birch_pressure_plate.name=Birkenholzdruckplatte
+tile.updateaquaticbackport.birch_trapdoor.name=Birkenholzfalltür
+tile.updateaquaticbackport.blue_ice.name=Blaueis
+tile.updateaquaticbackport.dark_oak_button.name=Schwarzeichenholzknopf
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Schwarzeichenholzdruckplatte
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Schwarzeichenholzfalltür
+tile.updateaquaticbackport.jungle_button.name=Tropenholzknopf
+tile.updateaquaticbackport.jungle_pressure_plate.name=Tropenholzdruckplatte
+tile.updateaquaticbackport.jungle_trapdoor.name=Tropenholzfalltür
+tile.updateaquaticbackport.spruce_button.name=Fichtenholzknopf
+tile.updateaquaticbackport.spruce_pressure_plate.name=Fichtenholzdruckplatte
+tile.updateaquaticbackport.spruce_trapdoor.name=Fichtenholzfalltür
+tile.updateaquaticbackport.stripped_acacia_log.name=Entrindeter Akazienstamm
+tile.updateaquaticbackport.stripped_acacia_wood.name=Entrindetes Akazienholz
+tile.updateaquaticbackport.stripped_birch_log.name=Entrindeter Birkenstamm
+tile.updateaquaticbackport.stripped_birch_wood.name=Entrindetes Birkenholz
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Entrindeter Schwarzeichenstamm
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Entrindetes Schwarzeichenholz
+tile.updateaquaticbackport.stripped_jungle_log.name=Entrindeter Tropenbaumstamm
+tile.updateaquaticbackport.stripped_jungle_wood.name=Entrindetes Tropenholz
+tile.updateaquaticbackport.stripped_oak_log.name=Entrindeter Eichenstamm
+tile.updateaquaticbackport.stripped_oak_wood.name=Entrindetes Eichenholz
+tile.updateaquaticbackport.stripped_spruce_log.name=Entrindeter Fichtenstamm
+tile.updateaquaticbackport.stripped_spruce_wood.name=Entrindetes Fichtenholz

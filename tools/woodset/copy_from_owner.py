@@ -1,5 +1,8 @@
-"""Copies the owner's 1.13 blocks (stripped logs and wood, wood trapdoors/buttons/plates, blue ice, sea
-pickles) from Village & Pillage Backport into this mod, so our copies match the owner's exactly.
+"""Copies the owner's 1.13 blocks (stripped logs and wood, wood trapdoors/buttons/plates, blue ice) from
+Village & Pillage Backport into this mod, so our copies match the owner's exactly.
+
+Not sea pickles: they are this mod's own block now (pickle/BlockSeaPickle, Backport Core's ownership table),
+so this script leaves their class and assets alone.
 
 Rule 1 of the family plan: when the owner is absent we register our own copy with the same states and
 metadata. Copying the owner's block classes and assets - instead of rewriting them - is what keeps them the
@@ -22,7 +25,7 @@ OWNER_JAVA = OWNER + "/src/main/java/com/exiledradio/villagerbackport/woodset"
 OWNER_ASSETS = OWNER + "/src/main/resources/assets/villagerbackport"
 OUR_JAVA = os.path.join(assets.ROOT, "src", "main", "java", "com", "exiledradio", "updateaquaticbackport", "woodset")
 
-CLASSES = ["Wood", "BlockStrippedLog", "BlockWoodRedstone", "BlockBlueIce", "BlockSeaPickle"]
+CLASSES = ["Wood", "BlockStrippedLog", "BlockWoodRedstone", "BlockBlueIce"]
 WOODS = ["oak", "spruce", "birch", "jungle", "acacia", "dark_oak"]
 
 
@@ -32,7 +35,7 @@ def names():
         out += ["stripped_%s_log" % w, "stripped_%s_wood" % w]
     for w in WOODS[1:]:
         out += ["%s_trapdoor" % w, "%s_button" % w, "%s_pressure_plate" % w]
-    return out + ["blue_ice", "sea_pickle"]
+    return out + ["blue_ice"]
 
 
 def rename(text):

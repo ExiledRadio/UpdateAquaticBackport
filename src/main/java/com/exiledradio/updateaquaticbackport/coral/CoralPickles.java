@@ -1,7 +1,7 @@
 package com.exiledradio.updateaquaticbackport.coral;
 
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
-import com.exiledradio.updateaquaticbackport.common.Owners;
+import com.exiledradio.updateaquaticbackport.pickle.SeaPickleContent;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -21,9 +21,8 @@ import java.util.Random;
  * the pickle becomes four, and more pickles (one to four each) appear on the coral blocks around it, in a
  * diamond five blocks across, one in six of the places with water over coral.
  *
- * <p>Works on whichever sea pickle the game has - the owner's or this mod's copy - by registry name and
- * property names, so it never links against the owner's class. Runs early so the pickle's own bone meal
- * handling (it has none for coral) never sees these.
+ * <p>Works on this mod's sea pickle by its property names. Runs early, so the pickle's own bone meal
+ * handling ({@code BlockSeaPickle.grow}, which looks for coral by name) never sees these.
  */
 @Mod.EventBusSubscriber(modid = UpdateAquaticBackport.MOD_ID)
 public final class CoralPickles {
@@ -39,7 +38,7 @@ public final class CoralPickles {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
         IBlockState state = event.getBlock();
-        Block pickle = Owners.block(Owners.VILLAGE_AND_PILLAGE, "sea_pickle");
+        Block pickle = SeaPickleContent.seaPickle();
         if (pickle == null || state.getBlock() != pickle || !isLit(world, pos, state) || !isLivingCoralBlock(world.getBlockState(pos.down()))) {
             return;
         }

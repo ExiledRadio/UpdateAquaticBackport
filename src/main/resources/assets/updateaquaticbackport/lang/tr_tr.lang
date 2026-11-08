@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Diğer Bloklar ve Eşyalar
 config.updateaquaticbackport.mobs=Canlı Değişiklikleri
 config.updateaquaticbackport.water=Su
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Balta soydu
-tile.updateaquaticbackport.acacia_button.name=Akasya Düğme
-tile.updateaquaticbackport.acacia_pressure_plate.name=Akasya Basınç Plakası
-tile.updateaquaticbackport.acacia_trapdoor.name=Akasya Tuzak Kapısı
-tile.updateaquaticbackport.birch_button.name=Huş Düğme
-tile.updateaquaticbackport.birch_pressure_plate.name=Huş Basınç Plakası
-tile.updateaquaticbackport.birch_trapdoor.name=Huş Tuzak Kapısı
-tile.updateaquaticbackport.blue_ice.name=Mavi Buz
-tile.updateaquaticbackport.dark_oak_button.name=Koyu Meşe Düğme
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Koyu Meşe Basınç Plakası
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Koyu Meşe Tuzak Kapısı
-tile.updateaquaticbackport.jungle_button.name=Orman Ağacı Düğme
-tile.updateaquaticbackport.jungle_pressure_plate.name=Orman Ağacı Basınç Plakası
-tile.updateaquaticbackport.jungle_trapdoor.name=Orman Ağacı Tuzak Kapısı
-tile.updateaquaticbackport.sea_pickle.name=Pirozom
-tile.updateaquaticbackport.spruce_button.name=Ladin Düğme
-tile.updateaquaticbackport.spruce_pressure_plate.name=Ladin Basınç Plakası
-tile.updateaquaticbackport.spruce_trapdoor.name=Ladin Tuzak Kapısı
-tile.updateaquaticbackport.stripped_acacia_log.name=Soyulmuş Akasya Kütüğü
-tile.updateaquaticbackport.stripped_acacia_wood.name=Soyulmuş Akasya Odunu
-tile.updateaquaticbackport.stripped_birch_log.name=Soyulmuş Huş Kütüğü
-tile.updateaquaticbackport.stripped_birch_wood.name=Soyulmuş Huş Odunu
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Soyulmuş Koyu Meşe Kütüğü
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Soyulmuş Koyu Meşe Odunu
-tile.updateaquaticbackport.stripped_jungle_log.name=Soyulmuş Orman Ağacı Kütüğü
-tile.updateaquaticbackport.stripped_jungle_wood.name=Soyulmuş Orman Ağacı Odunu
-tile.updateaquaticbackport.stripped_oak_log.name=Soyulmuş Meşe Kütüğü
-tile.updateaquaticbackport.stripped_oak_wood.name=Soyulmuş Meşe Odunu
-tile.updateaquaticbackport.stripped_spruce_log.name=Soyulmuş Ladin Kütüğü
-tile.updateaquaticbackport.stripped_spruce_wood.name=Soyulmuş Ladin Odunu
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Etkin
 config.updateaquaticbackport.mobs.enabled.tooltip=1.13'ün mevcut canlılardaki değişiklikleri: ölümsüzlerin batması, mürekkep balığı mürekkebi, buz üzerindeki kutup ayıları ve geri kalanı.
 config.updateaquaticbackport.water.enabled=Etkin
 config.updateaquaticbackport.water.enabled.tooltip=Biyoma göre su renkleri, su altı sisi, havanın kademeli olarak dolması ve 1.13'ün diğer su değişiklikleri.
-config.updateaquaticbackport.woodset.tooltip=Soyulmuş kütükler ve odunlar, beş ağaç türünün tuzak kapıları, düğmeleri ve basınç plakaları, mavi buz ve pirozomlar.
+config.updateaquaticbackport.woodset.tooltip=Soyulmuş kütükler ve odunlar, beş ağaç türünün tuzak kapıları, düğmeleri, basınç plakaları ve mavi buz.
 config.updateaquaticbackport.kelp.tooltip=Su yosunu, kurutulmuş su yosunu ve deniz otu.
 config.updateaquaticbackport.coral.tooltip=Mercanlar, mercan blokları, yelpaze mercanları ve mercan resifleri.
 config.updateaquaticbackport.fish.tooltip=Morina, somon, kirpi balığı ve tropikal balık ile bunların kovaları.
@@ -439,3 +406,38 @@ debug.inspect.client.block=İstemci taraflı blok verisi panoya kopyalandı
 debug.inspect.client.entity=İstemci taraflı varlık verisi panoya kopyalandı
 debug.inspect.server.block=Sunucu taraflı blok verisi panoya kopyalandı
 debug.inspect.server.entity=Sunucu taraflı varlık verisi panoya kopyalandı
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Pirozom
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Balta soydu
+tile.updateaquaticbackport.acacia_button.name=Akasya Düğme
+tile.updateaquaticbackport.acacia_pressure_plate.name=Akasya Basınç Plakası
+tile.updateaquaticbackport.acacia_trapdoor.name=Akasya Tuzak Kapısı
+tile.updateaquaticbackport.birch_button.name=Huş Düğme
+tile.updateaquaticbackport.birch_pressure_plate.name=Huş Basınç Plakası
+tile.updateaquaticbackport.birch_trapdoor.name=Huş Tuzak Kapısı
+tile.updateaquaticbackport.blue_ice.name=Mavi Buz
+tile.updateaquaticbackport.dark_oak_button.name=Koyu Meşe Düğme
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Koyu Meşe Basınç Plakası
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Koyu Meşe Tuzak Kapısı
+tile.updateaquaticbackport.jungle_button.name=Orman Ağacı Düğme
+tile.updateaquaticbackport.jungle_pressure_plate.name=Orman Ağacı Basınç Plakası
+tile.updateaquaticbackport.jungle_trapdoor.name=Orman Ağacı Tuzak Kapısı
+tile.updateaquaticbackport.spruce_button.name=Ladin Düğme
+tile.updateaquaticbackport.spruce_pressure_plate.name=Ladin Basınç Plakası
+tile.updateaquaticbackport.spruce_trapdoor.name=Ladin Tuzak Kapısı
+tile.updateaquaticbackport.stripped_acacia_log.name=Soyulmuş Akasya Kütüğü
+tile.updateaquaticbackport.stripped_acacia_wood.name=Soyulmuş Akasya Odunu
+tile.updateaquaticbackport.stripped_birch_log.name=Soyulmuş Huş Kütüğü
+tile.updateaquaticbackport.stripped_birch_wood.name=Soyulmuş Huş Odunu
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Soyulmuş Koyu Meşe Kütüğü
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Soyulmuş Koyu Meşe Odunu
+tile.updateaquaticbackport.stripped_jungle_log.name=Soyulmuş Orman Ağacı Kütüğü
+tile.updateaquaticbackport.stripped_jungle_wood.name=Soyulmuş Orman Ağacı Odunu
+tile.updateaquaticbackport.stripped_oak_log.name=Soyulmuş Meşe Kütüğü
+tile.updateaquaticbackport.stripped_oak_wood.name=Soyulmuş Meşe Odunu
+tile.updateaquaticbackport.stripped_spruce_log.name=Soyulmuş Ladin Kütüğü
+tile.updateaquaticbackport.stripped_spruce_wood.name=Soyulmuş Ladin Odunu

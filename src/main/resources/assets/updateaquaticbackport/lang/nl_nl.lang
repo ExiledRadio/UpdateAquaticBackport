@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Overige blokken en voorwerpen
 config.updateaquaticbackport.mobs=Wijzigingen aan wezens
 config.updateaquaticbackport.water=Water
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Bijl schraapt
-tile.updateaquaticbackport.acacia_button.name=Acaciahouten knop
-tile.updateaquaticbackport.acacia_pressure_plate.name=Acaciahouten drukplaat
-tile.updateaquaticbackport.acacia_trapdoor.name=Acaciahouten valluik
-tile.updateaquaticbackport.birch_button.name=Berkenhouten knop
-tile.updateaquaticbackport.birch_pressure_plate.name=Berkenhouten drukplaat
-tile.updateaquaticbackport.birch_trapdoor.name=Berkenhouten valluik
-tile.updateaquaticbackport.blue_ice.name=Blauw ijs
-tile.updateaquaticbackport.dark_oak_button.name=Donkere eikenhouten knop
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Donkere eikenhouten drukplaat
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Donker eikenhouten valluik
-tile.updateaquaticbackport.jungle_button.name=Oerwoudhouten knop
-tile.updateaquaticbackport.jungle_pressure_plate.name=Oerwoudhouten drukplaat
-tile.updateaquaticbackport.jungle_trapdoor.name=Oerwoudhouten valluik
-tile.updateaquaticbackport.sea_pickle.name=Zeeaugurk
-tile.updateaquaticbackport.spruce_button.name=Sparrenhouten knop
-tile.updateaquaticbackport.spruce_pressure_plate.name=Sparrenhouten drukplaat
-tile.updateaquaticbackport.spruce_trapdoor.name=Sparrenhouten valluik
-tile.updateaquaticbackport.stripped_acacia_log.name=Gestripte acaciastam
-tile.updateaquaticbackport.stripped_acacia_wood.name=Gestript acaciahout
-tile.updateaquaticbackport.stripped_birch_log.name=Gestripte berkenstam
-tile.updateaquaticbackport.stripped_birch_wood.name=Gestript berkenhout
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Gestripte donkere eikenstam
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Gestript donker eikenhout
-tile.updateaquaticbackport.stripped_jungle_log.name=Gestripte oerwoudstam
-tile.updateaquaticbackport.stripped_jungle_wood.name=Gestript oerwoudhout
-tile.updateaquaticbackport.stripped_oak_log.name=Gestripte eikenstam
-tile.updateaquaticbackport.stripped_oak_wood.name=Gestript eikenhout
-tile.updateaquaticbackport.stripped_spruce_log.name=Gestripte sparrenstam
-tile.updateaquaticbackport.stripped_spruce_wood.name=Gestript sparrenhout
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Ingeschakeld
 config.updateaquaticbackport.mobs.enabled.tooltip=De wijzigingen van 1.13 aan bestaande wezens: ondoden die zinken, inkt van inktvissen, ijsberen op ijs en de rest.
 config.updateaquaticbackport.water.enabled=Ingeschakeld
 config.updateaquaticbackport.water.enabled.tooltip=Waterkleuren per klimaat, mist onder water, geleidelijk aanvullen van lucht en de rest van de waterwijzigingen van 1.13.
-config.updateaquaticbackport.woodset.tooltip=Gestripte stammen en gestript hout, de valluiken, knoppen en drukplaten van de vijf houtsoorten, blauw ijs en zeeaugurken.
+config.updateaquaticbackport.woodset.tooltip=Gestripte stammen en gestript hout, de valluiken, knoppen en drukplaten van de vijf houtsoorten en blauw ijs.
 config.updateaquaticbackport.kelp.tooltip=Kelp, gedroogde kelp en zeegras.
 config.updateaquaticbackport.coral.tooltip=Koraal, koraalblokken, koraalwaaiers en koraalriffen.
 config.updateaquaticbackport.fish.tooltip=Kabeljauw, zalm, kogelvis en tropische vis, plus hun emmers.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Blokgegevens van cliënt naar klembord gekopieerd
 debug.inspect.client.entity=Entiteitgegevens van cliënt naar klembord gekopieerd
 debug.inspect.server.block=Blokgegevens van de server naar klembord gekopieerd
 debug.inspect.server.entity=Entiteitgegevens van de server naar klembord gekopieerd
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Zeeaugurk
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Bijl schraapt
+tile.updateaquaticbackport.acacia_button.name=Acaciahouten knop
+tile.updateaquaticbackport.acacia_pressure_plate.name=Acaciahouten drukplaat
+tile.updateaquaticbackport.acacia_trapdoor.name=Acaciahouten valluik
+tile.updateaquaticbackport.birch_button.name=Berkenhouten knop
+tile.updateaquaticbackport.birch_pressure_plate.name=Berkenhouten drukplaat
+tile.updateaquaticbackport.birch_trapdoor.name=Berkenhouten valluik
+tile.updateaquaticbackport.blue_ice.name=Blauw ijs
+tile.updateaquaticbackport.dark_oak_button.name=Donkere eikenhouten knop
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Donkere eikenhouten drukplaat
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Donker eikenhouten valluik
+tile.updateaquaticbackport.jungle_button.name=Oerwoudhouten knop
+tile.updateaquaticbackport.jungle_pressure_plate.name=Oerwoudhouten drukplaat
+tile.updateaquaticbackport.jungle_trapdoor.name=Oerwoudhouten valluik
+tile.updateaquaticbackport.spruce_button.name=Sparrenhouten knop
+tile.updateaquaticbackport.spruce_pressure_plate.name=Sparrenhouten drukplaat
+tile.updateaquaticbackport.spruce_trapdoor.name=Sparrenhouten valluik
+tile.updateaquaticbackport.stripped_acacia_log.name=Gestripte acaciastam
+tile.updateaquaticbackport.stripped_acacia_wood.name=Gestript acaciahout
+tile.updateaquaticbackport.stripped_birch_log.name=Gestripte berkenstam
+tile.updateaquaticbackport.stripped_birch_wood.name=Gestript berkenhout
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Gestripte donkere eikenstam
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Gestript donker eikenhout
+tile.updateaquaticbackport.stripped_jungle_log.name=Gestripte oerwoudstam
+tile.updateaquaticbackport.stripped_jungle_wood.name=Gestript oerwoudhout
+tile.updateaquaticbackport.stripped_oak_log.name=Gestripte eikenstam
+tile.updateaquaticbackport.stripped_oak_wood.name=Gestript eikenhout
+tile.updateaquaticbackport.stripped_spruce_log.name=Gestripte sparrenstam
+tile.updateaquaticbackport.stripped_spruce_wood.name=Gestript sparrenhout

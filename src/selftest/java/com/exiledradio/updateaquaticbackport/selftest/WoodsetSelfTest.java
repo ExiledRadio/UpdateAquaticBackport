@@ -4,7 +4,8 @@ import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.common.Content;
 import com.exiledradio.updateaquaticbackport.common.Owners;
 import com.exiledradio.updateaquaticbackport.woodset.AxeStripping;
-import com.exiledradio.updateaquaticbackport.woodset.BlockSeaPickle;
+import com.exiledradio.updateaquaticbackport.pickle.BlockSeaPickle;
+import com.exiledradio.updateaquaticbackport.pickle.SeaPickleContent;
 import com.exiledradio.updateaquaticbackport.woodset.Wood;
 import com.exiledradio.updateaquaticbackport.woodset.WoodsetContent;
 
@@ -46,9 +47,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The copies of the owner's blocks: registration, every state, crafting, smelting, stripping, redstone,
- * blue ice and sea pickles, and the remap of a world that had the owner. Ported from the owner's own test
- * so both are held to the same checks.
+ * The copies of the owner's blocks: registration, every state, crafting, smelting, stripping, redstone and
+ * blue ice, and the remap of a world that had the owner. Ported from the owner's own test so both are held
+ * to the same checks. Also this mod's own sea pickle, which began as one of these copies: registered in
+ * every game, and taking over Village &amp; Pillage's from older worlds.
  */
 public final class WoodsetSelfTest implements SelfTest {
 
@@ -88,7 +90,6 @@ public final class WoodsetSelfTest implements SelfTest {
             }
         }
         names.add("blue_ice");
-        names.add("sea_pickle");
         for (String n : names) {
             Block b = block(n);
             c.ok(b != null && Content.id(n).equals(b.getRegistryName()), "block " + n);
@@ -97,7 +98,8 @@ public final class WoodsetSelfTest implements SelfTest {
                     && b.getCreativeTab() == com.exiledradio.backportcore.creative.VanillaOrder.tab("minecraft:" + n),
                     "vanilla creative tab " + n);
         }
-        c.eq(29, WoodsetContent.blocks().size(), "block count");
+        c.eq(28, WoodsetContent.blocks().size(), "block count");
+        c.ok(!WoodsetContent.blocks().contains(block("sea_pickle")), "the sea pickle is not a woodset copy");
         for (Block b : WoodsetContent.blocks()) {
             for (IBlockState s : b.getBlockState().getValidStates()) {
                 c.ok(b.getStateFromMeta(b.getMetaFromState(s)) == s, "meta round trip " + s);
@@ -144,7 +146,6 @@ public final class WoodsetSelfTest implements SelfTest {
                 c.eq(300, TileEntityFurnace.getItemBurnTime(new ItemStack(block(w.name + "_pressure_plate"))), "fuel plate " + w.name);
             }
         }
-        c.ok(Crafting.same(FurnaceRecipes.instance().getSmeltingResult(new ItemStack(block("sea_pickle"))), new ItemStack(Items.DYE, 1, 10)), "pickle -> lime dye");
 
         BlockPos origin = c.area().up();
         EntityPlayerMP player = Players.real(world, "woodset");
@@ -232,6 +233,7 @@ public final class WoodsetSelfTest implements SelfTest {
         c.eq("pickaxe", blue.getHarvestTool(blue.getDefaultState()), "blue ice pickaxe");
 
         // 8. sea pickles ----------------------------------------------------------------------------
+        seaPickleRegistered(c);
         Block pickle = block("sea_pickle");
         Item pickleItem = Item.getItemFromBlock(pickle);
         at = area.add(4, 0, 0);
@@ -279,11 +281,53 @@ public final class WoodsetSelfTest implements SelfTest {
         c.ok(other.getAction() != RegistryEvent.MissingMappings.Action.REMAP, "owner's other blocks left alone");
     }
 
+    /**
+     * The sea pickle is this mod's own: registered whatever else is installed, in vanilla's creative tab
+     * and place, smelting to lime dye, and the name older Village &amp; Pillage worlds use points at it.
+     */
+    private static void seaPickleRegistered(Check c) {
+        Block pickle = block("sea_pickle");
+        c.ok(pickle instanceof BlockSeaPickle && pickle == SeaPickleContent.seaPickle(), "our sea pickle is registered: " + pickle);
+        c.ok(item("sea_pickle") instanceof ItemBlock && Item.getItemFromBlock(pickle) == item("sea_pickle"), "item sea_pickle");
+        c.ok(pickle.getCreativeTab() != null
+                && pickle.getCreativeTab() == com.exiledradio.backportcore.creative.VanillaOrder.tab("minecraft:sea_pickle"),
+                "sea pickle in vanilla's creative tab: " + pickle.getCreativeTab());
+        c.eq("updateaquaticbackport", com.exiledradio.backportcore.ownership.BlockOwnership.owner("sea_pickle"),
+                "Backport Core gives sea pickles to Update Aquatic");
+        c.ok(com.exiledradio.backportcore.ownership.BlockOwnership.block("sea_pickle") == pickle, "the ownership table finds ours");
+        for (IBlockState s : pickle.getBlockState().getValidStates()) {
+            c.ok(pickle.getStateFromMeta(pickle.getMetaFromState(s)) == s, "meta round trip " + s);
+        }
+        c.ok(Crafting.same(FurnaceRecipes.instance().getSmeltingResult(new ItemStack(pickle)), new ItemStack(Items.DYE, 1, 10)), "pickle -> lime dye");
+
+        // A world saved with Village & Pillage 2.3.0 to 2.5.0, opened where nothing registers its pickle.
+        @SuppressWarnings("unchecked")
+        IForgeRegistry<Block> blocks = (IForgeRegistry<Block>) (Object) ForgeRegistries.BLOCKS;
+        RegistryEvent.MissingMappings.Mapping<Block> m = new RegistryEvent.MissingMappings.Mapping<Block>(blocks, blocks,
+                new ResourceLocation(Owners.VILLAGE_AND_PILLAGE, "sea_pickle"), 4002);
+        SeaPickleContent.remapOld(new RegistryEvent.MissingMappings<Block>(new ResourceLocation("minecraft", "blocks"), blocks,
+                java.util.Arrays.asList(m)));
+        c.eq(RegistryEvent.MissingMappings.Action.REMAP, m.getAction(), "Village & Pillage's old sea pickle remapped");
+        c.ok(m.getTarget() == pickle, "onto ours");
+        @SuppressWarnings("unchecked")
+        IForgeRegistry<Item> items = (IForgeRegistry<Item>) (Object) ForgeRegistries.ITEMS;
+        RegistryEvent.MissingMappings.Mapping<Item> mi = new RegistryEvent.MissingMappings.Mapping<Item>(items, items,
+                new ResourceLocation(Owners.VILLAGE_AND_PILLAGE, "sea_pickle"), 4003);
+        SeaPickleContent.remapOldItems(new RegistryEvent.MissingMappings<Item>(new ResourceLocation("minecraft", "items"), items,
+                java.util.Arrays.asList(mi)));
+        c.ok(mi.getAction() == RegistryEvent.MissingMappings.Action.REMAP && mi.getTarget() == item("sea_pickle"),
+                "and its item onto our item");
+    }
+
     /** With the owner installed: no copies, every lookup is the owner's, and stripping makes the owner's. */
     private static void ownerPresent(Check c) {
         c.ok(!WoodsetContent.enabled(), "no copies with the owner installed");
         c.eq(0, WoodsetContent.blocks().size(), "nothing registered");
-        for (String n : new String[] {"stripped_oak_log", "spruce_trapdoor", "dark_oak_button", "blue_ice", "sea_pickle"}) {
+        seaPickleRegistered(c);
+        c.ok(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Owners.VILLAGE_AND_PILLAGE, "sea_pickle")) == Blocks.AIR
+                || ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Owners.VILLAGE_AND_PILLAGE, "sea_pickle")) == block("sea_pickle"),
+                "the owner registers no sea pickle of its own");
+        for (String n : new String[] {"stripped_oak_log", "spruce_trapdoor", "dark_oak_button", "blue_ice"}) {
             c.ok(Owners.ourBlock(n) == null, "no copy of " + n);
             Block owner = Owners.block(Owners.VILLAGE_AND_PILLAGE, n);
             c.ok(owner != null && Owners.VILLAGE_AND_PILLAGE.equals(owner.getRegistryName().getNamespace()), "lookup gives the owner's " + n);

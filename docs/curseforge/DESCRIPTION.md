@@ -33,7 +33,7 @@ Newly generated oceans come in four temperatures, as in 1.13: **warm**, **lukewa
 *   **Seagrass** and **tall seagrass** grow on sea, river and swamp floors. Shears collect it. Bone meal on seagrass makes it tall, and bone meal on the sea floor spreads seagrass around it.
 *   **Coral blocks**, **coral** and **coral fans** in tube, brain, bubble, fire and horn, living and dead. Coral needs water: a coral block with none touching it dies a few seconds later, and coral and fans out of water die too. Fans go on the floor or on the side of a block. A pickaxe on a coral block gives its dead form; Silk Touch gives the living one, and coral and fans drop only with Silk Touch.
 *   **Coral reefs** grow in warm oceans: coral trees, claws and mushrooms, with coral, fans and sea pickles on them. Bone meal on the floor of a warm ocean grows coral and fans among the seagrass.
-*   **Sea pickles** on a coral block spread with bone meal: four pickles, and more on the coral around.
+*   **Sea pickles**, up to four in a block, glowing only in water. On a coral block they spread with bone meal: four pickles, and more on the coral around.
 
 Kelp forests grow in every ocean except warm and frozen ones; seagrass grows everywhere underwater, rivers and swamps included.
 
@@ -138,7 +138,7 @@ Kelp forests grow in every ocean except warm and frozen ones; seagrass grows eve
 *   **Prismarine, prismarine brick and dark prismarine stairs and slabs.**
 *   **Carved pumpkins**: shears carve a face into a pumpkin and give 4 pumpkin seeds. The plain pumpkin has no face now. Golems and jack o'lanterns take a carved pumpkin, and you can wear one on your head.
 *   **Wood**, the log with bark on every side, made from four logs. Logs are now named Oak Log and so on, and Oak Wood is the bark block.
-*   **Stripped logs and stripped wood** in every wood, and an axe to strip them. **Trapdoors, buttons and pressure plates in every wood**, **blue ice** and **sea pickles**.
+*   **Stripped logs and stripped wood** in every wood, and an axe to strip them. **Trapdoors, buttons and pressure plates in every wood**, and **blue ice**.
 *   **Packed ice** from nine ice.
 *   **The undyed shulker box**, and washing the color out of a dyed one in a cauldron, contents and all.
 *   **The debug stick**, for operators in creative.
@@ -175,9 +175,10 @@ Kelp forests grow in every ocean except warm and frozen ones; seagrass grows eve
 
 Nothing here needs another mod, apart from the two libraries.
 
-**Village & Pillage Backport** adds the same stripped logs and wood, wood trapdoors, buttons and pressure plates, blue ice and sea pickles, because 1.14's villages are built from them. Whichever installed mod owns a shared block provides it: with Village & Pillage installed, this mod adds none of its own and uses Village & Pillage's everywhere, so axes strip logs into its stripped logs and icebergs carry its blue ice. Without it, this mod adds identical copies of its own. With both installed, there is also:
+**Village & Pillage Backport** adds the same stripped logs and wood, wood trapdoors, buttons and pressure plates and blue ice, because 1.14's villages are built from them. Whichever installed mod owns a shared block provides it: with Village & Pillage installed, this mod adds none of its own and uses Village & Pillage's everywhere, so axes strip logs into its stripped logs and icebergs carry its blue ice. Without it, this mod adds identical copies of its own. With both installed, there is also:
 
-*   **The composter** takes kelp, dried kelp, seagrass and the dried kelp block.
+*   **The composter** takes kelp, dried kelp, seagrass, the dried kelp block and sea pickles.
+*   **The wandering trader** sells this mod's sea pickles, and the 1.14 desert house that has sea pickles places two. Sea pickles from worlds made with Village & Pillage 2.3.0 or 2.4.0 become this mod's as the world loads.
 *   **Cats** scare phantoms off, as in 1.14, and bring phantom membrane among their morning gifts. Stray cats and foxes hunt baby turtles.
 *   **The stonecutter** cuts the prismarine stairs and slabs.
 
@@ -189,7 +190,7 @@ Mobs from other mods count as aquatic for Impaling when they are water mobs, and
 
 Everything lives in `config/updateaquaticbackport.cfg`, or the in-game config screen, with every setting documented in the file.
 
-*   `woodset`: stripped logs and wood, the wood trapdoors, buttons and pressure plates, blue ice and sea pickles, and axe stripping
+*   `woodset`: stripped logs and wood, the wood trapdoors, buttons and pressure plates, blue ice, and axe stripping. Sea pickles are always there.
 *   `kelp`, `coral`: the blocks, and whether they generate
 *   `fish`, `turtles`, `dolphins`: the mobs, and how often they spawn
 *   `phantoms`: phantoms, membrane and Slow Falling, and the `insomnia` switch that stops phantoms everywhere

@@ -12,7 +12,7 @@ import com.exiledradio.updateaquaticbackport.fish.EntityAbstractFish;
 import com.exiledradio.updateaquaticbackport.fish.FishContent;
 import com.exiledradio.updateaquaticbackport.fish.ItemFishBucket;
 import com.exiledradio.updateaquaticbackport.kelp.KelpContent;
-import com.exiledradio.updateaquaticbackport.woodset.WoodsetContent;
+import com.exiledradio.updateaquaticbackport.pickle.SeaPickleContent;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -106,12 +106,12 @@ public final class WaterlogSelfTest implements SelfTest {
             }
         }
 
-        // 4. the sea pickle copy keeps its owner's own water rule -------------------------------------------------
-        Block pickle = WoodsetContent.seaPickle();
+        // 4. the sea pickle keeps its water rule ----------------------------------------------------------------
+        Block pickle = SeaPickleContent.seaPickle();
         if (pickle != null) {
             BlockPos p = Pools.pool(c, 1).add(4, 1, 4);
             world.setBlockState(p, pickle.getDefaultState(), 3);
-            UpdateAquaticBackport.LOGGER.info("SELFTEST waterlog: the sea pickle copy holds Fluidlogged API water: {} (its own rule: {})",
+            UpdateAquaticBackport.LOGGER.info("SELFTEST waterlog: the sea pickle holds Fluidlogged API water: {} (its own rule: {})",
                     Waterlogging.hasWater(world, p), world.getBlockState(p));
         }
 

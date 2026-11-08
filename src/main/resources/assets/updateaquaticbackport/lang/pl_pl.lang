@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Inne bloki i przedmioty
 config.updateaquaticbackport.mobs=Zmiany stworzeń
 config.updateaquaticbackport.water=Woda
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Siekiera zeskrobuje
-tile.updateaquaticbackport.acacia_button.name=Akacjowy przycisk
-tile.updateaquaticbackport.acacia_pressure_plate.name=Akacjowa płytka naciskowa
-tile.updateaquaticbackport.acacia_trapdoor.name=Akacjowa klapa
-tile.updateaquaticbackport.birch_button.name=Brzozowy przycisk
-tile.updateaquaticbackport.birch_pressure_plate.name=Brzozowa płytka naciskowa
-tile.updateaquaticbackport.birch_trapdoor.name=Brzozowa klapa
-tile.updateaquaticbackport.blue_ice.name=Niebieski lód lodowcowy
-tile.updateaquaticbackport.dark_oak_button.name=Ciemnodębowy przycisk
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Ciemnodębowa płytka naciskowa
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Ciemnodębowa klapa
-tile.updateaquaticbackport.jungle_button.name=Tropikalny przycisk
-tile.updateaquaticbackport.jungle_pressure_plate.name=Tropikalna płytka naciskowa
-tile.updateaquaticbackport.jungle_trapdoor.name=Tropikalna klapa
-tile.updateaquaticbackport.sea_pickle.name=Iskrzyłuda
-tile.updateaquaticbackport.spruce_button.name=Świerkowy przycisk
-tile.updateaquaticbackport.spruce_pressure_plate.name=Świerkowa płytka naciskowa
-tile.updateaquaticbackport.spruce_trapdoor.name=Świerkowa klapa
-tile.updateaquaticbackport.stripped_acacia_log.name=Ociosany akacjowy pień
-tile.updateaquaticbackport.stripped_acacia_wood.name=Ociosane akacjowe drewno
-tile.updateaquaticbackport.stripped_birch_log.name=Ociosany brzozowy pień
-tile.updateaquaticbackport.stripped_birch_wood.name=Ociosane brzozowe drewno
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Ociosany ciemnodębowy pień
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Ociosane ciemnodębowe drewno
-tile.updateaquaticbackport.stripped_jungle_log.name=Ociosany tropikalny pień
-tile.updateaquaticbackport.stripped_jungle_wood.name=Ociosane tropikalne drewno
-tile.updateaquaticbackport.stripped_oak_log.name=Ociosany dębowy pień
-tile.updateaquaticbackport.stripped_oak_wood.name=Ociosane dębowe drewno
-tile.updateaquaticbackport.stripped_spruce_log.name=Ociosany świerkowy pień
-tile.updateaquaticbackport.stripped_spruce_wood.name=Ociosane świerkowe drewno
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Włączone
 config.updateaquaticbackport.mobs.enabled.tooltip=Zmiany z 1.13 w istniejących stworzeniach: tonięcie nieumarłych, atrament kałamarnic, niedźwiedzie polarne na lodzie i cała reszta.
 config.updateaquaticbackport.water.enabled=Włączone
 config.updateaquaticbackport.water.enabled.tooltip=Kolory wody zależne od biomu, mgła pod wodą, stopniowe odnawianie powietrza i pozostałe zmiany wody z 1.13.
-config.updateaquaticbackport.woodset.tooltip=Ociosane pnie i drewno, klapy, przyciski i płytki naciskowe z pięciu rodzajów drewna, niebieski lód lodowcowy i iskrzyłudy.
+config.updateaquaticbackport.woodset.tooltip=Ociosane pnie i drewno, klapy, przyciski i płytki naciskowe z pięciu rodzajów drewna oraz niebieski lód lodowcowy.
 config.updateaquaticbackport.kelp.tooltip=Wodorost, suszony wodorost i trawa morska.
 config.updateaquaticbackport.coral.tooltip=Koralowce, bloki koralowców, wachlarze koralowców i rafy koralowe.
 config.updateaquaticbackport.fish.tooltip=Dorsz, łosoś, rozdymka i ryba tropikalna oraz wiadra z nimi.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Skopiowano dane bloków z klienta do schowka
 debug.inspect.client.entity=Skopiowano dane bytów z klienta do schowka
 debug.inspect.server.block=Skopiowano dane bloków z serwera do schowka
 debug.inspect.server.entity=Skopiowano dane bytów z serwera do schowka
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Iskrzyłuda
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Siekiera zeskrobuje
+tile.updateaquaticbackport.acacia_button.name=Akacjowy przycisk
+tile.updateaquaticbackport.acacia_pressure_plate.name=Akacjowa płytka naciskowa
+tile.updateaquaticbackport.acacia_trapdoor.name=Akacjowa klapa
+tile.updateaquaticbackport.birch_button.name=Brzozowy przycisk
+tile.updateaquaticbackport.birch_pressure_plate.name=Brzozowa płytka naciskowa
+tile.updateaquaticbackport.birch_trapdoor.name=Brzozowa klapa
+tile.updateaquaticbackport.blue_ice.name=Niebieski lód lodowcowy
+tile.updateaquaticbackport.dark_oak_button.name=Ciemnodębowy przycisk
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Ciemnodębowa płytka naciskowa
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Ciemnodębowa klapa
+tile.updateaquaticbackport.jungle_button.name=Tropikalny przycisk
+tile.updateaquaticbackport.jungle_pressure_plate.name=Tropikalna płytka naciskowa
+tile.updateaquaticbackport.jungle_trapdoor.name=Tropikalna klapa
+tile.updateaquaticbackport.spruce_button.name=Świerkowy przycisk
+tile.updateaquaticbackport.spruce_pressure_plate.name=Świerkowa płytka naciskowa
+tile.updateaquaticbackport.spruce_trapdoor.name=Świerkowa klapa
+tile.updateaquaticbackport.stripped_acacia_log.name=Ociosany akacjowy pień
+tile.updateaquaticbackport.stripped_acacia_wood.name=Ociosane akacjowe drewno
+tile.updateaquaticbackport.stripped_birch_log.name=Ociosany brzozowy pień
+tile.updateaquaticbackport.stripped_birch_wood.name=Ociosane brzozowe drewno
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Ociosany ciemnodębowy pień
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Ociosane ciemnodębowe drewno
+tile.updateaquaticbackport.stripped_jungle_log.name=Ociosany tropikalny pień
+tile.updateaquaticbackport.stripped_jungle_wood.name=Ociosane tropikalne drewno
+tile.updateaquaticbackport.stripped_oak_log.name=Ociosany dębowy pień
+tile.updateaquaticbackport.stripped_oak_wood.name=Ociosane dębowe drewno
+tile.updateaquaticbackport.stripped_spruce_log.name=Ociosany świerkowy pień
+tile.updateaquaticbackport.stripped_spruce_wood.name=Ociosane świerkowe drewno

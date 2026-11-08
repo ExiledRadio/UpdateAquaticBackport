@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=其他方块与物品
 config.updateaquaticbackport.mobs=生物改动
 config.updateaquaticbackport.water=水
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=斧：削皮
-tile.updateaquaticbackport.acacia_button.name=金合欢木按钮
-tile.updateaquaticbackport.acacia_pressure_plate.name=金合欢木压力板
-tile.updateaquaticbackport.acacia_trapdoor.name=金合欢木活板门
-tile.updateaquaticbackport.birch_button.name=白桦木按钮
-tile.updateaquaticbackport.birch_pressure_plate.name=白桦木压力板
-tile.updateaquaticbackport.birch_trapdoor.name=白桦木活板门
-tile.updateaquaticbackport.blue_ice.name=蓝冰
-tile.updateaquaticbackport.dark_oak_button.name=深色橡木按钮
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=深色橡木压力板
-tile.updateaquaticbackport.dark_oak_trapdoor.name=深色橡木活板门
-tile.updateaquaticbackport.jungle_button.name=丛林木按钮
-tile.updateaquaticbackport.jungle_pressure_plate.name=丛林木压力板
-tile.updateaquaticbackport.jungle_trapdoor.name=丛林木活板门
-tile.updateaquaticbackport.sea_pickle.name=海泡菜
-tile.updateaquaticbackport.spruce_button.name=云杉木按钮
-tile.updateaquaticbackport.spruce_pressure_plate.name=云杉木压力板
-tile.updateaquaticbackport.spruce_trapdoor.name=云杉木活板门
-tile.updateaquaticbackport.stripped_acacia_log.name=去皮金合欢原木
-tile.updateaquaticbackport.stripped_acacia_wood.name=去皮金合欢木
-tile.updateaquaticbackport.stripped_birch_log.name=去皮白桦原木
-tile.updateaquaticbackport.stripped_birch_wood.name=去皮白桦木
-tile.updateaquaticbackport.stripped_dark_oak_log.name=去皮深色橡木原木
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=去皮深色橡木
-tile.updateaquaticbackport.stripped_jungle_log.name=去皮丛林原木
-tile.updateaquaticbackport.stripped_jungle_wood.name=去皮丛林木
-tile.updateaquaticbackport.stripped_oak_log.name=去皮橡木原木
-tile.updateaquaticbackport.stripped_oak_wood.name=去皮橡木
-tile.updateaquaticbackport.stripped_spruce_log.name=去皮云杉原木
-tile.updateaquaticbackport.stripped_spruce_wood.name=去皮云杉木
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=启用
 config.updateaquaticbackport.mobs.enabled.tooltip=1.13对现有生物的改动：亡灵生物在水中下沉、鱿鱼喷出墨汁、冰面上的北极熊等等。
 config.updateaquaticbackport.water.enabled=启用
 config.updateaquaticbackport.water.enabled.tooltip=生物群系水体颜色、水下雾、氧气逐渐恢复，以及1.13其余的水体改动。
-config.updateaquaticbackport.woodset.tooltip=去皮原木与去皮木头、五种木质活板门、按钮和压力板、蓝冰与海泡菜。
+config.updateaquaticbackport.woodset.tooltip=去皮原木与去皮木头、五种木质活板门、按钮和压力板与蓝冰。
 config.updateaquaticbackport.kelp.tooltip=海带、干海带与海草。
 config.updateaquaticbackport.coral.tooltip=珊瑚、珊瑚块、珊瑚扇与珊瑚礁。
 config.updateaquaticbackport.fish.tooltip=鳕鱼、鲑鱼、河豚和热带鱼，以及它们的桶。
@@ -439,3 +406,38 @@ debug.inspect.client.block=客户端方块数据已复制到剪贴板
 debug.inspect.client.entity=客户端实体数据已复制到剪贴板
 debug.inspect.server.block=服务端方块数据已复制到剪贴板
 debug.inspect.server.entity=服务端实体数据已复制到剪贴板
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=海泡菜
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=斧：削皮
+tile.updateaquaticbackport.acacia_button.name=金合欢木按钮
+tile.updateaquaticbackport.acacia_pressure_plate.name=金合欢木压力板
+tile.updateaquaticbackport.acacia_trapdoor.name=金合欢木活板门
+tile.updateaquaticbackport.birch_button.name=白桦木按钮
+tile.updateaquaticbackport.birch_pressure_plate.name=白桦木压力板
+tile.updateaquaticbackport.birch_trapdoor.name=白桦木活板门
+tile.updateaquaticbackport.blue_ice.name=蓝冰
+tile.updateaquaticbackport.dark_oak_button.name=深色橡木按钮
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=深色橡木压力板
+tile.updateaquaticbackport.dark_oak_trapdoor.name=深色橡木活板门
+tile.updateaquaticbackport.jungle_button.name=丛林木按钮
+tile.updateaquaticbackport.jungle_pressure_plate.name=丛林木压力板
+tile.updateaquaticbackport.jungle_trapdoor.name=丛林木活板门
+tile.updateaquaticbackport.spruce_button.name=云杉木按钮
+tile.updateaquaticbackport.spruce_pressure_plate.name=云杉木压力板
+tile.updateaquaticbackport.spruce_trapdoor.name=云杉木活板门
+tile.updateaquaticbackport.stripped_acacia_log.name=去皮金合欢原木
+tile.updateaquaticbackport.stripped_acacia_wood.name=去皮金合欢木
+tile.updateaquaticbackport.stripped_birch_log.name=去皮白桦原木
+tile.updateaquaticbackport.stripped_birch_wood.name=去皮白桦木
+tile.updateaquaticbackport.stripped_dark_oak_log.name=去皮深色橡木原木
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=去皮深色橡木
+tile.updateaquaticbackport.stripped_jungle_log.name=去皮丛林原木
+tile.updateaquaticbackport.stripped_jungle_wood.name=去皮丛林木
+tile.updateaquaticbackport.stripped_oak_log.name=去皮橡木原木
+tile.updateaquaticbackport.stripped_oak_wood.name=去皮橡木
+tile.updateaquaticbackport.stripped_spruce_log.name=去皮云杉原木
+tile.updateaquaticbackport.stripped_spruce_wood.name=去皮云杉木

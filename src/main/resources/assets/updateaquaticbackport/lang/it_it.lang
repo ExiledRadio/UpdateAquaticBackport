@@ -16,39 +16,6 @@ config.updateaquaticbackport.blocks=Altri blocchi e oggetti
 config.updateaquaticbackport.mobs=Modifiche alle creature
 config.updateaquaticbackport.water=Acqua
 
-# --- woodset ---
-# Copied from the owning mod by tools/woodset/copy_from_owner.py.
-subtitles.updateaquaticbackport.item.axe.strip=Ascia scorteccia
-tile.updateaquaticbackport.acacia_button.name=Pulsante di acacia
-tile.updateaquaticbackport.acacia_pressure_plate.name=Pedana a pressione di acacia
-tile.updateaquaticbackport.acacia_trapdoor.name=Botola di acacia
-tile.updateaquaticbackport.birch_button.name=Pulsante di betulla
-tile.updateaquaticbackport.birch_pressure_plate.name=Pedana a pressione di betulla
-tile.updateaquaticbackport.birch_trapdoor.name=Botola di betulla
-tile.updateaquaticbackport.blue_ice.name=Ghiaccio azzurro
-tile.updateaquaticbackport.dark_oak_button.name=Pulsante di quercia scura
-tile.updateaquaticbackport.dark_oak_pressure_plate.name=Pedana a pressione di quercia scura
-tile.updateaquaticbackport.dark_oak_trapdoor.name=Botola di quercia scura
-tile.updateaquaticbackport.jungle_button.name=Pulsante di mogano
-tile.updateaquaticbackport.jungle_pressure_plate.name=Pedana a pressione di mogano
-tile.updateaquaticbackport.jungle_trapdoor.name=Botola di mogano
-tile.updateaquaticbackport.sea_pickle.name=Cetriolo di mare
-tile.updateaquaticbackport.spruce_button.name=Pulsante di abete
-tile.updateaquaticbackport.spruce_pressure_plate.name=Pedana a pressione di abete
-tile.updateaquaticbackport.spruce_trapdoor.name=Botola di abete
-tile.updateaquaticbackport.stripped_acacia_log.name=Tronco di acacia scortecciato
-tile.updateaquaticbackport.stripped_acacia_wood.name=Legno di acacia scortecciato
-tile.updateaquaticbackport.stripped_birch_log.name=Tronco di betulla scortecciato
-tile.updateaquaticbackport.stripped_birch_wood.name=Legno di betulla scortecciato
-tile.updateaquaticbackport.stripped_dark_oak_log.name=Tronco di quercia scura scortecciato
-tile.updateaquaticbackport.stripped_dark_oak_wood.name=Legno di quercia scura scortecciato
-tile.updateaquaticbackport.stripped_jungle_log.name=Tronco di mogano scortecciato
-tile.updateaquaticbackport.stripped_jungle_wood.name=Legno di mogano scortecciato
-tile.updateaquaticbackport.stripped_oak_log.name=Tronco di quercia scortecciato
-tile.updateaquaticbackport.stripped_oak_wood.name=Legno di quercia scortecciato
-tile.updateaquaticbackport.stripped_spruce_log.name=Tronco di abete scortecciato
-tile.updateaquaticbackport.stripped_spruce_wood.name=Legno di abete scortecciato
-
 # --- common ---
 
 # --- kelp ---
@@ -140,7 +107,7 @@ config.updateaquaticbackport.mobs.enabled=Attivato
 config.updateaquaticbackport.mobs.enabled.tooltip=Le modifiche della 1.13 alle creature già esistenti: i non morti che affondano, l'inchiostro dei calamari, gli orsi polari sul ghiaccio e il resto.
 config.updateaquaticbackport.water.enabled=Attivato
 config.updateaquaticbackport.water.enabled.tooltip=Colori dell'acqua per bioma, nebbia sott'acqua, ricarica graduale dell'aria e il resto delle modifiche all'acqua della 1.13.
-config.updateaquaticbackport.woodset.tooltip=Tronchi e legni scortecciati, le botole, i pulsanti e le pedane a pressione dei cinque legni, il ghiaccio azzurro e i cetrioli di mare.
+config.updateaquaticbackport.woodset.tooltip=Tronchi e legni scortecciati, le botole, i pulsanti e le pedane a pressione dei cinque legni e il ghiaccio azzurro.
 config.updateaquaticbackport.kelp.tooltip=Alghe, alghe essiccate ed erba acquatica.
 config.updateaquaticbackport.coral.tooltip=Coralli, blocchi di corallo, gorgonie e barriere coralline.
 config.updateaquaticbackport.fish.tooltip=Merluzzi, salmoni, pesci palla e pesci tropicali, e i loro secchi.
@@ -439,3 +406,38 @@ debug.inspect.client.block=Dati blocco (lato client) copiati negli appunti
 debug.inspect.client.entity=Dati entità (lato client) copiati negli appunti
 debug.inspect.server.block=Dati blocco (lato server) copiati negli appunti
 debug.inspect.server.entity=Dati entità (lato server) copiati negli appunti
+
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Cetriolo di mare
+
+# --- woodset ---
+# Copied from the owning mod by tools/woodset/copy_from_owner.py.
+subtitles.updateaquaticbackport.item.axe.strip=Ascia scorteccia
+tile.updateaquaticbackport.acacia_button.name=Pulsante di acacia
+tile.updateaquaticbackport.acacia_pressure_plate.name=Pedana a pressione di acacia
+tile.updateaquaticbackport.acacia_trapdoor.name=Botola di acacia
+tile.updateaquaticbackport.birch_button.name=Pulsante di betulla
+tile.updateaquaticbackport.birch_pressure_plate.name=Pedana a pressione di betulla
+tile.updateaquaticbackport.birch_trapdoor.name=Botola di betulla
+tile.updateaquaticbackport.blue_ice.name=Ghiaccio azzurro
+tile.updateaquaticbackport.dark_oak_button.name=Pulsante di quercia scura
+tile.updateaquaticbackport.dark_oak_pressure_plate.name=Pedana a pressione di quercia scura
+tile.updateaquaticbackport.dark_oak_trapdoor.name=Botola di quercia scura
+tile.updateaquaticbackport.jungle_button.name=Pulsante di mogano
+tile.updateaquaticbackport.jungle_pressure_plate.name=Pedana a pressione di mogano
+tile.updateaquaticbackport.jungle_trapdoor.name=Botola di mogano
+tile.updateaquaticbackport.spruce_button.name=Pulsante di abete
+tile.updateaquaticbackport.spruce_pressure_plate.name=Pedana a pressione di abete
+tile.updateaquaticbackport.spruce_trapdoor.name=Botola di abete
+tile.updateaquaticbackport.stripped_acacia_log.name=Tronco di acacia scortecciato
+tile.updateaquaticbackport.stripped_acacia_wood.name=Legno di acacia scortecciato
+tile.updateaquaticbackport.stripped_birch_log.name=Tronco di betulla scortecciato
+tile.updateaquaticbackport.stripped_birch_wood.name=Legno di betulla scortecciato
+tile.updateaquaticbackport.stripped_dark_oak_log.name=Tronco di quercia scura scortecciato
+tile.updateaquaticbackport.stripped_dark_oak_wood.name=Legno di quercia scura scortecciato
+tile.updateaquaticbackport.stripped_jungle_log.name=Tronco di mogano scortecciato
+tile.updateaquaticbackport.stripped_jungle_wood.name=Legno di mogano scortecciato
+tile.updateaquaticbackport.stripped_oak_log.name=Tronco di quercia scortecciato
+tile.updateaquaticbackport.stripped_oak_wood.name=Legno di quercia scortecciato
+tile.updateaquaticbackport.stripped_spruce_log.name=Tronco di abete scortecciato
+tile.updateaquaticbackport.stripped_spruce_wood.name=Legno di abete scortecciato

@@ -106,7 +106,7 @@ config.updateaquaticbackport.mobs.enabled=Enabled
 config.updateaquaticbackport.mobs.enabled.tooltip=1.13's changes to existing mobs: undead sinking, squid ink, polar bears on ice and the rest.
 config.updateaquaticbackport.water.enabled=Enabled
 config.updateaquaticbackport.water.enabled.tooltip=Biome water colors, underwater fog, gradual air refill and the rest of 1.13's water changes.
-config.updateaquaticbackport.woodset.tooltip=Stripped logs and wood, the five wood trapdoors, buttons and pressure plates, blue ice and sea pickles.
+config.updateaquaticbackport.woodset.tooltip=Stripped logs and wood, the five wood trapdoors, buttons and pressure plates, and blue ice.
 config.updateaquaticbackport.kelp.tooltip=Kelp, dried kelp and seagrass.
 config.updateaquaticbackport.coral.tooltip=Coral, coral blocks, coral fans and coral reefs.
 config.updateaquaticbackport.fish.tooltip=Cod, salmon, pufferfish and tropical fish, and their buckets.
@@ -406,6 +406,9 @@ debug.inspect.client.entity=Copied client-side entity data to clipboard
 debug.inspect.server.block=Copied server-side block data to clipboard
 debug.inspect.server.entity=Copied server-side entity data to clipboard
 
+# --- pickle ---
+tile.updateaquaticbackport.sea_pickle.name=Sea Pickle
+
 # --- woodset ---
 # Copied from the owning mod by tools/woodset/copy_from_owner.py.
 subtitles.updateaquaticbackport.item.axe.strip=Axe strips
@@ -422,7 +425,6 @@ tile.updateaquaticbackport.dark_oak_trapdoor.name=Dark Oak Trapdoor
 tile.updateaquaticbackport.jungle_button.name=Jungle Button
 tile.updateaquaticbackport.jungle_pressure_plate.name=Jungle Pressure Plate
 tile.updateaquaticbackport.jungle_trapdoor.name=Jungle Trapdoor
-tile.updateaquaticbackport.sea_pickle.name=Sea Pickle
 tile.updateaquaticbackport.spruce_button.name=Spruce Button
 tile.updateaquaticbackport.spruce_pressure_plate.name=Spruce Pressure Plate
 tile.updateaquaticbackport.spruce_trapdoor.name=Spruce Trapdoor
