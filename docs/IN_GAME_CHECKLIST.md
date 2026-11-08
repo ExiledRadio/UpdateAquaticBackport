@@ -99,7 +99,7 @@ log only).
       a half slab between two water sources fills by itself.
 - [ ] **Text**: "Left Button", "Loading terrain...", "Open World Folder", "Raw Cod" (1.13.2's wording through Core).
 
-## Creative tabs (with Backport Core 1.3.0)
+## Creative tabs (with Backport Core 1.1.0)
 
 The places are in `docs/CREATIVE_TABS.md`; a dev client already checked the lists, the search tab and JEI.
 
