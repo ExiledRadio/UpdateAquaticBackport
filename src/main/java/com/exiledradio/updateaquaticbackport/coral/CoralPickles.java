@@ -40,7 +40,7 @@ public final class CoralPickles {
         BlockPos pos = event.getPos();
         IBlockState state = event.getBlock();
         Block pickle = Owners.block(Owners.VILLAGE_AND_PILLAGE, "sea_pickle");
-        if (pickle == null || state.getBlock() != pickle || !isLit(state) || !isLivingCoralBlock(world.getBlockState(pos.down()))) {
+        if (pickle == null || state.getBlock() != pickle || !isLit(world, pos, state) || !isLivingCoralBlock(world.getBlockState(pos.down()))) {
             return;
         }
         if (!world.isRemote) {
@@ -53,8 +53,14 @@ public final class CoralPickles {
         return CoralContent.BLOCKS.containsValue(state.getBlock());
     }
 
-    /** @return true if a sea pickle state is in water (the pickle's own "waterlogged" property) */
-    static boolean isLit(IBlockState state) {
+    /**
+     * @return true if the sea pickle holds water: real water through Backport Core, as both pickles now keep it,
+     * or the stored flag older pickles still carry until their chunk converts them
+     */
+    static boolean isLit(World world, BlockPos pos, IBlockState state) {
+        if (com.exiledradio.backportcore.waterlog.Waterlogging.hasWater(world, pos)) {
+            return true;
+        }
         IProperty<?> wet = property(state, "waterlogged");
         return wet != null && Boolean.TRUE.equals(state.getValue(wet));
     }

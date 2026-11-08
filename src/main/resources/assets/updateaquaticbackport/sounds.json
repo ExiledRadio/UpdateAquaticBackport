@@ -2,52 +2,22 @@
   "music.under_water": {
     "category": "music",
     "sounds": [
-      {"name": "updateaquaticbackport:music/game/water/shuniji", "stream": true, "volume": 0.4},
-      {"name": "updateaquaticbackport:music/game/water/dragon_fish", "stream": true, "volume": 0.4},
-      {"name": "updateaquaticbackport:music/game/water/axolotl", "stream": true, "volume": 0.4}
-    ]
-  },
-  "item.axe.strip": {
-    "category": "block",
-    "sounds": [
       {
-        "name": "updateaquaticbackport:item/axe/strip1",
-        "volume": 0.9
+        "name": "updateaquaticbackport:music/game/water/shuniji",
+        "stream": true,
+        "volume": 0.4
       },
       {
-        "name": "updateaquaticbackport:item/axe/strip2",
-        "volume": 0.9
+        "name": "updateaquaticbackport:music/game/water/dragon_fish",
+        "stream": true,
+        "volume": 0.4
       },
       {
-        "name": "updateaquaticbackport:item/axe/strip3",
-        "volume": 0.9
-      },
-      {
-        "name": "updateaquaticbackport:item/axe/strip4",
-        "volume": 0.9
-      },
-      {
-        "name": "updateaquaticbackport:item/axe/strip1",
-        "volume": 0.9,
-        "pitch": 0.85
-      },
-      {
-        "name": "updateaquaticbackport:item/axe/strip2",
-        "volume": 0.9,
-        "pitch": 0.85
-      },
-      {
-        "name": "updateaquaticbackport:item/axe/strip3",
-        "volume": 0.9,
-        "pitch": 0.85
-      },
-      {
-        "name": "updateaquaticbackport:item/axe/strip4",
-        "volume": 0.9,
-        "pitch": 0.85
+        "name": "updateaquaticbackport:music/game/water/axolotl",
+        "stream": true,
+        "volume": 0.4
       }
-    ],
-    "subtitle": "subtitles.updateaquaticbackport.item.axe.strip"
+    ]
   },
   "block.wet_grass.break": {
     "sounds": [
@@ -1446,5 +1416,47 @@
       }
     ],
     "subtitle": "subtitles.updateaquaticbackport.entity.parrot.imitate.drowned"
+  },
+  "item.axe.strip": {
+    "category": "block",
+    "sounds": [
+      {
+        "name": "updateaquaticbackport:item/axe/strip1",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:item/axe/strip2",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:item/axe/strip3",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:item/axe/strip4",
+        "volume": 0.9
+      },
+      {
+        "name": "updateaquaticbackport:item/axe/strip1",
+        "volume": 0.9,
+        "pitch": 0.85
+      },
+      {
+        "name": "updateaquaticbackport:item/axe/strip2",
+        "volume": 0.9,
+        "pitch": 0.85
+      },
+      {
+        "name": "updateaquaticbackport:item/axe/strip3",
+        "volume": 0.9,
+        "pitch": 0.85
+      },
+      {
+        "name": "updateaquaticbackport:item/axe/strip4",
+        "volume": 0.9,
+        "pitch": 0.85
+      }
+    ],
+    "subtitle": "subtitles.updateaquaticbackport.item.axe.strip"
   }
 }

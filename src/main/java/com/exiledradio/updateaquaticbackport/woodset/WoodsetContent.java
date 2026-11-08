@@ -200,6 +200,8 @@ public final class WoodsetContent {
         register(registry, "blue_ice", blueIce, "pickaxe");
         seaPickle = new BlockSeaPickle();
         register(registry, "sea_pickle", seaPickle, null);
+        // The owner's rule, copied with its block: a stored waterlogged flag becomes real water once.
+        com.exiledradio.backportcore.waterlog.Waterlogging.migrateStoredProperty(seaPickle, BlockSeaPickle.WATERLOGGED);
 
         // Vanilla's logs' numbers: catch fire as easily, burn away as fast.
         for (Wood wood : Wood.values()) {
