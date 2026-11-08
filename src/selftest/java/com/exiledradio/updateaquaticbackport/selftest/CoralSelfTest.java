@@ -263,7 +263,7 @@ public final class CoralSelfTest implements SelfTest {
         for (BlockPos q : BlockPos.getAllInBox(reef.add(2, 1, 2), reef.add(8, 1, 8))) {
             if (world.getBlockState(q).getBlock() == seaPickle) {
                 pickles++;
-                c.ok(Boolean.TRUE.equals(valueOf(world.getBlockState(q), "waterlogged")), "a spread pickle is lit, in water: " + q);
+                c.ok(com.exiledradio.backportcore.waterlog.Waterlogging.hasWater(world, q), "a spread pickle is lit, in water: " + q);
             }
         }
         c.eq(4, valueOf(world.getBlockState(pickleAt), "pickles"), "bone meal makes the pickle four");

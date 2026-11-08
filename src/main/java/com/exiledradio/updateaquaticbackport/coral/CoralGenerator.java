@@ -111,6 +111,11 @@ public final class CoralGenerator implements IWorldGenerator {
         for (IProperty p : state.getPropertyKeys()) {
             if ("pickles".equals(p.getName())) {
                 state = state.withProperty(p, Integer.valueOf(count));
+            } else if ("waterlogged".equals(p.getName())) {
+                // Placed already marked wet, which the pickle turns into real water on its first update.
+                // Placing it dry and adding the water as a second change made a light update reach into
+                // the next chunks mid-generation, which stopped kelp, seagrass and ruins generating there.
+                state = state.withProperty(p, Boolean.TRUE);
             }
         }
         return state;
