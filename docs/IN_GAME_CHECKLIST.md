@@ -98,3 +98,13 @@ log only).
 - [ ] **Prismarine stairs and slabs**: a bucket of water waterlogs them; lava does not; flowing water does not run in;
       a half slab between two water sources fills by itself.
 - [ ] **Text**: "Left Button", "Loading terrain...", "Open World Folder", "Raw Cod" (1.13.2's wording through Core).
+
+## Creative tabs (with Backport Core 1.3.0)
+
+The places are in `docs/CREATIVE_TABS.md`; a dev client already checked the lists, the search tab and JEI.
+
+- [ ] There is no tab for this mod; every vanilla tab keeps its icon, name, background and scroll bar.
+- [ ] A few places: carved pumpkin after the pumpkin, the undyed shulker box just before the white one, coral blocks after the black concrete powder, the turtle shell first in Combat, the trident after the totem with its four enchanted books, fish buckets after the milk bucket.
+- [ ] The search tab finds the mod's items, and JEI lists them.
+- [ ] Other mods' items are still in their tabs, in their own order.
+- [ ] With another update backport installed too, its items and this mod's sit together by kind (stripped logs, slabs).

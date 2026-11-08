@@ -3,7 +3,6 @@ package com.exiledradio.updateaquaticbackport.trident;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.Content;
-import com.exiledradio.updateaquaticbackport.common.ModCreativeTab;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -107,11 +106,9 @@ public final class TridentContent {
         riptide = enchantment(event, "riptide", EnchantmentTrident.Kind.RIPTIDE);
         impaling = enchantment(event, "impaling", EnchantmentTrident.Kind.IMPALING);
         channeling = enchantment(event, "channeling", EnchantmentTrident.Kind.CHANNELING);
-        // The mod's tab shows a book of each at its highest level, as vanilla's tabs do for theirs.
-        EnumEnchantmentType[] shown = ModCreativeTab.TAB.getRelevantEnchantmentTypes();
-        EnumEnchantmentType[] more = java.util.Arrays.copyOf(shown, shown.length + 1);
-        more[shown.length] = tridentType;
-        ModCreativeTab.TAB.setRelevantEnchantmentTypes(more);
+        // Combat shows a book of each at its highest level, with the bow's and the sword's, as in vanilla.
+        com.exiledradio.backportcore.creative.CreativePlacement.addEnchantmentType(
+                net.minecraft.creativetab.CreativeTabs.COMBAT, tridentType);
     }
 
     private static EnchantmentTrident enchantment(RegistryEvent.Register<Enchantment> event, String name, EnchantmentTrident.Kind kind) {

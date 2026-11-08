@@ -1,5 +1,4 @@
 # Turkish - our own text; vanilla names come from Mojang (tools/lang/build_langs.py)
-itemGroup.updateaquaticbackport=Update Aquatic Backport
 config.updateaquaticbackport.woodset=Ortak 1.13 Blokları
 config.updateaquaticbackport.kelp=Su Yosunu ve Deniz Otu
 config.updateaquaticbackport.coral=Mercanlar

@@ -1,5 +1,4 @@
 # The English each translations/<code>.lang entry was made from. Written by build_langs.py snapshot.
-itemGroup.updateaquaticbackport=Update Aquatic Backport
 config.updateaquaticbackport.woodset=Shared 1.13 Blocks
 config.updateaquaticbackport.kelp=Kelp and Seagrass
 config.updateaquaticbackport.coral=Coral

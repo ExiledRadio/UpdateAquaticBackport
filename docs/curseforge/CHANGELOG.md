@@ -2,7 +2,9 @@
 
 First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their floors, kelp, seagrass and coral reefs, icebergs and underwater caves; cod, salmon, pufferfish, tropical fish, turtles, dolphins, the drowned and phantoms; the trident and its four enchantments, the conduit, bubble columns, Slow Falling and the Turtle Master; carved pumpkins, prismarine stairs and slabs, wood blocks and 1.13's water. Where current Java has changed something since 1.13, this mod does it the current way.
 
-**Requires Backport Core 1.2.0 or newer and Fluidlogged API 3.3.3 or newer**, on the client and the server, with Forge 14.23.5.2847 or newer.
+**Requires Backport Core 1.3.0 or newer and Fluidlogged API 3.3.3 or newer**, on the client and the server, with Forge 14.23.5.2847 or newer.
+
+Everything is in vanilla's creative tabs, each block and item next to its vanilla neighbor as 1.19.2 lists them (stripped logs after the logs, coral blocks after the concrete powder, the trident and turtle shell in Combat with the trident's enchanted books). The mod has no tab of its own.
 
 ## New: ocean biomes and terrain
 

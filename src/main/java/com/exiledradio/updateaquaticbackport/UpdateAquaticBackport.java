@@ -29,7 +29,7 @@ import org.apache.logging.log4j.Logger;
         name = UpdateAquaticBackport.MOD_NAME,
         version = UpdateAquaticBackport.VERSION,
         acceptedMinecraftVersions = "[1.12.2]",
-        dependencies = "required-after:backportcore@[1.2.0,);required-after:fluidlogged_api@[3.3.3,)"
+        dependencies = "required-after:backportcore@[1.3.0,);required-after:fluidlogged_api@[3.3.3,)"
 )
 public final class UpdateAquaticBackport {
 
@@ -46,6 +46,8 @@ public final class UpdateAquaticBackport {
     public void preInit(FMLPreInitializationEvent event) {
         // 1.13's structure placement numbers, for Backport Core's table (seed parity with 1.13).
         com.exiledradio.updateaquaticbackport.structure.Placement113.register();
+        // This mod's spawn eggs in Miscellaneous where vanilla lists each mob's (Backport Core's creative placement).
+        com.exiledradio.backportcore.creative.CreativePlacement.placeSpawnEggs(MOD_ID);
         NetworkHandler.init();
         com.exiledradio.updateaquaticbackport.lookfeel.LookAndFeel.preInit();
         com.exiledradio.updateaquaticbackport.structure.StructureContent.preInit();
