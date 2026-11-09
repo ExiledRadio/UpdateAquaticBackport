@@ -88,8 +88,10 @@ final class LocateSelfTest implements SelfTest {
 
         List<String> ids = LocateChecks.complete(server, world, from, "locate structure ");
         c.ok(ids.containsAll(Arrays.asList("minecraft:shipwreck", "minecraft:shipwreck_beached", "minecraft:ocean_ruin_cold",
-                "minecraft:ocean_ruin_warm", "minecraft:buried_treasure", "#minecraft:shipwreck", "#minecraft:ocean_ruin")),
-                "tab completion lists the ids and tags: " + ids);
+                "minecraft:ocean_ruin_warm", "minecraft:buried_treasure")) && !ids.contains("#minecraft:shipwreck"),
+                "tab completion lists the ids, tags only after '#' (Core df1c4b6): " + ids);
+        List<String> tags = LocateChecks.complete(server, world, from, "locate structure #");
+        c.ok(tags.containsAll(Arrays.asList("#minecraft:shipwreck", "#minecraft:ocean_ruin")), "after '#' it lists the tags: " + tags);
         List<String> ruins = LocateChecks.complete(server, world, from, "locate structure ocean_ruin_");
         c.eq(Arrays.asList("minecraft:ocean_ruin_cold", "minecraft:ocean_ruin_warm"), ruins, "completion by path");
     }
