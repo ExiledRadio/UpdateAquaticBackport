@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport;
 
+import com.exiledradio.backportcore.settings.Setting;
+
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -25,66 +27,82 @@ public final class ModConfig {
 
     @Config.LangKey("config.updateaquaticbackport.woodset")
     @Config.Comment("Stripped logs and wood, the five wood trapdoors, buttons and pressure plates, and blue ice.")
+    @Setting.Feature(icon = "updateaquaticbackport:stripped_oak_log")
     public static final Woodset woodset = new Woodset();
 
     @Config.LangKey("config.updateaquaticbackport.kelp")
     @Config.Comment("Kelp, dried kelp and seagrass.")
+    @Setting.Feature(icon = "updateaquaticbackport:kelp")
     public static final Kelp kelp = new Kelp();
 
     @Config.LangKey("config.updateaquaticbackport.coral")
     @Config.Comment("Coral, coral blocks, coral fans and coral reefs.")
+    @Setting.Feature(icon = "updateaquaticbackport:brain_coral")
     public static final Coral coral = new Coral();
 
     @Config.LangKey("config.updateaquaticbackport.fish")
     @Config.Comment("Cod, salmon, pufferfish and tropical fish, and their buckets.")
+    @Setting.Feature(icon = "updateaquaticbackport:cod_bucket")
     public static final Fish fish = new Fish();
 
     @Config.LangKey("config.updateaquaticbackport.turtles")
     @Config.Comment("Turtles, turtle eggs, scutes, the turtle shell and the Turtle Master potion.")
+    @Setting.Feature(icon = "updateaquaticbackport:scute")
     public static final Turtles turtles = new Turtles();
 
     @Config.LangKey("config.updateaquaticbackport.dolphins")
     @Config.Comment("Dolphins and Dolphin's Grace.")
+    @Setting.Feature(icon = "minecraft:fish@1")
     public static final Dolphins dolphins = new Dolphins();
 
     @Config.LangKey("config.updateaquaticbackport.phantoms")
     @Config.Comment("Phantoms, phantom membrane and Slow Falling.")
+    @Setting.Feature(icon = "updateaquaticbackport:phantom_membrane")
     public static final Phantoms phantoms = new Phantoms();
 
     @Config.LangKey("config.updateaquaticbackport.trident")
     @Config.Comment("The trident, its four enchantments, and the drowned.")
+    @Setting.Feature(icon = "updateaquaticbackport:trident")
     public static final Trident trident = new Trident();
 
     @Config.LangKey("config.updateaquaticbackport.conduit")
     @Config.Comment("The conduit, Conduit Power, the nautilus shell and the heart of the sea.")
+    @Setting.Feature(icon = "updateaquaticbackport:conduit")
     public static final Conduit conduit = new Conduit();
 
     @Config.LangKey("config.updateaquaticbackport.structures")
     @Config.Comment("Shipwrecks, ocean ruins, buried treasure and treasure maps.")
+    @Setting.Feature(icon = "minecraft:filled_map")
     public static final Structures structures = new Structures();
 
     @Config.LangKey("config.updateaquaticbackport.oceans")
     @Config.Comment("1.13's ocean biomes, icebergs, and underwater caves and ravines.")
+    @Setting.Feature(icon = "minecraft:packed_ice")
     public static final Oceans oceans = new Oceans();
 
     @Config.LangKey("config.updateaquaticbackport.bubbles")
     @Config.Comment("Bubble columns over soul sand and magma blocks.")
+    @Setting.Feature(icon = "minecraft:soul_sand")
     public static final Bubbles bubbles = new Bubbles();
 
     @Config.LangKey("config.updateaquaticbackport.blocks")
     @Config.Comment("Smaller 1.13 block and item changes: prismarine stairs and slabs, carved pumpkins, wood blocks and more.")
+    @Setting.Feature(icon = "updateaquaticbackport:prismarine_stairs")
     public static final Blocks blocks = new Blocks();
 
     @Config.LangKey("config.updateaquaticbackport.mobs")
     @Config.Comment("1.13's changes to existing mobs.")
+    @Setting.Feature(icon = "minecraft:skull@2")
     public static final Mobs mobs = new Mobs();
 
     @Config.LangKey("config.updateaquaticbackport.water")
     @Config.Comment("How water looks and feels: biome water colors, underwater fog, air refilling, floating items.")
+    @Setting.Feature(icon = "minecraft:water_bucket")
     public static final Water water = new Water();
 
     @Config.LangKey("config.updateaquaticbackport.swimming")
     @Config.Comment("Swimming and crawling: sprint under water to swim, and crawl where there is no room to stand.")
+    @Setting.Feature(icon = "minecraft:trapdoor")
     public static final Swimming swimming = new Swimming();
 
     // ------------------------------------------------------------------------------------------
@@ -109,6 +127,7 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.kelp.enabled")
         public boolean enabled = true;
 
+        @Setting.NewChunks
         @Config.Comment("Kelp and seagrass generate in oceans and rivers in newly generated chunks.")
         @Config.LangKey("config.updateaquaticbackport.kelp.generate")
         public boolean generate = true;
@@ -120,6 +139,7 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.coral.enabled")
         public boolean enabled = true;
 
+        @Setting.NewChunks
         @Config.Comment("Coral reefs generate in warm oceans in newly generated chunks.")
         @Config.LangKey("config.updateaquaticbackport.coral.generate")
         public boolean generate = true;
@@ -192,6 +212,7 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.trident.zombiesConvert")
         public boolean zombiesConvert = true;
 
+        @Setting.ListOf(Setting.Kind.ENTITY)
         @Config.Comment({"Mobs Impaling counts as aquatic, by entity id, besides squid, guardians and every other water mob.",
                 "Ids of mods that are not installed are ignored."})
         @Config.LangKey("config.updateaquaticbackport.trident.impalingMobs")
@@ -220,6 +241,7 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.oceans.enabled")
         public boolean enabled = true;
 
+        @Setting.NewChunks
         @Config.Comment("Underwater caves and ravines cut through ocean floors in newly generated chunks.")
         @Config.LangKey("config.updateaquaticbackport.oceans.underwaterCaves")
         public boolean underwaterCaves = true;
@@ -231,6 +253,7 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.bubbles.enabled")
         public boolean enabled = true;
 
+        @Setting.NewChunks
         @Config.Comment("Bubble columns start over soul sand and magma blocks that world generation leaves under water, in newly generated chunks.")
         @Config.LangKey("config.updateaquaticbackport.bubbles.generate")
         public boolean generate = true;
@@ -267,6 +290,7 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.mobs.squidInk")
         public boolean squidInk = true;
 
+        @Config.RequiresMcRestart
         @Config.Comment("Polar bears spawn on the ice of frozen oceans.")
         @Config.LangKey("config.updateaquaticbackport.mobs.polarBearsOnIce")
         public boolean polarBearsOnIce = true;
@@ -288,17 +312,20 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.water.enabled")
         public boolean enabled = true;
 
+        @Setting.Client
         @Config.RequiresMcRestart
         @Config.Comment({"1.13's water texture and its colors by biome: blue in most places, darker in cold biomes,",
                 "purple in frozen ones, light green-gray in swamps, teal in warm oceans."})
         @Config.LangKey("config.updateaquaticbackport.water.biomeColors")
         public boolean biomeColors = true;
 
+        @Setting.Client
         @Config.Comment({"1.13's view under water: fog in the biome's water color, darker deeper down, and clearer",
                 "the longer you stay under."})
         @Config.LangKey("config.updateaquaticbackport.water.underwaterFog")
         public boolean underwaterFog = true;
 
+        @Setting.Client
         @Config.Comment("Underwater ambience: a soft loop with bubbles and the odd distant sound while your head is under water.")
         @Config.LangKey("config.updateaquaticbackport.water.ambience")
         public boolean ambience = true;
@@ -318,6 +345,7 @@ public final class ModConfig {
         @Config.LangKey("config.updateaquaticbackport.water.floatingItems")
         public boolean floatingItems = true;
 
+        @Setting.Client
         @Config.Comment("Jumping in shallow flowing water is a normal jump instead of swimming up slowly.")
         @Config.LangKey("config.updateaquaticbackport.water.shallowJump")
         public boolean shallowJump = true;
