@@ -64,8 +64,8 @@ public final class LookFeelSelfTest implements SelfTest {
         c.ok(stairs instanceof com.exiledradio.backportcore.waterlog.Waterloggable, "prismarine stairs are Waterloggable: " + stairs);
         if (stairs != null) {
             net.minecraft.block.state.IBlockState s = stairs.getDefaultState();
-            c.ok(com.exiledradio.backportcore.waterlog.WaterRules.decide(s, git.jbredwards.fluidlogged_api.api.util.FluidState.of(net.minecraftforge.fluids.FluidRegistry.WATER)) == null
-                    && com.exiledradio.backportcore.waterlog.WaterRules.decide(s, git.jbredwards.fluidlogged_api.api.util.FluidState.of(net.minecraftforge.fluids.FluidRegistry.LAVA)) == Boolean.FALSE,
+            c.ok(com.exiledradio.backportcore.waterlog.fluidlogged.WaterRules.decide(s, git.jbredwards.fluidlogged_api.api.util.FluidState.of(net.minecraftforge.fluids.FluidRegistry.WATER)) == null
+                    && com.exiledradio.backportcore.waterlog.fluidlogged.WaterRules.decide(s, git.jbredwards.fluidlogged_api.api.util.FluidState.of(net.minecraftforge.fluids.FluidRegistry.LAVA)) == Boolean.FALSE,
                     "prismarine stairs take water, not lava");
         }
         for (net.minecraft.block.Block b : net.minecraftforge.fml.common.registry.ForgeRegistries.BLOCKS) {

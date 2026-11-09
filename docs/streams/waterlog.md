@@ -164,3 +164,16 @@ New checks (`KelpSelfTest`, `CoralSelfTest`, `BubbleSelfTest`, `ConduitSelfTest`
 *   `tools/lang/vanilla_keys.json` on `main` is older than the merged streams: running
     `tools/lang/vanilla_keys.py` rewrites it (269 vanilla names, 130 ours). Left as it was here. No new lang
     keys in this stream; nothing for `build_langs.py`.
+
+## Without Fluidlogged API (optional since 2026-11-09)
+
+Fluidlogged API is Backport Core's optional dependency, not this mod's. Without it (`Waterlogging.isAvailable()`
+false) the blocks above go back to the model before this stream, in `common/PseudoWater`: kelp, seagrass, tall
+seagrass and bubble columns are water material with `LEVEL` 0 (always water); coral, fans and the conduit have
+`waterlogged` in metadata bit 1 (wall fans: bit 4) and are water material while it is true. The model is picked
+per block at construction (`PseudoWater.active()`), and each block reads it back from its own state container
+(`isPseudoWater`). The client maps those blocks to `blockstates/pseudo_water/<name>.json` (the same parts plus
+the water surface, `tools/common/pseudo_water.py`) and tints the surface. Buckets: `common/PseudoWaterEvents`.
+Sea pickles keep their stored `waterlogged` flag as "water beside or above". `LegacyWater` neither converts nor
+marks chunks then, so the blocks get Fluidlogged API water once it is installed. With Fluidlogged API every
+path is unchanged. Only `common/fluidlogged/FluidloggedAccess` names a Fluidlogged API class.

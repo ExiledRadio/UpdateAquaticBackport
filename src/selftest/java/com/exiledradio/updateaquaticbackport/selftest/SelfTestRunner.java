@@ -62,6 +62,7 @@ public final class SelfTestRunner {
             new OceanLegacySelfTest(),
             new SwimSelfTest(),
             new WaterlogSelfTest(),
+            new PseudoWaterSelfTest(),
             new LookFeelSelfTest(),
             new LocateSelfTest(),
     };

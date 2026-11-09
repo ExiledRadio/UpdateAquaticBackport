@@ -6,7 +6,7 @@ The oceans are 1.13's oceans: warm, lukewarm, cold and frozen, with coral reefs 
 
 It follows Minecraft as it plays today. Where current Java has changed something since 1.13 (bone meal grows kelp, shears stop it, fish swim in schools), this mod does it the current way. The numbers come from the decompiled game, so spawn rates, mob health, drop chances, growth rates and potion lengths are the ones the real game uses.
 
-**Everything 1.13 added is in this one mod.** It needs two libraries: Backport Core, which holds the code and textures the update backports share, and Fluidlogged API, for waterlogging. All three are needed on the client and the server.
+**Everything 1.13 added is in this one mod.** It needs Backport Core, which holds the code and textures the update backports share. Both are needed on the client and the server.
 
 > 💬 **[Join the Discord](https://discord.gg/kxQvMDJBTN)** for bug reports, questions and release pings.
 
@@ -153,7 +153,7 @@ Kelp forests grow in every ocean except warm and frozen ones; seagrass grows eve
 
 ## Waterlogging
 
-*   **Waterlogging, as in 1.13**: kelp, seagrass, coral, coral fans, conduits, bubble columns and prismarine stairs and slabs hold the water they are in. The water is drawn around them, flows out of them into open space, and buckets fill and empty the ones that may be dry.
+*   **Waterlogging, as in 1.13**, from Fluidlogged API, which Backport Core installs: kelp, seagrass, coral, coral fans, conduits, bubble columns and prismarine stairs and slabs hold the water they are in. The water is drawn around them, flows out of them into open space, and buckets fill and empty the ones that may be dry.
 *   **Kelp, seagrass and bubble columns always hold water**: drain them and they go with it. An empty bucket aimed at kelp or seagrass does nothing, as in 1.13; one aimed at a bubble column takes its water and leaves air. Kelp and seagrass can be placed in falling water, which becomes a source.
 *   **Coral, coral fans and conduits** may be dry or in water: a coral drained of its water dies a few seconds later.
 *   Light passes through all of them exactly as through the water around them, and squid, fish, dolphins and drowned spawn in the water of a kelp forest or a reef.
@@ -234,12 +234,11 @@ If floating items cost you performance in a world with a lot of dropped items in
 
 *   Minecraft 1.12.2, Forge 14.23.5.2847 or newer
 *   [Backport Core](https://www.curseforge.com/minecraft/mc-mods/backport-core) 1.1.0 or newer
-*   [Fluidlogged API](https://www.curseforge.com/minecraft/mc-mods/fluidlogged-api) 3.3.3 or newer
 *   Required on the client and the server
 
 ## Install
 
-Drop this jar, Backport Core's and Fluidlogged API's in `mods` on both sides. Delete any older version first, or the two copies will crash on startup with a duplicate mod id.
+Drop this jar and Backport Core's in `mods` on both sides, with Fluidlogged API, which comes with Backport Core. Delete any older version first, or the two copies will crash on startup with a duplicate mod id.
 
 ***
 

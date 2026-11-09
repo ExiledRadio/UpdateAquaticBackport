@@ -2,6 +2,7 @@ package com.exiledradio.updateaquaticbackport.coral;
 
 import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.common.BlockUnderwater;
+import com.exiledradio.updateaquaticbackport.common.PseudoWater;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -40,6 +41,10 @@ import java.util.Random;
  *
  * <p>Living coral is 1.13's ocean plant material; dead coral keeps its stone-like {@link #DRY} material. Water
  * never washes either away: they can hold water, so flowing water fills them instead.
+ *
+ * <p>Without Fluidlogged API ({@link PseudoWater}) a coral in water is the water in its space, with 1.13's
+ * {@code waterlogged} property in metadata bit 1 (bit 4 for wall fans); dry, living or dead, it is {@link #DRY},
+ * whose material blocks liquids, so flowing water does not wash it away.
  */
 public class BlockCoral extends BlockUnderwater {
 
@@ -78,15 +83,33 @@ public class BlockCoral extends BlockUnderwater {
     Block itemBlock = this;
 
     public BlockCoral(CoralType type, boolean fan, boolean living, SoundType sound) {
-        super(living ? OCEAN_PLANT : DRY, living ? type.color : MapColor.GRAY);
+        super(living ? OCEAN_PLANT : DRY, DRY, living ? type.color : MapColor.GRAY);
         this.type = type;
         this.fan = fan;
+        this.setDefaultState(this.baseState());
         this.setHardness(0.0F);
         this.setSoundType(sound);
     }
 
     public boolean isLiving() {
         return this.dead != null;
+    }
+
+    @Override
+    protected boolean canBeDry() {
+        return true;
+    }
+
+    /** No metadata with Fluidlogged API; without it, bit 1 is {@code waterlogged}. */
+    @Override
+    @SuppressWarnings("deprecation")
+    public IBlockState getStateFromMeta(int meta) {
+        return PseudoWater.fromBit(this.getDefaultState(), meta, 1);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return PseudoWater.waterloggedBit(state, 1);
     }
 
     // ------------------------------------------------------------------------------------------
@@ -145,7 +168,7 @@ public class BlockCoral extends BlockUnderwater {
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block neighbor, BlockPos from) {
         if (!this.hasSupport(world, pos, state)) {
             // 1.13 removes it without drops, leaving its water.
-            world.setBlockToAir(pos);
+            removeLeavingWater(world, pos);
             return;
         }
         this.checkLife(world, pos, state);
@@ -159,9 +182,9 @@ public class BlockCoral extends BlockUnderwater {
         }
     }
 
-    /** @return the dead form of this state, facing the same way */
+    /** @return the dead form of this state, facing the same way, dry */
     protected IBlockState deadState(IBlockState state) {
-        return this.dead.getDefaultState();
+        return dry(this.dead.getDefaultState());
     }
 
     // ------------------------------------------------------------------------------------------

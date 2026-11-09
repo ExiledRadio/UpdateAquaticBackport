@@ -1,0 +1,47 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "updateaquaticbackport:horn_coral_wall_fan"
+      },
+      "when": {
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "updateaquaticbackport:horn_coral_wall_fan",
+        "y": 90
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "updateaquaticbackport:horn_coral_wall_fan",
+        "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "updateaquaticbackport:horn_coral_wall_fan",
+        "y": 270
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "when": {
+        "surface": "true"
+      },
+      "apply": {
+        "model": "updateaquaticbackport:water_surface"
+      }
+    }
+  ]
+}

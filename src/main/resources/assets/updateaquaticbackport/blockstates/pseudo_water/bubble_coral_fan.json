@@ -1,0 +1,17 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "updateaquaticbackport:bubble_coral_fan"
+      }
+    },
+    {
+      "when": {
+        "surface": "true"
+      },
+      "apply": {
+        "model": "updateaquaticbackport:water_surface"
+      }
+    }
+  ]
+}

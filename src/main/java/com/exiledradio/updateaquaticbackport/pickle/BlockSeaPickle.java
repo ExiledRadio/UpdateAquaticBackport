@@ -70,6 +70,13 @@ import java.util.Random;
  * <p>Flowing water does not wash a dry pickle away: the material blocks liquids, as a waterloggable block
  * does in current Java, while having no collision box.
  *
+ * <h2>Without Fluidlogged API</h2>
+ * No block can hold water then, so the pickle is back to how it was before waterlogging, and the
+ * {@code waterlogged} property means "in water" again: set when it is placed if the block it replaces is water
+ * or water is directly beside or above it, and afterwards kept to whether water is beside or above it, checked
+ * whenever a neighbor changes. Light, the models and bone meal follow the property. A pickle saved this way keeps
+ * its flag, which becomes real water once Fluidlogged API is installed ({@link Waterlogging#migrateStoredProperty}).
+ *
  * <h2>Bone meal</h2>
  * As in current Java: bone meal on a waterlogged pickle sitting on a living coral block makes it four
  * pickles and spreads more across the coral blocks around it. 1.12.2 has no coral of its own, so the
@@ -157,12 +164,43 @@ public class BlockSeaPickle extends Block implements Waterloggable, IGrowable {
         return state.getValue(WATERLOGGED) || Waterlogging.hasWater(world, pos);
     }
 
-    /** Placed dry: Fluidlogged API keeps the water of a source it is placed into. */
+    /**
+     * Placed dry: Fluidlogged API keeps the water of a source it is placed into. Without it, in water if the block
+     * it replaces is water (placing on the sea floor replaces a water source) or water is beside or above it.
+     */
     @Override
     @SuppressWarnings("deprecation")
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
                                             float hitZ, int meta, EntityLivingBase placer) {
+        if (!Waterlogging.isAvailable()) {
+            boolean wet = world.getBlockState(pos).getMaterial() == Material.WATER || waterNextTo(world, pos);
+            return this.getDefaultState().withProperty(WATERLOGGED, wet);
+        }
         return this.getDefaultState();
+    }
+
+    /** Without Fluidlogged API: true if water is directly above or beside this position. */
+    static boolean waterNextTo(IBlockAccess world, BlockPos pos) {
+        for (EnumFacing side : EnumFacing.values()) {
+            if (side != EnumFacing.DOWN && world.getBlockState(pos.offset(side)).getMaterial() == Material.WATER) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Without Fluidlogged API: keeps the stored flag to whether water is beside or above. A state placed wet is
+     * left wet when nothing is there, as the water it replaced is gone by then ({@code onBlockAdded}).
+     */
+    private static void followWaterNextTo(World world, BlockPos pos, IBlockState state, boolean keepWet) {
+        if (world.isRemote) {
+            return;
+        }
+        boolean wet = waterNextTo(world, pos) || (keepWet && state.getValue(WATERLOGGED));
+        if (wet != state.getValue(WATERLOGGED)) {
+            world.setBlockState(pos, state.withProperty(WATERLOGGED, wet), 2);
+        }
     }
 
     /**
@@ -172,7 +210,8 @@ public class BlockSeaPickle extends Block implements Waterloggable, IGrowable {
      * @return the state now at the position
      */
     static IBlockState moveStoredWater(World world, BlockPos pos, IBlockState state) {
-        if (world.isRemote || !state.getValue(WATERLOGGED)) {
+        if (world.isRemote || !state.getValue(WATERLOGGED) || !Waterlogging.isAvailable()) {
+            // Without Fluidlogged API the flag is the pickle's only water: it stays.
             return state;
         }
         IBlockState dry = state.withProperty(WATERLOGGED, false);
@@ -184,6 +223,10 @@ public class BlockSeaPickle extends Block implements Waterloggable, IGrowable {
 
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        if (!Waterlogging.isAvailable()) {
+            followWaterNextTo(world, pos, state, true);
+            return;
+        }
         moveStoredWater(world, pos, state);
     }
 
@@ -196,6 +239,10 @@ public class BlockSeaPickle extends Block implements Waterloggable, IGrowable {
         if (!canStayOn(world, pos.down())) {
             this.dropBlockAsItem(world, pos, state, 0);
             world.setBlockToAir(pos);
+            return;
+        }
+        if (!Waterlogging.isAvailable()) {
+            followWaterNextTo(world, pos, state, false);
             return;
         }
         moveStoredWater(world, pos, state);
@@ -381,8 +428,13 @@ public class BlockSeaPickle extends Block implements Waterloggable, IGrowable {
                     BlockPos at = new BlockPos(x0 + dx, y, pos.getZ() - offset + dz);
                     if (rand.nextInt(6) == 0 && isWaterBlock(world.getBlockState(at))
                             && isCoralBlock(world.getBlockState(at.down()))) {
-                        Waterlogging.placeWithWater(world, at,
-                                this.getDefaultState().withProperty(PICKLES, rand.nextInt(4) + 1), 3);
+                        IBlockState more = this.getDefaultState().withProperty(PICKLES, rand.nextInt(4) + 1);
+                        if (Waterlogging.isAvailable()) {
+                            Waterlogging.placeWithWater(world, at, more, 3);
+                        } else {
+                            // It replaces a water block, so it is in water.
+                            world.setBlockState(at, more.withProperty(WATERLOGGED, true), 3);
+                        }
                     }
                 }
             }

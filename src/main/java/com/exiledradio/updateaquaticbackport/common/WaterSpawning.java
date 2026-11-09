@@ -34,8 +34,14 @@ public final class WaterSpawning {
     private WaterSpawning() {
     }
 
-    /** Sets {@link #IN_WATER} on {@code SpawnPlacementType.IN_WATER}, unless something else already gave it a test. */
+    /**
+     * Sets {@link #IN_WATER} on {@code SpawnPlacementType.IN_WATER}, unless something else already gave it a test.
+     * Without Fluidlogged API nothing is waterlogged, and 1.12.2's own test is already this one.
+     */
     public static void init() {
+        if (!Waterlogging.isAvailable()) {
+            return;
+        }
         try {
             // Forge's own field (not renamed by obfuscation).
             Field field = EntityLiving.SpawnPlacementType.class.getDeclaredField("spawnPredicate");

@@ -143,7 +143,7 @@ public final class LegacyWater {
     @SubscribeEvent
     public static void onChunkLoad(ChunkDataEvent.Load event) {
         World world = event.getWorld();
-        if (world == null || world.isRemote) {
+        if (world == null || world.isRemote || !Waterlogging.isAvailable()) {
             return;
         }
         NBTTagCompound level = event.getData().getCompoundTag("Level");
@@ -164,7 +164,9 @@ public final class LegacyWater {
     @SubscribeEvent
     public static void onChunkSave(ChunkDataEvent.Save event) {
         World world = event.getWorld();
-        if (world == null || world.isRemote) {
+        if (world == null || world.isRemote || !Waterlogging.isAvailable()) {
+            // Without Fluidlogged API the blocks are the water themselves: saved unmarked, so they get their
+            // water once it is installed.
             return;
         }
         Map<ChunkPos, List<BlockPos>> map = pending(world);

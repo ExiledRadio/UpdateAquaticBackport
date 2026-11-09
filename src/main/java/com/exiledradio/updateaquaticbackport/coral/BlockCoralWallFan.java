@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.coral;
 
+import com.exiledradio.updateaquaticbackport.common.PseudoWater;
+
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -36,19 +38,22 @@ public class BlockCoralWallFan extends BlockCoral {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
+        return this.container(FACING);
     }
 
-    /** Meta 0-3: the facing. Bit 4 was the old waterlogged flag; it is ignored (see {@code common.LegacyWater}). */
+    /**
+     * Meta 0-3: the facing. Bit 4 is the {@code waterlogged} flag without Fluidlogged API; with it, the flag is
+     * ignored (see {@code common.LegacyWater}).
+     */
     @Override
     @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3));
+        return PseudoWater.fromBit(this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)), meta, 4);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex();
+        return state.getValue(FACING).getHorizontalIndex() | PseudoWater.waterloggedBit(state, 4);
     }
 
     /** @return true if the block behind (opposite FACING) has a solid face toward this */

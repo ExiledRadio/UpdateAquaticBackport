@@ -1,0 +1,17 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "updateaquaticbackport:dead_brain_coral"
+      }
+    },
+    {
+      "when": {
+        "surface": "true"
+      },
+      "apply": {
+        "model": "updateaquaticbackport:water_surface"
+      }
+    }
+  ]
+}

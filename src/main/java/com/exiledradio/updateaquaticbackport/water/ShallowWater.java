@@ -1,7 +1,7 @@
 package com.exiledradio.updateaquaticbackport.water;
 
 import com.exiledradio.backportcore.waterlog.Waterlogging;
-import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
+import com.exiledradio.updateaquaticbackport.common.fluidlogged.FluidloggedAccess;
 
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -87,7 +87,7 @@ public final class ShallowWater {
         if (!Waterlogging.hasWater(world, pos)) {
             return null;
         }
-        return FluidloggedUtils.getFluidState(world, pos, state).getState();
+        return Waterlogging.isAvailable() ? FluidloggedAccess.fluidState(world, pos, state) : null;
     }
 
     /**

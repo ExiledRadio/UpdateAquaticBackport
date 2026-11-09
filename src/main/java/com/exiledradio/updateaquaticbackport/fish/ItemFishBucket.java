@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.fish;
 
 import com.exiledradio.backportcore.waterlog.Waterlogging;
+import com.exiledradio.updateaquaticbackport.common.PseudoWaterBlock;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
@@ -84,7 +85,8 @@ public class ItemFishBucket extends Item {
      * Places water at a position, as a water bucket would, and lets the fish out there.
      *
      * <p>A block that can hold water (a waterloggable one: kelp, coral, a slab) is filled if it is dry, as a
-     * water bucket fills it; one that already holds water, such as kelp, just takes the fish.
+     * water bucket fills it; one that already holds water, such as kelp, just takes the fish. Without Fluidlogged
+     * API the same goes for the blocks that are the water in their space (kelp, coral, the conduit).
      * In the Nether the water boils away and the fish is left to flop, as in 1.13.
      *
      * @return false if water cannot go there; then nothing happened
@@ -92,7 +94,18 @@ public class ItemFishBucket extends Item {
     public boolean empty(@Nullable EntityPlayer player, World world, BlockPos pos, ItemStack stack) {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        if (state.getMaterial() != Material.WATER && Waterlogging.canHoldWater(state, world, pos)) {
+        if (block instanceof PseudoWaterBlock && ((PseudoWaterBlock) block).isPseudoWater()) {
+            PseudoWaterBlock plant = (PseudoWaterBlock) block;
+            if (!plant.isWater(state)) {
+                IBlockState filled = plant.filled(state);
+                if (filled == null) {
+                    return false;
+                }
+                if (!world.isRemote) {
+                    world.setBlockState(pos, filled, 11);
+                }
+            }
+        } else if (state.getMaterial() != Material.WATER && Waterlogging.canHoldWater(state, world, pos)) {
             if (!Waterlogging.hasWaterSource(world, pos) && !world.isRemote && !Waterlogging.setWater(world, pos, true, 11)) {
                 return false;
             }

@@ -74,7 +74,7 @@ public class BlockKelp extends BlockUnderwater implements IGrowable {
     public BlockKelp(boolean top) {
         super(OCEAN_PLANT, MapColor.WATER);
         this.top = top;
-        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0));
+        this.setDefaultState(this.baseState().withProperty(AGE, 0));
         this.setHardness(0.0F);
         this.setSoundType(SharedSounds.WET_GRASS);
         this.setTickRandomly(top);
@@ -88,7 +88,7 @@ public class BlockKelp extends BlockUnderwater implements IGrowable {
     @Override
     protected BlockStateContainer createBlockState() {
         // The plant ignores its age; one property list keeps the two blocks' states alike.
-        return new BlockStateContainer(this, AGE);
+        return this.container(AGE);
     }
 
     BlockKelp topBlock() {

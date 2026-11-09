@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -58,7 +59,7 @@ public class BlockBubbleColumn extends BlockUnderwater {
 
     public BlockBubbleColumn() {
         super(BUBBLE_COLUMN, MapColor.WATER);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(DRAG, true));
+        this.setDefaultState(this.baseState().withProperty(DRAG, true));
         // Water's: never broken by hand, blast resistance 100 (1.12.2 divides by 5 and multiplies by 3).
         this.setHardness(100.0F);
         this.setResistance(100.0F * 5.0F / 3.0F);
@@ -71,7 +72,7 @@ public class BlockBubbleColumn extends BlockUnderwater {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, DRAG);
+        return this.container(DRAG);
     }
 
     /** @return this column's state for a drag direction */
@@ -177,6 +178,12 @@ public class BlockBubbleColumn extends BlockUnderwater {
     @Override
     public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
         return true;
+    }
+
+    /** Without Fluidlogged API, 1.13's bucket takes the water and leaves air, as draining it does with it. */
+    @Override
+    public IBlockState drained(IBlockState state) {
+        return Blocks.AIR.getDefaultState();
     }
 
     @Override

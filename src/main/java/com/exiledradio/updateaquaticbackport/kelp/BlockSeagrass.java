@@ -71,7 +71,7 @@ public class BlockSeagrass extends BlockUnderwater implements IGrowable {
     public BlockSeagrass(boolean tall) {
         super(SEA_GRASS, MapColor.WATER);
         this.tall = tall;
-        this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, Half.LOWER));
+        this.setDefaultState(this.baseState().withProperty(HALF, Half.LOWER));
         this.setHardness(0.0F);
         this.setSoundType(SharedSounds.WET_GRASS);
     }
@@ -83,7 +83,7 @@ public class BlockSeagrass extends BlockUnderwater implements IGrowable {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, HALF);
+        return this.container(HALF);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class BlockSeagrass extends BlockUnderwater implements IGrowable {
         if (!this.canStay(world, pos, state)) {
             if (this.tall) {
                 // The other half went: this one goes with it, quietly, as a double plant's does, leaving its water.
-                world.setBlockToAir(pos);
+                removeLeavingWater(world, pos);
             } else {
                 breakLeavingWater(world, pos);
             }

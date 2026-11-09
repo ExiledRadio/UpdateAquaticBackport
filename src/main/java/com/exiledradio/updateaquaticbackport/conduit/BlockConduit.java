@@ -1,13 +1,19 @@
 package com.exiledradio.updateaquaticbackport.conduit;
 
 import com.exiledradio.backportcore.waterlog.Waterloggable;
+import com.exiledradio.updateaquaticbackport.common.BlockUnderwater;
+import com.exiledradio.updateaquaticbackport.common.PseudoWater;
+import com.exiledradio.updateaquaticbackport.common.PseudoWaterBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -36,16 +42,95 @@ import javax.annotation.Nullable;
  *   <li>Dry, it is glass: water does not flow into it. Pistons cannot move it. Mobs do not path through.</li>
  *   <li>Drawn by the tile entity's renderer; the block model is empty.</li>
  * </ul>
+ *
+ * <p>Without Fluidlogged API ({@link PseudoWater}), a waterlogged conduit is the water in its own space: 1.13's
+ * {@code waterlogged} property, in metadata bit 1, makes it water material, as this mod's conduit was before
+ * waterlogging; dry, it is glass.
  */
-public class BlockConduit extends Block implements Waterloggable {
+public class BlockConduit extends Block implements Waterloggable, PseudoWaterBlock {
 
     private static final AxisAlignedBB BOX = new AxisAlignedBB(5 / 16.0, 5 / 16.0, 5 / 16.0, 11 / 16.0, 11 / 16.0, 11 / 16.0);
 
+    /** True if this block is the water in its space when waterlogged ({@link PseudoWater}). */
+    private final boolean pseudoWater;
+
     public BlockConduit() {
-        super(Material.GLASS, MapColor.DIAMOND);
+        super(PseudoWater.active() ? Material.WATER : Material.GLASS, MapColor.DIAMOND);
+        this.pseudoWater = PseudoWater.isPseudoWater(this);
+        this.setDefaultState(PseudoWater.withWater(PseudoWater.base(this.blockState.getBaseState()), false));
         // 1.12.2 keeps hardness * 5 as resistance and reports a fifth of it: 3, as 1.14's.
         this.setHardness(3.0F);
         this.setLightLevel(1.0F);
+    }
+
+    // ------------------------------------------------------------------------------------------
+    // Without Fluidlogged API: water in its own space when waterlogged
+    // ------------------------------------------------------------------------------------------
+
+    @Override
+    public boolean isPseudoWater() {
+        return this.pseudoWater;
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return PseudoWater.container(this, true);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public IBlockState getStateFromMeta(int meta) {
+        return PseudoWater.fromBit(this.getDefaultState(), meta, 1);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return PseudoWater.waterloggedBit(state, 1);
+    }
+
+    /** Without Fluidlogged API, waterlogged when placed into a plain water source, as 1.14's. */
+    @Override
+    @SuppressWarnings("deprecation")
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+                                            int meta, EntityLivingBase placer) {
+        IBlockState state = super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+        return this.pseudoWater ? PseudoWater.withWater(state, BlockUnderwater.plainWaterSource(world, pos)) : state;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public Material getMaterial(IBlockState state) {
+        return this.pseudoWater ? PseudoWater.material(state, Material.GLASS) : super.getMaterial(state);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public int getLightOpacity(IBlockState state) {
+        return this.pseudoWater ? PseudoWater.lightOpacity(state) : super.getLightOpacity(state);
+    }
+
+    @Override
+    public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return this.pseudoWater ? PseudoWater.lightOpacity(state) : super.getLightOpacity(state, world, pos);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return this.pseudoWater ? PseudoWater.actualState(state, world, pos) : super.getActualState(state, world, pos);
+    }
+
+    @Override
+    public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
+        return !this.pseudoWater && super.isReplaceable(world, pos);
+    }
+
+    @Override
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+        if (this.pseudoWater) {
+            return PseudoWater.removedByPlayer(this, state, world, pos, player);
+        }
+        return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 
     // ------------------------------------------------------------------------------------------
@@ -82,6 +167,10 @@ public class BlockConduit extends Block implements Waterloggable {
     public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
         if (!world.isRemote) {
             spawnAsEntity(world, pos, new ItemStack(this));
+        }
+        if (this.pseudoWater) {
+            PseudoWater.exploded(this, world, pos, explosion);
+            return;
         }
         super.onBlockExploded(world, pos, explosion);
     }
@@ -121,11 +210,14 @@ public class BlockConduit extends Block implements Waterloggable {
         return BlockFaceShape.UNDEFINED;
     }
 
-    /** The model is empty; cut-out keeps it out of the translucent pass. */
+    /**
+     * The model is empty; cut-out keeps it out of the translucent pass. Without Fluidlogged API it draws a water
+     * surface when waterlogged at the top of the water: translucent, the water's layer.
+     */
     @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return this.pseudoWater ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
     }
 
     /** 1.14.4: {@code allowsMovement} is false. */

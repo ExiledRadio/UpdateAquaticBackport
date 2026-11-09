@@ -1,12 +1,12 @@
 package com.exiledradio.updateaquaticbackport.swim;
 
 import com.exiledradio.backportcore.pose.PlayerMovement;
+import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
+import com.exiledradio.updateaquaticbackport.common.fluidlogged.FluidloggedAccess;
 import com.exiledradio.updateaquaticbackport.dolphin.DolphinContent;
 import com.exiledradio.updateaquaticbackport.phantom.PhantomContent;
 import com.google.common.collect.MapMaker;
-
-import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,7 +98,10 @@ public final class SwimMovement implements PlayerMovement {
 
     /** @return true if any fluid is at the position, held there by Fluidlogged API or as the block itself */
     static boolean fluidAt(EntityPlayer player, BlockPos pos) {
-        return FluidloggedUtils.getFluidOrReal(player.world, pos).getMaterial().isLiquid();
+        if (!Waterlogging.isAvailable()) {
+            return player.world.getBlockState(pos).getMaterial().isLiquid();
+        }
+        return FluidloggedAccess.fluidOrReal(player.world, pos).getMaterial().isLiquid();
     }
 
     /** @return the player's jump key state as their movement sees it (1.12.2's {@code isJumping}) */
