@@ -1,3 +1,8 @@
+# 1.0.1
+
+*   **Recipes unlock like vanilla's**, with Backport Core 1.2.0: each recipe of this mod unlocks on the items current Java unlocks it on, with the recipe toast. Update Backport Core to get it.
+*   **Fixed a crash on entering a world with Quark, Bewitchment and other mods that add mob spawns early**: `Biome.func_76747_a`, "Index 4 out of bounds for length 4". The fish's own spawn category is now added before any mod sets up its spawns.
+
 # 1.0.0
 
 First release: all of 1.13's Update Aquatic on 1.12.2. The new oceans and their floors, kelp, seagrass and coral reefs, icebergs and underwater caves; cod, salmon, pufferfish, tropical fish, turtles, dolphins, the drowned and phantoms; the trident and its four enchantments, the conduit, bubble columns, Slow Falling and the Turtle Master; carved pumpkins, prismarine stairs and slabs, wood blocks and 1.13's water. Where current Java has changed something since 1.13, this mod does it the current way.

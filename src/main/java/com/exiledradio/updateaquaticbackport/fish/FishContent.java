@@ -78,6 +78,10 @@ public final class FishContent {
     @Nullable
     private static EnumCreatureType waterAmbient;
 
+    /** The type itself, made while the mod is constructed; {@link #waterAmbient} is it once the fish register. */
+    @Nullable
+    private static EnumCreatureType waterAmbientType;
+
     private FishContent() {
     }
 
@@ -94,6 +98,30 @@ public final class FishContent {
     @Nullable
     public static EnumCreatureType waterAmbient() {
         return waterAmbient;
+    }
+
+    /**
+     * Adds the water ambient creature type. Called from the mod's constructor, before any mod's pre-init:
+     * {@code Biome.getSpawnableList} switches on the creature type through a table the JVM sizes on its first
+     * call, and a type added after that call is past the table's end ("Index 4 out of bounds" in
+     * {@code Biome.func_76747_a} once a world ticks). Mods that add spawns in pre-init (Quark, Bewitchment) make
+     * that first call long before entities register, so the type has to exist by then. The config is not read
+     * yet, so the type is added even with fish switched off; it then has nothing to spawn.
+     */
+    public static void createWaterAmbient() {
+        if (waterAmbientType != null) {
+            return;
+        }
+        try {
+            waterAmbientType = EnumHelper.addCreatureType("UPDATEAQUATICBACKPORT_WATER_AMBIENT", EntityAbstractFish.class, 20,
+                    Material.WATER, true, false);
+        } catch (RuntimeException e) {
+            UpdateAquaticBackport.LOGGER.error("Could not add the water ambient creature type; fish will not spawn naturally.", e);
+            return;
+        }
+        if (waterAmbientType != null) {
+            SwitchTables.grow(EnumCreatureType.class, "net.minecraft.world.biome.Biome$1");
+        }
     }
 
     static ItemStack stack(@Nullable Item item) {
@@ -150,10 +178,8 @@ public final class FishContent {
         for (ResourceLocation table : new ResourceLocation[] {COD_LOOT, SALMON_LOOT, PUFFERFISH_LOOT, TROPICAL_FISH_LOOT}) {
             LootTableList.register(table);
         }
-        if (waterAmbient == null) {
-            waterAmbient = EnumHelper.addCreatureType("UPDATEAQUATICBACKPORT_WATER_AMBIENT", EntityAbstractFish.class, 20,
-                    Material.WATER, true, false);
-        }
+        createWaterAmbient();
+        waterAmbient = waterAmbientType;
         UpdateAquaticBackport.LOGGER.info("Registered 4 fish.");
     }
 

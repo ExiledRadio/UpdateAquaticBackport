@@ -42,6 +42,11 @@ public final class UpdateAquaticBackport {
     @Mod.Instance(MOD_ID)
     public static UpdateAquaticBackport instance;
 
+    public UpdateAquaticBackport() {
+        // Before any mod's pre-init: see FishContent.createWaterAmbient.
+        com.exiledradio.updateaquaticbackport.fish.FishContent.createWaterAmbient();
+    }
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         // 1.13's structure placement numbers, for Backport Core's table (seed parity with 1.13).
