@@ -32,6 +32,9 @@ import java.util.Random;
  *       biomes still has warm seas with reefs and cold seas with kelp, in patches a few hundred blocks
  *       across, the same for every stream and every chunk. Noise never says frozen: frozen water needs
  *       the frozen biome.</li>
+ *   <li>In a world whose generator runs today's generation (Caves &amp; Cliffs Backport's 1.18 terrain,
+ *       {@link ModernWorlds}), the generator's biome: 1.18's warm, lukewarm, cold and frozen oceans where 1.18 has
+ *       them, read in three dimensions by {@link #at}, so a lush cave under an ocean is no ocean. No noise.</li>
  * </ul>
  */
 public enum OceanKind {
@@ -68,16 +71,33 @@ public enum OceanKind {
         realTemperatures = rule;
     }
 
-    /** @return the ocean kind at a position; {@link #NONE} if it is not in an ocean biome */
+    /**
+     * @return the ocean kind at a position; {@link #NONE} if it is not in an ocean biome. In a world whose generator
+     * runs today's generation ({@link ModernWorlds}), the kind of its biome there, in three dimensions.
+     */
     public static OceanKind at(World world, BlockPos pos) {
+        String modern = ModernWorlds.biomeAt(world, pos);
+        if (modern != null) {
+            return ofModern(modern);
+        }
         return of(world, world.getBiome(pos), pos.getX(), pos.getZ());
     }
 
     /**
      * @return the ocean kind of a biome at a column of a world: as {@link #of(Biome, long, int, int)}, except
-     * that vanilla's ocean and deep ocean are {@link #NORMAL} where the world's map has 1.13's temperatures
+     * that vanilla's ocean and deep ocean are {@link #NORMAL} where the world's map has 1.13's temperatures. In a
+     * world whose generator runs today's generation, its biomes are today's: a registered ocean is its kind, and
+     * vanilla's ocean or deep ocean (which stands in for any ocean that has no 1.12 biome) is the generator's ocean
+     * at the column's sea surface.
      */
     public static OceanKind of(World world, Biome biome, int x, int z) {
+        if ((biome == Biomes.OCEAN || biome == Biomes.DEEP_OCEAN) && !REGISTERED.containsKey(biome)) {
+            String modern = ModernWorlds.biomeAt(world, new BlockPos(x, world.getSeaLevel() - 1, z));
+            if (modern != null) {
+                OceanKind kind = ofModern(modern);
+                return kind == NONE ? NORMAL : kind;
+            }
+        }
         RealTemperatures rule = realTemperatures;
         if ((biome == Biomes.OCEAN || biome == Biomes.DEEP_OCEAN) && rule != null && rule.at(world, x, z)) {
             return NORMAL;
@@ -104,6 +124,29 @@ public enum OceanKind {
             return FROZEN;
         }
         return fromNoise(seed, x, z);
+    }
+
+    /** @return the ocean kind of today's biome, by its id without the namespace ({@code "deep_lukewarm_ocean"}) */
+    public static OceanKind ofModern(String id) {
+        switch (id) {
+            case "warm_ocean":
+            case "deep_warm_ocean":
+                return WARM;
+            case "lukewarm_ocean":
+            case "deep_lukewarm_ocean":
+                return LUKEWARM;
+            case "ocean":
+            case "deep_ocean":
+                return NORMAL;
+            case "cold_ocean":
+            case "deep_cold_ocean":
+                return COLD;
+            case "frozen_ocean":
+            case "deep_frozen_ocean":
+                return FROZEN;
+            default:
+                return NONE;
+        }
     }
 
     /** @return the temperature an ordinary ocean has at a column */

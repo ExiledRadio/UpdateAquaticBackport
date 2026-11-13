@@ -2,6 +2,7 @@ package com.exiledradio.updateaquaticbackport.fish;
 
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
+import com.exiledradio.updateaquaticbackport.common.ModernWorlds;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 
 import net.minecraft.entity.EntityLiving;
@@ -80,12 +81,24 @@ public final class FishSpawning {
         }
         World world = event.getWorld();
         BlockPos pos = event.getPos();
+        String modern = ModernWorlds.biomeAt(world, pos);
+        if (modern != null) {
+            // Today's biome at the spot, in three dimensions: a lush cave under an ocean has its own fish.
+            add(event.getList(), OceanKind.ofModern(modern), modern.startsWith("deep_"),
+                    modern.equals("river") || modern.equals("frozen_river"));
+            return;
+        }
         Biome biome = world.getBiome(pos);
         add(event.getList(), biome, OceanKind.of(world, biome, pos.getX(), pos.getZ()));
     }
 
     /** Fills a spawn list for a biome of this ocean kind. */
     static void add(List<Biome.SpawnListEntry> list, Biome biome, OceanKind kind) {
+        add(list, kind, isDeep(biome), BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER));
+    }
+
+    /** Fills a spawn list for an ocean of this kind, deep or not, or a river. */
+    static void add(List<Biome.SpawnListEntry> list, OceanKind kind, boolean deep, boolean river) {
         switch (kind) {
             case NORMAL:
                 list.add(COD_10);
@@ -98,7 +111,7 @@ public final class FishSpawning {
                 list.add(SALMON_15);
                 break;
             case LUKEWARM:
-                list.add(isDeep(biome) ? COD_8 : COD_15);
+                list.add(deep ? COD_8 : COD_15);
                 list.add(PUFFERFISH_5);
                 list.add(TROPICAL_25);
                 break;
@@ -107,7 +120,7 @@ public final class FishSpawning {
                 list.add(TROPICAL_25);
                 break;
             default:
-                if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
+                if (river) {
                     list.add(SALMON_RIVER);
                 }
                 break;

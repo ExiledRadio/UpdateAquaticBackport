@@ -1,6 +1,7 @@
 # 1.0.1
 
 *   **Recipes unlock like vanilla's**, with Backport Core 1.2.0: each recipe of this mod unlocks on the items current Java unlocks it on, with the recipe toast. Update Backport Core to get it.
+*   **Caves & Cliffs Backport's 1.18 worlds are 1.18's oceans**: reefs, kelp, seagrass and sea pickles are only 1.18.2's own, in 1.18's warm, lukewarm, cold and frozen oceans. Before, a world of the `cavesandcliffs` type got this mod's reefs and kelp as well, judged by a temperature of its own, so a reef could grow in a plain ocean of blue water and kelp and seagrass came twice. Fish, drowned, dolphins, polar bears and bone meal there go by 1.18's biome, in three dimensions (a lush cave under an ocean has tropical fish, not cod). Magma below y 0 gets its bubble columns too. Needs Backport Core 1.2.0 with `ModernGeneration`.
 *   **Fixed a crash on entering a world with Quark, Bewitchment and other mods that add mob spawns early**: `Biome.func_76747_a`, "Index 4 out of bounds for length 4". The fish's own spawn category is now added before any mod sets up its spawns.
 
 # 1.0.0

@@ -4,6 +4,7 @@ import com.exiledradio.backportcore.waterlog.Waterlogging;
 
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
+import com.exiledradio.updateaquaticbackport.common.ModernWorlds;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -82,10 +83,15 @@ public final class DrownedSpawning {
      * a river, or 1 in 40 and more than 5 below sea level anywhere else.
      */
     public static boolean waterRule(World world, BlockPos pos, Biome biome, Random random) {
+        return waterRule(world, pos, isRiver(biome), random);
+    }
+
+    /** {@link #waterRule(World, BlockPos, Biome, Random)} for a spot known to be in a river or not. */
+    public static boolean waterRule(World world, BlockPos pos, boolean river, Random random) {
         if (!Waterlogging.hasWater(world, pos)) {
             return false;
         }
-        if (isRiver(biome)) {
+        if (river) {
             return random.nextInt(15) == 0;
         }
         return random.nextInt(40) == 0 && pos.getY() < world.getSeaLevel() - 5;
@@ -98,7 +104,11 @@ public final class DrownedSpawning {
             return;
         }
         BlockPos pos = new BlockPos(event.getX(), event.getY(), event.getZ());
-        if (!waterRule(event.getWorld(), pos, event.getWorld().getBiome(pos), event.getWorld().rand)) {
+        // In Caves & Cliffs' 1.18 worlds, 1.18's biome at the spot in three dimensions (its river and frozen river).
+        String modern = ModernWorlds.biomeAt(event.getWorld(), pos);
+        boolean river = modern != null ? modern.equals("river") || modern.equals("frozen_river")
+                : isRiver(event.getWorld().getBiome(pos));
+        if (!waterRule(event.getWorld(), pos, river, event.getWorld().rand)) {
             event.setResult(Event.Result.DENY);
         }
     }

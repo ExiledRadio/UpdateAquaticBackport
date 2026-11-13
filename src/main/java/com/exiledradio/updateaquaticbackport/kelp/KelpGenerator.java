@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.kelp;
 
 import com.exiledradio.updateaquaticbackport.ModConfig;
+import com.exiledradio.updateaquaticbackport.common.ModernWorlds;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 
 import com.exiledradio.backportcore.waterlog.Waterlogging;
@@ -41,6 +42,9 @@ import java.util.Random;
  * between; each try grows a column of 1-11 from the ocean floor that stops below the surface. Seagrass:
  * as {@code SeaGrassFeature}, scattered within 8 blocks of the chunk's center. Positions stay inside the
  * area vanilla decorates (the chunk offset by 8), so nothing generates into an unloaded neighbor.
+ *
+ * <p>Not in a world whose generator runs today's generation ({@link ModernWorlds}: Caves &amp; Cliffs Backport's 1.18
+ * terrain), which places 1.18.2's kelp and seagrass itself, with this mod's blocks.
  */
 public final class KelpGenerator implements IWorldGenerator {
 
@@ -49,7 +53,9 @@ public final class KelpGenerator implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator generator, IChunkProvider provider) {
-        if (!KelpContent.enabled() || !ModConfig.kelp.generate || !world.provider.isSurfaceWorld()) {
+        if (!KelpContent.enabled() || !ModConfig.kelp.generate || !world.provider.isSurfaceWorld()
+                || ModernWorlds.placesFeatures(world, generator)) {
+            // Caves & Cliffs' 1.18 generator places 1.18.2's own kelp and seagrass in its oceans, rivers and swamps.
             return;
         }
         BlockPos center = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);

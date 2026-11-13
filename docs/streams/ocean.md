@@ -132,3 +132,38 @@ lines are ours). The 17 other language files are left for the family's language 
     (or keep 1.12.2's magma from deleting it on a random tick).
 *   **Streams F, D, T, R, S**: fish, dolphins, turtles, drowned and ocean structures find these biomes through
     `OceanKind` and the dictionary; nothing here adds their spawns.
+
+## Caves & Cliffs Backport's 1.18 worlds
+
+A world of the `cavesandcliffs` type created with Caves & Cliffs Backport's 1.18 terrain has a generator that runs
+1.18.2's world generation in full (Backport Core's `ModernGeneration`): its 3D biomes, and every placed feature,
+coral reefs, kelp, seagrass, sea pickles, icebergs and blue ice among them, built from this mod's blocks. In 1.18 the
+temperatures are 1.18's biomes, not this stream's layers; Caves & Cliffs maps them to this mod's ocean biomes.
+`common/ModernWorlds` tells such worlds (through Core, no dependency on Caves & Cliffs), and there:
+
+| Path | In a 1.18 world |
+| --- | --- |
+| `coral/CoralGenerator` | steps aside: 1.18.2 places its own reefs and sea pickles in its warm oceans |
+| `kelp/KelpGenerator` | steps aside: 1.18.2 places its own kelp and seagrass (oceans, rivers, swamps) |
+| `bubble/BubbleGenerator` | runs: 1.18.2 post-processes the magma `underwater_magma` places, so a column rises from each one with water above. Sections are read by their y through `WorldHeights` (slots 16-19 are y -64 to -1 there; read as y 256-319 they found no water above, so magma below y 0 had no column: 310 columns against 415 in the test areas) |
+| `ocean/OceanLayers` (biome map), `UnderwaterCarvers`, `OceanMonuments` | never reached: the 1.18 biome provider fires no `InitBiomeGens`, the generator no `InitMapGenEvent` |
+| `BiomeFrozenOcean.decorate` (icebergs, blue ice), the freezing pass | never reached: the generator does not decorate 1.12 biomes or fire the ice populate event |
+| `OceanTerrain.Population.flow` | nothing to do (only the underwater carvers note water) |
+| shipwrecks, ocean ruins, buried treasure | start and pick their variant by the generator's `StartRule` (1.18.2's), as before |
+| `common/OceanKind.at` | the generator's biome at the block, in three dimensions (a lush cave under an ocean is no ocean); `of(world, biome, x, z)` answers vanilla's ocean by the generator's ocean at the sea surface. No noise |
+| fish (`FishSpawning`), drowned (`DrownedSpawning`) | read the 3D biome: lush caves get only their tropical fish, rivers are 1.18's `river` and `frozen_river` |
+| dolphins, polar bears, underwater bone meal | through `OceanKind.at`, so the 3D biome |
+| water colors | by the column biome, which Caves & Cliffs sets to this mod's ocean biomes |
+
+Tested by Caves & Cliffs' `terrainocean` self-test with this mod in its `eclipse/mods` (see that repo's
+`docs/streams/generator.md`).
+
+Numbers (seed -5767635369185270459, five areas of 5x5 chunks: the plain ocean at -700, -869 and a warm, lukewarm,
+cold and frozen ocean; every block from y -64 to 319 against a second pipeline that finishes the same chunks in
+the same order):
+
+| | coral | kelp | seagrass | other blocks wrong | coral in the chunk at -700, -869 | `OceanKind` wrong |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1.18.2 (the core) | 3415 | 5315 | 5705 | | 0 | |
+| Update Aquatic before | 8762 | 8600 | 10049 | 6062 (flowing water from the reef updates) | 116 | 292 of the samples |
+| Update Aquatic now | 3415 | 5315 | 5705 | 0 | 0 | 0 |

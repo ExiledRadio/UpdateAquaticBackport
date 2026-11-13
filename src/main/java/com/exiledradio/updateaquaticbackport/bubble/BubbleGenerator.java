@@ -1,5 +1,6 @@
 package com.exiledradio.updateaquaticbackport.bubble;
 
+import com.exiledradio.backportcore.terrain.WorldHeights;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +22,10 @@ import java.util.Random;
  *
  * <p>Nothing happens in dimensions where water boils away (the Nether's soul sand), or with
  * {@code bubbles.generate} off. The scan reads block storage directly and skips empty sections.
+ *
+ * <p>In Caves &amp; Cliffs Backport's 1.18 worlds this still runs: 1.18.2 post-processes the magma its
+ * {@code underwater_magma} feature places, so a column rises from every one with water above, below y 0 too. The
+ * sections are read by their y ({@code WorldHeights}): there slots 16 to 19 hold y -64 to -1.
  */
 public final class BubbleGenerator implements IWorldGenerator {
 
@@ -40,12 +45,16 @@ public final class BubbleGenerator implements IWorldGenerator {
      */
     public static int formInArea(World world, int x0, int z0) {
         int formed = 0;
+        int minY = WorldHeights.minY(world) & ~15;
+        int maxY = WorldHeights.maxYExclusive(world);
         for (int x = x0; x < x0 + 16; x++) {
             for (int z = z0; z < z0 + 16; z++) {
                 Chunk chunk = world.getChunk(x >> 4, z >> 4);
                 ExtendedBlockStorage[] sections = chunk.getBlockStorageArray();
-                for (int s = 0; s < sections.length; s++) {
-                    ExtendedBlockStorage section = sections[s];
+                // By the section's own y: with Caves & Cliffs' extended height the slots past 15 are y -64 to -1.
+                for (int sy = minY; sy < maxY; sy += 16) {
+                    int s = WorldHeights.storageIndex(world, sy);
+                    ExtendedBlockStorage section = s < 0 || s >= sections.length ? null : sections[s];
                     if (section == Chunk.NULL_BLOCK_STORAGE || section.isEmpty()) {
                         continue;
                     }
@@ -54,7 +63,7 @@ public final class BubbleGenerator implements IWorldGenerator {
                         if (!BubbleColumns.isBase(state.getBlock())) {
                             continue;
                         }
-                        BlockPos above = new BlockPos(x, s * 16 + y + 1, z);
+                        BlockPos above = new BlockPos(x, sy + y + 1, z);
                         IBlockState up = chunk.getBlockState(above);
                         if (BubbleColumns.isVanillaSource(up) && BubbleColumns.updateColumn(world, above, state) > 0) {
                             formed++;

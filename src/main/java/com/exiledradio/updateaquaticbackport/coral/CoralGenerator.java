@@ -2,6 +2,7 @@ package com.exiledradio.updateaquaticbackport.coral;
 
 import com.exiledradio.backportcore.waterlog.Waterlogging;
 import com.exiledradio.updateaquaticbackport.ModConfig;
+import com.exiledradio.updateaquaticbackport.common.ModernWorlds;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 import com.exiledradio.updateaquaticbackport.pickle.SeaPickleContent;
 
@@ -34,6 +35,9 @@ import java.util.Random;
  *   <li>one chunk in 16 gets up to 20 sea pickles scattered on the floor.</li>
  * </ul>
  * Sea pickles are this mod's own ({@code pickle.SeaPickleContent}), whatever else is installed.
+ *
+ * <p>Not in a world whose generator runs today's generation ({@link ModernWorlds}: Caves &amp; Cliffs Backport's 1.18
+ * terrain), which places 1.18.2's reefs and sea pickles itself, with this mod's blocks.
  */
 public final class CoralGenerator implements IWorldGenerator {
 
@@ -41,7 +45,9 @@ public final class CoralGenerator implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator generator, IChunkProvider provider) {
-        if (!CoralContent.enabled() || !ModConfig.coral.generate || !world.provider.isSurfaceWorld()) {
+        if (!CoralContent.enabled() || !ModConfig.coral.generate || !world.provider.isSurfaceWorld()
+                || ModernWorlds.placesFeatures(world, generator)) {
+            // Caves & Cliffs' 1.18 generator places 1.18.2's own reefs and sea pickles in its warm oceans.
             return;
         }
         BlockPos center = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);
