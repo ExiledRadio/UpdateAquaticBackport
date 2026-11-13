@@ -113,7 +113,8 @@ public final class WaterClient {
             }
             Minecraft mc = Minecraft.getMinecraft();
             // Kept for every later reload (F3+T, a resource pack change), which rebuilds from this list...
-            List<IResourcePack> defaults = ReflectionHelper.getPrivateValue(Minecraft.class, mc, "field_110449_ao", "defaultResourcePacks");
+            // The two-name overload is (MCP name, SRG name) and uses one by environment: SRG first failed in every game.
+            List<IResourcePack> defaults = ReflectionHelper.getPrivateValue(Minecraft.class, mc, "defaultResourcePacks", "field_110449_ao");
             defaults.add(pack);
             // ...and added to the live manager now, since the first reload has already happened.
             IReloadableResourceManager manager = (IReloadableResourceManager) mc.getResourceManager();
