@@ -401,6 +401,7 @@ config.updateaquaticbackport.swimming.crawling.tooltip=Senza spazio per stare in
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
 debug.copy_location.help=F3 + C = Copia la posizione come comando «/tp» o tienili premuti per 10 secondi per arrestare il gioco
 debug.copy_location.message=Posizione copiata negli appunti
+options.biomeBlendRadius=Transizione tra biomi
 debug.inspect.help=F3 + I = Copia negli appunti i dati blocco o entità
 debug.inspect.client.block=Dati blocco (lato client) copiati negli appunti
 debug.inspect.client.entity=Dati entità (lato client) copiati negli appunti

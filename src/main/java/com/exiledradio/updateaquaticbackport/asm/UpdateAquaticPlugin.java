@@ -13,6 +13,7 @@ import java.util.Map;
  *   <li>{@link PumpkinHeadPatch}: the plain pumpkin is no longer worn on the head.</li>
  *   <li>{@link PumpkinGolemPatch}: the plain pumpkin no longer builds golems, however it is placed.</li>
  *   <li>{@link WoodPickBlockPatch}: middle-clicking 1.13's wood (a bark log) picks the wood item.</li>
+ *   <li>{@link BiomeBlendPatch}: biome colors blend over 1.13's Biome Blend square instead of 1.12.2's 3x3.</li>
  * The village biome point and the strongholds' and spawn point's biome search (1.0.0's P4 and P5) are
  * Backport Core's patches P9 and P8 since Core 1.1.0, shared by every backport of 1.13 and later.
  * </ul>
@@ -35,6 +36,7 @@ public final class UpdateAquaticPlugin implements IFMLLoadingPlugin {
                 PumpkinHeadPatch.class.getName(),
                 PumpkinGolemPatch.class.getName(),
                 WoodPickBlockPatch.class.getName(),
+                BiomeBlendPatch.class.getName(),
         };
     }
 

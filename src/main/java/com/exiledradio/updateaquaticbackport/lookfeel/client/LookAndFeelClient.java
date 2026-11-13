@@ -3,6 +3,8 @@ package com.exiledradio.updateaquaticbackport.lookfeel.client;
 import com.exiledradio.backportcore.presentation.Contribution;
 import com.exiledradio.backportcore.presentation.Presentation;
 import com.exiledradio.backportcore.presentation.client.PresentationHooks;
+import com.exiledradio.updateaquaticbackport.lookfeel.LookAndFeel;
+import com.exiledradio.updateaquaticbackport.water.BiomeBlend;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -49,6 +51,14 @@ public final class LookAndFeelClient {
         }
         UnderwaterFogStep.register();
         LookAndFeel113.register();
+        // Biome Blend: the colors' square follows the option; as 1.13's, a change rebuilds the chunks.
+        BiomeBlend.radius = LookAndFeel.biomeBlendRadius();
+        LookAndFeel.BIOME_BLEND.onChange(v -> {
+            BiomeBlend.radius = LookAndFeel.biomeBlendRadius();
+            if (Minecraft.getMinecraft().renderGlobal != null) {
+                Minecraft.getMinecraft().renderGlobal.loadRenderers();
+            }
+        });
     }
 
     /** F3+C: the player's position and look as a teleport command. Holding F3+C still crashes the game, as 1.12.2's. */

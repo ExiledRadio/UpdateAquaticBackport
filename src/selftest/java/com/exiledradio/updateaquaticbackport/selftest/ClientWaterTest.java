@@ -1,6 +1,13 @@
 package com.exiledradio.updateaquaticbackport.selftest;
 
+import com.exiledradio.backportcore.presentation.option.SliderOption;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
+import com.exiledradio.updateaquaticbackport.lookfeel.LookAndFeel;
+import com.exiledradio.updateaquaticbackport.water.BiomeBlend;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import com.exiledradio.updateaquaticbackport.water.WaterColors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -39,6 +46,10 @@ import java.util.List;
  * atlas's and the ones the fluid renderer and the water block model use) are 1.13's gray ones, and the biome
  * water colors; then it makes a flat water world for each of plains, swamp and warm ocean, checks the tint
  * the client gives the water there, and saves a screenshot of each ({@code eclipse/screenshots/ua_water_*.png}).
+ * Biome Blend (1.13's, {@code water/BiomeBlend}): the average over a made-up border at each radius, the option's
+ * range, default and label, and a last world whose client chunks get a jagged swamp and warm ocean border, shot from
+ * above at 3x3 (1.12.2's) and 5x5 (1.13's default), then a mosaic of quick changes between five water biomes
+ * ({@code ua_blend_border_*.png}, {@code ua_blend_mosaic_*.png}).
  * Logs {@code WATER ...} lines and {@code CLIENT SELFTEST DONE pass=N fail=M}, then closes.
  */
 @SideOnly(Side.CLIENT)
@@ -48,6 +59,8 @@ public final class ClientWaterTest {
             {"plains", "minecraft:plains", Integer.toHexString(WaterColors.DEFAULT_WATER)},
             {"swamp", "minecraft:swampland", "617b64"},
             {"warm_ocean", UpdateAquaticBackport.MOD_ID + ":warm_ocean", "43d5ee"},
+            // Plains (no ocean decoration); its client chunks get a swamp and warm ocean border (borderWorld).
+            {"border", "minecraft:plains", null},
     };
 
     private static final boolean FLUIDLOGGED = net.minecraftforge.fml.common.Loader.isModLoaded("fluidlogged_api");
@@ -103,36 +116,50 @@ public final class ClientWaterTest {
                 return;
             }
             this.inWorld++;
+            boolean border = WORLDS[this.world][2] == null;
             if (this.inWorld == 20) {
                 MinecraftServer server = mc.getIntegratedServer();
                 for (String c : new String[] {"time set 6000", "weather clear 100000", "gamerule doDaylightCycle false",
-                        "gamerule doWeatherCycle false", "gamemode spectator @p", "tp @p 8 11 8 -45 35"}) {
+                        "gamerule doWeatherCycle false", "gamemode spectator @p", border ? "tp @p 8 24 8 0 90" : "tp @p 8 11 8 -45 35"}) {
                     server.getCommandManager().executeCommand(server, c);
                 }
+            }
+            if (border) {
+                borderWorld(mc);
+                return;
             }
             if (this.inWorld == 200) {
                 worldChecks(mc);
             }
             if (this.inWorld == 220) {
-                mc.gameSettings.hideGUI = true;
-                mc.getToastGui().clear();
-                String name = "ua_water_" + WORLDS[this.world][0] + (FLUIDLOGGED ? "" : "_no_fluidlogged") + ".png";
-                ScreenShotHelper.saveScreenshot(mc.gameDir, name, mc.displayWidth, mc.displayHeight, mc.getFramebuffer());
-                UpdateAquaticBackport.LOGGER.info("WATER screenshot {}", name);
-                mc.gameSettings.hideGUI = false;
-                mc.world.sendQuittingDisconnectingPacket();
-                mc.loadWorld(null);
-                this.world++;
-                this.inWorld = 0;
-                if (this.world < WORLDS.length) {
-                    launch(mc);
-                } else {
-                    finish(mc);
-                }
+                screenshot(mc, "ua_water_" + WORLDS[this.world][0]);
+                nextWorld(mc);
             }
         } catch (Throwable t) {
             UpdateAquaticBackport.LOGGER.error("CLIENT SELFTEST threw", t);
             this.fail++;
+            finish(mc);
+        }
+    }
+
+    private static void screenshot(Minecraft mc, String base) {
+        mc.ingameGUI.getChatGUI().clearChatMessages(true);
+        mc.gameSettings.hideGUI = true;
+        mc.getToastGui().clear();
+        String name = base + (FLUIDLOGGED ? "" : "_no_fluidlogged") + ".png";
+        ScreenShotHelper.saveScreenshot(mc.gameDir, name, mc.displayWidth, mc.displayHeight, mc.getFramebuffer());
+        UpdateAquaticBackport.LOGGER.info("WATER screenshot {}", name);
+        mc.gameSettings.hideGUI = false;
+    }
+
+    private void nextWorld(Minecraft mc) throws IOException {
+        mc.world.sendQuittingDisconnectingPacket();
+        mc.loadWorld(null);
+        this.world++;
+        this.inWorld = 0;
+        if (this.world < WORLDS.length) {
+            launch(mc);
+        } else {
             finish(mc);
         }
     }
@@ -187,6 +214,139 @@ public final class ClientWaterTest {
 
         ok(Biomes.PLAINS.getWaterColor() == WaterColors.DEFAULT_WATER, "plains water color " + hex(Biomes.PLAINS.getWaterColor()));
         ok(Biomes.SWAMPLAND.getWaterColor() == 0x617B64, "swamp water color " + hex(Biomes.SWAMPLAND.getWaterColor()));
+        blendChecks();
+    }
+
+    // ---------------------------------------------------------------------------------- biome blend
+
+    /** Swamp west of x = 0, plains from x = 0: the blend at (0, 64, 0) at each radius against the plain average. */
+    private void blendChecks() {
+        SliderOption option = LookAndFeel.BIOME_BLEND;
+        ok(option.defaultValue() == 2.0 && option.min() == 0.0 && option.max() == 7.0,
+                "Biome Blend is 1.13.2's: 0 to 7, default 2 (" + option.min() + ".." + option.max() + ", " + option.defaultValue() + ")");
+        ok(BiomeBlend.radius == LookAndFeel.biomeBlendRadius(), "the colors' radius follows the option: " + BiomeBlend.radius);
+        ok(option.get() != 2.0 || "5x5".equals(option.valueText()), "Biome Blend at 2 reads 5x5: " + option.valueText());
+        IBlockAccess half = new IBlockAccess() {
+            @Override public TileEntity getTileEntity(BlockPos pos) { return null; }
+            @Override public int getCombinedLight(BlockPos pos, int light) { return 0; }
+            @Override public IBlockState getBlockState(BlockPos pos) { return Blocks.AIR.getDefaultState(); }
+            @Override public boolean isAirBlock(BlockPos pos) { return true; }
+            @Override public Biome getBiome(BlockPos pos) { return pos.getX() < 0 ? Biomes.SWAMPLAND : Biomes.PLAINS; }
+            @Override public int getStrongPower(BlockPos pos, EnumFacing side) { return 0; }
+            @Override public WorldType getWorldType() { return WorldType.DEFAULT; }
+            @Override public boolean isSideSolid(BlockPos pos, EnumFacing side, boolean fallback) { return fallback; }
+        };
+        int saved = BiomeBlend.radius;
+        try {
+            for (int r = 0; r <= 7; r++) {
+                BiomeBlend.radius = r;
+                int got = BiomeColorHelper.getWaterColorAtPos(half, new BlockPos(0, 64, 0));
+                int want = average(r, r, r + 1);
+                ok(got == want, "Biome Blend " + (2 * r + 1) + "x" + (2 * r + 1) + " at a swamp border: " + hex(got) + ", want " + hex(want));
+            }
+        } finally {
+            BiomeBlend.radius = saved;
+        }
+    }
+
+    /** @return the per-channel average of {@code swamp} swamp columns and {@code plains} plains columns, each 2r+1 long */
+    private static int average(int r, int swamp, int plains) {
+        int side = 2 * r + 1;
+        int s = Biomes.SWAMPLAND.getWaterColor(), p = Biomes.PLAINS.getWaterColor();
+        int out = 0;
+        for (int shift = 16; shift >= 0; shift -= 8) {
+            int sum = side * (swamp * (s >> shift & 255) + plains * (p >> shift & 255));
+            out |= (sum / (side * side) & 255) << shift;
+        }
+        return out;
+    }
+
+    /** Swamp west of a jagged line, warm ocean east of it: the line jumps 4 blocks every 4 blocks, as 1.12.2's borders do. */
+    private static int jagged(int x, int z, Biome[] palette) {
+        return x < ((Math.floorDiv(z, 4) & 1) == 0 ? 6 : 10) ? 0 : 1;
+    }
+
+    /**
+     * Quick changes of biome: 4-block cells of swamp, ocean, warm, lukewarm and cold ocean, with a one-block fuzz at
+     * their edges, as 1.12.2's biome map comes out of its zoom layers.
+     */
+    private static int mosaic(int x, int z, Biome[] palette) {
+        int fx = x + Math.floorMod(hash(x, z, 1), 3) - 1, fz = z + Math.floorMod(hash(x, z, 2), 3) - 1;
+        return Math.floorMod(hash(Math.floorDiv(fx, 4), Math.floorDiv(fz, 4), 3), palette.length);
+    }
+
+    private static int hash(int x, int z, int salt) {
+        int h = x * 73856093 ^ z * 19349663 ^ salt * 83492791;
+        h ^= h >>> 13;
+        h *= 0x5bd1e995;
+        return h ^ h >>> 15;
+    }
+
+    private interface Pattern {
+        int at(int x, int z, Biome[] palette);
+    }
+
+    /** Gives the client's chunks around the player a biome pattern and rebuilds them at 3x3. */
+    private void paint(Minecraft mc, Pattern pattern, Biome[] palette, String what) {
+        for (int cx = -6; cx <= 6; cx++) {
+            for (int cz = -6; cz <= 6; cz++) {
+                byte[] biomes = mc.world.getChunk(cx, cz).getBiomeArray();
+                for (int x = 0; x < 16; x++) {
+                    for (int z = 0; z < 16; z++) {
+                        biomes[z << 4 | x] = (byte) Biome.getIdForBiome(palette[pattern.at(cx * 16 + x, cz * 16 + z, palette)]);
+                    }
+                }
+            }
+        }
+        UpdateAquaticBackport.LOGGER.info("WATER border: {} on the client's chunks", what);
+        LookAndFeel.BIOME_BLEND.set(1.0);
+        ok(BiomeBlend.radius == 1, what + ": setting Biome Blend to 3x3 sets the colors' radius: " + BiomeBlend.radius);
+        mc.renderGlobal.loadRenderers();
+    }
+
+    private static Biome ours(String path) {
+        return ForgeRegistries.BIOMES.getValue(new ResourceLocation(UpdateAquaticBackport.MOD_ID, path));
+    }
+
+    /** The tint the client gives the water at a block is the plain average of the 5x5 columns around it. */
+    private void checkAverage(Minecraft mc, BlockPos pos, String what) {
+        long r = 0, g = 0, b = 0;
+        for (int dx = -2; dx <= 2; dx++) {
+            for (int dz = -2; dz <= 2; dz++) {
+                int c = mc.world.getBiome(pos.add(dx, 0, dz)).getWaterColor();
+                r += c >> 16 & 255;
+                g += c >> 8 & 255;
+                b += c & 255;
+            }
+        }
+        int want = (int) (r / 25 << 16 | g / 25 << 8 | b / 25);
+        int got = mc.getBlockColors().colorMultiplier(mc.world.getBlockState(pos), mc.world, pos, 0);
+        ok(mc.world.getBlockState(pos).getBlock() == Blocks.WATER && (got & 0xFFFFFF) == want,
+                what + ": the water's tint at " + pos + " is the 5x5 average: " + hex(got) + ", want " + hex(want));
+    }
+
+    /** Two scenes, each shot from above at 3x3 and then 5x5: a jagged swamp and warm ocean border, then a mosaic. */
+    private void borderWorld(Minecraft mc) throws IOException {
+        Biome[] two = {Biomes.SWAMPLAND, ours("warm_ocean")};
+        Biome[] five = {Biomes.SWAMPLAND, Biomes.OCEAN, ours("warm_ocean"), ours("lukewarm_ocean"), ours("cold_ocean")};
+        if (this.inWorld == 40) {
+            paint(mc, ClientWaterTest::jagged, two, "jagged swamp and warm ocean border");
+        }
+        if (this.inWorld == 200 || this.inWorld == 520) {
+            screenshot(mc, this.inWorld == 200 ? "ua_blend_border_3x3" : "ua_blend_mosaic_3x3");
+            LookAndFeel.BIOME_BLEND.set(2.0);
+            ok(BiomeBlend.radius == 2, "setting Biome Blend to 5x5 sets the colors' radius: " + BiomeBlend.radius);
+        }
+        if (this.inWorld == 360) {
+            screenshot(mc, "ua_blend_border_5x5");
+            checkAverage(mc, new BlockPos(7, 7, 0), "border");
+            paint(mc, ClientWaterTest::mosaic, five, "mosaic of swamp, ocean, warm, lukewarm and cold ocean");
+        }
+        if (this.inWorld == 680) {
+            screenshot(mc, "ua_blend_mosaic_5x5");
+            checkAverage(mc, new BlockPos(3, 7, 5), "mosaic");
+            nextWorld(mc);
+        }
     }
 
     private static net.minecraft.client.renderer.BlockFluidRenderer fluidRenderer(Minecraft mc) {

@@ -401,6 +401,7 @@ config.updateaquaticbackport.swimming.crawling.tooltip=Sans la place de vous ten
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
 debug.copy_location.help=F3 + C = Copier la position en tant que commande /tp ou maintenir pendant 10 secondes pour faire planter le jeu
 debug.copy_location.message=Position copiée dans le presse-papiers
+options.biomeBlendRadius=Fondu de biomes
 debug.inspect.help=F3 + I = Copier les données d'entité ou de bloc dans le presse-papiers
 debug.inspect.client.block=Les données du bloc ont été copiées côté client dans le presse-papiers
 debug.inspect.client.entity=Les données de l'entité ont été copiées côté client dans le presse-papiers

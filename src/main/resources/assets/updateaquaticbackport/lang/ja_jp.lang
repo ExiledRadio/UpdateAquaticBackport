@@ -401,6 +401,7 @@ config.updateaquaticbackport.swimming.crawling.tooltip=立つこともスニー�
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
 debug.copy_location.help=F3 + C = /tpコマンドとして座標をコピー、10秒間長押しでゲームをクラッシュ
 debug.copy_location.message=クリップボードに座標をコピーしました
+options.biomeBlendRadius=バイオームの重なり度合
 debug.inspect.help=F3 + I = エンティティまたはブロックのデータをクリップボードにコピー
 debug.inspect.client.block=クライアント側のブロックデータをクリップボードにコピーしました
 debug.inspect.client.entity=クライアント側のエンティティデータをクリップボードにコピーしました

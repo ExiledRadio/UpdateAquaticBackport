@@ -401,6 +401,7 @@ config.updateaquaticbackport.swimming.crawling.tooltip=Gdy nie ma miejsca, by st
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
 debug.copy_location.help=F3 + C = Kopiowanie lokalizacji jako polecenia /tp; lub przytrzymaj F3 + C przez 10 sekund, aby spowodować awarię gry
 debug.copy_location.message=Skopiowano położenie do schowka
+options.biomeBlendRadius=Przenikanie biomów
 debug.inspect.help=F3 + I = Kopiuj dane bytów lub bloków do schowka
 debug.inspect.client.block=Skopiowano dane bloków z klienta do schowka
 debug.inspect.client.entity=Skopiowano dane bytów z klienta do schowka

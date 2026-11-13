@@ -401,6 +401,7 @@ config.updateaquaticbackport.swimming.crawling.tooltip=Якщо немає мі�
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
 debug.copy_location.help=F3 + C = Скопіювати розташування як команду /tp; тримайте 10 секунд, щоб спричинити збій гри
 debug.copy_location.message=Скопійовано розташування в буфер обміну
+options.biomeBlendRadius=Переливання біомів
 debug.inspect.help=F3 + I = Скопіювати в буфер обміну дані сутности чи блока
 debug.inspect.client.block=Клієнтські дані блока скопійовано до буфера обміну
 debug.inspect.client.entity=Клієнтські дані сутностей скопійовано до буфера обміну
