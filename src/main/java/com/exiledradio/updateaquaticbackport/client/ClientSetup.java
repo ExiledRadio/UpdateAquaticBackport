@@ -48,9 +48,11 @@ public final class ClientSetup {
         com.exiledradio.updateaquaticbackport.lookfeel.client.LookAndFeelClient.init();
         // `runClient -Pselftest=client`: stream Lf's title-screen check, reached by name (a release jar has no test classes).
         String selftest = System.getProperty(UpdateAquaticBackport.MOD_ID + ".selftest");
+        // `runClient -Pselftest=clientwater`: 1.13's water texture and colors on a real client, with screenshots.
         if (selftest != null && selftest.contains("client")) {
             try {
-                Class.forName("com.exiledradio.updateaquaticbackport.selftest.ClientLookFeelTest").getMethod("register").invoke(null);
+                String test = selftest.contains("clientwater") ? "ClientWaterTest" : "ClientLookFeelTest";
+                Class.forName("com.exiledradio.updateaquaticbackport.selftest." + test).getMethod("register").invoke(null);
             } catch (ReflectiveOperationException e) {
                 UpdateAquaticBackport.LOGGER.error("CLIENT SELFTEST DONE pass=0 fail=1: the test classes are not in this build", e);
             }

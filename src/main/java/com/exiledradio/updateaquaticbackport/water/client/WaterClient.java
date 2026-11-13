@@ -31,8 +31,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.client.event.InputUpdateEvent;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -51,7 +53,7 @@ import java.util.List;
  *   <li><b>Texture</b>: 1.13's gray water texture in place of 1.12.2's blue one ({@link WaterTexturePack}),
  *       put in before the block atlas is first stitched, while biome colors are on. Forge's water fluid
  *       gets 1.13's default blue as its color, so tanks and pipes that draw it with the fluid's color are
- *       not gray.</li>
+ *       not gray - except while the block models bake ({@link #fluidColorWhileBaking}).</li>
  *   <li><b>Fog</b>, 1.14.4's {@code FogRenderer}: under water the fog is exponential-squared (density 0.05,
  *       clearing to 0.02 over 30 seconds under water, 0.005 thicker in swamps), colored by the biome's water
  *       fog color (blending over 5 seconds as the biome changes), darker below y=32 as all fog is, and
@@ -121,10 +123,38 @@ public final class WaterClient {
             if (manager instanceof SimpleReloadableResourceManager) {
                 ((SimpleReloadableResourceManager) manager).reloadResourcePack(pack);
             }
-            FluidRegistry.WATER.setColor(0xFF000000 | WaterColors.DEFAULT_WATER);
+            waterTextureInPlace = true;
+            FluidRegistry.WATER.setColor(FLUID_COLOR);
         } catch (RuntimeException e) {
             UpdateAquaticBackport.LOGGER.error("Could not put 1.13's water texture in place; keeping 1.12.2's water and colors", e);
             WaterColors.textureMissing();
+        }
+    }
+
+    /** Forge's water fluid's color while 1.13's texture is in place, outside model baking. */
+    private static final int FLUID_COLOR = 0xFF000000 | WaterColors.DEFAULT_WATER;
+
+    private static boolean waterTextureInPlace;
+
+    /**
+     * White while the block models bake. With Fluidlogged API, water in the world is drawn by its fluid model
+     * ({@code BakedModelFluid}), which bakes the fluid's color into every vertex and is then tinted by the biome as
+     * well: with 1.13's blue there, every water block was the biome color times blue again, far darker than 1.13.
+     * Baking with white leaves the biome tint alone, as vanilla's water renderer does. Every reload stitches the
+     * block atlas before it bakes, so this runs before each bake.
+     */
+    @SubscribeEvent
+    public static void fluidColorWhileBaking(TextureStitchEvent.Pre event) {
+        if (waterTextureInPlace && event.getMap() == Minecraft.getMinecraft().getTextureMapBlocks()) {
+            FluidRegistry.WATER.setColor(0xFFFFFFFF);
+        }
+    }
+
+    /** After the models are baked: the blue back, for tanks, pipes and anything else that draws the fluid. */
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void fluidColorAfterBaking(ModelBakeEvent event) {
+        if (waterTextureInPlace) {
+            FluidRegistry.WATER.setColor(FLUID_COLOR);
         }
     }
 

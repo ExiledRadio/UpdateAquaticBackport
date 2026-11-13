@@ -92,7 +92,8 @@ public final class UpdateAquaticBackport {
     @Mod.EventHandler
     public void serverStarted(FMLServerStartedEvent event) {
         String selftest = System.getProperty(MOD_ID + ".selftest");
-        if (selftest == null || selftest.isEmpty()) {
+        // The client tests (`client`, `clientwater`) make their own worlds and run on the client.
+        if (selftest == null || selftest.isEmpty() || selftest.startsWith("client")) {
             return;
         }
         try {
