@@ -2,6 +2,8 @@ package com.exiledradio.updateaquaticbackport.structure;
 
 import com.exiledradio.backportcore.structure.ScatteredPlacement;
 import com.exiledradio.backportcore.structure.ScatteredStructure;
+import com.exiledradio.backportcore.structure.StartRule;
+import com.exiledradio.backportcore.structure.StartRules;
 import com.exiledradio.backportcore.structure.Structures;
 import com.exiledradio.backportcore.worldgen.StructurePlacements;
 import com.exiledradio.backportcore.terrain.TerrainHeights;
@@ -48,9 +50,18 @@ public class MapGenShipwreck extends ScatteredStructure {
         return out;
     }
 
-    /** @return true for a beached shipwreck, false for a sunken one, null where none goes */
+    /**
+     * @return true for a beached shipwreck, false for a sunken one, null where none goes. In a world whose generator
+     * decides where shipwrecks start (Caves &amp; Cliffs Backport's 1.18 terrain, through Backport Core's
+     * {@code StartRules}), the kind it names.
+     */
     @Nullable
     static Boolean beached(World world, int chunkX, int chunkZ) {
+        StartRule rule = StartRules.of(world, Structures.SHIPWRECK);
+        if (rule != null) {
+            String id = rule.startAt(chunkX, chunkZ);
+            return id == null ? null : id.equals("shipwreck_beached");
+        }
         if (StructureBiomes.ocean(world, chunkX, chunkZ).isOcean()) {
             return Boolean.FALSE;
         }

@@ -3,6 +3,8 @@ package com.exiledradio.updateaquaticbackport.structure;
 import com.exiledradio.backportcore.structure.ModernTemplate;
 import com.exiledradio.backportcore.structure.ScatteredPlacement;
 import com.exiledradio.backportcore.structure.ScatteredStructure;
+import com.exiledradio.backportcore.structure.StartRule;
+import com.exiledradio.backportcore.structure.StartRules;
 import com.exiledradio.backportcore.structure.Structures;
 import com.exiledradio.backportcore.worldgen.StructurePlacements;
 import com.exiledradio.backportcore.terrain.TerrainHeights;
@@ -18,6 +20,7 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureStart;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -64,6 +67,21 @@ public class MapGenOceanRuin extends ScatteredStructure {
         return StructureBiomes.warmRuin(StructureBiomes.ocean(world, chunkX, chunkZ)) != null;
     }
 
+    /**
+     * @return true for a warm ruin, false for a cold one, null where none goes: the biome's, or in a world whose
+     * generator decides where ocean ruins start (Caves &amp; Cliffs Backport's 1.18 terrain, through Backport Core's
+     * {@code StartRules}) the kind it names.
+     */
+    @Nullable
+    static Boolean warm(World world, int chunkX, int chunkZ) {
+        StartRule rule = StartRules.of(world, Structures.OCEAN_RUIN);
+        if (rule != null) {
+            String id = rule.startAt(chunkX, chunkZ);
+            return id == null ? null : id.equals("ocean_ruin_warm");
+        }
+        return StructureBiomes.warmRuin(StructureBiomes.ocean(world, chunkX, chunkZ));
+    }
+
     @Override
     protected StructureStart getStructureStart(int chunkX, int chunkZ) {
         return new Start(this.world, this.rand, chunkX, chunkZ);
@@ -75,7 +93,7 @@ public class MapGenOceanRuin extends ScatteredStructure {
      * against Core 1.1.0).
      */
     public String variantAt(World world, int chunkX, int chunkZ) {
-        Boolean warm = StructureBiomes.warmRuin(StructureBiomes.ocean(world, chunkX, chunkZ));
+        Boolean warm = warm(world, chunkX, chunkZ);
         return warm == null ? null : warm ? "warm" : "cold";
     }
 
@@ -87,7 +105,7 @@ public class MapGenOceanRuin extends ScatteredStructure {
 
         Start(World world, Random random, int chunkX, int chunkZ) {
             super(chunkX, chunkZ);
-            Boolean warm = StructureBiomes.warmRuin(StructureBiomes.ocean(world, chunkX, chunkZ));
+            Boolean warm = warm(world, chunkX, chunkZ);
             TerrainHeights heights = TerrainHeights.forWorld(world);
             if (warm != null && heights != null) {
                 BlockPos origin = new BlockPos(chunkX << 4, 90, chunkZ << 4);
