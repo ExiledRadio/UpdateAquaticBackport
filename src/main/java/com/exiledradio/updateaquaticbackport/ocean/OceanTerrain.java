@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.ocean;
 
+import com.exiledradio.backportcore.worldgen.FlatWorlds;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -183,8 +185,9 @@ public final class OceanTerrain {
 
         @SubscribeEvent(priority = EventPriority.LOW)
         public static void onPopulate(PopulateChunkEvent.Populate event) {
+            // A superflat world fires no freezing pass; if a generator fires one anyway, its layers stay the preset's.
             if (event.getType() == PopulateChunkEvent.Populate.EventType.ICE && event.getResult() != Event.Result.DENY
-                    && freeze(event.getWorld(), event.getChunkX(), event.getChunkZ())) {
+                    && !FlatWorlds.isFlat(event.getWorld()) && freeze(event.getWorld(), event.getChunkX(), event.getChunkZ())) {
                 event.setResult(Event.Result.DENY);
             }
         }
@@ -197,6 +200,10 @@ public final class OceanTerrain {
 
         @SubscribeEvent
         public static void onPopulated(PopulateChunkEvent.Post event) {
+            if (FlatWorlds.isFlat(event.getWorld())) {
+                // Nothing carves a superflat world, so nothing was noted.
+                return;
+            }
             flow(event.getWorld(), event.getChunkX(), event.getChunkZ());
         }
 

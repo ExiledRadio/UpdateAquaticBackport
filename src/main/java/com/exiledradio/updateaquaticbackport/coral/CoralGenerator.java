@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.coral;
 
 import com.exiledradio.backportcore.waterlog.Waterlogging;
+import com.exiledradio.backportcore.worldgen.FlatWorlds;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.common.ModernWorlds;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
@@ -37,7 +38,8 @@ import java.util.Random;
  * Sea pickles are this mod's own ({@code pickle.SeaPickleContent}), whatever else is installed.
  *
  * <p>Not in a world whose generator runs today's generation ({@link ModernWorlds}: Caves &amp; Cliffs Backport's 1.18
- * terrain), which places 1.18.2's reefs and sea pickles itself, with this mod's blocks.
+ * terrain), which places 1.18.2's reefs and sea pickles itself, with this mod's blocks. Nor in a superflat world
+ * without {@code decoration}, as vanilla's own features ({@code FlatWorlds}).
  */
 public final class CoralGenerator implements IWorldGenerator {
 
@@ -46,8 +48,9 @@ public final class CoralGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator generator, IChunkProvider provider) {
         if (!CoralContent.enabled() || !ModConfig.coral.generate || !world.provider.isSurfaceWorld()
-                || ModernWorlds.placesFeatures(world, generator)) {
-            // Caves & Cliffs' 1.18 generator places 1.18.2's own reefs and sea pickles in its warm oceans.
+                || ModernWorlds.placesFeatures(world, generator) || !FlatWorlds.decoration(world)) {
+            // Caves & Cliffs' 1.18 generator places 1.18.2's own reefs and sea pickles in its warm oceans; a
+            // superflat world without decoration gets no features.
             return;
         }
         BlockPos center = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);

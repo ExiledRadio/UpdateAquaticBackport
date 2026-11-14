@@ -1,6 +1,7 @@
 package com.exiledradio.updateaquaticbackport.bubble;
 
 import com.exiledradio.backportcore.terrain.WorldHeights;
+import com.exiledradio.backportcore.worldgen.FlatWorlds;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +22,8 @@ import java.util.Random;
  * the others ({@link BubbleContent#GENERATOR_WEIGHT}) and looks at the area they have just populated.
  *
  * <p>Nothing happens in dimensions where water boils away (the Nether's soul sand), or with
- * {@code bubbles.generate} off. The scan reads block storage directly and skips empty sections.
+ * {@code bubbles.generate} off, nor in a superflat world without {@code decoration} (Backport Core's
+ * {@code FlatWorlds}). The scan reads block storage directly and skips empty sections.
  *
  * <p>In Caves &amp; Cliffs Backport's 1.18 worlds this still runs: 1.18.2 post-processes the magma its
  * {@code underwater_magma} feature places, so a column rises from every one with water above, below y 0 too. The
@@ -31,7 +33,9 @@ public final class BubbleGenerator implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator generator, IChunkProvider provider) {
-        if (!ModConfig.bubbles.generate || BubbleContent.column() == null || world.provider.doesWaterVaporize()) {
+        if (!ModConfig.bubbles.generate || BubbleContent.column() == null || world.provider.doesWaterVaporize()
+                || !FlatWorlds.decoration(world)) {
+            // A superflat world without decoration gets no features (1.12's ChunkGeneratorFlat).
             return;
         }
         formInArea(world, chunkX * 16 + 8, chunkZ * 16 + 8);

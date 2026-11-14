@@ -4,6 +4,7 @@ import com.exiledradio.backportcore.locate.StructureLocate;
 import com.exiledradio.backportcore.structure.ModernPalette;
 import com.exiledradio.backportcore.structure.ScatteredStructure;
 import com.exiledradio.backportcore.structure.Structures;
+import com.exiledradio.backportcore.worldgen.FlatWorlds;
 import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.Content;
@@ -99,9 +100,9 @@ public final class StructureContent {
         MapGenStructureIO.registerStructure(MapGenBuriedTreasure.Start.class, BURIED_TREASURE_SAVE);
         MapGenStructureIO.registerStructureComponent(BuriedTreasurePiece.class, "UAB_BuriedTreasurePiece");
 
-        ScatteredStructure.register(Structures.SHIPWRECK, world -> generates(world) ? new MapGenShipwreck() : null);
-        ScatteredStructure.register(Structures.OCEAN_RUIN, world -> generates(world) ? new MapGenOceanRuin() : null);
-        ScatteredStructure.register(Structures.BURIED_TREASURE, world -> generates(world) ? new MapGenBuriedTreasure() : null);
+        ScatteredStructure.register(Structures.SHIPWRECK, world -> generates(world, Structures.SHIPWRECK) ? new MapGenShipwreck() : null);
+        ScatteredStructure.register(Structures.OCEAN_RUIN, world -> generates(world, Structures.OCEAN_RUIN) ? new MapGenOceanRuin() : null);
+        ScatteredStructure.register(Structures.BURIED_TREASURE, world -> generates(world, Structures.BURIED_TREASURE) ? new MapGenBuriedTreasure() : null);
         registerLocate();
     }
 
@@ -125,9 +126,14 @@ public final class StructureContent {
                 "minecraft:buried_treasure");
     }
 
-    /** Today's ocean structures are the overworld's, and only where the world generates structures. */
-    static boolean generates(World world) {
-        return world.provider.getDimension() == 0 && world.getWorldInfo().isMapFeaturesEnabled();
+    /**
+     * Today's ocean structures are the overworld's, only where the world generates structures, and never in a
+     * superflat world: 1.12's presets have no option for them, as today's default presets list none
+     * ({@link FlatWorlds#structure}).
+     */
+    public static boolean generates(World world, String kind) {
+        return world.provider.getDimension() == 0 && world.getWorldInfo().isMapFeaturesEnabled()
+                && FlatWorlds.structure(world, kind);
     }
 
     /** @return the red X map decoration (1.13's buried treasure marker) */

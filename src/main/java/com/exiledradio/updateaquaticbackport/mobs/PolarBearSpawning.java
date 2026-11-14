@@ -4,6 +4,8 @@ import com.exiledradio.updateaquaticbackport.ModConfig;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 
+import com.exiledradio.backportcore.worldgen.FlatWorlds;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
@@ -48,7 +50,8 @@ import java.util.Random;
  *       allowed;</li>
  *   <li>every frozen ocean without a polar bear entry gets one, at post-init.</li>
  * </ul>
- * Spawners are left alone, as are polar bears outside frozen oceans.
+ * Spawners are left alone, as are polar bears outside frozen oceans. A superflat world spawns nothing at generation
+ * (1.12's {@code ChunkGeneratorFlat}), so neither does this.
  */
 @Mod.EventBusSubscriber(modid = UpdateAquaticBackport.MOD_ID)
 public final class PolarBearSpawning {
@@ -130,7 +133,8 @@ public final class PolarBearSpawning {
     @SubscribeEvent
     public static void onPopulated(PopulateChunkEvent.Post event) {
         World world = event.getWorld();
-        if (world.isRemote || !on()) {
+        if (world.isRemote || !on() || FlatWorlds.isFlat(world)) {
+            // A superflat world spawns no animals as it generates, with or without decoration.
             return;
         }
         int x = event.getChunkX() * 16 + 8;

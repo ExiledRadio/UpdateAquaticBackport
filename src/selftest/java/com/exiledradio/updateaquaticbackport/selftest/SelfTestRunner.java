@@ -65,6 +65,7 @@ public final class SelfTestRunner {
             new PseudoWaterSelfTest(),
             new LookFeelSelfTest(),
             new LocateSelfTest(),
+            new FlatSelfTest(),
     };
 
     private final List<String> wanted;

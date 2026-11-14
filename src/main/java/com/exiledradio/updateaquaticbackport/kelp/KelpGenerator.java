@@ -5,6 +5,7 @@ import com.exiledradio.updateaquaticbackport.common.ModernWorlds;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 
 import com.exiledradio.backportcore.waterlog.Waterlogging;
+import com.exiledradio.backportcore.worldgen.FlatWorlds;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -44,7 +45,8 @@ import java.util.Random;
  * area vanilla decorates (the chunk offset by 8), so nothing generates into an unloaded neighbor.
  *
  * <p>Not in a world whose generator runs today's generation ({@link ModernWorlds}: Caves &amp; Cliffs Backport's 1.18
- * terrain), which places 1.18.2's kelp and seagrass itself, with this mod's blocks.
+ * terrain), which places 1.18.2's kelp and seagrass itself, with this mod's blocks. Nor in a superflat world without
+ * {@code decoration}, as vanilla's own features ({@code FlatWorlds}).
  */
 public final class KelpGenerator implements IWorldGenerator {
 
@@ -54,8 +56,9 @@ public final class KelpGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator generator, IChunkProvider provider) {
         if (!KelpContent.enabled() || !ModConfig.kelp.generate || !world.provider.isSurfaceWorld()
-                || ModernWorlds.placesFeatures(world, generator)) {
-            // Caves & Cliffs' 1.18 generator places 1.18.2's own kelp and seagrass in its oceans, rivers and swamps.
+                || ModernWorlds.placesFeatures(world, generator) || !FlatWorlds.decoration(world)) {
+            // Caves & Cliffs' 1.18 generator places 1.18.2's own kelp and seagrass in its oceans, rivers and swamps;
+            // a superflat world without decoration gets no features.
             return;
         }
         BlockPos center = new BlockPos(chunkX * 16 + 8, 0, chunkZ * 16 + 8);
