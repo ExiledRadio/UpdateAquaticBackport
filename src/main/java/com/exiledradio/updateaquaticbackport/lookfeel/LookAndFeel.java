@@ -4,6 +4,9 @@ import com.exiledradio.backportcore.presentation.Contribution;
 import com.exiledradio.backportcore.presentation.Presentation;
 import com.exiledradio.backportcore.presentation.option.OptionScreen;
 import com.exiledradio.backportcore.presentation.option.SliderOption;
+import com.exiledradio.backportcore.presentation.option.ToggleOption;
+import com.exiledradio.backportcore.recipe.book.SmeltingBook;
+import com.exiledradio.backportcore.recipe.book.SmeltingBooks;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
 import net.minecraft.util.ResourceLocation;
 
@@ -24,6 +27,13 @@ import net.minecraft.util.ResourceLocation;
  *   <li>the world-loading screen: 1.13's "Preparing spawn area: N%" comes from Core's table for 1.13;</li>
  *   <li>1.13's Biome Blend (Video Settings, after Entity Shadows, as 1.13.2's list ends): OFF, 3x3 to 15x15,
  *       5x5 by default ({@link #BIOME_BLEND}, applied by {@code water/BiomeBlend}).</li>
+ *   <li>17w47a: command suggestions in the chat box, with Chat Settings' "Command Suggestions" ({@link #AUTO_SUGGEST},
+ *       on; off shows them on Tab). Backport Core's engine asks the server through 1.12.2's tab-complete packet, so any
+ *       server works.</li>
+ *   <li>1.13: the furnace's recipe book (Core's {@code recipe.book}, {@code SmeltingBook.furnace()}): the green button,
+ *       the Food, Blocks and Miscellaneous tabs, "Showing smeltable", the ghost recipe and fuel. 1.13.2's
+ *       {@code recipe_book.png} (which adds the furnace filter's sprite) and {@code recipe_button.png} are served as
+ *       vanilla's.</li>
  * </ul>
  * Menu music did not change in 1.13 ({@code music.menu} is menu1 to menu4 in 1.12.2 and 1.13.2). Also: vanilla's own
  * text as 1.13.2 words it ({@code vanilla_text/}: "Left Button", "Loading terrain...", "Open World Folder" ...), the
@@ -42,6 +52,10 @@ public final class LookAndFeel {
      */
     public static final SliderOption BIOME_BLEND = new SliderOption(ID + ":biome_blend_radius", "options.biomeBlendRadius",
             OptionScreen.VIDEO, 0.0, 7.0, 1.0, 2.0);
+
+    /** 1.13's "Command Suggestions" (Chat Settings; 1.13.2's {@code autoSuggestions}, on). */
+    public static final ToggleOption AUTO_SUGGEST = new ToggleOption(ID + ":auto_suggestions", "options.autoSuggestCommands",
+            OptionScreen.CHAT, true);
 
     private static boolean registered;
 
@@ -65,6 +79,10 @@ public final class LookAndFeel {
             return side + "x" + side;
         });
         v113.option(BIOME_BLEND.after("ENTITY_SHADOWS"));
+        v113.option(AUTO_SUGGEST.after("REDUCED_DEBUG_INFO")).commandSuggestions(AUTO_SUGGEST);
+        v113.replaceAsset("textures/gui/recipe_book.png", new ResourceLocation(ID, "textures/gui/recipe_book.png"))
+                .replaceAsset("textures/gui/recipe_button.png", new ResourceLocation(ID, "textures/gui/recipe_button.png"));
+        SmeltingBooks.register(SmeltingBook.furnace());
     }
 
     /** @return Biome Blend's radius, 0 to 7 */

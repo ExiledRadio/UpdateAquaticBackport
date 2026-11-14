@@ -51,7 +51,9 @@ public final class ClientSetup {
         // `runClient -Pselftest=clientwater`: 1.13's water texture and colors on a real client, with screenshots.
         if (selftest != null && selftest.contains("client")) {
             try {
-                String test = selftest.contains("clientwater") ? "ClientWaterTest" : "ClientLookFeelTest";
+                // `runClient -Pselftest=clientcmd`: command suggestions and the furnace book in a world.
+                String test = selftest.contains("clientwater") ? "ClientWaterTest"
+                        : selftest.contains("clientcmd") ? "ClientCommandsFurnaceTest" : "ClientLookFeelTest";
                 Class.forName("com.exiledradio.updateaquaticbackport.selftest." + test).getMethod("register").invoke(null);
             } catch (ReflectiveOperationException e) {
                 UpdateAquaticBackport.LOGGER.error("CLIENT SELFTEST DONE pass=0 fail=1: the test classes are not in this build", e);

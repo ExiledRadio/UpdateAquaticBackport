@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=Otwórz folder świata
 selectWorld.edit.save=Zapis
 selectWorld.versionJoinButton=Wczytaj mimo to
 selectWorld.versionWarning=Ten świat był ostatnio otwierany w wersji %s i załadowanie go w tej wersji może spowodować uszkodzenie!
+gui.recipebook.toggleRecipes.smeltable=Pokazuje przetapialne
+options.autoSuggestCommands=Sugestie poleceń

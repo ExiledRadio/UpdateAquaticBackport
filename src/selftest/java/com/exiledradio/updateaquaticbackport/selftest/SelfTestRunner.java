@@ -66,6 +66,7 @@ public final class SelfTestRunner {
             new LookFeelSelfTest(),
             new LocateSelfTest(),
             new FlatSelfTest(),
+            new CommandsFurnaceSelfTest(),
     };
 
     private final List<String> wanted;

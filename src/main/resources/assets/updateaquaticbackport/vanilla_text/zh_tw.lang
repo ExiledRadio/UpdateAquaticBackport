@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=開啟世界資料夾
 selectWorld.edit.save=儲存
 selectWorld.versionJoinButton=依然載入
 selectWorld.versionWarning=這個世界最後遊玩的版本為 %s ，使用目前版本載入可能會導致損壞！
+gui.recipebook.toggleRecipes.smeltable=已列出可熔煉項目
+options.autoSuggestCommands=指令提示

@@ -108,3 +108,19 @@ The places are in `docs/CREATIVE_TABS.md`; a dev client already checked the list
 - [ ] The search tab finds the mod's items, and JEI lists them.
 - [ ] Other mods' items are still in their tabs, in their own order.
 - [ ] With another update backport installed too, its items and this mod's sit together by kind (stripped logs, slabs).
+
+## Command suggestions and the furnace book (with Backport Core 1.3.0)
+
+A dev client already checked both in a world (`runClient -Pselftest=clientcmd`), with keys given in code.
+
+- [ ] Chat: type `/` then `g`: gamemode, gamerule and give list above the input, the first yellow, its rest grey after
+      the text. Up and Down move, Tab accepts and Tab again moves on, Esc closes the list and a second Esc the chat.
+- [ ] More than 10 suggestions (`/` alone): the dotted line above or below, the wheel scrolls, a click accepts.
+- [ ] `/give ` with the list closed (Esc): `<player> <item> [amount] [data] [dataTag]` in grey above the input.
+- [ ] On a vanilla 1.12.2 server and a Forge server without Backport Core: the list works; no usage line.
+- [ ] Chat Settings: "Command Suggestions: ON"; OFF shows the list only on Tab.
+- [ ] Furnace: the green book button; the book opens beside the furnace, Food/Blocks/Miscellaneous tabs as recipes
+      unlock, the "New Recipes Unlocked!" toast with a furnace. Click places one, shift a stack; a recipe without its
+      ingredients shows the ghost, with the fuel slot cycling through fuels. The filter shows "Showing smeltable".
+- [ ] The book's open and filter state survive closing the furnace, relogging and dying.
+- [ ] A narrow window (GUI scale large): the book covers the furnace, as the crafting table's does.

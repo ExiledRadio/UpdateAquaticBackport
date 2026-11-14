@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=세계 폴더 열기
 selectWorld.edit.save=저장
 selectWorld.versionJoinButton=무시하고 불러오기
 selectWorld.versionWarning=이 세계는 %s 버전에서 마지막으로 플레이되었으며, 현재 버전으로 불러오면 손상될 수 있습니다!
+gui.recipebook.toggleRecipes.smeltable=제련 가능한 아이템 표시 중
+options.autoSuggestCommands=명령어 제안

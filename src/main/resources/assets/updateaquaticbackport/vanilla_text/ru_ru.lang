@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=Открыть папку мира
 selectWorld.edit.save=Сохранить
 selectWorld.versionJoinButton=Загрузить
 selectWorld.versionWarning=Этот мир сохранён в версии %s и может быть повреждён при загрузке в этой версии!
+gui.recipebook.toggleRecipes.smeltable=Рецепты для печи
+options.autoSuggestCommands=Подсказки к командам
