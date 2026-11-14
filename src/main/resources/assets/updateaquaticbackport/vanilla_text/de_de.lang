@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=Weltordner öffnen
 selectWorld.edit.save=Speichern
 selectWorld.versionJoinButton=Trotzdem laden
 selectWorld.versionWarning=Diese Welt wurde zuletzt mit der Version %s gespielt. Sie in dieser Version zu laden, kann die Welt beschädigen!
+gui.recipebook.toggleRecipes.smeltable=Herstellbares wird angezeigt
+options.autoSuggestCommands=Befehlsvorschläge

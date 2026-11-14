@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=Abrir carpeta del mundo
 selectWorld.edit.save=Guardar
 selectWorld.versionJoinButton=Cargar igualmente
 selectWorld.versionWarning=¡Este mundo fue guardado en la versión %s y puede corromperse si lo abres en la actual!
+gui.recipebook.toggleRecipes.smeltable=Mostrando fundibles
+options.autoSuggestCommands=Sugerir comandos

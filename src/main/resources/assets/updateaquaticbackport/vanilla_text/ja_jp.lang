@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=ワールドフォルダーを開く
 selectWorld.edit.save=セーブ
 selectWorld.versionJoinButton=構わず読み込む
 selectWorld.versionWarning=このワールドが最後にプレイされたのはバージョン %s です。現在のバージョンでワールドを読み込むとデータが破損する可能性があります。
+gui.recipebook.toggleRecipes.smeltable=製錬可能なアイテムを表示中
+options.autoSuggestCommands=コマンドの候補

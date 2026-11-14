@@ -1,3 +1,8 @@
+# Unreleased
+
+*   **Command suggestions** as in 1.13: type a `/` command and the server's completions list above the chat box. Up and Down pick, Tab accepts, Esc closes the list. "Command Suggestions" in Chat Settings (on); off, Tab shows them. Works on any server. Needs Backport Core 1.3.0.
+*   **Furnace recipe book** as in 1.13: the green button, Food, Blocks and Miscellaneous tabs, "Showing smeltable", the ghost recipe and fuel. Every smelting recipe of every mod, unlocked by holding an input. Needs Backport Core 1.3.0.
+
 # 1.0.1
 
 *   **Recipes unlock like vanilla's**, with Backport Core 1.2.0: each recipe of this mod unlocks on the items current Java unlocks it on, with the recipe toast. Update Backport Core to get it.

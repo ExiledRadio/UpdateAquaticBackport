@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=Apri la cartella del mondo
 selectWorld.edit.save=Salva
 selectWorld.versionJoinButton=Carica comunque
 selectWorld.versionWarning=L'ultima volta è stato caricato nella versione %s. Caricarlo in questa versione potrebbe danneggiarlo!
+gui.recipebook.toggleRecipes.smeltable=Cotture realizzabili
+options.autoSuggestCommands=Suggerimenti dei comandi

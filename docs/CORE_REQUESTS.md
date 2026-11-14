@@ -26,8 +26,9 @@ have yet:
 *   **World list (17w47a, 1.13.1)**: Edit World's "Make Backup" and "Open Backups Folder", and the world list's
     search bar. One owner for the world screens.
 
-Out of scope for 1.12.2 (no counterpart): Command Suggestions (1.12.2 has no Brigadier suggestions), Optimize World
-(the Flattening's converter), data packs, the LWJGL 3 key names (letter keys in lowercase).
+Out of scope for 1.12.2 (no counterpart): Optimize World (the Flattening's converter), data packs, the LWJGL 3 key
+names (letter keys in lowercase). Command Suggestions, first ruled out (no Brigadier), are built after all: Core 1.3.0's
+engine asks the server through 1.12.2's tab-complete packet; registered here (below).
 
 ## Done in Backport Core 1.1.0 (core-finish, 2026-11-08)
 
@@ -36,3 +37,10 @@ table), the title-screen fade-in, the F3 text pipeline (1.13's lines, registered
 (`music.under_water`, registered here, with 1.13's three tracks), Edit World's Make Backup and Open Backups Folder,
 and vanilla text by version (`vanilla_text/`). Core's waterlogging rules now make the prismarine stairs and slabs
 `Waterloggable` here. Still open: Fullscreen Resolution and Biome Blend, the world list's search bar.
+
+## Done in Backport Core 1.3.0 (core-command-suggestions, 2026-11-14)
+
+Used here on branch `ua-commands-furnace`: command suggestions in the chat box (`Contribution.commandSuggestions`, with
+1.13's "Command Suggestions" option on Chat Settings) and the furnace recipe book (`recipe.book.SmeltingBook.furnace()`),
+with 1.13.2's `recipe_book.png` and `recipe_button.png` served as vanilla's. Village & Pillage's smoker and blast furnace
+can use the same `SmeltingBook` API.

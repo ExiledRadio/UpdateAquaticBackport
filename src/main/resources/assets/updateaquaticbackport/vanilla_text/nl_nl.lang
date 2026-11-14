@@ -26,3 +26,5 @@ selectWorld.edit.openFolder=Open wereldmap
 selectWorld.edit.save=Opslaan
 selectWorld.versionJoinButton=Toch laden
 selectWorld.versionWarning=Deze wereld is voor het laatst gespeeld in versie '%s' en het laden van de wereld in deze versie kan beschadigingen veroorzaken!
+gui.recipebook.toggleRecipes.smeltable=Toon smeltrecepten
+options.autoSuggestCommands=Opdrachtsuggesties
