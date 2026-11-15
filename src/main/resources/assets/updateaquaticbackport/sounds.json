@@ -1202,15 +1202,15 @@
     "sounds": [
       {
         "name": "updateaquaticbackport:ambient/underwater/enter1",
-        "volume": 0.8
+        "volume": 0.5
       },
       {
         "name": "updateaquaticbackport:ambient/underwater/enter2",
-        "volume": 0.8
+        "volume": 0.5
       },
       {
         "name": "updateaquaticbackport:ambient/underwater/enter3",
-        "volume": 0.8
+        "volume": 0.5
       }
     ]
   },
@@ -1218,15 +1218,15 @@
     "sounds": [
       {
         "name": "updateaquaticbackport:ambient/underwater/exit1",
-        "volume": 0.5
+        "volume": 0.3
       },
       {
         "name": "updateaquaticbackport:ambient/underwater/exit2",
-        "volume": 0.5
+        "volume": 0.3
       },
       {
         "name": "updateaquaticbackport:ambient/underwater/exit3",
-        "volume": 0.5
+        "volume": 0.3
       }
     ]
   },
