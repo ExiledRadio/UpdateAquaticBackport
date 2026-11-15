@@ -1,3 +1,8 @@
+# 1.1.1
+
+*   **Diving in and coming up are quieter**, as in current Java: the underwater enter and exit sounds were louder than vanilla's.
+*   **Long sounds are no longer cut off in busy places**, with Backport Core 1.3.1.
+
 # 1.1.0
 
 **Requires Backport Core 1.3.0 or newer.**
