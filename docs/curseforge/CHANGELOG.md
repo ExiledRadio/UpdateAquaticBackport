@@ -1,13 +1,20 @@
-# Unreleased
+# 1.1.0
 
-*   **Command suggestions** as in 1.13: type a `/` command and the server's completions list above the chat box. Up and Down pick, Tab accepts, Esc closes the list. "Command Suggestions" in Chat Settings (on); off, Tab shows them. Works on any server. Needs Backport Core 1.3.0.
-*   **Furnace recipe book** as in 1.13: the green button, Food, Blocks and Miscellaneous tabs, "Showing smeltable", the ghost recipe and fuel. Every smelting recipe of every mod, unlocked by holding an input. Needs Backport Core 1.3.0.
+**Requires Backport Core 1.3.0 or newer.**
+
+*   **Command suggestions** as in 1.13: type a `/` command and the server's completions list above the chat box. Up and Down pick, Tab accepts, Esc closes the list. "Command Suggestions" in Chat Settings (on); off, Tab shows them. Works on any server.
+*   **Furnace recipe book** as in 1.13: the green button, Food, Blocks and Miscellaneous tabs, "Showing smeltable", the ghost recipe and fuel. Every smelting recipe of every mod, unlocked by holding an input.
+*   **Biome Blend** as in 1.13, in Video Settings: water, grass and leaf colors blend over 5x5 blocks by default (OFF to 15x15). 1.12.2's fixed 3x3 drew hard bands where 1.13's water colors meet.
+*   **Caves & Cliffs Backport's 1.18 worlds are 1.18's oceans**: reefs, kelp, seagrass and sea pickles are only 1.18.2's own, in 1.18's warm, lukewarm, cold and frozen oceans. Before, a world of the `cavesandcliffs` type got this mod's reefs and kelp as well, judged by a temperature of its own, so a reef could grow in a plain ocean of blue water and kelp and seagrass came twice. Fish, drowned, dolphins, polar bears and bone meal there go by 1.18's biome, in three dimensions (a lush cave under an ocean has tropical fish, not cod). Magma below y 0 gets its bubble columns too.
+*   **Shipwrecks, ocean ruins and buried treasure in Caves & Cliffs Backport's 1.18 worlds** start where 1.18 puts them.
+*   **Superflat worlds generate only what vanilla does**: no shipwrecks, ocean ruins or buried treasure in any superflat world, kelp, seagrass, reefs, sea pickles and bubble columns only when the preset has `decoration`, and no polar bears spawned on a frozen ocean preset's ice as its chunks generate.
+*   **Fixed 1.13's water texture never showing** in a real game: the log said "Could not put 1.13's water texture in place" and kept 1.12.2's water.
+*   **Fixed dark water with Fluidlogged API**: plains water came out navy and swamps nearly black. Water now has the same color with and without it.
+*   **Fixed coral fans not going on walls** with nothing solid under them, which was most walls under water.
 
 # 1.0.1
 
 *   **Recipes unlock like vanilla's**, with Backport Core 1.2.0: each recipe of this mod unlocks on the items current Java unlocks it on, with the recipe toast. Update Backport Core to get it.
-*   **Caves & Cliffs Backport's 1.18 worlds are 1.18's oceans**: reefs, kelp, seagrass and sea pickles are only 1.18.2's own, in 1.18's warm, lukewarm, cold and frozen oceans. Before, a world of the `cavesandcliffs` type got this mod's reefs and kelp as well, judged by a temperature of its own, so a reef could grow in a plain ocean of blue water and kelp and seagrass came twice. Fish, drowned, dolphins, polar bears and bone meal there go by 1.18's biome, in three dimensions (a lush cave under an ocean has tropical fish, not cod). Magma below y 0 gets its bubble columns too. Needs Backport Core 1.2.0 with `ModernGeneration`.
-*   **Superflat worlds generate only what vanilla does**, with Backport Core 1.3.0: no shipwrecks, ocean ruins or buried treasure in any superflat world, kelp, seagrass, reefs, sea pickles and bubble columns only when the preset has `decoration`, and no polar bears spawned on a frozen ocean preset's ice as its chunks generate. Update Backport Core to get it.
 *   **Fixed a crash on entering a world with Quark, Bewitchment and other mods that add mob spawns early**: `Biome.func_76747_a`, "Index 4 out of bounds for length 4". The fish's own spawn category is now added before any mod sets up its spawns.
 
 # 1.0.0
