@@ -72,12 +72,12 @@ public final class ModConfig {
 
     @Config.LangKey("config.updateaquaticbackport.structures")
     @Config.Comment("Shipwrecks, ocean ruins, buried treasure and treasure maps.")
-    @Setting.Feature(icon = "minecraft:filled_map")
+    @Setting.Feature(icon = "updateaquaticbackport:heart_of_the_sea")
     public static final Structures structures = new Structures();
 
     @Config.LangKey("config.updateaquaticbackport.oceans")
     @Config.Comment("1.13's ocean biomes, icebergs, and underwater caves and ravines.")
-    @Setting.Feature(icon = "minecraft:packed_ice")
+    @Setting.Feature(icon = "updateaquaticbackport:blue_ice")
     public static final Oceans oceans = new Oceans();
 
     @Config.LangKey("config.updateaquaticbackport.bubbles")
@@ -92,7 +92,7 @@ public final class ModConfig {
 
     @Config.LangKey("config.updateaquaticbackport.mobs")
     @Config.Comment("1.13's changes to existing mobs.")
-    @Setting.Feature(icon = "minecraft:skull@2")
+    @Setting.Feature(icon = "updateaquaticbackport:nautilus_shell")
     public static final Mobs mobs = new Mobs();
 
     @Config.LangKey("config.updateaquaticbackport.water")
