@@ -1,32 +1,42 @@
 # Images
 
-None uploaded yet. Once a shot is on the project's Images tab, put its URL in the table and swap the
-matching `<!-- IMAGE: ... -->` line in `DESCRIPTION.md` (or the section named here) for the image, as
-Village & Pillage's page does, so the page can be rebuilt without hunting for them.
+`DESCRIPTION.md` names each image by its file name. Once a shot is on the project's Images tab, put its URL in the
+table and swap the file name in `DESCRIPTION.md` for it, as Village & Pillage's page does.
 
-| Shot | Where it sits | URL |
-| --- | --- | --- |
-| A coral reef in a warm ocean, tropical fish schooling over it, in clear daytime water | header | |
-| A warm, a cold and a frozen ocean side by side from above, showing the three water colors | Oceans | |
-| An iceberg in a frozen ocean, with patchy sea ice around it | Oceans | |
-| A kelp forest from the sea floor, looking up toward the surface | Kelp, seagrass and coral | |
-| All ten coral blocks, coral and fans, living and dead, laid out in rows | Kelp, seagrass and coral | |
-| A school of cod, and a puffed-up pufferfish | Fish | |
-| A turtle on its nest beside its eggs, at night | Turtles | |
-| Dolphins leaping beside a rowed boat | Dolphins | |
-| A drowned holding a trident and a nautilus shell, under water | The drowned and the trident | |
-| A player spinning up out of the water with Riptide, in the rain | The drowned and the trident | |
-| Phantoms circling over a player at night | Phantoms | |
-| A conduit in a full prismarine frame, its eye open | The conduit | |
-| An upward bubble column beside a whirlpool | Bubble columns | |
-| The underwater fog in a swamp beside that of a warm ocean | Water | |
-| A carved pumpkin, prismarine stairs and slabs and the six wood blocks | Blocks and items | |
-| The config screen, top level | Config | |
+Scenes are in the `Backport Showcase` instance. Teleports, times and setup are in
+`Releases/screenshot-scenes/SCENES.md` under the scene number given here.
 
-All prefixed with `https://media.forgecdn.net/attachments/`.
+| File | Where it sits | Scene | Taken | URL |
+| --- | --- | --- | --- | --- |
+| `ua-coral-reef-dolphins.jpg` | header | 7 | yes | |
+| `ua-frozen-ocean-icebergs.jpg` | Oceans | 23 | no | |
+| `ua-shipwreck-kelp-forest.jpg` | Oceans | 8 | yes | |
+| `ua-turtle-beach-sunset.jpg` | Sea life | 9 | yes | |
+| `ua-drowned-trident-phantoms.jpg` | The drowned and phantoms | 11 | yes | |
+| `ua-ocean-ruins-sea-lanterns.jpg` | Shipwrecks, ruins and treasure | 10 | yes | |
+| `ua-swimming.jpg` | Swimming | none, see below | no | |
+| `ua-bubble-columns.jpg` or `.gif` | Swimming | 24 | no | |
+| `ua-blocks.jpg` | Everything else | 25 | no | |
+| `ua-settings.png` | Everything else | none, see below | no | |
 
-Still worth capturing once the last three parts are in: a shipwreck and an ocean ruin, a player
-sprint-swimming and crawling, and a waterlogged sea pickle or lantern.
+All URLs are prefixed with `https://media.forgecdn.net/attachments/`.
+
+## Shots without a scene
+
+*   **Swimming.** Go to scene 7 (the reef), press F5 twice for the front view or once for the back view, hold sprint
+    and swim along the reef. F2 while moving. A second account is not needed.
+*   **Settings.** Main menu, Mods, Mod Options, Update Aquatic's page in Backport Core's settings screen, the same
+    framing as `vp-settings-new.png`.
+
+## Bubble columns as a GIF
+
+CurseForge shows animated GIFs in a description. Record 4 to 6 seconds at scene 24 without moving, then convert:
+
+```
+ffmpeg -i ua-bubble-columns.mp4 -vf "fps=15,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=bayer" -loop 0 ua-bubble-columns.gif
+```
+
+Keep it under about 8 MB; drop to `fps=12` or `scale=800:-1` if it comes out larger.
 
 ## Icon
 
