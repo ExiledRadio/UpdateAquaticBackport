@@ -240,6 +240,7 @@
     "item.updateaquaticbackport.trident.name": "item.minecraft.trident",
     "item.updateaquaticbackport.tropical_fish_bucket.name": "item.minecraft.tropical_fish_bucket",
     "item.updateaquaticbackport.turtle_helmet.name": "item.minecraft.turtle_helmet",
+    "item.updateaquaticbackport.turtle_scute.name": "item.minecraft.turtle_scute",
     "lingering_potion.effect.updateaquaticbackport.slow_falling": "item.minecraft.lingering_potion.effect.slow_falling",
     "potion.effect.updateaquaticbackport.slow_falling": "item.minecraft.potion.effect.slow_falling",
     "splash_potion.effect.updateaquaticbackport.slow_falling": "item.minecraft.splash_potion.effect.slow_falling",

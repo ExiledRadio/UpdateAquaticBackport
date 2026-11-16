@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Fisch wird eingefangen
 entity.updateaquaticbackport.turtle.name=Schildkröte
 item.updateaquaticbackport.scute.name=Hornschild
 item.updateaquaticbackport.turtle_helmet.name=Schildkrötenpanzer
+item.updateaquaticbackport.turtle_scute.name=Schildkröten-Hornschild
 lingering_potion.effect.turtle_master=Verweiltrank des Schildkrötenmeisters
 potion.effect.turtle_master=Trank des Schildkrötenmeisters
 splash_potion.effect.turtle_master=Wurftrank des Schildkrötenmeisters

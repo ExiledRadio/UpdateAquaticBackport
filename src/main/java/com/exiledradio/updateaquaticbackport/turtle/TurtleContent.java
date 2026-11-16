@@ -127,7 +127,7 @@ public final class TurtleContent {
         }
         IForgeRegistry<Item> registry = event.getRegistry();
         Content.blockItem(registry, turtleEgg, new ItemTurtleEgg(turtleEgg));
-        scute = Content.item(registry, "scute", new Item());
+        scute = Content.item(registry, "scute", new ItemScute());
 
         // 1.14.4 ArmorMaterial.TURTLE: durability factor 25 (275 for a helmet), 2 armor on the head,
         // enchantability 9, no toughness, repaired with scutes. The texture is

@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Рыба поймана
 entity.updateaquaticbackport.turtle.name=Черепаха
 item.updateaquaticbackport.scute.name=Щиток
 item.updateaquaticbackport.turtle_helmet.name=Черепаший панцирь
+item.updateaquaticbackport.turtle_scute.name=Черепаший щиток
 lingering_potion.effect.turtle_master=Туманное зелье черепашьей мощи
 potion.effect.turtle_master=Зелье черепашьей мощи
 splash_potion.effect.turtle_master=Взрывное зелье черепашьей мощи

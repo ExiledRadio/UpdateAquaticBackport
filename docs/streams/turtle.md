@@ -49,6 +49,11 @@ Package `turtle` (client classes in `turtle/client`). Config `turtles` (`enabled
 *   **The shell**: an `EnumHelper` armor material (`25` durability factor, `{2,5,6,2}`, enchantability 9, 1.13's
     equip sound, repair item scute). A player tick handler adds Water Breathing 200 ticks, no particles, every
     tick the head is out of water (today's `turtleHelmetTick`). Its texture is `turtle_layer_1`.
+*   **The scute's name**: `ItemScute.getTranslationKey(stack)` answers `item.updateaquaticbackport.turtle_scute`
+    ("Turtle Scute", Mojang's `item.minecraft.turtle_scute`, in every language) while
+    `Presentation.isAtLeast("1.20.5")`, and the 1.13 `scute` key otherwise. Core's `vanillaText` cannot do this:
+    it composes only `minecraft`'s language, which a mod's own keys override; and this mod must not register a
+    1.20.5 contribution, which would mark 1.20.5 installed. Presentation registers in pre-init on both sides.
 *   **Potions**: three `PotionType`s sharing the base name `turtle_master` (`potion.effect.turtle_master` and so on).
     Brewing is three `IBrewingRecipe`s that check the potion type; Forge's own `BrewingRecipe` ignores NBT and would
     turn any potion into Turtle Master.
@@ -82,6 +87,9 @@ after the last fix); `-Pselftest=all`: **`pass=1028 fail=0`**; `python tools/che
 states, 66 item models, 108 sound files, 0 errors**; `python tools/lang/vanilla_keys.py`: the egg, scute, shell and
 all 14 subtitles are vanilla names, the entity and potion names wait for the two rules above.
 
+*   Scute name (2026-11-16, `-Pselftest=turtle` `pass=167 fail=0`, `all` `pass=16392 fail=0`): the 1.13 key and
+    "Scute" with no 1.20.5 installed; with a detached 1.20.5 put into Core's table for the check, the
+    `turtle_scute` key and "Turtle Scute" (server-side `getDisplayName`); "Scute" again once it is taken out.
 *   Registration: egg block and item, scute, shell, the entity (network id 10, spawn egg), 14 sound events, three
     potion types; all 12 egg states survive a metadata round trip.
 *   The turtle: 30 health, speed 0.25, 1.2 x 0.4, a baby 0.36 x 0.12; breathes underwater, not pushed by water,

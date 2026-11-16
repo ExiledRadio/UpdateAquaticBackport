@@ -1,8 +1,12 @@
 package com.exiledradio.updateaquaticbackport.selftest;
 
+import com.exiledradio.backportcore.presentation.Contribution;
+import com.exiledradio.backportcore.presentation.GameVersion;
+import com.exiledradio.backportcore.presentation.Presentation;
 import com.exiledradio.updateaquaticbackport.common.Content;
 import com.exiledradio.updateaquaticbackport.turtle.BlockTurtleEgg;
 import com.exiledradio.updateaquaticbackport.turtle.EntityTurtle;
+import com.exiledradio.updateaquaticbackport.turtle.ItemScute;
 import com.exiledradio.updateaquaticbackport.turtle.TurtleContent;
 import com.exiledradio.updateaquaticbackport.turtle.TurtleEvents;
 
@@ -51,7 +55,9 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 /** Turtles, eggs, the scute and shell, Turtle Master, and what other mobs do about turtles. */
 public final class TurtleSelfTest implements SelfTest {
@@ -66,6 +72,7 @@ public final class TurtleSelfTest implements SelfTest {
         WorldServer world = c.world;
         c.ok(TurtleContent.enabled(), "turtle stream on");
         registration(c);
+        scuteName(c);
         basics(c, world);
         spawning(c, world);
         eggBlock(c, world);
@@ -100,6 +107,43 @@ public final class TurtleSelfTest implements SelfTest {
         for (String sound : new String[] {"entity.turtle.egg_hatch", "entity.zombie.destroy_egg", "item.armor.equip_turtle"}) {
             c.ok(ForgeRegistries.SOUND_EVENTS.containsKey(Content.id(sound)), "sound " + sound);
         }
+    }
+
+    /**
+     * 1.20.5 renamed the scute "Turtle Scute": the name follows the newest installed presentation. The test puts a
+     * detached 1.20.5 into Core's table for a moment (registering one would mark 1.20.5 installed for good) and
+     * takes it out again whatever happens.
+     */
+    @SuppressWarnings("unchecked")
+    private static void scuteName(Check c) throws Exception {
+        Item scute = TurtleContent.scute();
+        ItemStack stack = new ItemStack(scute);
+        c.ok(!Presentation.isAtLeast(ItemScute.RENAMED_IN), "no 1.20.5 presentation in the test run (newest " + Presentation.newest() + ")");
+        c.eq("item.updateaquaticbackport.scute", scute.getTranslationKey(stack), "1.13 key before 1.20.5");
+        c.eq("Scute", stack.getDisplayName(), "1.13 name before 1.20.5");
+        Field f = Presentation.class.getDeclaredField("VERSIONS");
+        f.setAccessible(true);
+        Map<GameVersion, Contribution> versions = (Map<GameVersion, Contribution>) f.get(null);
+        Contribution v1205 = Presentation.detached(ItemScute.RENAMED_IN);
+        boolean had;
+        synchronized (Presentation.class) {
+            had = versions.containsKey(v1205.version());
+            if (!had) {
+                versions.put(v1205.version(), v1205);
+            }
+        }
+        try {
+            c.ok(Presentation.isAtLeast("1.20.5"), "1.20.5 in place for the check");
+            c.eq("item.updateaquaticbackport.turtle_scute", scute.getTranslationKey(stack), "1.20.5 key from 1.20.5 on");
+            c.eq("Turtle Scute", stack.getDisplayName(), "1.20.5 name from 1.20.5 on");
+        } finally {
+            if (!had) {
+                synchronized (Presentation.class) {
+                    versions.remove(v1205.version());
+                }
+            }
+        }
+        c.eq("Scute", stack.getDisplayName(), "1.13 name again once 1.20.5 is gone");
     }
 
     // --- 2. the turtle itself -------------------------------------------------------------------------

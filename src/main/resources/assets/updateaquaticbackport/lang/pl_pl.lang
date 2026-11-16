@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Złapano rybę
 entity.updateaquaticbackport.turtle.name=Żółw
 item.updateaquaticbackport.scute.name=Tarczka
 item.updateaquaticbackport.turtle_helmet.name=Żółwia skorupa
+item.updateaquaticbackport.turtle_scute.name=Tarczka żółwia
 lingering_potion.effect.turtle_master=Trwała mikstura żółwiego mistrza
 potion.effect.turtle_master=Mikstura żółwiego mistrza
 splash_potion.effect.turtle_master=Miotana mikstura żółwiego mistrza

@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Poisson capturé
 entity.updateaquaticbackport.turtle.name=Tortue
 item.updateaquaticbackport.scute.name=Écaille
 item.updateaquaticbackport.turtle_helmet.name=Carapace de tortue
+item.updateaquaticbackport.turtle_scute.name=Écaille de tortue
 lingering_potion.effect.turtle_master=Potion du Maître Tortue persistante
 potion.effect.turtle_master=Potion du Maître Tortue
 splash_potion.effect.turtle_master=Potion du Maître Tortue jetable

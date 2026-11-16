@@ -41,6 +41,8 @@ names = {
     "tile.%s.turtle_egg.name" % M: assets.name("block.minecraft.turtle_egg"),
     "item.%s.scute.name" % M: assets.name("item.minecraft.scute"),
     "item.%s.turtle_helmet.name" % M: assets.name("item.minecraft.turtle_helmet"),
+    # 1.20.5 renamed the scute (armadillo scutes came in); ItemScute shows this key from 1.20.5 on.
+    "item.%s.turtle_scute.name" % M: "Turtle Scute",
     "entity.%s.turtle.name" % M: assets.name("entity.minecraft.turtle"),
 }
 # 1.12.2 names potions by prefix + the potion's base name; all three Turtle Master forms share "turtle_master".

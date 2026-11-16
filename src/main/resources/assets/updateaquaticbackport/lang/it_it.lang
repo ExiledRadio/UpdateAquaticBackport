@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Pesce catturato
 entity.updateaquaticbackport.turtle.name=Tartaruga
 item.updateaquaticbackport.scute.name=Scuto
 item.updateaquaticbackport.turtle_helmet.name=Carapace di tartaruga
+item.updateaquaticbackport.turtle_scute.name=Scuto di tartaruga
 lingering_potion.effect.turtle_master=Pozione persistente del maestro tartaruga
 potion.effect.turtle_master=Pozione del maestro tartaruga
 splash_potion.effect.turtle_master=Pozione da lancio del maestro tartaruga
