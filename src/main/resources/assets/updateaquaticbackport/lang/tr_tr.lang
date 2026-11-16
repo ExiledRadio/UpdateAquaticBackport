@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Balık yakalandı
 entity.updateaquaticbackport.turtle.name=Kaplumbağa
 item.updateaquaticbackport.scute.name=Pul
 item.updateaquaticbackport.turtle_helmet.name=Kaplumbağa Kabuğu
+item.updateaquaticbackport.turtle_scute.name=Kaplumbağa Pulu
 lingering_potion.effect.turtle_master=Kalıcı Kaplumbağa Ustası İksiri
 potion.effect.turtle_master=Kaplumbağa Ustası İksiri
 splash_potion.effect.turtle_master=Patlayıcı Kaplumbağa Ustası İksiri

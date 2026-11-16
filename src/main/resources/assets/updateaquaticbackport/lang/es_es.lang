@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Pez capturado
 entity.updateaquaticbackport.turtle.name=Tortuga
 item.updateaquaticbackport.scute.name=Escama
 item.updateaquaticbackport.turtle_helmet.name=Caparazón de tortuga
+item.updateaquaticbackport.turtle_scute.name=Escama de tortuga
 lingering_potion.effect.turtle_master=Poción del maestro tortuga persistente
 potion.effect.turtle_master=Poción del maestro tortuga
 splash_potion.effect.turtle_master=Poción del maestro tortuga arrojadiza

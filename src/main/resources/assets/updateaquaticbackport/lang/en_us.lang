@@ -207,6 +207,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Fish captured
 entity.updateaquaticbackport.turtle.name=Turtle
 item.updateaquaticbackport.scute.name=Scute
 item.updateaquaticbackport.turtle_helmet.name=Turtle Shell
+item.updateaquaticbackport.turtle_scute.name=Turtle Scute
 lingering_potion.effect.turtle_master=Lingering Potion of the Turtle Master
 potion.effect.turtle_master=Potion of the Turtle Master
 splash_potion.effect.turtle_master=Splash Potion of the Turtle Master

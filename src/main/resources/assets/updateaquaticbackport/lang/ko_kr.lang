@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=물고기를 잡음
 entity.updateaquaticbackport.turtle.name=거북
 item.updateaquaticbackport.scute.name=인갑
 item.updateaquaticbackport.turtle_helmet.name=거북 등딱지
+item.updateaquaticbackport.turtle_scute.name=거북 인갑
 lingering_potion.effect.turtle_master=잔류형 거북 도사의 물약
 potion.effect.turtle_master=거북 도사의 물약
 splash_potion.effect.turtle_master=투척용 거북 도사의 물약

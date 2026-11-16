@@ -1,3 +1,7 @@
+# Unreleased
+
+*   **The scute is the "Turtle Scute"** while a 1.20.5-or-newer backport is installed, as 1.20.5 renamed it, in every language. Otherwise it stays 1.13's "Scute".
+
 # 1.1.1
 
 *   **Diving in and coming up are quieter**, as in current Java: the underwater enter and exit sounds were louder than vanilla's.

@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Vis wordt gevangen
 entity.updateaquaticbackport.turtle.name=Schildpad
 item.updateaquaticbackport.scute.name=Hoornschild
 item.updateaquaticbackport.turtle_helmet.name=Schildpadschild
+item.updateaquaticbackport.turtle_scute.name=Schildpadhoornschild
 lingering_potion.effect.turtle_master=Aanhoudende drank der schildpadmeester
 potion.effect.turtle_master=Drank der schildpadmeester
 splash_potion.effect.turtle_master=Spattende drank der schildpadmeester

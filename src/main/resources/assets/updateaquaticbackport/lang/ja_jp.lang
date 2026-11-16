@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=魚が捕まる
 entity.updateaquaticbackport.turtle.name=カメ
 item.updateaquaticbackport.scute.name=カメのウロコ
 item.updateaquaticbackport.turtle_helmet.name=カメの甲羅
+item.updateaquaticbackport.turtle_scute.name=カメのウロコ
 lingering_potion.effect.turtle_master=タートルマスターの残留ポーション
 potion.effect.turtle_master=タートルマスターのポーション
 splash_potion.effect.turtle_master=タートルマスターのスプラッシュポーション

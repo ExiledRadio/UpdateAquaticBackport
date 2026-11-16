@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=Риба піймана
 entity.updateaquaticbackport.turtle.name=Черепаха
 item.updateaquaticbackport.scute.name=Щиток
 item.updateaquaticbackport.turtle_helmet.name=Панцир черепахи
+item.updateaquaticbackport.turtle_scute.name=Щиток черепахи
 lingering_potion.effect.turtle_master=Осідальне зілля майстра черепах
 potion.effect.turtle_master=Зілля майстра черепах
 splash_potion.effect.turtle_master=Вибухове зілля майстра черепах

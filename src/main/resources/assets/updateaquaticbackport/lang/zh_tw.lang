@@ -208,6 +208,7 @@ subtitles.updateaquaticbackport.item.bucket.fill_fish=捕獲魚
 entity.updateaquaticbackport.turtle.name=海龜
 item.updateaquaticbackport.scute.name=鱗甲
 item.updateaquaticbackport.turtle_helmet.name=海龜殼
+item.updateaquaticbackport.turtle_scute.name=海龜鱗甲
 lingering_potion.effect.turtle_master=滯留龜仙藥水
 potion.effect.turtle_master=龜仙藥水
 splash_potion.effect.turtle_master=飛濺龜仙藥水

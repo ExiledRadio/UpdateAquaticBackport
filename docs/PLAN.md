@@ -122,7 +122,7 @@ only when `villagerbackport` is absent. Also:
 - **Turtle eggs**: 1-4 per block, hatch in 3 stages (faster at night), trampled by mobs and players, broken
   by zombies, husks, zombie pigmen and drowned that seek them out.
 - **Scute**, **turtle shell** helmet (2 armor; Water Breathing 10 s while not underwater, as 1.13), repair
-  with scutes.
+  with scutes. The scute reads "Turtle Scute" (1.20.5's name) when a 1.20.5-or-newer presentation is installed.
 - **Potion of the Turtle Master** (Slowness IV + Resistance III 20 s; **now:** these values), long and
   strong forms, splash, lingering and tipped arrows; brewed from turtle shell.
 - Undead, wolves, foxes, ocelots and cats attack baby turtles.
