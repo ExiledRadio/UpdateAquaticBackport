@@ -136,3 +136,5 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Fungo nella capanna dell
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=Il vaso da fiori di una capanna della strega contiene un fungo rosso, nei chunk appena generati.
 config.updateaquaticbackport.mechanics.creativeSleep=Dormire in Creativa vicino ai mostri
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=I giocatori in modalità Creativa possono dormire anche con dei mostri nelle vicinanze.
+config.updateaquaticbackport.mechanics.chestPairing=Unione delle casse della 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Le casse si uniscono come nella 1.13: una cassa piazzata mentre si è accovacciati resta singola, così due casse possono stare una accanto all'altra, e una cassa può essere piazzata accanto a una cassa grande. Una cassa grande resta com'è.

@@ -405,6 +405,11 @@ public final class ModConfig {
         @Config.Comment("Players in Creative can sleep with monsters nearby.")
         @Config.LangKey("config.updateaquaticbackport.mechanics.creativeSleep")
         public boolean creativeSleep = true;
+
+        @Config.Comment({"Chests join as in 1.13: a chest placed while sneaking stays single, so two chests can stand side by",
+                "side, and a chest can be placed beside a double chest. A double chest stays as it is."})
+        @Config.LangKey("config.updateaquaticbackport.mechanics.chestPairing")
+        public boolean chestPairing = true;
     }
 
     // ------------------------------------------------------------------------------------------

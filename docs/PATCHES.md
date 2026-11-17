@@ -11,9 +11,9 @@ jar too, so a dependent's dev run loads it) and, for `runServer`/`runClient`, by
 deobfuscation, so a release sees SRG member names and the dev environment MCP names; every transformer
 matches both. A transformer that does not find exactly the shape it expects changes nothing and logs
 `Patch ... skipped`; it never half-patches a class. Classes are written with `COMPUTE_MAXS` only, so no class
-is loaded while another is transformed; the one patch that adds a branch (P7, at the head of a method) adds its
-frame itself. P1 to P3 call `blocks/BlocksHooks`, which answers as vanilla 1.12.2 does when `blocks.enabled`
-is off; P7 to P10 call `mechanics/MechanicsHooks`, which answers as 1.12.2 does when the patch's own
+is loaded while another is transformed; the patches that add a branch (P7 and P11, each at the head of a method) add
+their frame themselves. P1 to P3 call `blocks/BlocksHooks`, which answers as vanilla 1.12.2 does when `blocks.enabled`
+is off; P7 to P10 call `mechanics/MechanicsHooks` and P11 `mechanics/ChestPairing`, which answers as 1.12.2 does when the patch's own
 `mechanics` setting is off.
 
 Fluidlogged API (3.3.3) transforms none of these five classes (its vanilla plugins are listed in its jar
@@ -176,6 +176,39 @@ under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin`, `BlockLog`, 
     `noMonstersNear(list, this)`: empty, or the player is in Creative and the setting is on.
 *   **Tested**: with a zombie near, a survival player gets `NOT_SAFE`, a Creative one `OK`, and with the setting
     off `NOT_SAFE` again.
+
+## P11. Chests pair by a stored pairing
+
+*   **Classes**: `net.minecraft.block.BlockChest`, `net.minecraft.tileentity.TileEntityChest`, Forge's
+    `net.minecraftforge.items.VanillaDoubleChestItemHandler`. **Transformer**: `asm/ChestPairingPatch`. **Hooks**:
+    `mechanics/ChestPairing`. **Setting**: `mechanics.chestPairing`. **Since**: after 1.1.1 (unreleased).
+*   **Vanilla 1.13+** (17w47a): a chest's `type` (single, left, right) is part of its block state.
+    `ChestBlock.getStateForPlacement`: the chest faces the player; sneaking against the side of a single chest joins
+    that chest (with its facing); sneaking otherwise leaves it single; placed normally it joins a single chest of the
+    same kind on its left or right that faces the same way. A chest can be placed anywhere, beside a double chest or
+    between two chests (it stays single, or joins one). Breaking a half leaves the other single. 1.12.2 pairs any two
+    chests of a kind that touch, every time it looks (`getContainer`, `getBoundingBox`, `TileEntityChest.getAdjacentChest`,
+    Forge's item handler), so it refuses a third chest beside a double and can never keep two side by side apart.
+*   **Why a patch**: every reader recomputes the pairing from the neighbors inside vanilla's methods; there is no
+    event, and the block's metadata (its facing, values 2 to 5) has no room for a type.
+*   **What changes**: the pairing is stored in the chest tile entity's Forge data (`UpdateAquaticChestPair`: -1 single,
+    else the direction's index), saved with it and sent with the chunk. These methods start with
+    `if (ChestPairing.handles(this)) return ChestPairing.<hook>(...)`: `BlockChest.getStateForPlacement`,
+    `onBlockPlacedBy`, `canPlaceBlockAt`, `getContainer` (inventories, hoppers, comparators), `getBoundingBox`,
+    `onBlockAdded` (returns: 1.12.2 turned neighbors to line up), `TileEntityChest.getAdjacentChest` (which fills the
+    public `adjacentChestXNeg/XPos/ZNeg/ZPos` the renderer, the lid and other mods read) and Forge's
+    `VanillaDoubleChestItemHandler.get`. `breakBlock` first calls `ChestPairing.broken` (the other half becomes single).
+    `TileEntityChest` gets `getUpdatePacket` (its update tag, when the chest is handled) and `onDataPacket` (takes the
+    pairing), so a change reaches clients after the block update that `ChestPairing` sends. `handles` is true only for
+    vanilla's chest and trapped chest with vanilla's tile entity class, with the setting on; another mod's chest
+    subclass keeps 1.12.2's code.
+*   **Old chests**: a chest without a stored pairing pairs as 1.12.2 would, with a neighbor of its kind that has none
+    either and pairs back (west, east, north, south), and the server then stores it (only with the area around loaded,
+    so a pair across an unloaded chunk border is not split). A stored pairing counts only while the other half stores
+    the way back.
+*   **Fails safe**: a class not as expected is left whole (each logs); with `BlockChest` unpatched, placement and
+    containers stay 1.12.2's.
+*   **Tested** (`-Pselftest=chests`, and `runClient -Pselftest=clientmech`): see `docs/streams/mechanics.md`.
 
 ## P4 and P5: moved to Backport Core
 

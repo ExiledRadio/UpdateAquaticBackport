@@ -415,6 +415,8 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Champignon de la cabane 
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=Le pot de fleurs d'une cabane de sorcière contient un champignon rouge, dans les chunks nouvellement générés.
 config.updateaquaticbackport.mechanics.creativeSleep=Dormir en Créatif près des monstres
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Les joueurs en mode Créatif peuvent dormir même avec des monstres à proximité.
+config.updateaquaticbackport.mechanics.chestPairing=Assemblage des coffres de la 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Les coffres s'assemblent comme en 1.13 : un coffre posé en étant accroupi reste seul, si bien que deux coffres peuvent être côte à côte, et un coffre peut être posé à côté d'un grand coffre. Un grand coffre reste tel qu'il est.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

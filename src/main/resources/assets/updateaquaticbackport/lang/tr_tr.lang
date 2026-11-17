@@ -415,6 +415,8 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Cadı Kulübesi Mantarı
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=Yeni oluşturulan yığınlarda, cadı kulübesindeki saksıda kırmızı bir mantar bulunur.
 config.updateaquaticbackport.mechanics.creativeSleep=Canavarların Yanında Yaratıcı Modda Uyku
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Yaratıcı Moddaki oyuncular, yakınlarda canavarlar olsa bile uyuyabilir.
+config.updateaquaticbackport.mechanics.chestPairing=1.13 Sandık Birleşmesi
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Sandıklar 1.13'teki gibi birleşir: eğilirken yerleştirilen sandık tek kalır, böylece iki sandık yan yana durabilir ve büyük bir sandığın yanına sandık yerleştirilebilir. Büyük sandık olduğu gibi kalır.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

@@ -136,3 +136,5 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=女巫小屋的蘑菇
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=在新生成的区块中，女巫小屋的花盆里种着一株红色蘑菇。
 config.updateaquaticbackport.mechanics.creativeSleep=创造模式下在怪物附近睡觉
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=创造模式下的玩家在附近有怪物时也能睡觉。
+config.updateaquaticbackport.mechanics.chestPairing=1.13 箱子合并
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=箱子按 1.13 的方式合并：潜行时放置的箱子保持单个，因此两个箱子可以并排放置，大型箱子旁边也可以放置箱子。大型箱子保持不变。
