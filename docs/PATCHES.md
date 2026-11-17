@@ -10,9 +10,11 @@ jar too, so a dependent's dev run loads it) and, for `runServer`/`runClient`, by
 (`build.gradle`; GradleStart merges the two, so it loads once). Sorting index 1001: after FML's
 deobfuscation, so a release sees SRG member names and the dev environment MCP names; every transformer
 matches both. A transformer that does not find exactly the shape it expects changes nothing and logs
-`Patch ... skipped`; it never half-patches a class. No patch adds a branch, so classes are written with
-`COMPUTE_MAXS` only and no class is loaded while another is transformed. The patched code calls
-`blocks/BlocksHooks`, which answers as vanilla 1.12.2 does when `blocks.enabled` is off.
+`Patch ... skipped`; it never half-patches a class. Classes are written with `COMPUTE_MAXS` only, so no class
+is loaded while another is transformed; the one patch that adds a branch (P7, at the head of a method) adds its
+frame itself. P1 to P3 call `blocks/BlocksHooks`, which answers as vanilla 1.12.2 does when `blocks.enabled`
+is off; P7 to P10 call `mechanics/MechanicsHooks`, which answers as 1.12.2 does when the patch's own
+`mechanics` setting is off.
 
 Fluidlogged API (3.3.3) transforms none of these five classes (its vanilla plugins are listed in its jar
 under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin`, `BlockLog`, `MapGenVillage` or `BiomeProvider`).
@@ -107,6 +109,73 @@ under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin`, `BlockLog`, 
     then a mosaic of quick changes between five water biomes (4-block cells with fuzzy edges), setting the option
     sets the radius, the water's tint is the 5x5 average, and screenshots from above at 3x3 and 5x5
     (`ua_blend_border_*.png`, `ua_blend_mosaic_*.png`) show the difference.
+
+## P7. Leaves stay up to 6 blocks from a log
+
+*   **Classes**: `net.minecraft.block.BlockLeaves`, `net.minecraft.block.BlockLog`. **Transformer**:
+    `asm/LeafDecayPatch`. **Hooks**: `MechanicsHooks.leavesTick`, `logBroken`. **Setting**: `mechanics.leafDistance`.
+    **Since**: after 1.1.1 (unreleased).
+*   **Vanilla 1.13+**: `LeavesBlock` keeps a `distance` (1 to 7) to the nearest log through leaves, and a leaf at 7
+    that is not persistent decays; so leaves up to 6 steps from a log stay. 1.12.2's `BlockLeaves.updateTick`
+    searches only 4 steps (a 9x9x9 cube), so large trees (big oaks, dark oaks, jungle and spruce giants, modded
+    trees) lose the outer canopy once something near them changes.
+*   **Why a patch**: the search is inside `updateTick`, with its range as constants and a fixed array; every
+    leaves block that extends `BlockLeaves` (vanilla's, most mods') runs it, and no event reaches it.
+*   **What changes**: `updateTick` starts with `if (MechanicsHooks.leavesTick(this, world, pos, state)) return;`.
+    With the setting on, the hook runs 1.12.2's check with 1.13's range: a leaf marked to check (`check_decay`)
+    that can decay stays (and is unmarked) if a block that sustains leaves is at most 6 steps away through leaves
+    (faces only, as both versions count), else it drops as vanilla's does. Surroundings not loaded leave the mark,
+    so a random tick checks again (1.12.2 decided on stale data). `BlockLog.breakBlock` starts with
+    `MechanicsHooks.logBroken(world, pos)`, which marks the leaves up to 6 around a broken log (vanilla's
+    marking, 4 around, follows), so leaves 5 and 6 from a log that goes are checked too.
+*   **Kept from 1.12.2**: leaves are still checked only when marked (a log or leaf near them went). 1.13 also
+    decays, on a random tick, any unmarked leaf already more than 6 from a log; that would strip leaves from
+    trees in existing worlds (and modded trees built with 1.12.2's rules) that 1.12.2 leaves alone, so it is
+    not done. Leaves 5 and 6 from a log persist, as in 1.13.
+*   **Fails safe**: a method not found leaves that class as 1.12.2 (logged). A leaves block without vanilla's
+    two properties, or one that overrides `updateTick` without calling it, keeps its own decay.
+*   **Tested** (`-Pselftest=mechanics`): distances 1 to 8 along a row; after the checks, leaves 1 to 6 stay
+    unmarked and 7 and 8 are gone; a leaf touching a log only by an edge is not held; with the setting off,
+    leaf 5 decays as in 1.12.2; breaking a log marks the leaf 6 away (not 7) and leaves 5 and 6 then decay.
+
+## P8. Signs and banners beside a cactus
+
+*   **Classes**: `net.minecraft.block.BlockSign`, `net.minecraft.block.BlockBanner`. **Transformer**:
+    `asm/CactusSignPatch`. **Hook**: `MechanicsHooks.cactusBeside`. **Setting**: `mechanics.cactusBreaksSigns`.
+    **Since**: after 1.1.1 (unreleased).
+*   **Vanilla 1.13+** (17w47a): signs and banners can be placed beside a cactus, and the cactus then breaks.
+    1.12.2's `canPlaceBlockAt` of both refuses a spot with a cactus beside it (`BlockContainer.hasInvalidNeighbor`).
+*   **What changes**: the boolean that `hasInvalidNeighbor` returns in each `canPlaceBlockAt` goes through
+    `cactusBeside(boolean)`, false with the setting on. The rest is 1.12.2's own: the sign's neighbor update
+    reaches the cactus, which breaks beside a solid block (wood is solid); a wall sign on the cactus then loses
+    its support and drops too, as in 1.13.
+*   **Fails safe**: other than one such call, nothing is patched in that class.
+*   **Tested**: a sign and a banner can be placed beside a cactus (not with the setting off); a sign placed there
+    breaks the cactus.
+
+## P9. The witch hut's flower pot holds a red mushroom
+
+*   **Class**: `ComponentScatteredFeaturePieces$SwampHut`. **Transformer**: `asm/SwampHutPotPatch`. **Hook**:
+    `MechanicsHooks.swampHutPot`. **Setting**: `mechanics.witchHutMushroom` (new chunks). **Since**: after 1.1.1 (unreleased).
+*   **Vanilla 1.13+** (17w47a): the pot in a witch hut holds a red mushroom. 1.12.2 asks for one through the pot's
+    `contents` property, but that property is only drawn from the tile entity, so the pot is empty.
+*   **Why a patch**: the hut is built inside chunk population with no event of its own; finding huts afterwards
+    would mean reading the structure generator's private map.
+*   **What changes**: right after the `setBlockState` that follows `Blocks.FLOWER_POT` in `addComponentParts`,
+    `swampHutPot(this, world, box)` puts a red mushroom in the empty pots of the hut's part of the chunk.
+*   **Tested**: a hut built in a test area has a red mushroom in its pot; with the setting off, an empty pot.
+
+## P10. Creative players sleep with monsters nearby
+
+*   **Class**: `net.minecraft.entity.player.EntityPlayer`. **Transformer**: `asm/CreativeSleepPatch`. **Hook**:
+    `MechanicsHooks.noMonstersNear`. **Setting**: `mechanics.creativeSleep`. **Since**: after 1.1.1 (unreleased).
+*   **Vanilla 1.13+** (18w20a): a player in Creative can sleep while monsters are near. 1.12.2's `trySleep`
+    answers `NOT_SAFE` for anyone. Forge's sleep event can only refuse or answer for vanilla, not let the rest of
+    `trySleep` run.
+*   **What changes**: the method's one `List.isEmpty()` (the monsters near the bed) becomes
+    `noMonstersNear(list, this)`: empty, or the player is in Creative and the setting is on.
+*   **Tested**: with a zombie near, a survival player gets `NOT_SAFE`, a Creative one `OK`, and with the setting
+    off `NOT_SAFE` again.
 
 ## P4 and P5: moved to Backport Core
 

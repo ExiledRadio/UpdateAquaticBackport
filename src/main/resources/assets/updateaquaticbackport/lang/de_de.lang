@@ -145,6 +145,7 @@ color.updateaquaticbackport.red=Rot
 color.updateaquaticbackport.white=Weiß
 color.updateaquaticbackport.yellow=Gelb
 entity.updateaquaticbackport.cod.name=Kabeljau
+entity.updateaquaticbackport.item_frame.name=Rahmen
 entity.updateaquaticbackport.pufferfish.name=Kugelfisch
 entity.updateaquaticbackport.salmon.name=Lachs
 entity.updateaquaticbackport.tropical_fish.name=Tropenfisch
@@ -396,6 +397,24 @@ config.updateaquaticbackport.swimming.enabled=Schwimmen
 config.updateaquaticbackport.swimming.enabled.tooltip=Sprinte mit dem Kopf unter Wasser, um zu schwimmen: Du liegst flach in einer 0.6 Blöcke hohen Form, bist schneller, folgst deinem Blick und passt durch Lücken von einem Block. Auf einem Server zählt die Einstellung des Servers.
 config.updateaquaticbackport.swimming.crawling=Kriechen
 config.updateaquaticbackport.swimming.crawling.tooltip=Ist weder zum Stehen noch zum Schleichen Platz, kriechst du: flach am Boden mit Schleichgeschwindigkeit, bis wieder Platz ist. Das passiert, wenn du in eine Lücke von einem Block schwimmst oder unter einer geschlossenen Falltür.
+config.updateaquaticbackport.mechanics=Mechaniken
+config.updateaquaticbackport.mechanics.tooltip=Die Änderungen von 1.13 daran, wie sich bestehende Blöcke und Kreaturen verhalten: Laubzerfall, das Spawnen von Tintenfischen, Rahmen und kleinere Regeln.
+config.updateaquaticbackport.mechanics.leafDistance=Laub reicht 6 Blöcke weit
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=Laub bleibt erhalten, solange ein Stamm über anderes Laub höchstens 6 Blöcke entfernt ist (1.12.2: 4), sodass große Bäume ihre ganze Krone behalten. Gilt für jeden Laubblock, der den Zerfall von Vanilla nutzt.
+config.updateaquaticbackport.mechanics.squidBiomes=Tintenfische in Ozeanen und Flüssen
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=Tintenfische spawnen nur in Ozeanen und Flüssen, nicht in Sümpfen, Teichen oder anderem Wasser.
+config.updateaquaticbackport.mechanics.floorItemFrames=Rahmen auf Böden
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=Rahmen lassen sich auf Böden und an Decken setzen.
+config.updateaquaticbackport.mechanics.shapedOutlines=Blockumrisse nach Form
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=Der Umriss des Blocks, auf den du schaust, folgt seiner Form: Treppen, Zäune, Glasscheiben, Eisengitter, Trichter, Kessel, Braustände und andere werden nicht mehr als einfacher Kasten umrandet.
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=Schilder neben Kakteen
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=Schilder und Banner lassen sich neben einen Kaktus setzen, der dabei zerbricht.
+config.updateaquaticbackport.mechanics.placementSounds=Platzierungsgeräusche
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=Schilder, Banner, Köpfe und Redstone-Staub machen beim Platzieren ein Geräusch.
+config.updateaquaticbackport.mechanics.witchHutMushroom=Pilz in der Hexenhütte
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=Der Blumentopf in einer Hexenhütte enthält einen roten Pilz, in neu generierten Chunks.
+config.updateaquaticbackport.mechanics.creativeSleep=Schlafen im Kreativmodus trotz Monstern
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Spieler im Kreativmodus können schlafen, auch wenn Monster in der Nähe sind.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

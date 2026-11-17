@@ -145,6 +145,7 @@ color.updateaquaticbackport.red=Красный
 color.updateaquaticbackport.white=Белый
 color.updateaquaticbackport.yellow=Жёлтый
 entity.updateaquaticbackport.cod.name=Треска
+entity.updateaquaticbackport.item_frame.name=Рамка
 entity.updateaquaticbackport.pufferfish.name=Иглобрюх
 entity.updateaquaticbackport.salmon.name=Лосось
 entity.updateaquaticbackport.tropical_fish.name=Тропическая рыба
@@ -396,13 +397,31 @@ config.updateaquaticbackport.swimming.enabled=Плавание
 config.updateaquaticbackport.swimming.enabled.tooltip=Бегите, опустив голову под воду, чтобы плыть: вы ложитесь горизонтально в фигуру высотой 0.6 блока, двигаетесь быстрее, плывёте туда, куда смотрите, и пролезаете в проёмы высотой в один блок. На сервере действует настройка сервера.
 config.updateaquaticbackport.swimming.crawling=Ползание
 config.updateaquaticbackport.swimming.crawling.tooltip=Если нет места ни встать, ни красться, вы ползёте: лёжа на земле со скоростью крадущегося, пока снова не появится место. Это бывает, если заплыть в проём высотой в один блок или оказаться под закрытым люком.
+config.updateaquaticbackport.mechanics=Механики
+config.updateaquaticbackport.mechanics.tooltip=Изменения 1.13 в поведении существующих блоков и мобов: опадание листвы, появление спрутов, рамки и более мелкие правила.
+config.updateaquaticbackport.mechanics.leafDistance=Листва держится на 6 блоков
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=Листва не опадает, пока бревно находится не дальше 6 блоков через другую листву (1.12.2: 4), поэтому большие деревья сохраняют всю крону. Действует на все блоки листвы, использующие ванильное опадание.
+config.updateaquaticbackport.mechanics.squidBiomes=Спруты в океанах и реках
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=Спруты появляются только в океанах и реках, а не в болотах, прудах или любой другой воде.
+config.updateaquaticbackport.mechanics.floorItemFrames=Рамки на полу
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=Рамки можно ставить на пол и на потолок.
+config.updateaquaticbackport.mechanics.shapedOutlines=Контур блоков по форме
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=Контур блока, на который вы смотрите, повторяет его форму: ступеньки, заборы, стеклянные панели, железные прутья, воронки, котлы, зельеварки и другие больше не обводятся простым прямоугольным контуром.
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=Таблички рядом с кактусами
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=Таблички и флаги можно ставить рядом с кактусом, и он ломается.
+config.updateaquaticbackport.mechanics.placementSounds=Звуки установки
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=Таблички, флаги, головы и редстоуновая пыль издают звук при установке.
+config.updateaquaticbackport.mechanics.witchHutMushroom=Гриб в хижине ведьмы
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=В цветочном горшке хижины ведьмы растёт красный гриб — в недавно сгенерированных чанках.
+config.updateaquaticbackport.mechanics.creativeSleep=Сон в творческом режиме рядом с монстрами
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Игроки в творческом режиме могут спать, даже когда рядом есть монстры.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
 debug.copy_location.help=F3 + C = Скопировать координаты как команду /tp; удерживайте 10 секунд, чтобы вызвать сбой игры
 debug.copy_location.message=Координаты скопированы в буфер обмена
-options.biomeBlendRadius=Смешивание биомов
+options.biomeBlendRadius=Граница биомов
 debug.inspect.help=F3 + I = Скопировать в буфер обмена данные сущности или блока
 debug.inspect.client.block=В буфер обмена скопированы клиентские данные блока
 debug.inspect.client.entity=В буфер обмена скопированы клиентские данные сущности

@@ -145,6 +145,7 @@ color.updateaquaticbackport.red=Rood
 color.updateaquaticbackport.white=Wit
 color.updateaquaticbackport.yellow=Geel
 entity.updateaquaticbackport.cod.name=Kabeljauw
+entity.updateaquaticbackport.item_frame.name=Voorwerplijst
 entity.updateaquaticbackport.pufferfish.name=Kogelvis
 entity.updateaquaticbackport.salmon.name=Zalm
 entity.updateaquaticbackport.tropical_fish.name=Tropische vis
@@ -396,6 +397,24 @@ config.updateaquaticbackport.swimming.enabled=Zwemmen
 config.updateaquaticbackport.swimming.enabled.tooltip=Ren met je hoofd onder water om te zwemmen: je ligt plat in een vorm van 0.6 blok hoog, gaat sneller, zwemt waar je naartoe kijkt en past door openingen van één blok. Op een server telt de instelling van de server.
 config.updateaquaticbackport.swimming.crawling=Kruipen
 config.updateaquaticbackport.swimming.crawling.tooltip=Is er geen ruimte om te staan of te sluipen, dan kruip je: plat op de grond op sluipsnelheid, tot er weer ruimte is. Dat gebeurt als je een opening van één blok in zwemt, of onder een gesloten valluik.
+config.updateaquaticbackport.mechanics=Mechanica
+config.updateaquaticbackport.mechanics.tooltip=De wijzigingen van 1.13 aan hoe bestaande blokken en wezens zich gedragen: het vergaan van bladeren, het spawnen van inktvissen, voorwerplijsten en kleinere regels.
+config.updateaquaticbackport.mechanics.leafDistance=Bladeren reiken 6 blokken
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=Bladeren blijven bestaan zolang een stam via andere bladeren hooguit 6 blokken ver is (1.12.2: 4), zodat grote bomen hun hele kruin houden. Geldt voor elk bladerblok dat het vergaan van vanilla gebruikt.
+config.updateaquaticbackport.mechanics.squidBiomes=Inktvissen in oceanen en rivieren
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=Inktvissen spawnen alleen in oceanen en rivieren, niet in moerassen, vijvers of ander water.
+config.updateaquaticbackport.mechanics.floorItemFrames=Voorwerplijsten op vloeren
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=Voorwerplijsten kunnen op vloeren en plafonds worden geplaatst.
+config.updateaquaticbackport.mechanics.shapedOutlines=Blokomlijning volgens vorm
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=De omlijning van het blok waar je naar kijkt volgt de vorm ervan: trappen, hekken, glazen ruiten, ijzeren tralies, trechters, ketels, brouwstandaarden en andere worden niet meer als een gewone doos omlijnd.
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=Borden naast cactussen
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=Borden en baniers kunnen naast een cactus worden geplaatst, waardoor de cactus breekt.
+config.updateaquaticbackport.mechanics.placementSounds=Plaatsingsgeluiden
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=Borden, baniers, hoofden en redstonestof maken een geluid wanneer ze worden geplaatst.
+config.updateaquaticbackport.mechanics.witchHutMushroom=Paddenstoel in heksenhut
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=De bloempot in een heksenhut bevat een rode paddenstoel, in nieuw gegenereerde chunks.
+config.updateaquaticbackport.mechanics.creativeSleep=Creatief slapen bij monsters
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Spelers in de creatieve modus kunnen slapen terwijl er monsters in de buurt zijn.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

@@ -105,6 +105,11 @@ public final class ModConfig {
     @Setting.Feature(icon = "minecraft:trapdoor")
     public static final Swimming swimming = new Swimming();
 
+    @Config.LangKey("config.updateaquaticbackport.mechanics")
+    @Config.Comment("1.13's changes to how existing blocks and mobs behave: leaf decay, squid spawning, item frames and smaller rules.")
+    @Setting.Feature(icon = "minecraft:leaves")
+    public static final Mechanics mechanics = new Mechanics();
+
     // ------------------------------------------------------------------------------------------
     // Categories. Each stream owns exactly one.
     // ------------------------------------------------------------------------------------------
@@ -361,6 +366,45 @@ public final class ModConfig {
                 "there is room again: after swimming into a one-block gap, or under a closed trapdoor."})
         @Config.LangKey("config.updateaquaticbackport.swimming.crawling")
         public boolean crawling = true;
+    }
+
+    public static final class Mechanics {
+        @Config.Comment({"Leaves stay while a log is up to 6 blocks away through other leaves (1.12.2: 4), so large trees",
+                "keep their whole canopy. Applies to every leaves block that uses vanilla's decay."})
+        @Config.LangKey("config.updateaquaticbackport.mechanics.leafDistance")
+        public boolean leafDistance = true;
+
+        @Config.RequiresMcRestart
+        @Config.Comment("Squid spawn only in oceans and rivers, not in swamps, ponds or any other water.")
+        @Config.LangKey("config.updateaquaticbackport.mechanics.squidBiomes")
+        public boolean squidBiomes = true;
+
+        @Config.Comment("Item frames can be placed on floors and ceilings.")
+        @Config.LangKey("config.updateaquaticbackport.mechanics.floorItemFrames")
+        public boolean floorItemFrames = true;
+
+        @Setting.Client
+        @Config.Comment({"The outline of the block you look at follows its shape: stairs, fences, panes, iron bars, hoppers,",
+                "cauldrons, brewing stands and others are no longer outlined as a plain box."})
+        @Config.LangKey("config.updateaquaticbackport.mechanics.shapedOutlines")
+        public boolean shapedOutlines = true;
+
+        @Config.Comment("Signs and banners can be placed beside a cactus, which breaks it.")
+        @Config.LangKey("config.updateaquaticbackport.mechanics.cactusBreaksSigns")
+        public boolean cactusBreaksSigns = true;
+
+        @Config.Comment("Signs, banners, heads and redstone dust make a sound when placed.")
+        @Config.LangKey("config.updateaquaticbackport.mechanics.placementSounds")
+        public boolean placementSounds = true;
+
+        @Setting.NewChunks
+        @Config.Comment("The flower pot in a witch hut holds a red mushroom, in newly generated chunks.")
+        @Config.LangKey("config.updateaquaticbackport.mechanics.witchHutMushroom")
+        public boolean witchHutMushroom = true;
+
+        @Config.Comment("Players in Creative can sleep with monsters nearby.")
+        @Config.LangKey("config.updateaquaticbackport.mechanics.creativeSleep")
+        public boolean creativeSleep = true;
     }
 
     // ------------------------------------------------------------------------------------------
