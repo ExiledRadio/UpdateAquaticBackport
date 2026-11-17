@@ -415,6 +415,8 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Pilz in der Hexenhütte
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=Der Blumentopf in einer Hexenhütte enthält einen roten Pilz, in neu generierten Chunks.
 config.updateaquaticbackport.mechanics.creativeSleep=Schlafen im Kreativmodus trotz Monstern
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Spieler im Kreativmodus können schlafen, auch wenn Monster in der Nähe sind.
+config.updateaquaticbackport.mechanics.chestPairing=Truhenverbindung wie in 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Truhen verbinden sich wie in 1.13: Eine beim Schleichen platzierte Truhe bleibt einzeln, sodass zwei Truhen nebeneinander stehen können, und neben einer großen Truhe kann eine Truhe platziert werden. Eine große Truhe bleibt, wie sie ist.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

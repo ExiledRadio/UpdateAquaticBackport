@@ -415,6 +415,8 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Muchomor w chatce wiedź
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=Doniczka w chatce wiedźmy zawiera muchomor, w nowo wygenerowanych chunkach.
 config.updateaquaticbackport.mechanics.creativeSleep=Sen w trybie kreatywnym przy potworach
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Gracze w trybie kreatywnym mogą spać, gdy w pobliżu są potwory.
+config.updateaquaticbackport.mechanics.chestPairing=Łączenie skrzyń z 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Skrzynie łączą się jak w 1.13: skrzynia postawiona podczas skradania zostaje pojedyncza, więc dwie skrzynie mogą stać obok siebie, a skrzynię można postawić obok dużej skrzyni. Duża skrzynia pozostaje bez zmian.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

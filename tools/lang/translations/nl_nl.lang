@@ -136,3 +136,5 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Paddenstoel in heksenhut
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=De bloempot in een heksenhut bevat een rode paddenstoel, in nieuw gegenereerde chunks.
 config.updateaquaticbackport.mechanics.creativeSleep=Creatief slapen bij monsters
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Spelers in de creatieve modus kunnen slapen terwijl er monsters in de buurt zijn.
+config.updateaquaticbackport.mechanics.chestPairing=Kistkoppeling van 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Kisten koppelen zoals in 1.13: een kist die je sluipend plaatst blijft los, zodat twee kisten naast elkaar kunnen staan, en een kist kan naast een grote kist worden geplaatst. Een grote kist blijft zoals ze is.

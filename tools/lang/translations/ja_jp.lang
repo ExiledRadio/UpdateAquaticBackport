@@ -136,3 +136,5 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=ウィッチの小屋の
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=新しく生成されたチャンクでは、ウィッチの小屋の植木鉢に赤色のキノコが入ります。
 config.updateaquaticbackport.mechanics.creativeSleep=モンスターの近くでもクリエイティブで眠れる
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=クリエイティブモードのプレイヤーは、近くにモンスターがいても眠れます。
+config.updateaquaticbackport.mechanics.chestPairing=1.13のチェストの連結
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=チェストが1.13と同じように連結されます。スニークしながら置いたチェストは単体のままなので、2つのチェストを並べて置けます。また、ラージチェストの隣にもチェストを置けます。ラージチェストはそのままです。

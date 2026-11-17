@@ -18,6 +18,7 @@ import java.util.Map;
  *   <li>{@link CactusSignPatch}: signs and banners can be placed beside a cactus, which breaks it.</li>
  *   <li>{@link SwampHutPotPatch}: the witch hut's flower pot holds a red mushroom.</li>
  *   <li>{@link CreativeSleepPatch}: players in Creative sleep with monsters nearby.</li>
+ *   <li>{@link ChestPairingPatch}: chests pair by a stored pairing, as 1.13's do.</li>
  * The village biome point and the strongholds' and spawn point's biome search (1.0.0's P4 and P5) are
  * Backport Core's patches P9 and P8 since Core 1.1.0, shared by every backport of 1.13 and later.
  * </ul>
@@ -45,6 +46,7 @@ public final class UpdateAquaticPlugin implements IFMLLoadingPlugin {
                 CactusSignPatch.class.getName(),
                 SwampHutPotPatch.class.getName(),
                 CreativeSleepPatch.class.getName(),
+                ChestPairingPatch.class.getName(),
         };
     }
 

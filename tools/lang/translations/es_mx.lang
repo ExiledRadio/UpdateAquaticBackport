@@ -136,3 +136,5 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Hongo de la cabaña de b
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=La maceta de una cabaña de bruja contiene un hongo rojo, en los chunks recién generados.
 config.updateaquaticbackport.mechanics.creativeSleep=Dormir en creativo con monstruos cerca
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Los jugadores en modo creativo pueden dormir aunque haya monstruos cerca.
+config.updateaquaticbackport.mechanics.chestPairing=Unión de cofres de la 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Los cofres se unen como en la 1.13: un cofre colocado mientras te agachas queda solo, así que dos cofres pueden estar uno junto al otro, y se puede colocar un cofre junto a un cofre grande. Un cofre grande sigue como está.

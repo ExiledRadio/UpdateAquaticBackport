@@ -136,3 +136,5 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Witch Hut Mushroom
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=The flower pot in a witch hut holds a red mushroom, in newly generated chunks.
 config.updateaquaticbackport.mechanics.creativeSleep=Creative Sleep Near Monsters
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Players in Creative can sleep with monsters nearby.
+config.updateaquaticbackport.mechanics.chestPairing=1.13 Chest Pairing
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Chests join as in 1.13: a chest placed while sneaking stays single, so two chests can stand side by side, and a chest can be placed beside a double chest. A double chest stays as it is.

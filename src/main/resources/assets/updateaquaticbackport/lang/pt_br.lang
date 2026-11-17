@@ -415,6 +415,8 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Cogumelo da Cabana da Br
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=O Vaso de Flores de uma cabana de bruxa contém um Cogumelo Vermelho, em chunks recém-gerados.
 config.updateaquaticbackport.mechanics.creativeSleep=Dormir no Criativo Perto de Monstros
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Jogadores no Modo Criativo podem dormir mesmo com monstros por perto.
+config.updateaquaticbackport.mechanics.chestPairing=União de Baús da 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Os baús se unem como na 1.13: um baú colocado enquanto agachado fica sozinho, então dois baús podem ficar lado a lado, e um baú pode ser colocado ao lado de um baú grande. Um baú grande continua como está.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

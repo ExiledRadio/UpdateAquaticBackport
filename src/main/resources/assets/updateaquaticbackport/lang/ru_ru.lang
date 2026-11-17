@@ -415,6 +415,8 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Гриб в хижине
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=В цветочном горшке хижины ведьмы растёт красный гриб — в недавно сгенерированных чанках.
 config.updateaquaticbackport.mechanics.creativeSleep=Сон в творческом режиме рядом с монстрами
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Игроки в творческом режиме могут спать, даже когда рядом есть монстры.
+config.updateaquaticbackport.mechanics.chestPairing=Соединение сундуков из 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Сундуки соединяются как в 1.13: сундук, поставленный крадучись, остаётся одиночным, поэтому два сундука могут стоять рядом, а рядом с большим сундуком можно поставить сундук. Большой сундук остаётся как есть.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

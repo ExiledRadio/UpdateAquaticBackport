@@ -68,6 +68,7 @@ public final class SelfTestRunner {
             new FlatSelfTest(),
             new CommandsFurnaceSelfTest(),
             new MechanicsSelfTest(),
+            new ChestSelfTest(),
     };
 
     private final List<String> wanted;

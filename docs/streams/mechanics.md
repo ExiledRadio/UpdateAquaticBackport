@@ -2,8 +2,8 @@
 
 Package `mechanics` (client part `mechanics/client`). Config `mechanics`: `leafDistance`, `squidBiomes`,
 `floorItemFrames`, `shapedOutlines` (client), `cactusBreaksSigns`, `placementSounds`, `witchHutMushroom` (new
-chunks), `creativeSleep`, all on by default. Entity id 30 (block 30-34): `updateaquaticbackport:item_frame`. No
-packets, blocks or items. Patches P7 to P10 (`docs/PATCHES.md`). From the family audit of 2026-11-16
+chunks), `creativeSleep`, `chestPairing`, all on by default. Entity id 30 (block 30-34): `updateaquaticbackport:item_frame`. No
+packets, blocks or items. Patches P7 to P11 (`docs/PATCHES.md`). From the family audit of 2026-11-16
 (`family-notes/MECHANICS_AUDIT_2026-11-16.md`), its 1.13 rows.
 
 ## Changelog section
@@ -18,6 +18,9 @@ packets, blocks or items. Patches P7 to P10 (`docs/PATCHES.md`). From the family
 *   **Signs, banners, heads and redstone dust make a sound when placed.**
 *   **Witch huts have a red mushroom in their flower pot** (new chunks).
 *   **Players in Creative can sleep with monsters nearby.**
+*   **Chests join as in 1.13**: a chest placed while sneaking stays single, so two chests can stand side by side; a
+    chest can be placed beside a double chest or between two chests; a chest joins only a single chest of its kind
+    beside it that faces the same way (or, sneaking, the single chest whose side was clicked).
 
 ## How it works
 
@@ -48,6 +51,12 @@ packets, blocks or items. Patches P7 to P10 (`docs/PATCHES.md`). From the family
     `VoxelShape.forEachEdge` finds them and drawn as vanilla's box (black at 40%, 2 pixels, no depth writes). Not
     done: what the crosshair can target is 1.12.2's (1.12.2's stairs already target by their parts).
 *   **Cactus**: patch P8. **Witch hut**: patch P9. **Creative sleep**: patch P10.
+*   **Chests** (`ChestPairing`, patch P11): the pairing is stored per chest (tile entity Forge data) and every 1.12.2
+    reader of the neighbors asks it instead. First skipped (2026-11-17): 1.12.2 has no stored chest type and pairs by
+    looking at neighbors in five places; doing it means replacing all of them, which looked too invasive for a
+    low-impact item. Done after a player report, gated to vanilla's two chest blocks so other mods' chest subclasses
+    (Quark's chests, say) keep their own pairing; Iron Chests and other mods with their own chest blocks are
+    untouched. A mod that reads `adjacentChest*` on a vanilla chest sees the stored pairing.
 *   **Placement sounds** (`MechanicsContent.placeSound`, 17w47a): 1.12.2's sign, head and redstone items are not
     `ItemBlock`s, and its banner item places on its own; none plays a sound. Forge's place event (server) gives the
     block placed; for a sign, banner, head or redstone dust placed by anything but another mod's `ItemBlock`
@@ -55,12 +64,20 @@ packets, blocks or items. Patches P7 to P10 (`docs/PATCHES.md`). From the family
 
 ## Not done
 
-*   **Chests beside a double chest** (17w47a: a chest can be placed next to a double chest). 1.12.2's chests pair by
-    adjacency every time they are looked at (`TileEntityChest.checkForSurroundingChests`, `BlockChest.getContainer`),
-    not by a stored type as 1.13's `type=left/right` is; a third chest beside a double would make the double's half
-    see two partners (a broken render and inventory). Allowing it means replacing 1.12.2's chest pairing with
-    1.13's stored one, block, tile entity, renderer and container, which other mods' chest code relies on. Skipped.
 *   The 1.13 anvil's detailed collision (its outline is 1.13's; walking against it is still 1.12.2's box).
+
+## Tests (`-Pselftest=chests`)
+
+Chests placed by a real player's item use: two placed side by side while sneaking stay single (pairing, container
+size, `adjacentChest*` fields), through a block update and saved and read back; a normal placement joins a single
+chest facing the same way, saved; a third chest beside a double is allowed and single, the double unchanged; a chest
+placed between two singles joins the one on its left only; chests facing different ways do not join; sneaking against a
+single chest's side joins it with its facing; a trapped chest and a chest never join, two trapped chests do; a hopper
+sees 54 or 27 slots, a comparator reads the other half's items only for a double, the item handler has 54 or 27 slots;
+the update packet and tag carry the pairing; breaking a half leaves the other single; two chests without a stored
+pairing pair as 1.12.2 and get it stored; with the setting off the two singles are one double and a chest beside them is
+refused again, and with it on again they are single. Client (`clientmech`): a pair placed while sneaking opens as 27
+slots, a normal pair as 54, and `ua_mech_chests.png` shows the double and the two singles.
 
 ## Tests (`-Pselftest=mechanics`)
 

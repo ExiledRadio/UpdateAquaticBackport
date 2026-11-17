@@ -136,3 +136,5 @@ config.updateaquaticbackport.mechanics.witchHutMushroom=Гриб у хатині
 config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=У квітковому горщику хатини відьми росте червоний гриб — у щойно згенерованих чанках.
 config.updateaquaticbackport.mechanics.creativeSleep=Сон у творчому режимі поряд із монстрами
 config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Гравці у творчому режимі можуть спати, навіть коли поблизу є монстри.
+config.updateaquaticbackport.mechanics.chestPairing=З'єднання скринь з 1.13
+config.updateaquaticbackport.mechanics.chestPairing.tooltip=Скрині з'єднуються як у 1.13: скриня, поставлена під час підкрадання, лишається одиночною, тож дві скрині можуть стояти поруч, а поруч із великою скринею можна поставити скриню. Велика скриня лишається як є.
