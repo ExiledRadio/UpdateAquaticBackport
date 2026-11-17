@@ -145,6 +145,7 @@ color.updateaquaticbackport.red=Czerwony
 color.updateaquaticbackport.white=Biały
 color.updateaquaticbackport.yellow=Żółty
 entity.updateaquaticbackport.cod.name=Dorsz
+entity.updateaquaticbackport.item_frame.name=Ramka na przedmiot
 entity.updateaquaticbackport.pufferfish.name=Rozdymka
 entity.updateaquaticbackport.salmon.name=Łosoś
 entity.updateaquaticbackport.tropical_fish.name=Ryba tropikalna
@@ -396,6 +397,24 @@ config.updateaquaticbackport.swimming.enabled=Pływanie
 config.updateaquaticbackport.swimming.enabled.tooltip=Biegnij z głową pod wodą, aby płynąć: kładziesz się płasko w kształcie o wysokości 0.6 bloku, poruszasz się szybciej, płyniesz tam, gdzie patrzysz, i mieścisz się w szczelinach o wysokości jednego bloku. Na serwerze liczy się ustawienie serwera.
 config.updateaquaticbackport.swimming.crawling=Czołganie
 config.updateaquaticbackport.swimming.crawling.tooltip=Gdy nie ma miejsca, by stać ani się skradać, czołgasz się: płasko przy ziemi z prędkością skradania, dopóki znów nie będzie miejsca. Dzieje się tak po wpłynięciu w szczelinę o wysokości jednego bloku lub pod zamkniętą klapą.
+config.updateaquaticbackport.mechanics=Mechanika
+config.updateaquaticbackport.mechanics.tooltip=Zmiany z 1.13 w zachowaniu istniejących bloków i stworzeń: zanikanie liści, pojawianie się kałamarnic, ramki na przedmioty i drobniejsze zasady.
+config.updateaquaticbackport.mechanics.leafDistance=Liście sięgają 6 bloków
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=Liście pozostają, dopóki pień jest najwyżej 6 bloków dalej przez inne liście (1.12.2: 4), więc duże drzewa zachowują całą koronę. Dotyczy każdego bloku liści, który korzysta z zanikania z podstawowej gry.
+config.updateaquaticbackport.mechanics.squidBiomes=Kałamarnice w oceanach i rzekach
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=Kałamarnice pojawiają się tylko w oceanach i rzekach, a nie na bagnach, w stawach czy w innej wodzie.
+config.updateaquaticbackport.mechanics.floorItemFrames=Ramki na podłogach
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=Ramki na przedmioty można stawiać na podłogach i sufitach.
+config.updateaquaticbackport.mechanics.shapedOutlines=Obrys bloków zgodny z kształtem
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=Obrys bloku, na który patrzysz, podąża za jego kształtem: schody, płoty, szyby, żelazne kraty, leje, kotły, statywy alchemiczne i inne nie są już obrysowane jak zwykłe pudełko.
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=Tabliczki obok kaktusów
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=Tabliczki i sztandary można stawiać obok kaktusa, który wtedy się niszczy.
+config.updateaquaticbackport.mechanics.placementSounds=Dźwięki stawiania
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=Tabliczki, sztandary, głowy i sproszkowany redstone wydają dźwięk przy stawianiu.
+config.updateaquaticbackport.mechanics.witchHutMushroom=Muchomor w chatce wiedźmy
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=Doniczka w chatce wiedźmy zawiera muchomor, w nowo wygenerowanych chunkach.
+config.updateaquaticbackport.mechanics.creativeSleep=Sen w trybie kreatywnym przy potworach
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Gracze w trybie kreatywnym mogą spać, gdy w pobliżu są potwory.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

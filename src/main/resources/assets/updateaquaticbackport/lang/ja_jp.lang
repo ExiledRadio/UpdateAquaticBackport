@@ -145,6 +145,7 @@ color.updateaquaticbackport.red=赤色
 color.updateaquaticbackport.white=白色
 color.updateaquaticbackport.yellow=黄色
 entity.updateaquaticbackport.cod.name=タラ
+entity.updateaquaticbackport.item_frame.name=額縁
 entity.updateaquaticbackport.pufferfish.name=フグ
 entity.updateaquaticbackport.salmon.name=サケ
 entity.updateaquaticbackport.tropical_fish.name=熱帯魚
@@ -396,6 +397,24 @@ config.updateaquaticbackport.swimming.enabled=水泳
 config.updateaquaticbackport.swimming.enabled.tooltip=頭が水中にある状態でダッシュすると泳ぎます。高さ0.6ブロックの姿勢で横になり、速く移動し、視線の方向へ進み、1ブロックの隙間を通れます。サーバーではサーバーの設定が優先されます。
 config.updateaquaticbackport.swimming.crawling=這う
 config.updateaquaticbackport.swimming.crawling.tooltip=立つこともスニークすることもできない場所では、再び空間ができるまでスニークの速さで地面に伏せて這います。1ブロックの隙間に泳いで入ったときや、閉じたトラップドアの下などで起こります。
+config.updateaquaticbackport.mechanics=メカニクス
+config.updateaquaticbackport.mechanics.tooltip=1.13での既存のブロックとMobの挙動の変更です。葉の消滅、イカのスポーン、額縁、その他の細かなルールです。
+config.updateaquaticbackport.mechanics.leafDistance=葉が6ブロック先まで残る
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=他の葉を通じて6ブロック以内（1.12.2では4）に原木があれば葉が残るので、大きな木も葉をすべて保ちます。バニラの消滅処理を使うすべての葉ブロックに適用されます。
+config.updateaquaticbackport.mechanics.squidBiomes=海洋と河川のイカ
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=イカは海洋と河川にのみスポーンし、沼地や池などほかの水ではスポーンしません。
+config.updateaquaticbackport.mechanics.floorItemFrames=床に置ける額縁
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=額縁を床や天井に設置できます。
+config.updateaquaticbackport.mechanics.shapedOutlines=形に沿ったブロックの輪郭
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=見ているブロックの輪郭がその形に沿います。階段、フェンス、ガラス板、鉄格子、ホッパー、大釜、醸造台などが、ただの箱型の輪郭で表示されなくなります。
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=サボテンの隣の看板
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=看板と旗をサボテンの隣に設置でき、そのサボテンは壊れます。
+config.updateaquaticbackport.mechanics.placementSounds=設置音
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=看板、旗、頭、レッドストーンダストを設置すると音が鳴ります。
+config.updateaquaticbackport.mechanics.witchHutMushroom=ウィッチの小屋のキノコ
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=新しく生成されたチャンクでは、ウィッチの小屋の植木鉢に赤色のキノコが入ります。
+config.updateaquaticbackport.mechanics.creativeSleep=モンスターの近くでもクリエイティブで眠れる
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=クリエイティブモードのプレイヤーは、近くにモンスターがいても眠れます。
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

@@ -144,6 +144,7 @@ color.updateaquaticbackport.red=Red
 color.updateaquaticbackport.white=White
 color.updateaquaticbackport.yellow=Yellow
 entity.updateaquaticbackport.cod.name=Cod
+entity.updateaquaticbackport.item_frame.name=Item Frame
 entity.updateaquaticbackport.pufferfish.name=Pufferfish
 entity.updateaquaticbackport.salmon.name=Salmon
 entity.updateaquaticbackport.tropical_fish.name=Tropical Fish
@@ -395,6 +396,24 @@ config.updateaquaticbackport.swimming.enabled=Swimming
 config.updateaquaticbackport.swimming.enabled.tooltip=Sprint with your head under water to swim: you lie flat in a 0.6-block-tall shape, move faster and follow where you look, and fit through one-block gaps. On a server, the server's setting counts.
 config.updateaquaticbackport.swimming.crawling=Crawling
 config.updateaquaticbackport.swimming.crawling.tooltip=With no room to stand or sneak, you crawl instead, flat on the ground at sneaking speed, until there is room again: after swimming into a one-block gap, or under a closed trapdoor.
+config.updateaquaticbackport.mechanics=Mechanics
+config.updateaquaticbackport.mechanics.tooltip=1.13's changes to how existing blocks and mobs behave: leaf decay, squid spawning, item frames and smaller rules.
+config.updateaquaticbackport.mechanics.leafDistance=Leaves Reach 6 Blocks
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=Leaves stay while a log is up to 6 blocks away through other leaves (1.12.2: 4), so large trees keep their whole canopy. Applies to every leaves block that uses vanilla's decay.
+config.updateaquaticbackport.mechanics.squidBiomes=Squid in Oceans and Rivers
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=Squid spawn only in oceans and rivers, not in swamps, ponds or any other water.
+config.updateaquaticbackport.mechanics.floorItemFrames=Item Frames on Floors
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=Item frames can be placed on floors and ceilings.
+config.updateaquaticbackport.mechanics.shapedOutlines=Shaped Block Outlines
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=The outline of the block you look at follows its shape: stairs, fences, panes, iron bars, hoppers, cauldrons, brewing stands and others are no longer outlined as a plain box.
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=Signs Beside Cacti
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=Signs and banners can be placed beside a cactus, which breaks it.
+config.updateaquaticbackport.mechanics.placementSounds=Placement Sounds
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=Signs, banners, heads and redstone dust make a sound when placed.
+config.updateaquaticbackport.mechanics.witchHutMushroom=Witch Hut Mushroom
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=The flower pot in a witch hut holds a red mushroom, in newly generated chunks.
+config.updateaquaticbackport.mechanics.creativeSleep=Creative Sleep Near Monsters
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Players in Creative can sleep with monsters nearby.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

@@ -52,8 +52,10 @@ public final class ClientSetup {
         if (selftest != null && selftest.contains("client")) {
             try {
                 // `runClient -Pselftest=clientcmd`: command suggestions and the furnace book in a world.
+                // `runClient -Pselftest=clientmech`: floor item frames and shaped outlines, with screenshots.
                 String test = selftest.contains("clientwater") ? "ClientWaterTest"
-                        : selftest.contains("clientcmd") ? "ClientCommandsFurnaceTest" : "ClientLookFeelTest";
+                        : selftest.contains("clientcmd") ? "ClientCommandsFurnaceTest"
+                        : selftest.contains("clientmech") ? "ClientMechanicsTest" : "ClientLookFeelTest";
                 Class.forName("com.exiledradio.updateaquaticbackport.selftest." + test).getMethod("register").invoke(null);
             } catch (ReflectiveOperationException e) {
                 UpdateAquaticBackport.LOGGER.error("CLIENT SELFTEST DONE pass=0 fail=1: the test classes are not in this build", e);

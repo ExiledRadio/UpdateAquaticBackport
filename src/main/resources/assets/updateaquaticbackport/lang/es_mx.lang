@@ -145,6 +145,7 @@ color.updateaquaticbackport.red=Rojo
 color.updateaquaticbackport.white=Blanco
 color.updateaquaticbackport.yellow=Amarillo
 entity.updateaquaticbackport.cod.name=Bacalao
+entity.updateaquaticbackport.item_frame.name=Marco
 entity.updateaquaticbackport.pufferfish.name=Pez globo
 entity.updateaquaticbackport.salmon.name=Salmón
 entity.updateaquaticbackport.tropical_fish.name=Pez tropical
@@ -396,6 +397,24 @@ config.updateaquaticbackport.swimming.enabled=Nadar
 config.updateaquaticbackport.swimming.enabled.tooltip=Corre con la cabeza bajo el agua para nadar: te acuestas en una forma de 0.6 bloques de alto, vas más rápido, avanzas hacia donde miras y cabes por huecos de un bloque. En un servidor cuenta la opción del servidor.
 config.updateaquaticbackport.swimming.crawling=Gatear
 config.updateaquaticbackport.swimming.crawling.tooltip=Sin espacio para estar de pie ni agacharte, gateas: acostado en el suelo a la velocidad de agacharse, hasta que vuelva a haber espacio. Pasa al entrar nadando en un hueco de un bloque o debajo de una trampilla cerrada.
+config.updateaquaticbackport.mechanics=Mecánicas
+config.updateaquaticbackport.mechanics.tooltip=Los cambios de la 1.13 en cómo se comportan los bloques y las criaturas que ya existían: la descomposición de las hojas, la aparición de calamares, los marcos y reglas menores.
+config.updateaquaticbackport.mechanics.leafDistance=Las hojas alcanzan 6 bloques
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=Las hojas se mantienen mientras haya un tronco a 6 bloques como máximo a través de otras hojas (1.12.2: 4), así que los árboles grandes conservan toda su copa. Se aplica a todos los bloques de hojas que usan la descomposición vanilla.
+config.updateaquaticbackport.mechanics.squidBiomes=Calamares en océanos y ríos
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=Los calamares solo aparecen en océanos y ríos, no en pantanos, estanques ni en ninguna otra agua.
+config.updateaquaticbackport.mechanics.floorItemFrames=Marcos en el piso
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=Los marcos se pueden colocar en el piso y en el techo.
+config.updateaquaticbackport.mechanics.shapedOutlines=Contornos de bloque con forma
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=El contorno del bloque al que miras sigue su forma: las escaleras, las vallas, los paneles de vidrio, las barras de hierro, las tolvas, los calderos, los alambiques alquímicos y otros ya no se marcan como una simple caja.
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=Letreros junto a cactus
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=Los letreros y los estandartes se pueden colocar junto a un cactus, que se rompe.
+config.updateaquaticbackport.mechanics.placementSounds=Sonidos al colocar
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=Los letreros, los estandartes, las cabezas y el polvo de redstone hacen un sonido al colocarlos.
+config.updateaquaticbackport.mechanics.witchHutMushroom=Hongo de la cabaña de bruja
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=La maceta de una cabaña de bruja contiene un hongo rojo, en los chunks recién generados.
+config.updateaquaticbackport.mechanics.creativeSleep=Dormir en creativo con monstruos cerca
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Los jugadores en modo creativo pueden dormir aunque haya monstruos cerca.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and

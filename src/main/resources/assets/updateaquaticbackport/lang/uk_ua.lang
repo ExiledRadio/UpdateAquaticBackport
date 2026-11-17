@@ -145,6 +145,7 @@ color.updateaquaticbackport.red=Червоний
 color.updateaquaticbackport.white=Білий
 color.updateaquaticbackport.yellow=Жовтий
 entity.updateaquaticbackport.cod.name=Тріска
+entity.updateaquaticbackport.item_frame.name=Рамка для предметів
 entity.updateaquaticbackport.pufferfish.name=Скелезуб
 entity.updateaquaticbackport.salmon.name=Лосось
 entity.updateaquaticbackport.tropical_fish.name=Тропічна риба
@@ -396,13 +397,31 @@ config.updateaquaticbackport.swimming.enabled=Плавання
 config.updateaquaticbackport.swimming.enabled.tooltip=Біжіть, опустивши голову під воду, щоб плисти: ви лягаєте горизонтально у фігуру заввишки 0.6 блока, рухаєтеся швидше, пливете туди, куди дивитеся, і пролазите в отвори заввишки один блок. На сервері діє налаштування сервера.
 config.updateaquaticbackport.swimming.crawling=Повзання
 config.updateaquaticbackport.swimming.crawling.tooltip=Якщо немає місця ні встати, ні крастися, ви повзете: лежачи на землі зі швидкістю скрадання, доки знову не з'явиться місце. Так буває, якщо запливти в отвір заввишки один блок або опинитися під зачиненим люком.
+config.updateaquaticbackport.mechanics=Механіки
+config.updateaquaticbackport.mechanics.tooltip=Зміни 1.13 у поведінці наявних блоків і мобів: опадання листя, поява кальмарів, рамки для предметів і дрібніші правила.
+config.updateaquaticbackport.mechanics.leafDistance=Листя тримається на 6 блоків
+config.updateaquaticbackport.mechanics.leafDistance.tooltip=Листя не опадає, поки колода розташована не далі ніж за 6 блоків через інше листя (1.12.2: 4), тож великі дерева зберігають усю крону. Діє на всі блоки листя, що використовують ванільне опадання.
+config.updateaquaticbackport.mechanics.squidBiomes=Кальмари в океанах і річках
+config.updateaquaticbackport.mechanics.squidBiomes.tooltip=Кальмари з’являються лише в океанах і річках, а не на болотах, у ставках чи будь-якій іншій воді.
+config.updateaquaticbackport.mechanics.floorItemFrames=Рамки для предметів на підлозі
+config.updateaquaticbackport.mechanics.floorItemFrames.tooltip=Рамки для предметів можна розміщувати на підлозі й на стелі.
+config.updateaquaticbackport.mechanics.shapedOutlines=Контур блоків за формою
+config.updateaquaticbackport.mechanics.shapedOutlines.tooltip=Контур блока, на який ви дивитеся, повторює його форму: сходи, паркани, шибки, залізні ґрати, лійки, казани, варильні стійки та інші більше не обводяться простим прямокутним контуром.
+config.updateaquaticbackport.mechanics.cactusBreaksSigns=Таблички біля кактусів
+config.updateaquaticbackport.mechanics.cactusBreaksSigns.tooltip=Таблички та стяги можна ставити біля кактуса, і він ламається.
+config.updateaquaticbackport.mechanics.placementSounds=Звуки розміщення
+config.updateaquaticbackport.mechanics.placementSounds.tooltip=Таблички, стяги, голови й редстоуновий пил видають звук під час розміщення.
+config.updateaquaticbackport.mechanics.witchHutMushroom=Гриб у хатині відьми
+config.updateaquaticbackport.mechanics.witchHutMushroom.tooltip=У квітковому горщику хатини відьми росте червоний гриб — у щойно згенерованих чанках.
+config.updateaquaticbackport.mechanics.creativeSleep=Сон у творчому режимі поряд із монстрами
+config.updateaquaticbackport.mechanics.creativeSleep.tooltip=Гравці у творчому режимі можуть спати, навіть коли поблизу є монстри.
 
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
 debug.copy_location.help=F3 + C = Скопіювати розташування як команду /tp; тримайте 10 секунд, щоб спричинити збій гри
 debug.copy_location.message=Скопійовано розташування в буфер обміну
-options.biomeBlendRadius=Переливання біомів
+options.biomeBlendRadius=Зміш. біомів
 debug.inspect.help=F3 + I = Скопіювати в буфер обміну дані сутности чи блока
 debug.inspect.client.block=Клієнтські дані блока скопійовано до буфера обміну
 debug.inspect.client.entity=Клієнтські дані сутностей скопійовано до буфера обміну

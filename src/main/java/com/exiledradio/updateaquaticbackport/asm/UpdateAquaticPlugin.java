@@ -14,6 +14,10 @@ import java.util.Map;
  *   <li>{@link PumpkinGolemPatch}: the plain pumpkin no longer builds golems, however it is placed.</li>
  *   <li>{@link WoodPickBlockPatch}: middle-clicking 1.13's wood (a bark log) picks the wood item.</li>
  *   <li>{@link BiomeBlendPatch}: biome colors blend over 1.13's Biome Blend square instead of 1.12.2's 3x3.</li>
+ *   <li>{@link LeafDecayPatch}: leaves stay up to 6 blocks from a log (1.12.2: 4).</li>
+ *   <li>{@link CactusSignPatch}: signs and banners can be placed beside a cactus, which breaks it.</li>
+ *   <li>{@link SwampHutPotPatch}: the witch hut's flower pot holds a red mushroom.</li>
+ *   <li>{@link CreativeSleepPatch}: players in Creative sleep with monsters nearby.</li>
  * The village biome point and the strongholds' and spawn point's biome search (1.0.0's P4 and P5) are
  * Backport Core's patches P9 and P8 since Core 1.1.0, shared by every backport of 1.13 and later.
  * </ul>
@@ -37,6 +41,10 @@ public final class UpdateAquaticPlugin implements IFMLLoadingPlugin {
                 PumpkinGolemPatch.class.getName(),
                 WoodPickBlockPatch.class.getName(),
                 BiomeBlendPatch.class.getName(),
+                LeafDecayPatch.class.getName(),
+                CactusSignPatch.class.getName(),
+                SwampHutPotPatch.class.getName(),
+                CreativeSleepPatch.class.getName(),
         };
     }
 

@@ -4,6 +4,7 @@ import com.exiledradio.updateaquaticbackport.network.NetworkHandler;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
@@ -78,6 +79,12 @@ public final class UpdateAquaticBackport {
         com.exiledradio.updateaquaticbackport.turtle.TurtleContent.postInit();
         com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.postInit();
         com.exiledradio.updateaquaticbackport.mobs.MobsContent.postInit();
+    }
+
+    @Mod.EventHandler
+    public void loadComplete(FMLLoadCompleteEvent event) {
+        // After every mod's post-init: their biomes' spawn lists are final.
+        com.exiledradio.updateaquaticbackport.mechanics.SquidSpawning.loadComplete();
     }
 
     @Mod.EventHandler
