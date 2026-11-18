@@ -1,5 +1,13 @@
-# Unreleased
+# 1.2.0
 
+1.13's changes to existing blocks and mobs, each a setting in the new Mechanics category (all on).
+
+*   **Leaves stay up to 6 blocks from a log** (1.12.2: 4), so large trees keep their canopy. Every leaves block that uses vanilla's decay, modded ones included.
+*   **Chests join as in 1.13**: a chest placed while sneaking stays single, so two chests can stand side by side; a chest can be placed beside a double chest or between two chests; a chest joins only a single chest of its kind beside it that faces the same way (or, sneaking, the single chest whose side was clicked). Existing double chests stay as they are.
+*   **Item frames can be placed on floors and ceilings.**
+*   **The block outline follows the block's shape**: stairs, fences, panes, iron bars, hoppers, cauldrons, anvils, brewing stands and others are no longer outlined as a box.
+*   **Squid spawn only in oceans and rivers**, not in swamps, ponds or other water.
+*   **Smaller 1.13 rules**: signs and banners can be placed beside a cactus, which breaks it; signs, banners, heads and redstone dust make a sound when placed; witch huts have a red mushroom in their flower pot (new chunks); players in Creative can sleep with monsters nearby.
 *   **The scute is the "Turtle Scute"** while a 1.20.5-or-newer backport is installed, as 1.20.5 renamed it, in every language. Otherwise it stays 1.13's "Scute".
 
 # 1.1.1
