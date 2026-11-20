@@ -1,3 +1,9 @@
+# 1.2.1
+
+*   **Cauldron water is tinted by the biome's water color**, as in 1.13; with 1.13's water texture it was gray.
+*   **With Fluidlogged API, water and lava are lit flat** as vanilla lights them: no dark gradient along shores and walls
+    with smooth lighting on (Fluidlogged API's fluid model asked for ambient occlusion).
+
 # 1.2.0
 
 1.13's changes to existing blocks and mobs, each a setting in the new Mechanics category (all on).
