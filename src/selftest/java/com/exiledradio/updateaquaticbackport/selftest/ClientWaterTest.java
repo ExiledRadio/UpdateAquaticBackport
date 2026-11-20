@@ -204,6 +204,14 @@ public final class ClientWaterTest {
         UpdateAquaticBackport.LOGGER.info("WATER water block model: {}", model == null ? null : model.getClass().getName());
         // Fluidlogged API draws water with its own fluid model, which bakes the fluid's color into the vertices and
         // is tinted by the biome on top: it must be baked white, or every biome's water is tinted twice.
+        if (model instanceof com.exiledradio.updateaquaticbackport.water.client.WaterClient.FlatFluid) {
+            // Lit flat as vanilla's fluid renderer lights it: no shore-darkening gradient from ambient occlusion.
+            ok(!model.isAmbientOcclusion() && !model.isAmbientOcclusion(Blocks.WATER.getDefaultState()),
+                    "Fluidlogged API's water model is lit flat (no ambient occlusion)");
+            model = ((com.exiledradio.updateaquaticbackport.water.client.WaterClient.FlatFluid) model).wrapped();
+        } else {
+            ok(!model.getClass().getName().endsWith("BakedModelFluid"), "Fluidlogged API's water model is wrapped to be lit flat");
+        }
         if (model != null && model.getClass().getName().endsWith("BakedModelFluid")) {
             float[] argb = ReflectionHelper.getPrivateValue((Class<? super IBakedModel>) model.getClass(), model, "argb");
             ok(argb[0] == 1.0F && argb[1] == 1.0F && argb[2] == 1.0F && argb[3] == 1.0F,
@@ -214,6 +222,16 @@ public final class ClientWaterTest {
 
         ok(Biomes.PLAINS.getWaterColor() == WaterColors.DEFAULT_WATER, "plains water color " + hex(Biomes.PLAINS.getWaterColor()));
         ok(Biomes.SWAMPLAND.getWaterColor() == 0x617B64, "swamp water color " + hex(Biomes.SWAMPLAND.getWaterColor()));
+        // The cauldron's water: tinted (1.12.2's model has no tint, so 1.13's gray texture showed gray).
+        IBakedModel cauldron = mc.getBlockRendererDispatcher().getModelForState(
+                Blocks.CAULDRON.getDefaultState().withProperty(net.minecraft.block.BlockCauldron.LEVEL, 3));
+        int tinted = 0;
+        for (net.minecraft.client.renderer.block.model.BakedQuad q : cauldron.getQuads(null, null, 0L)) {
+            if ("minecraft:blocks/water_still".equals(q.getSprite().getIconName()) && q.getTintIndex() == 0) {
+                tinted++;
+            }
+        }
+        ok(tinted == 1, "the full cauldron's water quad carries tint 0 (" + tinted + " found)");
         blendChecks();
     }
 
@@ -415,5 +433,7 @@ public final class ClientWaterTest {
         int blockTint = mc.getBlockColors().colorMultiplier(mc.world.getBlockState(pos), mc.world, pos, 0);
         ok(w[2].equals(hex(tint)), w[0] + " (" + biome.getRegistryName() + "): BiomeColorHelper water tint " + hex(tint) + ", want " + w[2]);
         ok(w[2].equals(hex(blockTint)), w[0] + ": BlockColors water tint " + hex(blockTint) + ", want " + w[2]);
+        int cauldronTint = mc.getBlockColors().colorMultiplier(Blocks.CAULDRON.getDefaultState(), mc.world, pos, 0);
+        ok(w[2].equals(hex(cauldronTint)), w[0] + ": cauldron water tint " + hex(cauldronTint) + ", want " + w[2]);
     }
 }

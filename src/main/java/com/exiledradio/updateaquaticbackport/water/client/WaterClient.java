@@ -158,6 +158,119 @@ public final class WaterClient {
         }
     }
 
+    /**
+     * 1.12.2's cauldron models draw their water with {@code blocks/water_still} and no tint, and nothing colors the
+     * cauldron: with 1.13's gray texture its water was gray. 1.13 tints it by the biome's water color. The water quad
+     * of every filled cauldron model (whatever pack supplies it) gets tint 0, and {@link #cauldronColors} colors it.
+     */
+    @SubscribeEvent
+    public static void cauldronWater(ModelBakeEvent event) {
+        if (!waterTextureInPlace) {
+            return;
+        }
+        for (int level = 1; level <= 3; level++) {
+            net.minecraft.client.renderer.block.model.ModelResourceLocation key =
+                    new net.minecraft.client.renderer.block.model.ModelResourceLocation("minecraft:cauldron", "level=" + level);
+            net.minecraft.client.renderer.block.model.IBakedModel model = event.getModelRegistry().getObject(key);
+            if (model != null) {
+                event.getModelRegistry().putObject(key, new TintedCauldron(model));
+            }
+        }
+    }
+
+    /**
+     * Fluidlogged API draws water and lava with its own baked model ({@code BakedModelFluid}), which asks for ambient
+     * occlusion: with smooth lighting, water darkened toward every shore and wall in a gradient. Vanilla's fluid
+     * renderer (1.12.2's, and 1.13's onward) lights fluids flat, with no ambient occlusion, so vanilla's fluid models
+     * baked by Fluidlogged API are wrapped to say no. Without Fluidlogged API there is no such model and nothing changes.
+     */
+    @SubscribeEvent(priority = EventPriority.LOWEST) // after Fluidlogged API puts its models in (at LOW)
+    public static void flatFluids(ModelBakeEvent event) {
+        for (net.minecraft.client.renderer.block.model.ModelResourceLocation key : new java.util.ArrayList<>(event.getModelRegistry().getKeys())) {
+            net.minecraft.client.renderer.block.model.IBakedModel model = event.getModelRegistry().getObject(key);
+            if (model != null && FLUIDLOGGED_MODEL.equals(model.getClass().getName()) && vanillaFluid(model)) {
+                event.getModelRegistry().putObject(key, new FlatFluid(model));
+            }
+        }
+    }
+
+    /** Vanilla's water or lava, by the sprite (Fluidlogged API's model keys don't name the fluid). */
+    private static boolean vanillaFluid(net.minecraft.client.renderer.block.model.IBakedModel model) {
+        net.minecraft.client.renderer.texture.TextureAtlasSprite sprite = model.getParticleTexture();
+        String name = sprite == null ? "" : sprite.getIconName();
+        return name.startsWith("minecraft:blocks/water_") || name.startsWith("minecraft:blocks/lava_");
+    }
+
+    static final String FLUIDLOGGED_MODEL = "git.jbredwards.fluidlogged_api.mod.client.model.BakedModelFluid";
+
+    /** A fluid model lit flat, as vanilla's fluid renderer lights fluids; everything else is the wrapped model's. */
+    public static final class FlatFluid extends net.minecraftforge.client.model.BakedModelWrapper<net.minecraft.client.renderer.block.model.IBakedModel> {
+
+        FlatFluid(net.minecraft.client.renderer.block.model.IBakedModel model) {
+            super(model);
+        }
+
+        /** @return the model this wraps (Fluidlogged API's) */
+        public net.minecraft.client.renderer.block.model.IBakedModel wrapped() {
+            return this.originalModel;
+        }
+
+        @Override
+        public boolean isAmbientOcclusion() {
+            return false;
+        }
+
+        @Override
+        public boolean isAmbientOcclusion(net.minecraft.block.state.IBlockState state) {
+            return false;
+        }
+    }
+
+    /** The cauldron's water: the biome's water color (1.13's), only on the tint {@link #cauldronWater} gives it. */
+    @SubscribeEvent
+    public static void cauldronColors(net.minecraftforge.client.event.ColorHandlerEvent.Block event) {
+        event.getBlockColors().registerBlockColorHandler((state, world, pos, tint) -> {
+            if (tint != 0 || !waterTextureInPlace) {
+                return -1;
+            }
+            return world != null && pos != null ? net.minecraft.world.biome.BiomeColorHelper.getWaterColorAtPos(world, pos)
+                    : WaterColors.DEFAULT_WATER;
+        }, net.minecraft.init.Blocks.CAULDRON);
+    }
+
+    /** A cauldron model whose water quads carry tint 0; everything else is the wrapped model's. */
+    static final class TintedCauldron extends net.minecraftforge.client.model.BakedModelWrapper<net.minecraft.client.renderer.block.model.IBakedModel> {
+
+        private final java.util.Map<net.minecraft.util.EnumFacing, List<net.minecraft.client.renderer.block.model.BakedQuad>> sided =
+                new java.util.EnumMap<>(net.minecraft.util.EnumFacing.class);
+        private List<net.minecraft.client.renderer.block.model.BakedQuad> general;
+
+        TintedCauldron(net.minecraft.client.renderer.block.model.IBakedModel model) {
+            super(model);
+        }
+
+        @Override
+        public List<net.minecraft.client.renderer.block.model.BakedQuad> getQuads(@javax.annotation.Nullable net.minecraft.block.state.IBlockState state,
+                                                                                @javax.annotation.Nullable net.minecraft.util.EnumFacing side, long rand) {
+            // The cauldron's model doesn't depend on the state or the position, so each side is tinted once.
+            List<net.minecraft.client.renderer.block.model.BakedQuad> cached = side == null ? this.general : this.sided.get(side);
+            if (cached == null) {
+                cached = new java.util.ArrayList<>();
+                for (net.minecraft.client.renderer.block.model.BakedQuad q : this.originalModel.getQuads(state, side, rand)) {
+                    boolean water = !q.hasTintIndex() && q.getSprite() != null && "minecraft:blocks/water_still".equals(q.getSprite().getIconName());
+                    cached.add(water ? new net.minecraft.client.renderer.block.model.BakedQuad(q.getVertexData(), 0, q.getFace(), q.getSprite(),
+                            q.shouldApplyDiffuseLighting(), q.getFormat()) : q);
+                }
+                if (side == null) {
+                    this.general = cached;
+                } else {
+                    this.sided.put(side, cached);
+                }
+            }
+            return cached;
+        }
+    }
+
     // ---------------------------------------------------------------------------------- ticks
 
     @SubscribeEvent
