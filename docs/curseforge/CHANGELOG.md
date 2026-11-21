@@ -1,3 +1,7 @@
+# 1.2.2
+
+*   **26.1's baby turtle** when Game Drops Backport is installed: its new model and texture. It follows Game Drops' Baby Models setting; without Game Drops baby turtles look as before.
+
 # 1.2.1
 
 *   **Cauldron water is tinted by the biome's water color**, as in 1.13; with 1.13's water texture it was gray.
