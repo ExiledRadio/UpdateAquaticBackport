@@ -88,7 +88,7 @@ Existing worlds work. The new oceans show up in chunks you have not explored yet
 
 **[Buzzy Bees Backport](https://www.curseforge.com/minecraft/mc-mods/buzzy-bees-backport)**: with `doInsomnia` off, phantoms stop spawning. Drowned spawn eggs make baby drowned.
 
-**[Nether Update Backport](https://www.curseforge.com/minecraft/mc-mods/nether-update-backport)**: hoes mine dried kelp blocks fast, and this mod's blue ice works in the basalt generator.
+**[Nether Update Backport](https://www.curseforge.com/minecraft/mc-mods/nether-backport)**: hoes mine dried kelp blocks fast, and this mod's blue ice works in the basalt generator.
 
 **[Wild Update Backport](https://www.curseforge.com/minecraft/mc-mods/wild-update-backport)**: tropical fish live in mangrove swamps, and the swamps keep their own water color.
 
@@ -106,6 +106,14 @@ Minecraft 1.12.2 with Forge 14.23.5.2847 or newer, and [Backport Core](https://w
 
 ***
 
-Also by me: [Village & Pillage Backport](https://www.curseforge.com/minecraft/mc-mods/village-and-pillage-backport), [Enchantment Recipes](https://www.curseforge.com/minecraft/mc-mods/rlcraft-enchantment-recipes), which lets you craft enchanted books from mod materials, and [Villager Tomes](https://www.curseforge.com/minecraft/mc-mods/rlcraft-villager-tomes), which lets you teach a librarian the books you find.
+Also by me: [Village & Pillage Backport](https://www.curseforge.com/minecraft/mc-mods/villager-backport), [Enchantment Recipes](https://www.curseforge.com/minecraft/mc-mods/rlcraft-enchantment-recipes), which lets you craft enchanted books from mod materials, and [Villager Tomes](https://www.curseforge.com/minecraft/mc-mods/rlcraft-villager-tomes), which lets you teach a librarian the books you find.
 
-Not affiliated with Mojang. MIT license. Source: [github.com/ExiledRadio/UpdateAquaticBackport](https://github.com/ExiledRadio/UpdateAquaticBackport)
+## Credits
+
+**Original content: [Minecraft](https://www.minecraft.net), by [Mojang Studios](https://www.minecraft.net/en-us/about-minecraft).** Every feature this mod adds is from a later version of Minecraft. The textures, models, sounds, music and translations are Mojang's, taken from Minecraft's own game files, and remain theirs. The features' names and designs are Mojang's too.
+
+**How this mod differs from the original:** Minecraft's newer versions don't run on 1.12.2. This mod is a Forge mod for Minecraft 1.12.2 that reimplements those features on the older game, matching the newer versions as closely as it can. It is not a copy or port of another mod. Where 1.12.2 can't do something the same way, the description above says so.
+
+This is an unofficial fan project, made under Mojang's [Minecraft Usage Guidelines](https://www.minecraft.net/en-us/usage-guidelines). Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.
+
+The mod's own code is MIT licensed. Source: [github.com/ExiledRadio/UpdateAquaticBackport](https://github.com/ExiledRadio/UpdateAquaticBackport)
