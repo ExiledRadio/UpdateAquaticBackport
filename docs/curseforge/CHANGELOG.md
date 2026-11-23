@@ -1,5 +1,6 @@
 # 1.2.2
 
+*   **Fixed: ocean monuments on land and in lakes in Realistic Terrain Generation worlds.** With Backport Core 1.4.5 or later a monument there also needs deep water where it stands, so it only generates in RTG's deep oceans, and `/locate` and explorer maps point to the same places.
 *   **26.1's baby turtle** when Game Drops Backport is installed: its new model and texture. It follows Game Drops' Baby Models setting; without Game Drops baby turtles look as before.
 *   **Realistic Terrain Generation** (and its Unofficial fork): the new oceans now generate. RTG turned them into plains, since it only builds biomes registered with it.
 *   **Shipwrecks, ocean ruins and buried treasure in RTG worlds** go where RTG's biomes really are. They were placed by the biome map before RTG reshaped its coasts, so they could start in plains or rivers, and shipwrecks hung in the air over land.
