@@ -1,5 +1,7 @@
 package com.exiledradio.updateaquaticbackport.ocean;
 
+import com.exiledradio.backportcore.worldgen.MonumentTerrain;
+
 import net.minecraft.init.Biomes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.StructureOceanMonument;
@@ -18,6 +20,10 @@ import java.util.Random;
  * {@code OceanMonumentStructure} asks instead that the center be any deep ocean and the surroundings any
  * ocean or river, both squares measured from the chunk's block (9, 9). Everything else - the spacing (32 chunks, 5 apart), the seed, the structure, its
  * guardians and its saved name ("Monument") - is vanilla's own, so existing monuments are untouched.
+ *
+ * <p>Where the terrain does not follow the biome map, the monument also needs deep water where it stands (Backport
+ * Core's {@link MonumentTerrain}, from Core 1.4.5): in Realistic Terrain Generation worlds, whose terrain is built
+ * apart from the biome map, the biome rule alone put monuments on land and in lakes.
  */
 final class OceanMonuments extends StructureOceanMonument {
 
@@ -26,6 +32,9 @@ final class OceanMonuments extends StructureOceanMonument {
 
     private final List<Biome> spawnBiomes = new ArrayList<Biome>();
     private final List<Biome> waterBiomes = new ArrayList<Biome>();
+
+    /** False once an older Backport Core turned out to have no {@link MonumentTerrain}. */
+    private static boolean coreTerrain = true;
 
     OceanMonuments() {
         this.spawnBiomes.add(Biomes.DEEP_OCEAN);
@@ -60,6 +69,18 @@ final class OceanMonuments extends StructureOceanMonument {
         // 1.13 measures both squares from the chunk's block (9, 9); for the 29-block square that starts one 1:4
         // cell later than 1.12.2's (8, 8) does.
         return this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 9, chunkZ * 16 + 9, 16, this.spawnBiomes)
-                && this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 9, chunkZ * 16 + 9, 29, this.waterBiomes);
+                && this.world.getBiomeProvider().areBiomesViable(chunkX * 16 + 9, chunkZ * 16 + 9, 29, this.waterBiomes)
+                && deepEnough(chunkX, chunkZ);
+    }
+
+    private boolean deepEnough(int chunkX, int chunkZ) {
+        if (coreTerrain) {
+            try {
+                return MonumentTerrain.deepEnough(this.world, chunkX, chunkZ);
+            } catch (NoClassDefFoundError e) {
+                coreTerrain = false;
+            }
+        }
+        return true;
     }
 }
