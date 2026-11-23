@@ -81,12 +81,14 @@ public final class UpdateAquaticBackport {
         com.exiledradio.updateaquaticbackport.turtle.TurtleContent.postInit();
         com.exiledradio.updateaquaticbackport.dolphin.DolphinContent.postInit();
         com.exiledradio.updateaquaticbackport.mobs.MobsContent.postInit();
+        com.exiledradio.updateaquaticbackport.compat.RtgCompat.postInit();
     }
 
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
         // After every mod's post-init: their biomes' spawn lists are final.
         com.exiledradio.updateaquaticbackport.mechanics.SquidSpawning.loadComplete();
+        com.exiledradio.updateaquaticbackport.compat.PillarCompat.loadComplete();
     }
 
     @Mod.EventHandler

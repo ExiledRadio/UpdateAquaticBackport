@@ -1,6 +1,9 @@
 # 1.2.2
 
 *   **26.1's baby turtle** when Game Drops Backport is installed: its new model and texture. It follows Game Drops' Baby Models setting; without Game Drops baby turtles look as before.
+*   **Realistic Terrain Generation** (and its Unofficial fork): the new oceans now generate. RTG turned them into plains, since it only builds biomes registered with it.
+*   **Shipwrecks, ocean ruins and buried treasure in RTG worlds** go where RTG's biomes really are. They were placed by the biome map before RTG reshaped its coasts, so they could start in plains or rivers, and shipwrecks hung in the air over land.
+*   **Pillar**: structures meant for the surface are no longer built on sea floors covered in seagrass, kelp or coral. Underwater and above-water structures treat those blocks as water too.
 
 # 1.2.1
 
