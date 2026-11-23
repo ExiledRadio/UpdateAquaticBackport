@@ -94,6 +94,10 @@ Existing worlds work. The new oceans show up in chunks you have not explored yet
 
 **[Trails & Tales Backport](https://www.curseforge.com/minecraft/mc-mods/trails-tales-backport)**: ocean ruins get suspicious sand and gravel, and warm ruins hold sniffer eggs.
 
+**Realistic Terrain Generation** (and RTG Unofficial): the new oceans generate in RTG worlds, and shipwrecks, ocean ruins and buried treasure follow its coasts.
+
+**Pillar**: seagrass, kelp and coral count as water, so surface structures stay off the sea floor.
+
 ## Commands
 
 `/locate structure #minecraft:shipwreck` finds the nearest shipwreck. `#minecraft:ocean_ruin` and `minecraft:buried_treasure` work the same way.

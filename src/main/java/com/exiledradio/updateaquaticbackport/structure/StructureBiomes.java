@@ -1,6 +1,8 @@
 package com.exiledradio.updateaquaticbackport.structure;
 
 import com.exiledradio.backportcore.worldgen.StructurePlacements;
+import com.exiledradio.backportcore.worldgen.StructurePlacements.BiomePoint;
+import com.exiledradio.updateaquaticbackport.compat.RtgCompat;
 import com.exiledradio.updateaquaticbackport.common.OceanKind;
 
 import net.minecraft.init.Biomes;
@@ -33,7 +35,27 @@ public final class StructureBiomes {
      *         placement table), the block biome at (9, 9) for 1.13 to 1.15, the 1:4 cell at (4x + 2, 4z + 2) from 1.16
      */
     public static Biome middle(World world, int chunkX, int chunkZ) {
+        if (RtgCompat.handles(world)) {
+            // RTG repairs its biome map per chunk to fit its coasts; read the biome the chunk will really have.
+            int offset = offset(StructurePlacements.biomePoint());
+            Biome biome = RtgCompat.biomeAt(world, (chunkX << 4) + offset, (chunkZ << 4) + offset);
+            if (biome != null) {
+                return biome;
+            }
+        }
         return StructurePlacements.biomeAt(world.getBiomeProvider(), chunkX, chunkZ);
+    }
+
+    /** @return the block in the chunk (on both axes) that a biome point reads; the middle of the cell for 1:4 */
+    private static int offset(BiomePoint point) {
+        switch (point) {
+            case BLOCK_9_9:
+                return 9;
+            case QUART_CENTER:
+                return 10;
+            default:
+                return 8;
+        }
     }
 
     public static OceanKind ocean(World world, int chunkX, int chunkZ) {

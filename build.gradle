@@ -54,6 +54,9 @@ dependencies {
     // through Backport Core. On the dev classpath for runs and self-tests (which need it). deobfCompile maps
     // it to dev names, and FG2's GradleStart finds its coremod on the classpath. Never shade it.
     deobfCompile 'curse.maven:fluidlogged-api-485654:8445863'
+    // Realistic Terrain Generation Unofficial 1.1.0 (CurseForge 648514, file 4696300): optional, compile only, for
+    // compat/RtgOceans (the one class that links against it; RTG 6.1 has the same API there). Never shaded.
+    deobfProvided 'curse.maven:rtgu-648514:4696300'
 }
 
 // The mod carries a small coremod of its own (package asm, one transformer per patch, docs/PATCHES.md).
