@@ -421,14 +421,6 @@ config.updateaquaticbackport.mechanics.chestPairing.tooltip=Truhen verbinden sic
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
-debug.copy_location.help=F3 + C = Position als /tp‐Befehl kopieren oder 10 Sekunden gedrückt halten, um einen Absturz zu erzwingen
-debug.copy_location.message=Position wurde in die Zwischenablage kopiert
-options.biomeBlendRadius=Biomübergang
-debug.inspect.help=F3 + I = Block- oder Objektdaten in Zwischenablage kopieren
-debug.inspect.client.block=Clientseitige Blockdaten in die Zwischenablage kopiert
-debug.inspect.client.entity=Clientseitige Objektdaten in die Zwischenablage kopiert
-debug.inspect.server.block=Serverseitige Blockdaten in Zwischenablage kopiert
-debug.inspect.server.entity=Serverseitige Objektdaten in Zwischenablage kopiert
 
 # --- pickle ---
 tile.updateaquaticbackport.sea_pickle.name=Meeresgurke

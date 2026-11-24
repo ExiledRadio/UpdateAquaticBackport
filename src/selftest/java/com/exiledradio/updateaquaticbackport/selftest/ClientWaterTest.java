@@ -2,8 +2,8 @@ package com.exiledradio.updateaquaticbackport.selftest;
 
 import com.exiledradio.backportcore.presentation.option.SliderOption;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
-import com.exiledradio.updateaquaticbackport.lookfeel.LookAndFeel;
-import com.exiledradio.updateaquaticbackport.water.BiomeBlend;
+import com.exiledradio.backportcore.presentation.versions.Look113;
+import com.exiledradio.backportcore.presentation.versions.BiomeBlend;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -46,7 +46,7 @@ import java.util.List;
  * atlas's and the ones the fluid renderer and the water block model use) are 1.13's gray ones, and the biome
  * water colors; then it makes a flat water world for each of plains, swamp and warm ocean, checks the tint
  * the client gives the water there, and saves a screenshot of each ({@code eclipse/screenshots/ua_water_*.png}).
- * Biome Blend (1.13's, {@code water/BiomeBlend}): the average over a made-up border at each radius, the option's
+ * Biome Blend (1.13's, Backport Core's {@code versions/BiomeBlend}, patch P68): the average over a made-up border at each radius, the option's
  * range, default and label, and a last world whose client chunks get a jagged swamp and warm ocean border, shot from
  * above at 3x3 (1.12.2's) and 5x5 (1.13's default), then a mosaic of quick changes between five water biomes
  * ({@code ua_blend_border_*.png}, {@code ua_blend_mosaic_*.png}).
@@ -239,10 +239,10 @@ public final class ClientWaterTest {
 
     /** Swamp west of x = 0, plains from x = 0: the blend at (0, 64, 0) at each radius against the plain average. */
     private void blendChecks() {
-        SliderOption option = LookAndFeel.BIOME_BLEND;
+        SliderOption option = Look113.BIOME_BLEND;
         ok(option.defaultValue() == 2.0 && option.min() == 0.0 && option.max() == 7.0,
                 "Biome Blend is 1.13.2's: 0 to 7, default 2 (" + option.min() + ".." + option.max() + ", " + option.defaultValue() + ")");
-        ok(BiomeBlend.radius == LookAndFeel.biomeBlendRadius(), "the colors' radius follows the option: " + BiomeBlend.radius);
+        ok(BiomeBlend.radius == Look113.biomeBlendRadius(), "the colors' radius follows the option: " + BiomeBlend.radius);
         ok(option.get() != 2.0 || "5x5".equals(option.valueText()), "Biome Blend at 2 reads 5x5: " + option.valueText());
         IBlockAccess half = new IBlockAccess() {
             @Override public TileEntity getTileEntity(BlockPos pos) { return null; }
@@ -317,7 +317,7 @@ public final class ClientWaterTest {
             }
         }
         UpdateAquaticBackport.LOGGER.info("WATER border: {} on the client's chunks", what);
-        LookAndFeel.BIOME_BLEND.set(1.0);
+        Look113.BIOME_BLEND.set(1.0);
         ok(BiomeBlend.radius == 1, what + ": setting Biome Blend to 3x3 sets the colors' radius: " + BiomeBlend.radius);
         mc.renderGlobal.loadRenderers();
     }
@@ -352,7 +352,7 @@ public final class ClientWaterTest {
         }
         if (this.inWorld == 200 || this.inWorld == 520) {
             screenshot(mc, this.inWorld == 200 ? "ua_blend_border_3x3" : "ua_blend_mosaic_3x3");
-            LookAndFeel.BIOME_BLEND.set(2.0);
+            Look113.BIOME_BLEND.set(2.0);
             ok(BiomeBlend.radius == 2, "setting Biome Blend to 5x5 sets the colors' radius: " + BiomeBlend.radius);
         }
         if (this.inWorld == 360) {

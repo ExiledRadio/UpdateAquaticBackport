@@ -13,14 +13,14 @@ import java.util.Map;
  *   <li>{@link PumpkinHeadPatch}: the plain pumpkin is no longer worn on the head.</li>
  *   <li>{@link PumpkinGolemPatch}: the plain pumpkin no longer builds golems, however it is placed.</li>
  *   <li>{@link WoodPickBlockPatch}: middle-clicking 1.13's wood (a bark log) picks the wood item.</li>
- *   <li>{@link BiomeBlendPatch}: biome colors blend over 1.13's Biome Blend square instead of 1.12.2's 3x3.</li>
  *   <li>{@link LeafDecayPatch}: leaves stay up to 6 blocks from a log (1.12.2: 4).</li>
  *   <li>{@link CactusSignPatch}: signs and banners can be placed beside a cactus, which breaks it.</li>
  *   <li>{@link SwampHutPotPatch}: the witch hut's flower pot holds a red mushroom.</li>
  *   <li>{@link CreativeSleepPatch}: players in Creative sleep with monsters nearby.</li>
  *   <li>{@link ChestPairingPatch}: chests pair by a stored pairing, as 1.13's do.</li>
  * The village biome point and the strongholds' and spawn point's biome search (1.0.0's P4 and P5) are
- * Backport Core's patches P9 and P8 since Core 1.1.0, shared by every backport of 1.13 and later.
+ * Backport Core's patches P9 and P8 since Core 1.1.0, shared by every backport of 1.13 and later; Biome Blend
+ * (1.0.1's P6) is Core's P68 since Core 1.4.7.
  * </ul>
  * Sorted after FML's deobfuscation (index 1001), so a release sees SRG member names and the development
  * environment MCP names; every patch matches both. Each patch changes only the instructions it names, finds
@@ -41,7 +41,6 @@ public final class UpdateAquaticPlugin implements IFMLLoadingPlugin {
                 PumpkinHeadPatch.class.getName(),
                 PumpkinGolemPatch.class.getName(),
                 WoodPickBlockPatch.class.getName(),
-                BiomeBlendPatch.class.getName(),
                 LeafDecayPatch.class.getName(),
                 CactusSignPatch.class.getName(),
                 SwampHutPotPatch.class.getName(),

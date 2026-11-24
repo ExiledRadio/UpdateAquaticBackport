@@ -1,3 +1,10 @@
+# 1.2.3
+
+**Requires Backport Core 1.4.7 or newer.**
+
+*   **1.13's look and feel pieces moved into Backport Core**, so every backport of 1.13 or later has them, even without this mod: Biome Blend, Command Suggestions, F3 + C and F3 + I, 1.13's F3 text, the furnace recipe book and its textures, 1.13's splashes, Allow Snooper off by default and vanilla's text as 1.13 words it. Your Biome Blend and Command Suggestions settings carry over.
+*   The ocean panorama, the underwater fog and the underwater music stay in this mod.
+
 # 1.2.2
 
 *   **Fixed: ocean monuments on land and in lakes in Realistic Terrain Generation worlds.** With Backport Core 1.4.5 or later a monument there also needs deep water where it stands, so it only generates in RTG's deep oceans, and `/locate` and explorer maps point to the same places.

@@ -421,14 +421,6 @@ config.updateaquaticbackport.mechanics.chestPairing.tooltip=Kisten koppelen zoal
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
-debug.copy_location.help=F3 + C = Locatie als /tp-opdracht kopiëren. Houd F3 + C voor tien seconden ingedrukt om het spel te crashen.
-debug.copy_location.message=Locatie gekopieerd
-options.biomeBlendRadius=Klimaatovergang
-debug.inspect.help=F3 + I = Entiteit- of blokgegevens kopiëren
-debug.inspect.client.block=Blokgegevens van cliënt naar klembord gekopieerd
-debug.inspect.client.entity=Entiteitgegevens van cliënt naar klembord gekopieerd
-debug.inspect.server.block=Blokgegevens van de server naar klembord gekopieerd
-debug.inspect.server.entity=Entiteitgegevens van de server naar klembord gekopieerd
 
 # --- pickle ---
 tile.updateaquaticbackport.sea_pickle.name=Zeeaugurk

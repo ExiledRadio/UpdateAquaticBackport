@@ -421,14 +421,6 @@ config.updateaquaticbackport.mechanics.chestPairing.tooltip=상자가 1.13처럼
 # --- look and feel ---
 # Stream Lf: 1.13's F3+C and F3+I, and vanilla text 1.13 reworded on 1.12.2's own keys (a diff of the 1.12.2 and
 # 1.13.2 jars; left out: text 1.12.2's screens would show wrong, such as /experience or a '%s' it never fills).
-debug.copy_location.help=F3 + C = 위치를 /tp 명령어로 복사, 10초 동안 누르고 있으면 게임에 크래시를 발생시킴
-debug.copy_location.message=위치를 클립보드에 복사했습니다
-options.biomeBlendRadius=생물 군계 혼합
-debug.inspect.help=F3 + I = 개체 또는 블록 데이터를 클립보드에 복사
-debug.inspect.client.block=클라이언트 측 블록 데이터를 클립보드에 복사했습니다
-debug.inspect.client.entity=클라이언트 측 개체 데이터를 클립보드에 복사했습니다
-debug.inspect.server.block=서버 측 블록 데이터를 클립보드에 복사했습니다
-debug.inspect.server.entity=서버 측 개체 데이터를 클립보드에 복사했습니다
 
 # --- pickle ---
 tile.updateaquaticbackport.sea_pickle.name=불우렁쉥이

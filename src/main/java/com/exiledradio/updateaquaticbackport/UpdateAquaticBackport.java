@@ -32,7 +32,7 @@ import org.apache.logging.log4j.Logger;
         acceptedMinecraftVersions = "[1.12.2]",
         // Newer releases, read by Forge's update check and Backport Core's settings screen.
         updateJSON = "https://raw.githubusercontent.com/ExiledRadio/BackportCore/main/updates/updateaquaticbackport.json",
-        dependencies = "required-after:backportcore@[1.3.0,)"
+        dependencies = "required-after:backportcore@[1.4.7,)"
 )
 public final class UpdateAquaticBackport {
 

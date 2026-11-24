@@ -9,7 +9,7 @@ import com.exiledradio.backportcore.presentation.client.FogPipeline;
 import com.exiledradio.backportcore.presentation.client.PanoramaRenderer;
 import com.exiledradio.backportcore.presentation.client.TitleSplashes;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
-import com.exiledradio.updateaquaticbackport.lookfeel.client.LookAndFeelClient;
+import com.exiledradio.backportcore.presentation.versions.client.Look113Client;
 import com.exiledradio.updateaquaticbackport.lookfeel.client.UnderwaterFogStep;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -117,14 +117,14 @@ public final class ClientLookFeelTest {
         List<String> fog = FogPipeline.steps().names(newest);
         ok(fog.toString().contains(UnderwaterFogStep.NAME), "the underwater fog is a step of Core's fog pipeline: " + fog);
 
-        ok("/tp @s 1.50 64.00 -2.25 90.00 -10.00".equals(LookAndFeelClient.locationCommand(1.5, 64, -2.25, 90, -10)),
-                "F3+C's command: " + LookAndFeelClient.locationCommand(1.5, 64, -2.25, 90, -10));
-        String block = LookAndFeelClient.blockCommand(Blocks.FURNACE.getDefaultState().withProperty(
+        ok("/tp @s 1.50 64.00 -2.25 90.00 -10.00".equals(Look113Client.locationCommand(1.5, 64, -2.25, 90, -10)),
+                "F3+C's command: " + Look113Client.locationCommand(1.5, 64, -2.25, 90, -10));
+        String block = Look113Client.blockCommand(Blocks.FURNACE.getDefaultState().withProperty(
                 net.minecraft.block.BlockFurnace.FACING, EnumFacing.EAST), new BlockPos(1, 2, 3), tag());
         ok("/setblock 1 2 3 minecraft:furnace facing=east replace {CookTime:5}".equals(block), "F3+I's block command: " + block);
-        String plain = LookAndFeelClient.blockCommand(Blocks.DIRT.getDefaultState(), new BlockPos(0, 0, 0), null);
+        String plain = Look113Client.blockCommand(Blocks.DIRT.getDefaultState(), new BlockPos(0, 0, 0), null);
         ok(plain.startsWith("/setblock 0 0 0 minecraft:dirt ") && !plain.contains("replace"), "F3+I without data: " + plain);
-        String entity = LookAndFeelClient.entityCommand(new ResourceLocation("minecraft:pig"), 1, 2, 3, entityTag());
+        String entity = Look113Client.entityCommand(new ResourceLocation("minecraft:pig"), 1, 2, 3, entityTag());
         ok("/summon minecraft:pig 1.00 2.00 3.00 {Saddle:1b}".equals(entity), "F3+I's entity command drops UUID, Pos and Dimension: " + entity);
         ok(EntityList.getKey(net.minecraft.entity.passive.EntityPig.class) != null, "entity ids resolve");
 

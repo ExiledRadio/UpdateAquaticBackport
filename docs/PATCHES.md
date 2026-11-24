@@ -82,34 +82,6 @@ under `mod/asm/plugins/vanilla`: no `EntityLiving`, `BlockPumpkin`, `BlockLog`, 
     item; an upright log of each type still picks its log with the right metadata; stone picks stone. The
     client's middle click itself (`ForgeHooks.onPickBlock`) is not run headlessly.
 
-## P6. Biome colors blend over 1.13's Biome Blend square
-
-*   **Class**: `net.minecraft.world.biome.BiomeColorHelper` (client only). **Transformer**: `asm/BiomeBlendPatch`.
-    **Hook**: `water/BiomeBlend.low()`, `high()`, `count()`. **Since**: 1.0.1.
-*   **Vanilla 1.13+**: 1.13.2's Video Settings end with Biome Blend (`options.biomeBlendRadius`, saved as
-    `biomeBlendRadius`, 0 to 7, default 2). Its `BiomeColors` averages the grass, foliage and water colors over the
-    `(2r+1)x(2r+1)` columns around a block at its height, one color per block (not per corner), shown as OFF, 3x3 ...
-    15x15. 1.12.2 always averages 3x3. With 1.13's water colors, which differ far more between biomes than 1.12.2's
-    (an ocean's blue beside a swamp's green, a warm ocean's cyan beside a cold ocean's blue), 3x3 draws a hard,
-    blocky band at every border; 1.13's default 5x5 spreads it over five blocks.
-*   **Why a patch**: every biome tint in 1.12.2 goes through `BiomeColorHelper.getColorAtPos` (private), whose
-    square and divisor are constants: vanilla's water, grass, leaves and vines, Forge's fluid renderer, Fluidlogged
-    API's water (its `PluginFluidWater` asks `getWaterColorAtPos`), this mod's water surfaces and other mods'
-    blocks. Replacing each caller's `IBlockColor` would miss the rest.
-*   **What changes**: in `getColorAtPos(IBlockAccess, BlockPos, ColorResolver)`, the `ICONST_M1`s and `ICONST_1`s
-    given as x and z to the two `BlockPos.add(int, int, int)` calls become `BiomeBlend.low()` and `high()`, and the
-    three `BIPUSH 9` before an `IDIV` become `BiomeBlend.count()`. `BiomeBlend.radius` is set by the client from
-    the option (`lookfeel/LookAndFeel.BIOME_BLEND`, Video Settings after Entity Shadows), and a change rebuilds
-    the chunks (`RenderGlobal.loadRenderers`), as 1.13's does.
-*   **Fails safe**: if the method does not have exactly those two calls with those corners and three such
-    divisors (OptiFine or another mod rewrote it), nothing is patched and colors blend 3x3 as in 1.12.2.
-*   **Tested** (`runClient -Pselftest=clientwater`, with and without Fluidlogged API): the option is 0 to 7,
-    default 2, and reads 5x5; at a made-up swamp and plains border, `getWaterColorAtPos` at every radius 0 to 7 is
-    the plain average of its square; in a world whose client chunks get a jagged swamp and warm ocean border and
-    then a mosaic of quick changes between five water biomes (4-block cells with fuzzy edges), setting the option
-    sets the radius, the water's tint is the 5x5 average, and screenshots from above at 3x3 and 5x5
-    (`ua_blend_border_*.png`, `ua_blend_mosaic_*.png`) show the difference.
-
 ## P7. Leaves stay up to 6 blocks from a log
 
 *   **Classes**: `net.minecraft.block.BlockLeaves`, `net.minecraft.block.BlockLog`. **Transformer**:
@@ -216,6 +188,12 @@ The villages' 1.13 biome point (P4) and the 1.13 pick of the strongholds' and sp
 are Backport Core 1.1.0's patches P9 and P8 now (its `docs/PATCHES.md`), shared by every backport of 1.13 and
 later, so each of them alone gets them. This mod only registers 1.13's structure numbers with Core's placement
 table (`structure/Placement113`). The numbers P4 and P5 had are not reused.
+
+## P6: moved to Backport Core
+
+Biome Blend (1.0.1's P6, `asm/BiomeBlendPatch` and `water/BiomeBlend`) is Backport Core's patch P68 since Core 1.4.7
+and this mod's 1.2.3, with its Video Settings option (still `updateaquaticbackport:biome_blend_radius`), so every
+backport of 1.13 and later has it.
 
 ## Not in this coremod: swimming and crawling
 

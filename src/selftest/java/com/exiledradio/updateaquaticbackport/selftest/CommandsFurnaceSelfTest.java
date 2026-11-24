@@ -9,7 +9,7 @@ import com.exiledradio.backportcore.recipe.book.SmeltingBooks;
 import com.exiledradio.backportcore.recipe.book.SmeltingPlacer;
 import com.exiledradio.backportcore.recipe.book.SmeltingRecipe;
 import com.exiledradio.updateaquaticbackport.UpdateAquaticBackport;
-import com.exiledradio.updateaquaticbackport.lookfeel.LookAndFeel;
+import com.exiledradio.backportcore.presentation.versions.Look113;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ContainerFurnace;
@@ -40,12 +40,12 @@ public final class CommandsFurnaceSelfTest implements SelfTest {
     @Override
     public void run(Check c) throws Exception {
         c.section("command suggestions");
-        c.ok(Presentation.commandSuggestions() == LookAndFeel.AUTO_SUGGEST, "1.13 turns command suggestions on with its option");
-        c.ok(LookAndFeel.AUTO_SUGGEST.defaultValue(), "Command Suggestions is on by default");
-        c.eq("options.autoSuggestCommands", LookAndFeel.AUTO_SUGGEST.labelKey(), "the option's label is vanilla's");
+        c.ok(Presentation.commandSuggestions() == Look113.AUTO_SUGGEST, "1.13 turns command suggestions on with Core's option");
+        c.ok(Look113.AUTO_SUGGEST.defaultValue(), "Command Suggestions is on by default");
+        c.eq("options.autoSuggestCommands", Look113.AUTO_SUGGEST.labelKey(), "the option's label is vanilla's");
         boolean onChat = false;
         for (PresentationOption o : Presentation.optionsOn(OptionScreen.CHAT)) {
-            onChat |= o == LookAndFeel.AUTO_SUGGEST;
+            onChat |= o == Look113.AUTO_SUGGEST;
         }
         c.ok(onChat, "Command Suggestions shows on Chat Settings");
 
@@ -93,9 +93,11 @@ public final class CommandsFurnaceSelfTest implements SelfTest {
         player.openContainer = player.inventoryContainer;
         c.world.setBlockToAir(pos);
 
-        c.section("1.13.2 textures");
+        c.section("1.13.2 textures (Backport Core's since 1.4.7)");
         for (String path : new String[] {"recipe_book.png", "recipe_button.png"}) {
-            c.ok(Presentation.newest() != null && hasAsset(path), path + " is shipped");
+            ResourceLocation served = Presentation.coreContribution("1.13").replacedAssets().get("textures/gui/" + path);
+            c.ok(served != null && hasAsset(served), path + " is served from Core's jar: " + served);
+            c.ok(!hasAsset(new ResourceLocation(ID, "textures/gui/" + path)), path + " is no longer in this mod's jar");
         }
     }
 
@@ -109,8 +111,8 @@ public final class CommandsFurnaceSelfTest implements SelfTest {
         return n;
     }
 
-    private static boolean hasAsset(String file) throws java.io.IOException {
-        try (InputStream in = CommandsFurnaceSelfTest.class.getResourceAsStream("/assets/" + ID + "/textures/gui/" + file)) {
+    private static boolean hasAsset(ResourceLocation rl) throws java.io.IOException {
+        try (InputStream in = CommandsFurnaceSelfTest.class.getResourceAsStream("/assets/" + rl.getNamespace() + "/" + rl.getPath())) {
             return in != null;
         }
     }

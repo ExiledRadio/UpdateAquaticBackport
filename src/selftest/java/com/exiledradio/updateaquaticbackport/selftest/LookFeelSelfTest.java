@@ -23,7 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/** Stream Lf: 1.13's look and feel registered with Backport Core, its assets, the default and the lang overrides. */
+/**
+ * Stream Lf: 1.13's look and feel registered with Backport Core and its assets; the default, the splashes and the lang
+ * overrides that Backport Core 1.4.7 took over are checked as Core now serves them with this mod installed.
+ */
 public final class LookFeelSelfTest implements SelfTest {
 
     private static final String ID = UpdateAquaticBackport.MOD_ID;
@@ -48,7 +51,10 @@ public final class LookFeelSelfTest implements SelfTest {
         c.eq(GameVersion.parse("1.13"), Presentation.newest(), "the newest installed version (this mod alone)");
         c.eq(LoadingRevision.TEXT_1_13, Presentation.loadingRevision(), "the world-loading screen revision");
         // Core's finished presentation module: vanilla text, the underwater music, Core's 1.13 table.
-        c.ok(Presentation.vanillaTexts().contains(new ResourceLocation(ID, "vanilla_text")), "1.13's vanilla text is registered");
+        // Since Core 1.4.7 1.13's vanilla text, splashes, snooper default and F3 keys are Backport Core's own.
+        c.ok(Presentation.vanillaTexts().contains(new ResourceLocation("backportcore", "look/1.13/vanilla_text")),
+                "1.13's vanilla text is registered (Core's)");
+        c.ok(LookFeelSelfTest.class.getResource("/assets/" + ID + "/vanilla_text/en_us.lang") == null, "this mod no longer ships vanilla_text/");
         net.minecraft.util.SoundEvent music = net.minecraft.util.SoundEvent.REGISTRY.getObject(new ResourceLocation(ID, "music.under_water"));
         c.ok(music != null && music == com.exiledradio.updateaquaticbackport.common.SharedSounds.MUSIC_UNDER_WATER, "music.under_water is registered");
         for (String track : new String[] {"axolotl", "dragon_fish", "shuniji"}) {
@@ -141,6 +147,11 @@ public final class LookFeelSelfTest implements SelfTest {
             "ko_kr", "nl_nl", "pl_pl", "pt_br", "ru_ru", "tr_tr", "uk_ua", "zh_cn", "zh_tw"};
 
     private static void lang(Check c) throws IOException {
+        for (String line : lines(new ResourceLocation(ID, "lang/en_us.lang"))) {
+            if (line.startsWith("debug.copy_location.") || line.startsWith("debug.inspect.") || line.startsWith("options.biomeBlendRadius=")) {
+                c.ok(false, "moved to Backport Core, still in this mod's en_us: " + line);
+            }
+        }
         Map<String, String> en = langFile("en_us");
         for (String[] kv : LANG) {
             c.eq(kv[1], en.get(kv[0]), "en_us " + kv[0]);
@@ -160,16 +171,13 @@ public final class LookFeelSelfTest implements SelfTest {
 
     // ------------------------------------------------------------------------------------------
 
-    /** The mod's own lang file and its vanilla text (Core's, newest version wins) for one language. */
+    /** Backport Core's lang file and its 1.13 vanilla text for one language (Core's since Core 1.4.7). */
     private static Map<String, String> langFile(String code) throws IOException {
         Map<String, String> out = new HashMap<String, String>();
-        for (String folder : new String[] {"lang/", "vanilla_text/"}) {
-            for (String line : lines(new ResourceLocation(ID, folder + code + ".lang"))) {
+        for (String folder : new String[] {"lang/", "look/1.13/vanilla_text/"}) {
+            for (String line : lines(new ResourceLocation("backportcore", folder + code + ".lang"))) {
                 int eq = line.indexOf('=');
                 if (eq > 0 && !line.startsWith("#")) {
-                    if (folder.startsWith("vanilla") && out.containsKey(line.substring(0, eq))) {
-                        throw new IOException(code + ": " + line.substring(0, eq) + " is in lang/ and vanilla_text/");
-                    }
                     out.put(line.substring(0, eq), line.substring(eq + 1));
                 }
             }
