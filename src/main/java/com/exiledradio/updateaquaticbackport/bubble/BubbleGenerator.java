@@ -51,13 +51,18 @@ public final class BubbleGenerator implements IWorldGenerator {
         int formed = 0;
         int minY = WorldHeights.minY(world) & ~15;
         int maxY = WorldHeights.maxYExclusive(world);
+        // By the section's own y: with Caves & Cliffs' extended height the slots past 15 are y -64 to -1. The slots
+        // are the same for every column, so they are looked up once, not for each of the area's 256 columns.
+        int[] slots = new int[Math.max(0, (maxY - minY + 15) >> 4)];
+        for (int i = 0; i < slots.length; i++) {
+            slots[i] = WorldHeights.storageIndex(world, minY + (i << 4));
+        }
         for (int x = x0; x < x0 + 16; x++) {
             for (int z = z0; z < z0 + 16; z++) {
                 Chunk chunk = world.getChunk(x >> 4, z >> 4);
                 ExtendedBlockStorage[] sections = chunk.getBlockStorageArray();
-                // By the section's own y: with Caves & Cliffs' extended height the slots past 15 are y -64 to -1.
-                for (int sy = minY; sy < maxY; sy += 16) {
-                    int s = WorldHeights.storageIndex(world, sy);
+                for (int sy = minY, si = 0; sy < maxY; sy += 16, si++) {
+                    int s = slots[si];
                     ExtendedBlockStorage section = s < 0 || s >= sections.length ? null : sections[s];
                     if (section == Chunk.NULL_BLOCK_STORAGE || section.isEmpty()) {
                         continue;

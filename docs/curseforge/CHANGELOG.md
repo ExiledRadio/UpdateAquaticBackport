@@ -1,3 +1,7 @@
+# 1.2.4
+
+*   **Faster world generation**: bubble columns look up the world's height once per chunk, not once per column.
+
 # 1.2.3
 
 *   **1.13's look and feel pieces moved into Backport Core**, so every backport of 1.13 or later has them, even without this mod: Biome Blend, Command Suggestions, F3 + C and F3 + I, 1.13's F3 text, the furnace recipe book and its textures, 1.13's splashes, Allow Snooper off by default and vanilla's text as 1.13 words it. Your Biome Blend and Command Suggestions settings carry over.
